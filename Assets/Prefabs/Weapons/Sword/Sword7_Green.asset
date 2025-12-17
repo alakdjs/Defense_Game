@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef8fcbf31b7d49b48ba8ea72d89ee44c, type: 3}
+  m_Name: Sword7_Green
+  m_EditorClassIdentifier: 
+  weaponType: 0
+  weaponPrefab: {fileID: 2109343117526967164, guid: e9dd64d7e7efec54cb721f831345f30e, type: 3}
