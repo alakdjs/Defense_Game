@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class PlayerIdleState : IState
 {
@@ -20,7 +20,7 @@ public class PlayerIdleState : IState
     {
         _player.CheckDead();
 
-        // ¿òÁ÷ÀÌ±â ½ÃÀÛÇÏ¸é Áï½Ã MoveState·Î ÀüÈ¯
+        // ì›€ì§ì´ê¸° ì‹œì‘í•˜ë©´ ì¦‰ì‹œ MoveStateë¡œ ì „í™˜
         if (_player.HasTarget)
         {
             _player.Animator.SetBool("IsMoving", true);

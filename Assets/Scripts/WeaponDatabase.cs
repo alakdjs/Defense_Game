@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections.Generic;
 
 
@@ -36,19 +36,19 @@ public class WeaponDatabase : MonoBehaviour
 
     }
 
-    // Å¸ÀÔ¿¡ ÇØ´çÇÏ´Â ¹«±â ¸ñ·Ï ¹İÈ¯
+    // íƒ€ì…ì— í•´ë‹¹í•˜ëŠ” ë¬´ê¸° ëª©ë¡ ë°˜í™˜
     public List<WeaponData> GetWeaponList(WeaponType type)
     {
         return _weaponDict[type];
     }
 
-    // ±âº» ¹«±â (Ã¹ ¹øÂ°)
+    // ê¸°ë³¸ ë¬´ê¸° (ì²« ë²ˆì§¸)
     public WeaponData GetDefaultWeapon(WeaponType type)
     {
         return _weaponDict[type][0];
     }
 
-    // ·£´ı ¹«±â
+    // ëœë¤ ë¬´ê¸°
     public WeaponData GetRandomWeapon(WeaponType type)
     {
         List<WeaponData> list = _weaponDict[type];

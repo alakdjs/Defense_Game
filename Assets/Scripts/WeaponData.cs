@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public enum WeaponType
 {
@@ -10,6 +10,6 @@ public enum WeaponType
 
 public class WeaponData : ScriptableObject
 {
-    public WeaponType weaponType; // ¹«±â Å¸ÀÔ
-    public GameObject weaponPrefab; // ½ÇÁ¦ ¹«±â ÇÁ¸®ÆÕ
+    public WeaponType weaponType; // ë¬´ê¸° íƒ€ìž…
+    public GameObject weaponPrefab; // ì‹¤ì œ ë¬´ê¸° í”„ë¦¬íŒ¹
 }

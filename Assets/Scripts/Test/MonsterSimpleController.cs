@@ -1,42 +1,62 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MonsterSimpleController : MonoBehaviour
 {
-    public Transform target;
-    public float moveSpeed = 2f;
+    private Transform _target;
+    private float _moveSpeed = 2f;
 
-    private Animator anim;
-    private bool isDead = false;
+    private Rigidbody _rb;
+    private Animator _anim;
+    private bool _isDead = false;
 
     void Awake()
     {
-        anim = GetComponent<Animator>();
+        _anim = GetComponent<Animator>();
+        _rb = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    void Start()
     {
-        if (isDead || target == null) return;
+        // 임시: 씬에 배치된 몬스터가 플레이어 타겟으로 따라오게
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
 
-        // �÷��̾� ������ �̵�
-        Vector3 dir = (target.position - transform.position);
+        if (player != null)
+        {
+            _target = player.transform;
+        }
+        else
+        {
+            Debug.LogWarning("Player 태그를 가진 오브젝트가 없음");
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (_isDead || _target == null) return;
+
+        // 플레이어 쪽으로 이동
+        Vector3 dir = (_target.position - transform.position);
         dir.y = 0;
 
         if (dir.magnitude > 0.1f)
         {
-            transform.position += dir.normalized * moveSpeed * Time.deltaTime;
-            transform.forward = dir.normalized;
+            Vector3 velocity = dir.normalized * _moveSpeed;
+            _rb.linearVelocity = new Vector3(velocity.x, _rb.linearVelocity.y, velocity.z);
 
-            anim.SetBool("Walk", true);
+            transform.forward = dir.normalized;
+            _anim.SetBool("Walk", true);
         }
         else
         {
-            anim.SetBool("Walk", false);
+            _rb.linearVelocity = Vector3.zero;
+            _anim.SetBool("Walk", false);
         }
     }
 
+
     private void OnTriggerEnter(Collider other)
     {
-        if (isDead) return;
+        if (_isDead) return;
 
         if (other.CompareTag("Attack"))
         {
@@ -46,9 +66,17 @@ public class MonsterSimpleController : MonoBehaviour
 
     void Die()
     {
-        isDead = true;
-        anim.SetTrigger("Die");
+        _isDead = true;
 
-        Destroy(gameObject, 1.5f); // �ִϸ��̼� �� ����
+        _rb.linearVelocity = Vector3.zero;
+        _rb.isKinematic = true;
+
+        _anim.SetTrigger("Die");
+        Destroy(gameObject, 2.0f);
+    }
+
+    public void SetTarget(Transform target)
+    {
+        _target = target;
     }
 }

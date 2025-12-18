@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
@@ -19,11 +19,11 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // ¸ó½ºÅÍ¿¡ ¸Â¾ÒÀ» °æ¿ì
+        // ëª¬ìŠ¤í„°ì— ë§ì•˜ì„ ê²½ìš°
         if (other.CompareTag("Monster"))
         {
-            Destroy(other.gameObject); // ¸ó½ºÅÍ Á¦°Å
-            Destroy(gameObject); // ÃÑ¾Ë Á¦°Å
+            Destroy(other.gameObject); // ëª¬ìŠ¤í„° ì œê±°
+            Destroy(gameObject); // ì´ì•Œ ì œê±°
         }
     }
 }

@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class PlayerMoveState : IState
 {
@@ -12,16 +12,16 @@ public class PlayerMoveState : IState
 
     public void Enter()
     {
-        // ÀÌµ¿ ¾Ö´Ï¸ŞÀÌ¼Ç ½ÇÇà
+        // ì´ë™ ì• ë‹ˆë©”ì´ì…˜ ì‹¤í–‰
         _player.Animator.SetBool("IsMoving", true);
     }
 
     public void Execute()
     {
-        // Dead Ã¼Å©
+        // Dead ì²´í¬
         _player.CheckDead();
 
-        // ¸¸¾à Å¸°ÙÀÌ ¾øÀ¸¸é Idle·Î º¹±Í
+        // ë§Œì•½ íƒ€ê²Ÿì´ ì—†ìœ¼ë©´ Idleë¡œ ë³µê·€
         if (!_player.HasTarget)
         {
             _player.StateMachine.ChangeState(_player.IdleState);
@@ -31,12 +31,12 @@ public class PlayerMoveState : IState
         Vector3 current = _player.transform.position;
         Vector3 target = _player.TargetPosition;
 
-        // Y°ª °íÁ¤ (Áö¸é ³ôÀÌ Â÷ÀÌ°¡ ÀÖÀ» ¼ö ÀÖÀ¸¹Ç·Î)
+        // Yê°’ ê³ ì • (ì§€ë©´ ë†’ì´ ì°¨ì´ê°€ ìˆì„ ìˆ˜ ìˆìœ¼ë¯€ë¡œ)
         target.y = current.y;
 
         Vector3 direction = (target - current).normalized;
 
-        // µµÂø Ã¼Å©
+        // ë„ì°© ì²´í¬
         float distance = Vector3.Distance(current, target);
         if (distance < 0.2f)
         {
@@ -45,12 +45,12 @@ public class PlayerMoveState : IState
 
             _player.ClearTarget();
 
-            // µµÂøÇßÀ¸¸é Idle »óÅÂ·Î ÀüÈ¯
+            // ë„ì°©í–ˆìœ¼ë©´ Idle ìƒíƒœë¡œ ì „í™˜
             _player.StateMachine.ChangeState(_player.IdleState);
             return;
         }
 
-        // -------- ÀÌµ¿ Ã³¸® --------
+        // -------- ì´ë™ ì²˜ë¦¬ --------
         Vector3 moveVelocity = new Vector3(
             direction.x * _player.MoveSpeed,
             _player.Rigidbody.linearVelocity.y,
@@ -60,7 +60,7 @@ public class PlayerMoveState : IState
         _player.Rigidbody.linearVelocity = moveVelocity;
 
         /*
-        // -------- È¸Àü Ã³¸® --------
+        // -------- íšŒì „ ì²˜ë¦¬ --------
         if (direction.sqrMagnitude > 0.001f)
         {
             Quaternion targetRot = Quaternion.LookRotation(direction, Vector3.up);
@@ -72,7 +72,7 @@ public class PlayerMoveState : IState
 
     public void Exit()
     {
-        // ÀÌµ¿À» ¸ØÃâ ¶§ ¼Óµµ Á¦°Å
+        // ì´ë™ì„ ë©ˆì¶œ ë•Œ ì†ë„ ì œê±°
         _player.Rigidbody.linearVelocity = Vector3.zero;
         _player.Animator.SetBool("IsMoving", false);
     }

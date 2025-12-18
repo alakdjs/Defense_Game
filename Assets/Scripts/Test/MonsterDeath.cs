@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class MonsterDeath : MonoBehaviour
 {
@@ -12,7 +12,7 @@ public class MonsterDeath : MonoBehaviour
 
     void Die()
     {
-        // ³ªÁß¿¡ ¾Ö´Ï¸ŞÀÌ¼Ç, ÀÌÆåÆ® Ãß°¡ °¡´É
+        // ë‚˜ì¤‘ì— ì• ë‹ˆë©”ì´ì…˜, ì´í™íŠ¸ ì¶”ê°€ ê°€ëŠ¥
         Destroy(gameObject);
     }
 }

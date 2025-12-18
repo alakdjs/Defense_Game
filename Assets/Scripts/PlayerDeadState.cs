@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class PlayerDeadState : IState
 {
@@ -13,23 +13,23 @@ public class PlayerDeadState : IState
     {
         Debug.Log("PLAYER DEAD");
 
-        // ¾Ö´Ï¸ŞÀÌÅÍ ÆÄ¶ó¹ÌÅÍ
+        // ì• ë‹ˆë©”ì´í„° íŒŒë¼ë¯¸í„°
         _player.Animator.SetBool("IsMoving", false);
         _player.Animator.SetBool("IsDead", true);
 
-        // ÀÌµ¿ ÁßÀÌ¾ú´Ù¸é Áï½Ã ¸ØÃã
+        // ì´ë™ ì¤‘ì´ì—ˆë‹¤ë©´ ì¦‰ì‹œ ë©ˆì¶¤
         _player.Rigidbody.linearVelocity = Vector3.zero;
     }
 
     public void Execute()
     {
-        // Dead¿¡¼­´Â ¾Æ¹«°Íµµ ÇÏÁö ¾ÊÀ½.
-        // ¸ğµç ÀÔ·Â ¹«½Ã.
+        // Deadì—ì„œëŠ” ì•„ë¬´ê²ƒë„ í•˜ì§€ ì•ŠìŒ.
+        // ëª¨ë“  ì…ë ¥ ë¬´ì‹œ.
     }
 
     public void Exit()
     {
-        // º¸Åë Dead¿¡¼­ ³ª°¡´Â ÀÏÀº ¾øÁö¸¸,
-        // ÇÊ¿äÇÏ¸é ¿©±â¿¡ º¹±Í¿ë ÄÚµå ÀÛ¼º °¡´É.
+        // ë³´í†µ Deadì—ì„œ ë‚˜ê°€ëŠ” ì¼ì€ ì—†ì§€ë§Œ,
+        // í•„ìš”í•˜ë©´ ì—¬ê¸°ì— ë³µê·€ìš© ì½”ë“œ ì‘ì„± ê°€ëŠ¥.
     }
 }
