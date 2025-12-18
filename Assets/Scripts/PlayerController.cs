@@ -12,11 +12,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private WeaponType _weaponType = WeaponType.Sword;
 
     [Header("Auto Attack")]
-    [SerializeField] private float _autoAttackInterval = 2f;
+    [SerializeField] private float _autoAttackInterval = 3f;
     [SerializeField] private float _autoAimRange = 8f;
     [SerializeField] private float _aimRotateSpeed = 10f;
 
     private float _autoAttackTimer = 0f;
+
+    private bool _isMoveRotationLocked = false;
 
     private GameObject _currentWeapon; // 현재 장착된 무기 오브젝트
     private WeaponData _currentWeaponData; // 현재 장착된 무기 데이터
@@ -104,6 +106,7 @@ public class PlayerController : MonoBehaviour
             {
                 _targetPosition = hit.point;
                 _hasTarget = true;
+                _isMoveRotationLocked = false;
 
                 if (_stateMachine.CurrentState != _moveState)
                 {
@@ -118,6 +121,7 @@ public class PlayerController : MonoBehaviour
     public void ClearTarget()
     {
         _hasTarget = false;
+        _targetPosition = transform.position;
     }
 
     // 무기 장착
@@ -249,9 +253,11 @@ public class PlayerController : MonoBehaviour
             {
                 lookDirection = dir;
             }
+
+            _isMoveRotationLocked = false;
         }
 
-        // 몬스터가 없을 때 이동 방향으로 회전
+        // 몬스터가 없고, 이동 중일 때만 이동 방향으로 회전
         else if (HasTarget)
         {
             Vector3 dir = TargetPosition - transform.position;
@@ -260,6 +266,7 @@ public class PlayerController : MonoBehaviour
             if (dir.sqrMagnitude > 0.001f)
             {
                 lookDirection = dir;
+                _isMoveRotationLocked = true;
             }
         }
 
