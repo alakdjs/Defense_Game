@@ -93,6 +93,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void LateUpdate()
+    {
+        // 물리 충돌로 생긴 회전 속도 제거
+        if (_rb != null)
+        {
+            _rb.angularVelocity = Vector3.zero;
+        }
+
+    }
+
     // 마우스 클릭으로 이동 설정
     private void CheckMouseClick()
     {
