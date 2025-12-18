@@ -2,8 +2,8 @@
 
 public class MonsterSimpleController : MonoBehaviour
 {
-    private Transform _target;
-    private float _moveSpeed = 2f;
+    public Transform _target;
+    public float _moveSpeed = 2f;
 
     private Rigidbody _rb;
     private Animator _anim;
