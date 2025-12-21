@@ -10,6 +10,8 @@ public enum WeaponType
 
 public class WeaponData : ScriptableObject
 {
-    public WeaponType weaponType; // 무기 타입
-    public GameObject weaponPrefab; // 실제 무기 프리팹
+    public WeaponType _weaponType; // 무기 타입
+    public GameObject _weaponPrefab; // 실제 무기 프리팹
+
+    public float _attackRange = 2.0f; // 공격 인식 범위
 }

@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         // 시작 무기 : Sword (Stick)
-        WeaponData startWeapon = WeaponDatabase.Instance.GetDefaultWeapon(WeaponType.Sword);
+        WeaponData startWeapon = WeaponDatabase._Instance.GetDefaultWeapon(WeaponType.Sword);
         EquipWeapon(startWeapon);
 
         // 시작 시 무기 상태 Animator 동기화
@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour
         // 테스트용: 1번 키 누르면 Rifle 장착
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            WeaponData rifle = WeaponDatabase.Instance.GetRandomWeapon(WeaponType.Rifle);
+            WeaponData rifle = WeaponDatabase._Instance.GetRandomWeapon(WeaponType.Rifle);
 
             EquipWeapon(rifle);
         }
@@ -135,7 +135,7 @@ public class PlayerController : MonoBehaviour
     // 무기 장착
     public void EquipWeapon(WeaponData data)
     {
-        if (data == null || data.weaponPrefab == null)
+        if (data == null || data._weaponPrefab == null)
         {
             Debug.LogError("[EquipWeapon] WeaponData 또는 Prefab null");
             return;
@@ -153,12 +153,12 @@ public class PlayerController : MonoBehaviour
         }
 
         // 무기 생성
-        _currentWeapon = Instantiate(data.weaponPrefab, _weaponTarget);
+        _currentWeapon = Instantiate(data._weaponPrefab, _weaponTarget);
         _currentWeapon.transform.localPosition = Vector3.zero;
 
         // 무기 데이터 및 타입 갱신
         _currentWeaponData = data;
-        _weaponType = data.weaponType;
+        _weaponType = data._weaponType;
 
         // Rifle일 경우 발사 스크립트 캐싱
         _fireRifleWeapon = _currentWeapon.GetComponent<FireRifleWeapon>();

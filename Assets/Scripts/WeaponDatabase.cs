@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class WeaponDatabase : MonoBehaviour
 {
-    public static WeaponDatabase Instance;
+    public static WeaponDatabase _Instance;
 
     [SerializeField] private List<WeaponData> _weaponDataList;
 
@@ -12,9 +12,9 @@ public class WeaponDatabase : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
+        if (_Instance == null)
         {
-            Instance = this;
+            _Instance = this;
         }
         else
         {
@@ -26,12 +26,12 @@ public class WeaponDatabase : MonoBehaviour
 
         foreach (var data in _weaponDataList)
         {
-            if (!_weaponDict.ContainsKey(data.weaponType))
+            if (!_weaponDict.ContainsKey(data._weaponType))
             {
-                _weaponDict[data.weaponType] = new List<WeaponData>();
+                _weaponDict[data._weaponType] = new List<WeaponData>();
             }
 
-            _weaponDict[data.weaponType].Add(data);
+            _weaponDict[data._weaponType].Add(data);
         }
 
     }
