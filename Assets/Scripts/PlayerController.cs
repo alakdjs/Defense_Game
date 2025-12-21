@@ -13,15 +13,16 @@ public class PlayerController : MonoBehaviour
 
     [Header("Auto Attack")]
     [SerializeField] private float _autoAttackInterval = 3f;
-    [SerializeField] private float _autoAimRange = 8f;
     [SerializeField] private float _aimRotateSpeed = 10f;
+    private float _currentAttackRange = 2f;
 
     private float _autoAttackTimer = 0f;
-
 
     private GameObject _currentWeapon; // 현재 장착된 무기 오브젝트
     private WeaponData _currentWeaponData; // 현재 장착된 무기 데이터
     private FireRifleWeapon _fireRifleWeapon; // Rifle 전용 발사 스크립트
+
+    [SerializeField] private AttackRangeUI _attackRangeUI;
 
     private Rigidbody _rb;
     private Camera _mainCam;
@@ -160,6 +161,15 @@ public class PlayerController : MonoBehaviour
         _currentWeaponData = data;
         _weaponType = data._weaponType;
 
+        _currentAttackRange = data._attackRange; // 공격 범위 동기화
+
+        // UI 반영
+        if (_attackRangeUI != null)
+        {
+            _attackRangeUI.SetRange(_currentAttackRange);
+
+        }
+
         // Rifle일 경우 발사 스크립트 캐싱
         _fireRifleWeapon = _currentWeapon.GetComponent<FireRifleWeapon>();
 
@@ -205,6 +215,15 @@ public class PlayerController : MonoBehaviour
             
     }
 
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = (_weaponType == WeaponType.Rifle)
+            ? Color.green
+            : Color.red;
+
+        Gizmos.DrawWireSphere(transform.position, _currentAttackRange);
+    }
+
     // 총알 발사 관련 Rifle 애니메이션 이벤트에서 호출
     public void OnRifleFire()
     {
@@ -223,7 +242,7 @@ public class PlayerController : MonoBehaviour
     // 자동 에임 회전 관련 근처 가까운 몬스터 인식
     private Transform FindNearestMonster()
     {
-        Collider[] hits = Physics.OverlapSphere(transform.position, _autoAimRange);
+        Collider[] hits = Physics.OverlapSphere(transform.position, _currentAttackRange);
 
         Transform nearest = null;
         float minDist = float.MaxValue;

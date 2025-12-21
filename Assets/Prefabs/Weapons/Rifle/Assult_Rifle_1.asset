@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8fcbf31b7d49b48ba8ea72d89ee44c, type: 3}
   m_Name: Assult_Rifle_1
   m_EditorClassIdentifier: 
-  weaponType: 1
-  weaponPrefab: {fileID: 5806699757733382792, guid: 4306539b5b4dbb747a8855adcc2e4845, type: 3}
+  _weaponType: 1
+  _weaponPrefab: {fileID: 5806699757733382792, guid: 4306539b5b4dbb747a8855adcc2e4845, type: 3}
+  _attackRange: 5
