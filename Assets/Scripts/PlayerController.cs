@@ -215,15 +215,6 @@ public class PlayerController : MonoBehaviour
             
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = (_weaponType == WeaponType.Rifle)
-            ? Color.green
-            : Color.red;
-
-        Gizmos.DrawWireSphere(transform.position, _currentAttackRange);
-    }
-
     // 총알 발사 관련 Rifle 애니메이션 이벤트에서 호출
     public void OnRifleFire()
     {
@@ -232,10 +223,10 @@ public class PlayerController : MonoBehaviour
         if (_weaponType != WeaponType.Rifle)
             return;
 
-        if (_fireRifleWeapon != null)
+        if (_fireRifleWeapon != null && _currentWeaponData != null)
         {
             Debug.Log("총알발사됨");
-            _fireRifleWeapon.Fire(transform);
+            _fireRifleWeapon.Fire(transform, _currentWeaponData._attackRange);
         }
     }
 

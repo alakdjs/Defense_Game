@@ -3,12 +3,12 @@
 public class FireRifleWeapon : MonoBehaviour
 {
     [SerializeField] private GameObject _bulletPrefab;
-    [SerializeField] private Transform _firePoint;
+    //[SerializeField] private Transform _firePoint;
     [SerializeField] private float _fireDelay = 0.3f;
 
     private float _lastFireTime;
 
-    public void Fire(Transform playerTransform)
+    public void Fire(Transform playerTransform, float attackRange)
     {
         //Debug.Log($"[FireRifleWeapon.Fire] time={Time.time:F3}");
 
@@ -17,11 +17,25 @@ public class FireRifleWeapon : MonoBehaviour
 
         _lastFireTime = Time.time;
 
+        Vector3 spawnPos =
+            playerTransform.position
+            + playerTransform.forward * 0.8f
+            + Vector3.up * 1.2f;
+
         Vector3 dir = playerTransform.forward;
         dir.y = 0f;
         dir.Normalize();
 
-        Instantiate(_bulletPrefab, _firePoint.position, Quaternion.LookRotation(dir));
+        GameObject bulletObj = Instantiate(_bulletPrefab, spawnPos, Quaternion.LookRotation(dir));
+
+        bulletObj.transform.SetParent(null);
+
+        // Bullet 초기화
+        Bullet bullet = bulletObj.AddComponent<Bullet>();
+        if (bullet != null )
+        {
+            bullet.Init(attackRange);
+        }
     }
     
 }

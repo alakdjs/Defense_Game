@@ -4,7 +4,7 @@ public class AttackRangeUI : MonoBehaviour
 {
     [SerializeField] private Transform _visual;
     [SerializeField] private float _scaleMultiplier = 2.0f;
-    [SerializeField] private bool _alwaysVisible = true;
+    //[SerializeField] private bool _alwaysVisible = true;
 
     private void Awake()
     {
