@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class AttackRangeUI : MonoBehaviour
 {
@@ -12,7 +12,7 @@ public class AttackRangeUI : MonoBehaviour
             _visual = transform;
     }
 
-    // °ø°İ ¹üÀ§ ¹İ¿µ
+    // ê³µê²© ë²”ìœ„ ë°˜ì˜
     public void SetRange(float range)
     {
         float diameter = range * _scaleMultiplier;
