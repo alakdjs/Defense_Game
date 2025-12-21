@@ -41,7 +41,13 @@ public class Bullet : MonoBehaviour
         {
             Destroy(other.gameObject); // 몬스터 제거
             Destroy(gameObject); // 총알 제거
+            return;
         }
 
+        // 맵 오브젝트에 맞았을 경우
+        if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
+        {
+            Destroy(gameObject); // 총알 제거
+        }
     }
 }
