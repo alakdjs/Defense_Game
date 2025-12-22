@@ -7,7 +7,7 @@ public class MonsterController : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private Transform _target;
     [SerializeField] private float _detectRange = 10.0f;
-    [SerializeField] private float _attackRange = 1.5f;
+    [SerializeField] private float _attackRange = 2.5f;
 
     private NavMeshAgent _agent;
 

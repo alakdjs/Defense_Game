@@ -4297,7 +4297,7 @@ MonoBehaviour:
   _animator: {fileID: 741292681}
   _target: {fileID: 891160554}
   _detectRange: 10
-  _attackRange: 1.5
+  _attackRange: 2.5
 --- !u!54 &741292683
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7090,7 +7090,7 @@ MonoBehaviour:
   _animator: {fileID: 1119318101}
   _target: {fileID: 891160554}
   _detectRange: 10
-  _attackRange: 1.5
+  _attackRange: 2.5
 --- !u!54 &1119318103
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9249,7 +9249,7 @@ MonoBehaviour:
   _animator: {fileID: 1387840842}
   _target: {fileID: 891160554}
   _detectRange: 10
-  _attackRange: 1.5
+  _attackRange: 2.5
 --- !u!1001 &1391491828
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9994,7 +9994,7 @@ MonoBehaviour:
   _animator: {fileID: 1495657321}
   _target: {fileID: 891160554}
   _detectRange: 10
-  _attackRange: 1.5
+  _attackRange: 2.5
 --- !u!54 &1495657323
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10388,7 +10388,7 @@ MonoBehaviour:
   _animator: {fileID: 1520929897}
   _target: {fileID: 891160554}
   _detectRange: 10
-  _attackRange: 1.5
+  _attackRange: 2.5
 --- !u!54 &1520929899
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10571,7 +10571,7 @@ MonoBehaviour:
   _animator: {fileID: 1524696171}
   _target: {fileID: 891160554}
   _detectRange: 10
-  _attackRange: 1.5
+  _attackRange: 2.5
 --- !u!54 &1524696173
 Rigidbody:
   m_ObjectHideFlags: 0
