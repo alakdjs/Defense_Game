@@ -3,7 +3,7 @@
 public class FireRifleWeapon : MonoBehaviour
 {
     [SerializeField] private GameObject _bulletPrefab;
-    //[SerializeField] private Transform _firePoint;
+    [SerializeField] private Transform _firePoint;
     [SerializeField] private float _fireDelay = 0.3f;
 
     private float _lastFireTime;
@@ -17,12 +17,9 @@ public class FireRifleWeapon : MonoBehaviour
 
         _lastFireTime = Time.time;
 
-        Vector3 spawnPos =
-            playerTransform.position
-            + playerTransform.forward * 0.8f
-            + Vector3.up * 1.2f;
+        Vector3 spawnPos = _firePoint.position; // 총구 위치
 
-        Vector3 dir = playerTransform.forward;
+        Vector3 dir = playerTransform.forward; // 총알 나가는 방향
         dir.y = 0f;
         dir.Normalize();
 

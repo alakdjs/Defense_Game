@@ -75,4 +75,10 @@ public class MonsterController : MonoBehaviour
 
         return Vector3.Distance(transform.position, _target.position);
     }
+
+    public void OnAttackAnimationEnd()
+    {
+        Debug.Log("Attack Animation End");
+        StateMachine.ChangeState(ChaseState);
+    }
 }
