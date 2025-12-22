@@ -39,7 +39,15 @@ public class Bullet : MonoBehaviour
         // 몬스터에 맞았을 경우
         if (other.CompareTag("Monster"))
         {
-            Destroy(other.gameObject, 1.0f); // 몬스터 제거
+            MonsterController monster = other.transform.root.GetComponent<MonsterController>();
+
+            if (monster != null)
+            {
+                Debug.Log("몬스터가 총알에 맞음!");
+                Debug.Log("Bullet Hit : " + other.name);
+                monster.TakeDamage(30); // Rifle 데미지
+            }
+
             Destroy(gameObject); // 총알 제거
             return;
         }
@@ -49,5 +57,6 @@ public class Bullet : MonoBehaviour
         {
             Destroy(gameObject); // 총알 제거
         }
+
     }
 }

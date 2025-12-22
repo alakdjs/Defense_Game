@@ -229,15 +229,22 @@ public class PlayerController : MonoBehaviour
 
         Vector3 center = transform.position + transform.forward * (_currentWeaponData._attackRange * 0.5f);
 
+        // 공격 범위 내 콜라이더 탐색
         Collider[] hits = Physics.OverlapSphere(center, _currentWeaponData._attackRange);
 
         foreach (var hit in hits)
         {
-            if (hit.transform.root.CompareTag("Monster"))
+            if (!hit.transform.root.CompareTag("Monster"))
+                continue;
+
+            MonsterController monster = hit.transform.root.GetComponent<MonsterController>();
+
+            if (monster != null)
             {
                 Debug.Log("몬스터 타격!");
-                Destroy(hit.transform.root.gameObject);
+                monster.TakeDamage(25); // 칼 데미지 25
             }
+
         }
     }
 

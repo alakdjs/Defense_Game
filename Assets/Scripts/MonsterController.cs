@@ -11,6 +11,11 @@ public class MonsterController : MonoBehaviour
 
     private NavMeshAgent _agent;
 
+    [Header("Stat")]
+    [SerializeField] private int _maxHP = 100;
+    private int _currentHP;
+
+
     // FSM
     private StateMachine _stateMachine;
     private MonsterIdleState _idleState;
@@ -51,6 +56,8 @@ public class MonsterController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        _currentHP = _maxHP;
+
         if (_target == null)
         {
             GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -67,6 +74,19 @@ public class MonsterController : MonoBehaviour
         _stateMachine.Update();
     }
 
+    public void TakeDamage(int damage)
+    {
+        if (StateMachine.CurrentState == DeadState)
+            return;
+
+        _currentHP -= damage;
+
+        if (_currentHP <= 0)
+        {
+            Die();
+        }
+    }
+
     // 거리 계산용
     public float DistanceToTarget()
     {
@@ -76,9 +96,25 @@ public class MonsterController : MonoBehaviour
         return Vector3.Distance(transform.position, _target.position);
     }
 
+    // 몬스터 공격 애니메이션
     public void OnAttackAnimationEnd()
     {
-        Debug.Log("Monster Attack Animation End");
         StateMachine.ChangeState(ChaseState);
     }
+
+    // 몬스터 Die 상태
+    public void Die()
+    {
+        if (StateMachine.CurrentState == DeadState)
+            return;
+
+        StateMachine.ChangeState(DeadState);
+    }
+
+    // 몬스터 Die 종료용 메소드
+    public void OnDieAnimationEnd()
+    {
+        Destroy(gameObject);
+    }
+
 }
