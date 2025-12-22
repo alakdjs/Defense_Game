@@ -10,8 +10,6 @@ public class FireRifleWeapon : MonoBehaviour
 
     public void Fire(Transform playerTransform, float attackRange)
     {
-        //Debug.Log($"[FireRifleWeapon.Fire] time={Time.time:F3}");
-
         if (Time.time < _lastFireTime + _fireDelay)
             return;
 

@@ -78,7 +78,7 @@ public class MonsterController : MonoBehaviour
 
     public void OnAttackAnimationEnd()
     {
-        Debug.Log("Attack Animation End");
+        Debug.Log("Monster Attack Animation End");
         StateMachine.ChangeState(ChaseState);
     }
 }

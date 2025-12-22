@@ -39,7 +39,7 @@ public class Bullet : MonoBehaviour
         // 몬스터에 맞았을 경우
         if (other.CompareTag("Monster"))
         {
-            Destroy(other.gameObject); // 몬스터 제거
+            Destroy(other.gameObject, 1.0f); // 몬스터 제거
             Destroy(gameObject); // 총알 제거
             return;
         }

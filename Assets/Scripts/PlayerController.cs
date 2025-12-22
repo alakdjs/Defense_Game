@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float _moveSpeed = 5f;
+    [SerializeField] private float _moveSpeed = 5.0f;
     [SerializeField] private Animator _animator;
 
     [Header("Weapon")]
@@ -12,11 +12,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private WeaponType _weaponType = WeaponType.Sword;
 
     [Header("Auto Attack")]
-    [SerializeField] private float _autoAttackInterval = 3f;
-    [SerializeField] private float _aimRotateSpeed = 10f;
-    private float _currentAttackRange = 2f;
+    [SerializeField] private float _autoAttackInterval = 3.0f;
+    [SerializeField] private float _aimRotateSpeed = 10.0f;
+    private float _currentAttackRange = 2.0f;
 
-    private float _autoAttackTimer = 0f;
+    private float _autoAttackTimer = 0.0f;
 
     private GameObject _currentWeapon; // 현재 장착된 무기 오브젝트
     private WeaponData _currentWeaponData; // 현재 장착된 무기 데이터
@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
             Ray ray = _mainCam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, 100f))
+            if (Physics.Raycast(ray, out hit, 100.0f))
             {
                 _targetPosition = hit.point;
                 _hasTarget = true;
@@ -186,12 +186,20 @@ public class PlayerController : MonoBehaviour
     // 자동 공격
     private void HandleAutoFire()
     {
+        // 주변에 몬스터가 없으면
+        Transform target = FindNearestMonster();
+        if (target == null)
+        {
+            // 타이머 멈추거나 초기화
+            _autoAttackTimer = 0.0f;
+            return;
+        }
+
+        // 몬스터가 있을 때에만 타이머 진행
         _autoAttackTimer += Time.deltaTime;
 
         if (_autoAttackTimer < _autoAttackInterval)
             return;
-
-        //Debug.Log($"[AutoAttackTimer] FIRE time={Time.time:F3}");
 
         _autoAttackTimer = 0f;
         TriggerAttack();
@@ -201,8 +209,6 @@ public class PlayerController : MonoBehaviour
     public void TriggerAttack()
     {
         if (_animator == null) return;
-
-        //Debug.Log($"[TriggerAttack] weapon={_weaponType} time={Time.time:F3}");
 
         if (_weaponType == WeaponType.Sword)
         {
@@ -215,11 +221,29 @@ public class PlayerController : MonoBehaviour
             
     }
 
+    // Sword 공격 판정 (애니메이션 이벤트에서 호출)
+    public void OnSwordHit()
+    {
+        if (_currentWeaponData == null)
+            return;
+
+        Vector3 center = transform.position + transform.forward * (_currentWeaponData._attackRange * 0.5f);
+
+        Collider[] hits = Physics.OverlapSphere(center, _currentWeaponData._attackRange);
+
+        foreach (var hit in hits)
+        {
+            if (hit.transform.root.CompareTag("Monster"))
+            {
+                Debug.Log("몬스터 타격!");
+                Destroy(hit.transform.root.gameObject);
+            }
+        }
+    }
+
     // 총알 발사 관련 Rifle 애니메이션 이벤트에서 호출
     public void OnRifleFire()
     {
-        //Debug.Log($"[OnRifleFire] time={Time.time:F3} frame={Time.frameCount}");
-
         if (_weaponType != WeaponType.Rifle)
             return;
 
