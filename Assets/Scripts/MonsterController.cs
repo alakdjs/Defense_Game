@@ -12,8 +12,14 @@ public class MonsterController : MonoBehaviour
     private NavMeshAgent _agent;
 
     [Header("Stat")]
-    [SerializeField] private int _maxHP = 100;
-    private int _currentHP;
+    [SerializeField] private float _maxHP = 100.0f;
+    private float _currentHP;
+
+    [SerializeField] private HpBar _hpBarPrefab;
+    [SerializeField] private Vector3 _hpBarWorldOffset = new Vector3(0, 2.0f, 0);
+    [SerializeField] private Canvas _uiCanvas;
+    private HpBar _hpBarInstance;
+    private HpBar _hpBar;
 
 
     // FSM
@@ -65,6 +71,13 @@ public class MonsterController : MonoBehaviour
                 _target = player.transform;
         }
 
+        // HpBar 풀에서 하나 가져오기
+        if (HpBarManager.Instance != null)
+        {
+            _hpBar = HpBarManager.Instance.GetHpBar(transform, _maxHP, _hpBarWorldOffset);
+            _hpBar.SetHp(_currentHP);
+        }
+
         _stateMachine.ChangeState(_idleState);
     }
 
@@ -74,6 +87,29 @@ public class MonsterController : MonoBehaviour
         _stateMachine.Update();
     }
 
+    // 체력바 생성
+    private void CreateHpBar()
+    {
+        if (_hpBarPrefab == null)
+            return;
+
+        if (_uiCanvas == null)
+        {
+            _uiCanvas = FindFirstObjectByType<Canvas>();
+        }
+
+        if (_uiCanvas == null)
+        {
+            Debug.LogError("Canvas를 찾지 못함");
+            return;
+        }
+
+        _hpBarInstance = Instantiate(_hpBarPrefab, _uiCanvas.transform); // HpBar 생성
+        _hpBarInstance.Init(transform, _maxHP); // HpBar 초기화
+        _hpBarInstance.SetWorldOffset(_hpBarWorldOffset);
+        _hpBarInstance.SetHp(_currentHP);
+    }
+
     public void TakeDamage(int damage)
     {
         if (StateMachine.CurrentState == DeadState)
@@ -81,7 +117,13 @@ public class MonsterController : MonoBehaviour
 
         _currentHP -= damage;
 
-        if (_currentHP <= 0)
+        // 체력바 갱신
+        if (_hpBar != null)
+        {
+            _hpBar.SetHp(_currentHP);
+        }
+
+        if (_currentHP <= 0.0f)
         {
             Die();
         }
@@ -111,9 +153,15 @@ public class MonsterController : MonoBehaviour
         StateMachine.ChangeState(DeadState);
     }
 
-    // 몬스터 Die 종료용 메소드
+    // 몬스터 Die 애니메이션 이벤트 종료용 메소드
     public void OnDieAnimationEnd()
     {
+        if (_hpBar != null && HpBarManager.Instance != null)
+        {
+            HpBarManager.Instance.ReturnHpbar(_hpBar);
+            _hpBar = null;
+        }
+
         Destroy(gameObject);
     }
 
