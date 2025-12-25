@@ -51,7 +51,7 @@ public abstract class MonsterBase : MonoBehaviour
     }
 
     /// <summary>
-    /// 몬스터별 행동 구현 (FSM / 비FSM 각각 구현)
+    /// 몬스터별 행동 구현
     /// </summary>
     protected abstract void UpdateBehavior();
 

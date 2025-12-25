@@ -237,7 +237,7 @@ public class PlayerController : MonoBehaviour
             if (!hit.transform.root.CompareTag("Monster"))
                 continue;
 
-            MonsterController monster = hit.transform.root.GetComponent<MonsterController>();
+            MonsterBase monster = hit.transform.root.GetComponent<MonsterBase>();
 
             if (monster != null)
             {

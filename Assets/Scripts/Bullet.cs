@@ -39,7 +39,7 @@ public class Bullet : MonoBehaviour
         // 몬스터에 맞았을 경우
         if (other.CompareTag("Monster"))
         {
-            MonsterController monster = other.transform.root.GetComponent<MonsterController>();
+            MonsterBase monster = other.transform.root.GetComponent<MonsterBase>();
 
             if (monster != null)
             {
