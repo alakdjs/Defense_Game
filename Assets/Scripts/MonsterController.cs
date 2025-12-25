@@ -87,29 +87,6 @@ public class MonsterController : MonoBehaviour
         _stateMachine.Update();
     }
 
-    // 체력바 생성
-    private void CreateHpBar()
-    {
-        if (_hpBarPrefab == null)
-            return;
-
-        if (_uiCanvas == null)
-        {
-            _uiCanvas = FindFirstObjectByType<Canvas>();
-        }
-
-        if (_uiCanvas == null)
-        {
-            Debug.LogError("Canvas를 찾지 못함");
-            return;
-        }
-
-        _hpBarInstance = Instantiate(_hpBarPrefab, _uiCanvas.transform); // HpBar 생성
-        _hpBarInstance.Init(transform, _maxHP); // HpBar 초기화
-        _hpBarInstance.SetWorldOffset(_hpBarWorldOffset);
-        _hpBarInstance.SetHp(_currentHP);
-    }
-
     public void TakeDamage(int damage)
     {
         if (StateMachine.CurrentState == DeadState)

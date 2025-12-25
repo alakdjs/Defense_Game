@@ -2,9 +2,9 @@
 
 public class MonsterIdleState : IState
 {
-    private MonsterController _monster;
+    private Monster_PartyMonster _monster;
 
-    public MonsterIdleState(MonsterController monster)
+    public MonsterIdleState(Monster_PartyMonster monster)
     {
         _monster = monster;
     }

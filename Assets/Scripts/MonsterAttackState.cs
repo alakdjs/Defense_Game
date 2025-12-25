@@ -2,9 +2,9 @@
 
 public class MonsterAttackState : IState
 {
-    private MonsterController _monster;
+    private Monster_PartyMonster _monster;
 
-    public MonsterAttackState(MonsterController monster)
+    public MonsterAttackState(Monster_PartyMonster monster)
     {
         _monster = monster;
     }
@@ -22,6 +22,11 @@ public class MonsterAttackState : IState
 
     public void Exit()
     {
+        _monster.Agent.isStopped = true;
 
+        if (_monster.Animator != null)
+        {
+            _monster.Animator.SetTrigger("Attack");
+        }
     }
 }
