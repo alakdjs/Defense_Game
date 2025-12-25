@@ -2,9 +2,9 @@
 
 public class MonsterIdleState : IState
 {
-    private Monster_PartyMonster _monster;
+    private MonsterBase _monster;
 
-    public MonsterIdleState(Monster_PartyMonster monster)
+    public MonsterIdleState(MonsterBase monster)
     {
         _monster = monster;
     }
@@ -12,7 +12,7 @@ public class MonsterIdleState : IState
     public void Enter()
     {
         _monster.Agent.isStopped = true;
-        _monster.Animator.SetBool("IsMoving", false);
+        _monster.SetMoveAnimation(false);
     }
 
     public void Execute()

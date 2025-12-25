@@ -2,9 +2,9 @@
 
 public class MonsterDeadState : IState
 {
-    private Monster_PartyMonster _monster;
+    private MonsterBase _monster;
 
-    public MonsterDeadState(Monster_PartyMonster monster)
+    public MonsterDeadState(MonsterBase monster)
     {
         _monster = monster;
     }
@@ -13,15 +13,7 @@ public class MonsterDeadState : IState
     {
         _monster.Agent.isStopped = true;
 
-        if (_monster.Animator != null)
-        {
-            _monster.Animator.SetTrigger("Die");
-        }
-        else
-        {
-            // 애니메이션 없으면 즉시 제거
-            _monster.OnDieAnimationEnd();
-        }
+        _monster.Die();
     }
     
     public void Execute()

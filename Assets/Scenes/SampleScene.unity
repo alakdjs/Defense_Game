@@ -8953,7 +8953,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8942734549851988516, guid: 60ab07b23a75fbf458c80cba08df9edb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -2.98
       objectReference: {fileID: 0}
     - target: {fileID: 8942734549851988516, guid: 60ab07b23a75fbf458c80cba08df9edb, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8961,7 +8961,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8942734549851988516, guid: 60ab07b23a75fbf458c80cba08df9edb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -9.45
       objectReference: {fileID: 0}
     - target: {fileID: 8942734549851988516, guid: 60ab07b23a75fbf458c80cba08df9edb, type: 3}
       propertyPath: m_LocalRotation.w
@@ -9103,11 +9103,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHp: 100
-  _hpBarWorldOffset: {x: 0, y: 2, z: 0}
-  _target: {fileID: 891160554}
-  _animator: {fileID: 1387840842}
   _detectRange: 10
   _attackRange: 2.5
+  _moveSpeed: 2.5
+  _animator: {fileID: 1387840842}
+  _target: {fileID: 891160554}
+  _hpBarWorldOffset: {x: 0, y: 2, z: 0}
 --- !u!1001 &1391491828
 PrefabInstance:
   m_ObjectHideFlags: 0

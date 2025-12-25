@@ -2,9 +2,9 @@
 
 public class MonsterAttackState : IState
 {
-    private Monster_PartyMonster _monster;
+    private MonsterBase _monster;
 
-    public MonsterAttackState(Monster_PartyMonster monster)
+    public MonsterAttackState(MonsterBase monster)
     {
         _monster = monster;
     }
@@ -12,7 +12,8 @@ public class MonsterAttackState : IState
     public void Enter()
     {
         _monster.Agent.isStopped = true;
-        _monster.Animator.SetTrigger("Attack");
+        // _monster.Animator.SetTrigger("Attack");
+        _monster.PerformAttack();
     }
 
     public void Execute()
@@ -22,11 +23,13 @@ public class MonsterAttackState : IState
 
     public void Exit()
     {
+        /*
         _monster.Agent.isStopped = true;
 
         if (_monster.Animator != null)
         {
             _monster.Animator.SetTrigger("Attack");
         }
+        */
     }
 }

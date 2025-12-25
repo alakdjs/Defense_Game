@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class MonsterChaseState : IState
 {
-    private Monster_PartyMonster _monster;
+    private MonsterBase _monster;
 
-    public MonsterChaseState(Monster_PartyMonster monster)
+    public MonsterChaseState(MonsterBase monster)
     {
         _monster = monster;
     }
@@ -12,7 +12,7 @@ public class MonsterChaseState : IState
     public void Enter()
     {
         _monster.Agent.isStopped = false;
-        _monster.Animator.SetBool("IsMoving", true);
+        _monster.SetMoveAnimation(true);
     }
 
     public void Execute()
@@ -31,6 +31,6 @@ public class MonsterChaseState : IState
     public void Exit() 
     {
         _monster.Agent.isStopped = true;
-        _monster.Animator.SetBool("IsMoving", false);
+        _monster.SetMoveAnimation(false);
     }
 }
