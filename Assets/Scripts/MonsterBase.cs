@@ -115,8 +115,6 @@ public abstract class MonsterBase : MonoBehaviour
         }    
     }
 
-    
-
     /// <summary>
     /// 거리 계산
     /// </summary>
@@ -165,7 +163,12 @@ public abstract class MonsterBase : MonoBehaviour
         if (_target == null)
             return;
 
-        // Player HP 처리 연결
+        PlayerHp playerHp = _target.GetComponent<PlayerHp>();
+        if (playerHp != null)
+        {
+            playerHp.TakeDamage(10.0f);
+            Debug.Log("몬스터가 플레이어를 때림");
+        }
     }
 
     /// <summary>

@@ -4,10 +4,10 @@ using UnityEngine.UI;
 
 public class HpBar : MonoBehaviour
 {
-    [SerializeField] private Image _fillImage; // 체력 Fill 이미지
-    [SerializeField] private Color _fullHpColor = Color.green; // 체력 많을 때 색상
+    [SerializeField] private Image _fillImage;
+    [SerializeField] private Color _fullHpColor = Color.green;
     [SerializeField] private Color _middleHpColor = Color.yellow;
-    [SerializeField] private Color _lowHpColor = Color.red; // 체력 적을 때 생상
+    [SerializeField] private Color _lowHpColor = Color.red;
 
     [SerializeField] private bool _followTarget = true;
     [SerializeField] private Vector3 _worldOffset = Vector3.up;
