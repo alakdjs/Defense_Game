@@ -44,6 +44,12 @@ public class PlayerHp : MonoBehaviour
         _currentHp -= damage;
         _currentHp = Mathf.Clamp(_currentHp, 0.0f, _maxHp);
 
+        // 피격 순간 테두리 번쩍 효과
+        if (_hpBarShadow != null )
+        {
+            _hpBarShadow.PlayHitFlash();
+        }
+
         UpdateHpUI();
 
         if (_currentHp <= 0.0f)

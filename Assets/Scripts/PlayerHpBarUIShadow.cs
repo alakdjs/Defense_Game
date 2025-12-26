@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
@@ -12,11 +13,36 @@ public class PlayerHpBarUIShadow : MonoBehaviour
     [SerializeField] private float _blinkSpeed = 6.0f;
     [SerializeField] private float _dangerHpRatio = 0.2f; // 체력이 20% 남았을 때
 
+    [SerializeField] private Color _hitFlashColor = Color.yellow;
+    [SerializeField] private float _hitFlashDuration = 0.2f;
+    private Coroutine _hitFlashCoroutine;
+
     private bool _isDanger = false;
+
 
     public void SetDanger(bool isDanger)
     {
         _isDanger = isDanger;
+    }
+
+    // 피격 시 반짝임 효과
+    public void PlayHitFlash()
+    {
+        if(_hitFlashCoroutine != null)
+        {
+            StopCoroutine( _hitFlashCoroutine );
+        }
+
+        _hitFlashCoroutine = StartCoroutine(HitFlashCoroutine());
+    }
+
+    public IEnumerator HitFlashCoroutine()
+    {
+        SetColor(_hitFlashColor);
+
+        yield return new WaitForSecondsRealtime(_hitFlashDuration);
+
+        _hitFlashCoroutine = null; // 상태 복귀
     }
 
     private void Update()
@@ -26,7 +52,8 @@ public class PlayerHpBarUIShadow : MonoBehaviour
             SetColor(Color.white);
             return;
         }
-        float t = Mathf.PingPong(Time.unscaledTime * _blinkSpeed, 1.0f);
+
+        float t = Mathf.PingPong(Time.time * _blinkSpeed, 1.0f);
         Color dangerColor = Color.Lerp(Color.white, Color.red, t);
 
         SetColor(dangerColor);
