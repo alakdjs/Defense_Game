@@ -7,6 +7,7 @@
 public class PlayerHp : MonoBehaviour
 {
     [SerializeField] private PlayerHpUI _playerHpUI;
+    [SerializeField] private PlayerHpBarUIShadow _hpBarShadow;
 
     [SerializeField] private float _maxHp = 100.0f;
     private float _currentHp;
@@ -31,6 +32,8 @@ public class PlayerHp : MonoBehaviour
         {
             _playerHpUI.Init(_maxHp);
         }
+
+        UpdateHpUI();
     }
 
     public void TakeDamage(float damage)
@@ -41,10 +44,7 @@ public class PlayerHp : MonoBehaviour
         _currentHp -= damage;
         _currentHp = Mathf.Clamp(_currentHp, 0.0f, _maxHp);
 
-        if (_playerHpUI != null)
-        {
-            _playerHpUI.SetHp(_currentHp);
-        }
+        UpdateHpUI();
 
         if (_currentHp <= 0.0f)
         {
@@ -53,8 +53,28 @@ public class PlayerHp : MonoBehaviour
 
     }
 
+    private void UpdateHpUI()
+    {
+        float hpRatio = _currentHp / _maxHp;
+
+        if (_playerHpUI != null)
+        {
+            _playerHpUI.SetHp(_currentHp);
+        }
+
+        if (_hpBarShadow  != null)
+        {
+            _hpBarShadow.SetDanger(hpRatio <= 0.2f);
+        }
+    }
+
     private void Die()
     {
+        if (_hpBarShadow != null)
+        {
+            _hpBarShadow.SetDanger(false);
+        }
+
         if (_player != null)
         {
             _player.StateMachine.ChangeState(_player.DeadState);
