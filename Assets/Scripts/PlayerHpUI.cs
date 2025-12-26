@@ -1,11 +1,11 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 
 public class PlayerHpUI : MonoBehaviour
 {
     [SerializeField] private Image _fillImage;
+    [SerializeField] private Text _hpText;
 
     private float _maxHp;
 
@@ -19,5 +19,7 @@ public class PlayerHpUI : MonoBehaviour
     {
         float ratio = currentHp / _maxHp;
         _fillImage.fillAmount = ratio;
+
+        _hpText.text = $"{Mathf.CeilToInt(currentHp)} / {Mathf.CeilToInt(_maxHp)}";
     }
 }
