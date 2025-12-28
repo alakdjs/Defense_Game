@@ -14036,6 +14036,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 621074935933945739, guid: 4a21c635ce6416f4a9ca4dba50a2c8ff, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 722587135448257199, guid: 4a21c635ce6416f4a9ca4dba50a2c8ff, type: 3}
       propertyPath: m_Name
       value: Snow Man_01
@@ -14050,7 +14054,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6426000298984326267, guid: 4a21c635ce6416f4a9ca4dba50a2c8ff, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6426000298984326267, guid: 4a21c635ce6416f4a9ca4dba50a2c8ff, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14062,15 +14066,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6426000298984326267, guid: 4a21c635ce6416f4a9ca4dba50a2c8ff, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6426000298984326267, guid: 4a21c635ce6416f4a9ca4dba50a2c8ff, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6426000298984326267, guid: 4a21c635ce6416f4a9ca4dba50a2c8ff, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6426000298984326267, guid: 4a21c635ce6416f4a9ca4dba50a2c8ff, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -14083,6 +14087,10 @@ PrefabInstance:
     - target: {fileID: 6426000298984326267, guid: 4a21c635ce6416f4a9ca4dba50a2c8ff, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802330354167884163, guid: 4a21c635ce6416f4a9ca4dba50a2c8ff, type: 3}
+      propertyPath: m_BaseOffset
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14165,5 +14173,5 @@ SceneRoots:
   - {fileID: 7604763659781938809}
   - {fileID: 442313806}
   - {fileID: 1432264894}
-  - {fileID: 3239319430852703833}
   - {fileID: 1169168103}
+  - {fileID: 3239319430852703833}

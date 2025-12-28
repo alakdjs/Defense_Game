@@ -62,7 +62,7 @@ public class Monster_Snowman : MonsterBase
         if (_isDead)
         {
             Vector3 scale = transform.localScale;
-            scale.y -= Time.deltaTime * 2.0f;
+            scale.y -= Time.deltaTime * 0.5f;
             scale.y = Mathf.Max(0.0f, scale.y);
             transform.localScale = scale;
 
