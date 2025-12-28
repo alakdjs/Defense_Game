@@ -3073,7 +3073,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHp: 100
-  _detectRange: 10
+  _detectRange: 15
   _attackRange: 2.5
   _moveSpeed: 2.5
   _animator: {fileID: 746894314670455395}

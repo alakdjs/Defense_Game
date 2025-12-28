@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 722587135448257199}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.85, y: 1.5, z: -9.18}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4.85, y: 0, z: -9.18}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -75,14 +75,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHp: 100
   _detectRange: 15
-  _attackRange: 2.5
-  _moveSpeed: 2.5
+  _attackRange: 10
+  _moveSpeed: 2
   _animator: {fileID: 0}
   _target: {fileID: 0}
   _hpBarWorldOffset: {x: 0, y: 2, z: 0}
   _mouthPoint: {fileID: 2170360432221461752}
   _snowballPrefab: {fileID: 3580650660468538349, guid: c2ce4f6ba5d07954c9f3fbe20d8c4f37, type: 3}
   _attackCoolTime: 2
+  _aimHeightOffset: 1.3
 --- !u!195 &8802330354167884163
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -102,7 +103,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0
+  m_BaseOffset: 5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!1 &1823745060660438372

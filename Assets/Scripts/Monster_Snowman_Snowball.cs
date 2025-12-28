@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Monster_Snowman_Snowball : MonoBehaviour
 {
-    [SerializeField] private float _speed = 10.0f;
+    [SerializeField] private float _speed = 25.0f;
     [SerializeField] private float _damage = 10.0f;
 
     private float _traveledDistance;
