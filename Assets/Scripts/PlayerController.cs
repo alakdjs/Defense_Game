@@ -14,7 +14,9 @@ public class PlayerController : MonoBehaviour
     [Header("Auto Attack")]
     [SerializeField] private float _autoAttackInterval = 3.0f;
     [SerializeField] private float _aimRotateSpeed = 10.0f;
-    private float _currentAttackRange = 2.0f;
+
+    [SerializeField] private float _detectRange = 6.0f; // 몬스터 인식 범위
+    private float _attackRange = 2.0f; // 무기 공격 범위
 
     private float _autoAttackTimer = 0.0f;
 
@@ -161,12 +163,12 @@ public class PlayerController : MonoBehaviour
         _currentWeaponData = data;
         _weaponType = data._weaponType;
 
-        _currentAttackRange = data._attackRange; // 공격 범위 동기화
+        _attackRange = data._attackRange; // 공격 범위 동기화
 
         // UI 반영
         if (_attackRangeUI != null)
         {
-            _attackRangeUI.SetRange(_currentAttackRange);
+            _attackRangeUI.SetRange(_attackRange);
 
         }
 
@@ -264,7 +266,7 @@ public class PlayerController : MonoBehaviour
     // 자동 에임 회전 관련 근처 가까운 몬스터 인식
     private Transform FindNearestMonster()
     {
-        Collider[] hits = Physics.OverlapSphere(transform.position, _currentAttackRange);
+        Collider[] hits = Physics.OverlapSphere(transform.position, _detectRange);
 
         Transform nearest = null;
         float minDist = float.MaxValue;
