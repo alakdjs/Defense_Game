@@ -167,7 +167,6 @@ public abstract class MonsterBase : MonoBehaviour
         if (playerHp != null)
         {
             playerHp.TakeDamage(10.0f);
-            Debug.Log("몬스터가 플레이어를 때림");
         }
     }
 
