@@ -43,8 +43,6 @@ public class Bullet : MonoBehaviour
 
             if (monster != null)
             {
-                Debug.Log("몬스터가 총알에 맞음!");
-                Debug.Log("Bullet Hit : " + other.name);
                 monster.TakeDamage(30); // Rifle 데미지
             }
 

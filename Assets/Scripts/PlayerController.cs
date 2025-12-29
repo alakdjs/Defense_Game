@@ -96,13 +96,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
         // 물리 충돌로 생긴 회전 속도 제거
         if (_rb != null)
         {
             _rb.angularVelocity = Vector3.zero;
         }
+    }
+
+    private void LateUpdate()
+    {
+        Vector3 pos = transform.position;
+        pos.y = 0f; // 항상 지면에 고정
+        transform.position = pos;
 
     }
 
