@@ -18,9 +18,6 @@ public class PlayerMoveState : IState
 
     public void Execute()
     {
-        // Dead 체크
-        _player.CheckDead();
-
         // 만약 타겟이 없으면 Idle로 복귀
         if (!_player.HasTarget)
         {

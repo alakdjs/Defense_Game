@@ -345,12 +345,4 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    // 강제로 Dead 상태 전환 가능하도록(테스트용)
-    public void CheckDead()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            _stateMachine.ChangeState(_deadState);
-        }
-    }
 }
