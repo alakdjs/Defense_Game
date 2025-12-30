@@ -22,6 +22,9 @@ public abstract class MonsterBase : MonoBehaviour
     [SerializeField] protected Vector3 _hpBarWorldOffset = new Vector3(0.0f, 2.0f, 0.0f);
     protected HpBar _hpBar;
 
+    [Header("Drop")]
+    [SerializeField] protected GameObject _expSpherePrefab;
+
     protected NavMeshAgent _agent;
 
     // FSM
@@ -193,6 +196,7 @@ public abstract class MonsterBase : MonoBehaviour
     /// </summary>
     public virtual void OnDieAnimationEnd()
     {
+        DropExp();
         CleanUpHpBar();
         Destroy(gameObject);
     }
@@ -207,5 +211,13 @@ public abstract class MonsterBase : MonoBehaviour
             HpBarManager.Instance.ReturnHpbar(_hpBar);
             _hpBar = null;
         }
+    }
+
+    /// <summary>
+    /// 경험치 드랍
+    /// </summary>
+    protected virtual void DropExp()
+    {
+        Instantiate(_expSpherePrefab, transform.position + Vector3.up * 0.5f, Quaternion.identity);
     }
 }

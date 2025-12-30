@@ -11,9 +11,6 @@ public class PlayerDeadState : IState
 
     public void Enter()
     {
-        Debug.Log("PLAYER DEAD");
-
-        // 애니메이터 파라미터
         _player.Animator.SetBool("IsMoving", false);
         _player.Animator.SetBool("IsDead", true);
 
