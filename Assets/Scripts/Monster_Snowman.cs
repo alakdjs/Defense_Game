@@ -74,10 +74,10 @@ public class Monster_Snowman : MonsterBase
             scale.y = Mathf.Max(0.0f, scale.y);
             transform.localScale = scale;
 
+            // Die() 애니메이션 효과 대체용 -> y 스케일을 줄여서 바닥 밑으로 없어지는 연출
             if (scale.y <= 0.01f)
             {
-                CleanUpHpBar();
-                Destroy(gameObject);
+                OnDieAnimationEnd();
             }
         }
     }
