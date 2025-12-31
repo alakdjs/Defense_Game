@@ -8,7 +8,7 @@ public class FireRifleWeapon : MonoBehaviour
 
     private float _lastFireTime;
 
-    public void Fire(Transform playerTransform, float attackRange)
+    public void Fire(Transform playerTransform, WeaponData weaponData)
     {
         if (Time.time < _lastFireTime + _fireDelay)
             return;
@@ -23,13 +23,10 @@ public class FireRifleWeapon : MonoBehaviour
 
         GameObject bulletObj = Instantiate(_bulletPrefab, spawnPos, Quaternion.LookRotation(dir));
 
-        bulletObj.transform.SetParent(null);
-
-        // Bullet 초기화
-        Bullet bullet = bulletObj.AddComponent<Bullet>();
-        if (bullet != null )
+        Bullet bullet = bulletObj.GetComponent<Bullet>();
+        if (bullet != null)
         {
-            bullet.Init(attackRange);
+            bullet.Init(weaponData._damage, weaponData._attackRange);
         }
     }
     

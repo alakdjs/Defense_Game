@@ -8,7 +8,7 @@ public class Monster_Snowman : MonsterBase
     [SerializeField] private GameObject _snowballPrefab;
     [SerializeField] private float _attackCoolTime = 2.0f;
 
-    [SerializeField] private float _aimHeightOffset = 1.3f; // 플레아어 머리 쪽 보정값
+    [SerializeField] private float _aimHeightOffset = 1.3f; // 플레이어 머리 쪽 보정값
 
     private float _lastAttackTime;
 
@@ -74,7 +74,6 @@ public class Monster_Snowman : MonsterBase
             scale.y = Mathf.Max(0.0f, scale.y);
             transform.localScale = scale;
 
-            // Die() 애니메이션 효과 대체용 -> y 스케일을 줄여서 바닥 밑으로 없어지는 연출
             if (scale.y <= 0.01f)
             {
                 OnDieAnimationEnd();

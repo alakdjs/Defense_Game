@@ -80,16 +80,19 @@ public class HpBar : MonoBehaviour
             return;
         }
 
+        // 플레이어 기준 거리 체크
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            float distance = Vector3.Distance(_target.position, player.transform.position);
+
+        }
+
+        gameObject.SetActive(true);
+
         // 월드 좌표 -> 화면 좌표 변환
         Vector3 worldPos = _target.position + _worldOffset;
         Vector3 screenPos = _mainCamera.WorldToScreenPoint(worldPos);
-
-        // 카메라 뒤에 있으면 숨김
-        if (screenPos.z < 0.0f)
-        {
-            gameObject.SetActive(false);
-            return;
-        }
 
         gameObject.SetActive(true);
         transform.position = screenPos;

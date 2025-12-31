@@ -260,8 +260,7 @@ public class PlayerController : MonoBehaviour
 
             if (monster != null)
             {
-                //Debug.Log("몬스터 타격!");
-                monster.TakeDamage(25); // 칼 데미지 25
+                monster.TakeDamage(_currentWeaponData._damage);
             }
 
         }
@@ -276,7 +275,7 @@ public class PlayerController : MonoBehaviour
         if (_fireRifleWeapon != null && _currentWeaponData != null)
         {
             //Debug.Log("총알발사됨");
-            _fireRifleWeapon.Fire(transform, _currentWeaponData._attackRange);
+            _fireRifleWeapon.Fire(transform, _currentWeaponData);
         }
     }
 

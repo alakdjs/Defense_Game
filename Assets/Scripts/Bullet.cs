@@ -1,17 +1,20 @@
 ﻿using UnityEngine;
 
+
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float _fireSpeed = 20.0f;
 
+    private float _damage;
     private float _traveledDistance;
     private float _maxDistance;
     private bool _isInitialized = false;
 
 
     // 발사 시 초기화
-    public void Init(float maxDistance)
+    public void Init(float damage, float maxDistance)
     {
+        _damage = damage;
         _traveledDistance = 0.0f;
         _maxDistance = maxDistance;
         _isInitialized = true;
@@ -37,23 +40,18 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // 몬스터에 맞았을 경우
-        if (other.CompareTag("Monster"))
+        MonsterBase monster = other.GetComponentInParent<MonsterBase>();
+        if (monster != null)
         {
-            MonsterBase monster = other.transform.root.GetComponent<MonsterBase>();
-
-            if (monster != null)
-            {
-                monster.TakeDamage(30); // Rifle 데미지
-            }
-
-            Destroy(gameObject); // 총알 제거
+            monster.TakeDamage(_damage);
+            Destroy(gameObject);
             return;
         }
 
         // 맵 오브젝트에 맞았을 경우
         if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
         {
-            Destroy(gameObject); // 총알 제거
+            Destroy(gameObject);
         }
 
     }

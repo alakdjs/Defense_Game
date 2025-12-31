@@ -14654,6 +14654,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 621074935933945739, guid: 4a21c635ce6416f4a9ca4dba50a2c8ff, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 722587135448257199, guid: 4a21c635ce6416f4a9ca4dba50a2c8ff, type: 3}
       propertyPath: m_Name
       value: Snow Man_01
@@ -14672,7 +14676,7 @@ PrefabInstance:
       objectReference: {fileID: 7503372356713384532, guid: 34fa1cae9d026bd49bb6fb49e8a4d2b8, type: 3}
     - target: {fileID: 6426000298984326267, guid: 4a21c635ce6416f4a9ca4dba50a2c8ff, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.85
+      value: 12.77
       objectReference: {fileID: 0}
     - target: {fileID: 6426000298984326267, guid: 4a21c635ce6416f4a9ca4dba50a2c8ff, type: 3}
       propertyPath: m_LocalPosition.y
@@ -14680,7 +14684,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6426000298984326267, guid: 4a21c635ce6416f4a9ca4dba50a2c8ff, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -19.8
+      value: 16.8
       objectReference: {fileID: 0}
     - target: {fileID: 6426000298984326267, guid: 4a21c635ce6416f4a9ca4dba50a2c8ff, type: 3}
       propertyPath: m_LocalRotation.w
