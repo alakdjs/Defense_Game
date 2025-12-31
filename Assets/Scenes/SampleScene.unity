@@ -5493,6 +5493,22 @@ MonoBehaviour:
   _maxExp: 10
   _expIncrease: 2
   _expUI: {fileID: 974844959}
+--- !u!114 &891160565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106890193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d50aa02dabf6a4a863b41c0c39d268, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _collectRange: 3
+  _expLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1001 &899693286
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15428,6 +15444,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7167928421021097973, guid: d085da537bbea694493000dafa056e9a, type: 3}
       insertIndex: 4
       addedObject: {fileID: 891160564}
+    - targetCorrespondingSourceObject: {fileID: 7167928421021097973, guid: d085da537bbea694493000dafa056e9a, type: 3}
+      insertIndex: 5
+      addedObject: {fileID: 891160565}
   m_SourcePrefab: {fileID: 100100000, guid: d085da537bbea694493000dafa056e9a, type: 3}
 --- !u!1001 &3239319430852703833
 PrefabInstance:
@@ -15563,6 +15582,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3969682075391730611, guid: db8a340232348ad45931818c8dc69018, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6677786252347936889, guid: db8a340232348ad45931818c8dc69018, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7754685115408764319}
   - component: {fileID: 5641296267197289122}
   - component: {fileID: 8459137067315380574}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ExpSphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,4 +122,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _expAmount: 2
-  _rotateSpeed: 90
+  _moveSpeed: 8
