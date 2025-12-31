@@ -345,4 +345,9 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public void OnDeadAnimationEnd()
+    {
+        Destroy(gameObject);
+    }
+
 }

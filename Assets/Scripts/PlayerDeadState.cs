@@ -16,6 +16,9 @@ public class PlayerDeadState : IState
 
         // 이동 중이었다면 즉시 멈춤
         _player.Rigidbody.linearVelocity = Vector3.zero;
+        _player.Rigidbody.angularVelocity = Vector3.zero;
+
+        _player.Invoke(nameof(PlayerController.OnDeadAnimationEnd), 3.5f);
     }
 
     public void Execute()
@@ -29,4 +32,5 @@ public class PlayerDeadState : IState
         // 보통 Dead에서 나가는 일은 없지만,
         // 필요하면 여기에 복귀용 코드 작성 가능.
     }
+
 }
