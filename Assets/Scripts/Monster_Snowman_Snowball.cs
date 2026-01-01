@@ -2,15 +2,16 @@ using UnityEngine;
 
 public class Monster_Snowman_Snowball : MonoBehaviour
 {
-    [SerializeField] private float _speed = 25.0f;
-    [SerializeField] private float _damage = 10.0f;
+    [SerializeField] private float _snowballSpeed = 25.0f;
 
+    private float _damage;
     private float _traveledDistance;
     private float _maxDistance;
     private bool _isInitialized = false;
 
-    public void Init(float maxDistance)
+    public void Init(float damage, float maxDistance)
     {
+        _damage = damage;
         _traveledDistance = 0.0f;
         _maxDistance = maxDistance;
         _isInitialized = true;
@@ -21,7 +22,7 @@ public class Monster_Snowman_Snowball : MonoBehaviour
         if (!_isInitialized)
             return;
 
-        float move = _speed * Time.deltaTime;
+        float move = _snowballSpeed * Time.deltaTime;
         transform.position += transform.forward * move;
 
         _traveledDistance += move;

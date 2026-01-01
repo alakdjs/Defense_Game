@@ -46,7 +46,7 @@ public class Monster_Snowman : MonsterBase
         if (projectile != null)
         {
             //Debug.Log("Snowball Init »£√‚µ ");
-            projectile.Init(AttackRange);
+            projectile.Init(_attackDamage, AttackRange);
         }
         else
         {

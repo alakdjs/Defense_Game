@@ -11,6 +11,7 @@ public abstract class MonsterBase : MonoBehaviour
     protected float _currentHp;
     protected bool _isDead = false;
 
+    [SerializeField] protected float _attackDamage = 5.0f;
     [SerializeField] protected float _detectRange = 15.0f;
     [SerializeField] protected float _attackRange = 2.5f;
     [SerializeField] protected float _moveSpeed = 2.5f;
@@ -169,7 +170,7 @@ public abstract class MonsterBase : MonoBehaviour
         PlayerHp playerHp = _target.GetComponent<PlayerHp>();
         if (playerHp != null)
         {
-            playerHp.TakeDamage(10.0f);
+            playerHp.TakeDamage(_attackDamage);
         }
     }
 
