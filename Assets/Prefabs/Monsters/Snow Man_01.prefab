@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 722587135448257199}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.85, y: 0, z: -9.18}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalPosition: {x: 12.77, y: 0, z: 16.8}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3479288859916943859}
@@ -56,7 +56,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -75,12 +75,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHp: 100
+  _attackDamage: 5
   _detectRange: 15
   _attackRange: 10
   _moveSpeed: 2
   _animator: {fileID: 0}
   _target: {fileID: 0}
   _hpBarWorldOffset: {x: 0, y: 2, z: 0}
+  _expSpherePrefab: {fileID: 7503372356713384532, guid: 34fa1cae9d026bd49bb6fb49e8a4d2b8, type: 3}
   _mouthPoint: {fileID: 2170360432221461752}
   _snowballPrefab: {fileID: 3580650660468538349, guid: c2ce4f6ba5d07954c9f3fbe20d8c4f37, type: 3}
   _attackCoolTime: 2
