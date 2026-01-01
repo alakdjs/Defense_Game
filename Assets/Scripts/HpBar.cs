@@ -80,14 +80,6 @@ public class HpBar : MonoBehaviour
             return;
         }
 
-        // 플레이어 기준 거리 체크
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
-        {
-            float distance = Vector3.Distance(_target.position, player.transform.position);
-
-        }
-
         gameObject.SetActive(true);
 
         // 월드 좌표 -> 화면 좌표 변환

@@ -3029,10 +3029,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2.2141318
+  m_Radius: 0.8
+  m_Height: 2.25
   m_Direction: 1
-  m_Center: {x: 0, y: 0.9779091, z: 0}
+  m_Center: {x: -0, y: 1.12, z: -0}
 --- !u!54 &612203271062232719
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3079,7 +3079,7 @@ MonoBehaviour:
   _moveSpeed: 2.5
   _animator: {fileID: 746894314670455395}
   _target: {fileID: 0}
-  _hpBarWorldOffset: {x: 0, y: 2, z: 0}
+  _hpBarWorldOffset: {x: 0, y: 1.5, z: 0}
   _expSpherePrefab: {fileID: 7503372356713384532, guid: 34fa1cae9d026bd49bb6fb49e8a4d2b8, type: 3}
 --- !u!1 &8776642320991409445
 GameObject:

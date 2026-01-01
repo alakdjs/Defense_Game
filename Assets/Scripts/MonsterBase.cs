@@ -7,14 +7,14 @@ using UnityEngine.AI;
 public abstract class MonsterBase : MonoBehaviour
 {
     [Header("Base Stat")]
-    [SerializeField] protected float _maxHp = 100.0f;
+    [SerializeField] protected float _maxHp = 100.0f; // 체력
     protected float _currentHp;
     protected bool _isDead = false;
-
-    [SerializeField] protected float _attackDamage = 5.0f;
-    [SerializeField] protected float _detectRange = 15.0f;
-    [SerializeField] protected float _attackRange = 2.5f;
-    [SerializeField] protected float _moveSpeed = 2.5f;
+    [SerializeField] protected float _attackDamage = 5.0f; // 공격력
+    [SerializeField] protected float _defense = 0.0f; // 방어력
+    [SerializeField] protected float _detectRange = 15.0f; // 플레이어 감지 범위
+    [SerializeField] protected float _attackRange = 2.5f; // 공격 범위
+    [SerializeField] protected float _moveSpeed = 2.5f; // 스피드(이동속도)
 
     [SerializeField] protected Animator _animator;
     [SerializeField] protected Transform _target;
@@ -104,7 +104,8 @@ public abstract class MonsterBase : MonoBehaviour
         if (_isDead)
             return;
 
-        _currentHp -= damage;
+        float finalDamage = Mathf.Max(1.0f, damage - _defense);
+        _currentHp -= finalDamage;
 
         // 체력바 갱신
         if (_hpBar != null)

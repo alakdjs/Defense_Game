@@ -55,7 +55,7 @@ MonoBehaviour:
   _middleHpColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 0.78431374}
   _lowHpColor: {r: 1, g: 0, b: 0, a: 0.78431374}
   _followTarget: 1
-  _worldOffset: {x: 0, y: 2, z: 0}
+  _worldOffset: {x: 0, y: 1.5, z: 0}
 --- !u!1 &4438298750692348043
 GameObject:
   m_ObjectHideFlags: 0

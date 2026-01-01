@@ -4,29 +4,32 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float _moveSpeed = 5.0f;
+    [Header("Player Stat")]
+    [SerializeField] private float _maxHp = 100.0f; // 체력
+    [SerializeField] private float _attack = 1.0f; // 공격력 ( 최종 데미지 = 무기 데미지 x 공격력 )
+    [SerializeField] private float _defense = 0.0f; // 방어력
+    [SerializeField] private float _speed = 5.0f; // 스피드(이동속도)
+    [SerializeField] private float _detectRange = 6.0f; // 몬스터 인식 범위
+    private float _attackRange = 2.0f; // 무기 공격 범위
+
+    [Header("Auto Attack")]
+    [SerializeField] private float _autoAttackInterval = 3.0f;
+    [SerializeField] private float _aimRotateSpeed = 10.0f;
+
+    [SerializeField] private AttackRangeUI _attackRangeUI;
+
+    private float _autoAttackTimer = 0.0f;
+    private bool _hasAutoAttackTarget = false;
+
     [SerializeField] private Animator _animator;
 
     [Header("Weapon")]
     [SerializeField] private Transform _weaponTarget; // 무기 장착 위치
     [SerializeField] private WeaponType _weaponType = WeaponType.Sword;
 
-    [Header("Auto Attack")]
-    [SerializeField] private float _autoAttackInterval = 3.0f;
-    [SerializeField] private float _aimRotateSpeed = 10.0f;
-
-    private bool _hasAutoAttackTarget = false;
-
-    [SerializeField] private float _detectRange = 6.0f; // 몬스터 인식 범위
-    private float _attackRange = 2.0f; // 무기 공격 범위
-
-    private float _autoAttackTimer = 0.0f;
-
     private GameObject _currentWeapon; // 현재 장착된 무기 오브젝트
     private WeaponData _currentWeaponData; // 현재 장착된 무기 데이터
     private FireRifleWeapon _fireRifleWeapon; // Rifle 전용 발사 스크립트
-
-    [SerializeField] private AttackRangeUI _attackRangeUI;
 
     private Rigidbody _rb;
     private Camera _mainCam;
@@ -34,6 +37,14 @@ public class PlayerController : MonoBehaviour
     // 이동 타겟
     private Vector3 _targetPosition;
     private bool _hasTarget = false;
+
+    public float MaxHp => _maxHp;
+    public float Attack => _attack;
+    public float Defense => _defense;
+    public float Speed => _speed;
+    public float DetectRange => _detectRange;
+    public float AttackRange => _attackRange;
+
 
     // FSM
     private StateMachine _stateMachine;
@@ -48,7 +59,6 @@ public class PlayerController : MonoBehaviour
     public StateMachine StateMachine => _stateMachine;
     public Animator Animator => _animator;
     public Rigidbody Rigidbody => _rb;
-    public float MoveSpeed => _moveSpeed;
 
     public bool HasTarget => _hasTarget;
     public Vector3 TargetPosition => _targetPosition;
@@ -260,7 +270,7 @@ public class PlayerController : MonoBehaviour
 
             if (monster != null)
             {
-                monster.TakeDamage(_currentWeaponData._damage);
+                monster.TakeDamage(GetFinalDamage());
             }
 
         }
@@ -274,15 +284,15 @@ public class PlayerController : MonoBehaviour
 
         if (_fireRifleWeapon != null && _currentWeaponData != null)
         {
-            //Debug.Log("총알발사됨");
-            _fireRifleWeapon.Fire(transform, _currentWeaponData);
+            float finalDamage = GetFinalDamage();
+            _fireRifleWeapon.Fire(transform, finalDamage, _currentWeaponData);
         }
     }
 
     // 자동 에임 회전 관련 근처 가까운 몬스터 인식
     private Transform FindNearestMonster()
     {
-        Collider[] hits = Physics.OverlapSphere(transform.position, _detectRange);
+        Collider[] hits = Physics.OverlapSphere(transform.position, DetectRange);
 
         Transform nearest = null;
         float minDist = float.MaxValue;
@@ -342,6 +352,17 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * _aimRotateSpeed);
         }
 
+    }
+
+    /// <summary>
+    /// 데미지 계산
+    /// </summary>
+    public float GetFinalDamage()
+    {
+        if (_currentWeaponData == null)
+            return 0;
+
+        return _currentWeaponData._damage * _attack;
     }
 
     public void OnDeadAnimationEnd()

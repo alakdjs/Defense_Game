@@ -49,9 +49,9 @@ public class PlayerMoveState : IState
 
         // -------- 이동 처리 --------
         Vector3 moveVelocity = new Vector3(
-            direction.x * _player.MoveSpeed,
+            direction.x * _player.Speed,
             _player.Rigidbody.linearVelocity.y,
-            direction.z * _player.MoveSpeed
+            direction.z * _player.Speed
         );
 
         _player.Rigidbody.linearVelocity = moveVelocity;

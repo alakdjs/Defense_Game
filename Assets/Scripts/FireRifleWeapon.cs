@@ -8,7 +8,7 @@ public class FireRifleWeapon : MonoBehaviour
 
     private float _lastFireTime;
 
-    public void Fire(Transform playerTransform, WeaponData weaponData)
+    public void Fire(Transform playerTransform, float damage, WeaponData weaponData)
     {
         if (Time.time < _lastFireTime + _fireDelay)
             return;
@@ -26,7 +26,7 @@ public class FireRifleWeapon : MonoBehaviour
         Bullet bullet = bulletObj.GetComponent<Bullet>();
         if (bullet != null)
         {
-            bullet.Init(weaponData._damage, weaponData._attackRange);
+            bullet.Init(damage, weaponData._attackRange);
         }
     }
     

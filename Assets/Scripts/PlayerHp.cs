@@ -9,14 +9,12 @@ public class PlayerHp : MonoBehaviour
     [SerializeField] private PlayerHpUI _playerHpUI;
     [SerializeField] private PlayerHpBarUIShadow _hpBarShadow;
 
-    [SerializeField] private float _maxHp = 100.0f;
     private float _currentHp;
 
     private PlayerController _player;
-    private HpBar _hpBar;
 
     public float CurrentHp => _currentHp;
-    public float MaxHp => _maxHp;
+
 
     private void Awake()
     {
@@ -26,11 +24,11 @@ public class PlayerHp : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
-        _currentHp = _maxHp;
+        _currentHp = _player.MaxHp;
 
         if (_playerHpUI != null)
         {
-            _playerHpUI.Init(_maxHp);
+            _playerHpUI.Init(_player.MaxHp);
         }
 
         UpdateHpUI();
@@ -41,11 +39,12 @@ public class PlayerHp : MonoBehaviour
         if (_currentHp <= 0.0f)
             return;
 
-        _currentHp -= damage;
-        _currentHp = Mathf.Clamp(_currentHp, 0.0f, _maxHp);
+        float finalDamage = Mathf.Max(1.0f, damage - _player.Defense);
+        _currentHp -= finalDamage;
+        _currentHp = Mathf.Clamp(_currentHp, 0.0f, _player.MaxHp);
 
         // 피격 순간 테두리 번쩍 효과
-        if (_hpBarShadow != null )
+        if (_hpBarShadow != null)
         {
             _hpBarShadow.PlayHitFlash();
         }
@@ -61,7 +60,8 @@ public class PlayerHp : MonoBehaviour
 
     private void UpdateHpUI()
     {
-        float hpRatio = _currentHp / _maxHp;
+        float maxHp = _player.MaxHp;
+        float hpRatio = _currentHp / maxHp;
 
         if (_playerHpUI != null)
         {

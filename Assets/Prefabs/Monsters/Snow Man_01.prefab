@@ -60,8 +60,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.3601274, y: 9.796454, z: 3.833146}
-  m_Center: {x: -0.17515858, y: 0, z: -0.10143677}
+  m_Size: {x: 4.5, y: 10, z: 4.5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2579845844602244158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,7 +81,7 @@ MonoBehaviour:
   _moveSpeed: 2
   _animator: {fileID: 0}
   _target: {fileID: 0}
-  _hpBarWorldOffset: {x: 0, y: 2, z: 0}
+  _hpBarWorldOffset: {x: 0, y: 1.5, z: 0}
   _expSpherePrefab: {fileID: 7503372356713384532, guid: 34fa1cae9d026bd49bb6fb49e8a4d2b8, type: 3}
   _mouthPoint: {fileID: 2170360432221461752}
   _snowballPrefab: {fileID: 3580650660468538349, guid: c2ce4f6ba5d07954c9f3fbe20d8c4f37, type: 3}
