@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.AI;
 
 
@@ -8,7 +8,7 @@ public class Monster_Snowman : MonsterBase
     [SerializeField] private GameObject _snowballPrefab;
     [SerializeField] private float _attackCoolTime = 2.0f;
 
-    [SerializeField] private float _aimHeightOffset = 1.3f; // ÇÃ·¹ÀÌ¾î ¸Ó¸® ÂÊ º¸Á¤°ª
+    [SerializeField] private float _aimHeightOffset = 1.3f; // í”Œë ˆì´ì–´ ë¨¸ë¦¬ ìª½ ë³´ì •ê°’
 
     private float _lastAttackTime;
 
@@ -33,8 +33,12 @@ public class Monster_Snowman : MonsterBase
 
     private void FireSnowball()
     {
-        if (_snowballPrefab == null || _mouthPoint == null || _target == null)
+        if (_snowballPrefab == null || _mouthPoint == null)
             return;
+
+        UpdateTarget();
+
+        if (_target  == null) return;
 
         Vector3 aimPos = _target.position + Vector3.up * _aimHeightOffset; 
         Vector3 dir = (aimPos - _mouthPoint.position).normalized;
@@ -45,18 +49,17 @@ public class Monster_Snowman : MonsterBase
 
         if (projectile != null)
         {
-            //Debug.Log("Snowball Init È£ÃâµÊ");
             projectile.Init(_attackDamage, AttackRange);
         }
         else
         {
-            Debug.LogError("Snowball ½ºÅ©¸³Æ® ¾øÀ½!");
+            Debug.LogError("Snowball ìŠ¤í¬ë¦½íŠ¸ ì—†ìŒ!");
         }
     }
 
     public override void Die()
     {
-        // Melt Ã³¸®, FSMÀº Die()Ã³¸®·Î ÀÎ½Ä
+        // Melt ì²˜ë¦¬, FSMì€ Die()ì²˜ë¦¬ë¡œ ì¸ì‹
     }
 
     public override void OnDieAnimationEnd()
@@ -66,7 +69,7 @@ public class Monster_Snowman : MonsterBase
 
     private void LateUpdate()
     {
-        // Á×¾úÀ» ¶§¸¸ Melt È¿°ú
+        // ì£½ì—ˆì„ ë•Œë§Œ Melt íš¨ê³¼
         if (_isDead)
         {
             Vector3 scale = transform.localScale;

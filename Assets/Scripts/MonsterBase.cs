@@ -18,6 +18,8 @@ public abstract class MonsterBase : MonoBehaviour
 
     [SerializeField] protected Animator _animator;
     [SerializeField] protected Transform _target;
+    [SerializeField] protected Transform _targetPlayer;
+    [SerializeField] protected Transform _targetTower;
 
     [Header("HpBar")]
     [SerializeField] protected Vector3 _hpBarWorldOffset = new Vector3(0.0f, 2.0f, 0.0f);
@@ -68,14 +70,25 @@ public abstract class MonsterBase : MonoBehaviour
     {
         _currentHp = _maxHp;
 
-        if (_target == null)
+        if (_targetPlayer == null)
         {
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             if (player != null)
             {
-                _target = player.transform;
+                _targetPlayer = player.transform;
             }
         }
+
+        if (_targetTower == null)
+        {
+            GameObject tower = GameObject.FindGameObjectWithTag("Tower");
+            if (tower != null)
+            {
+                _targetTower = tower.transform;
+            }
+        }
+
+        UpdateTarget();
 
         // HpBar 풀에서 하나 가져오기
         if (HpBarManager.Instance != null)
@@ -121,6 +134,53 @@ public abstract class MonsterBase : MonoBehaviour
     }
 
     /// <summary>
+    /// 타겟 갱신
+    /// </summary>
+    public virtual void UpdateTarget()
+    {
+        if (_targetPlayer == null || _targetTower == null)
+        {
+            _target = null;
+            return;
+        }
+
+        if (_targetPlayer == null)
+        {
+            _target = _targetTower;
+            return;
+        }
+
+        if (_targetTower == null)
+        {
+            _target = _targetPlayer;
+            return;
+        }
+
+        float playerDist = Vector3.Distance(transform.position, _targetPlayer.position);
+        float towerDist = Vector3.Distance(transform.position, _targetTower.position);
+
+        if (playerDist < towerDist)
+        {
+            _target = _targetPlayer;
+        }
+        else
+        {
+            _target = _targetTower;
+        }
+    }
+
+    protected void LooAtTarget()
+    {
+        Vector3 dir = _target.position - transform.position;
+        dir.y = 0.0f;
+
+        if (dir.sqrMagnitude < 0.0001f)
+            return;
+
+        transform.rotation = Quaternion.LookRotation(dir);
+    }
+
+    /// <summary>
     /// 거리 계산
     /// </summary>
     /// <returns></returns>
@@ -129,7 +189,17 @@ public abstract class MonsterBase : MonoBehaviour
         if (_target == null)
             return float.MaxValue;
 
-        return Vector3.Distance(transform.position, _target.position);
+        Collider targetCollider = _target.GetComponent<Collider>();
+
+        if (targetCollider == null)
+        {
+            // 컬라이더 없으면 transform.position
+            return Vector3.Distance(transform.position, _target.position);
+        }
+
+        // 타겟 컬라이더 표면 중 가장 가까운 지점
+        Vector3 closestPoint = targetCollider.ClosestPoint(transform.position);
+        return Vector3.Distance(transform.position, closestPoint);
     }
 
     /// <summary>
@@ -148,6 +218,8 @@ public abstract class MonsterBase : MonoBehaviour
     /// </summary>
     public virtual void PerformAttack()
     {
+        LooAtTarget();
+
         if (_animator != null)
         {
             _animator.SetTrigger("Attack");
@@ -168,10 +240,10 @@ public abstract class MonsterBase : MonoBehaviour
         if (_target == null)
             return;
 
-        PlayerHp playerHp = _target.GetComponent<PlayerHp>();
-        if (playerHp != null)
+        IDamageable damageable = _target.GetComponent<IDamageable>();
+        if (damageable != null)
         {
-            playerHp.TakeDamage(_attackDamage);
+            damageable.TakeDamage(_attackDamage);
         }
     }
 

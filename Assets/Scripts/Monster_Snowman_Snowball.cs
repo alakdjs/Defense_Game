@@ -9,12 +9,21 @@ public class Monster_Snowman_Snowball : MonoBehaviour
     private float _maxDistance;
     private bool _isInitialized = false;
 
+    private Rigidbody _rb;
+
+    private void Awake()
+    {
+        _rb = GetComponent<Rigidbody>();
+    }
+
     public void Init(float damage, float maxDistance)
     {
         _damage = damage;
         _traveledDistance = 0.0f;
         _maxDistance = maxDistance;
         _isInitialized = true;
+
+        _rb.linearVelocity = transform.forward * _snowballSpeed;
     }
 
     private void Update()
@@ -22,10 +31,10 @@ public class Monster_Snowman_Snowball : MonoBehaviour
         if (!_isInitialized)
             return;
 
-        float move = _snowballSpeed * Time.deltaTime;
-        transform.position += transform.forward * move;
-
-        _traveledDistance += move;
+        //float move = _snowballSpeed * Time.deltaTime;
+        //transform.position += transform.forward * move;
+        //_traveledDistance += move;
+        _traveledDistance += _snowballSpeed * Time.deltaTime;
 
         if (_traveledDistance >= _maxDistance)
         {
@@ -35,7 +44,7 @@ public class Monster_Snowman_Snowball : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // 플레이어에 맞았을 경우
+        
         if (other.CompareTag("Player"))
         {
             PlayerHp playerHp = other.GetComponent<PlayerHp>();
@@ -43,6 +52,19 @@ public class Monster_Snowman_Snowball : MonoBehaviour
             if (playerHp != null)
             {
                 playerHp.TakeDamage(_damage);
+            }
+
+            Destroy(gameObject);
+            return;
+        }
+
+        if (other.CompareTag("Tower"))
+        {
+            TowerHp towerHp = other.GetComponent<TowerHp>();
+
+            if (towerHp != null)
+            {
+                towerHp.TakeDamage(_damage);
             }
 
             Destroy(gameObject);

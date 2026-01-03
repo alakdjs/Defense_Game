@@ -12,7 +12,6 @@ public class MonsterAttackState : IState
     public void Enter()
     {
         _monster.Agent.isStopped = true;
-        // _monster.Animator.SetTrigger("Attack");
         _monster.PerformAttack();
     }
 
@@ -23,13 +22,6 @@ public class MonsterAttackState : IState
 
     public void Exit()
     {
-        /*
-        _monster.Agent.isStopped = true;
 
-        if (_monster.Animator != null)
-        {
-            _monster.Animator.SetTrigger("Attack");
-        }
-        */
     }
 }

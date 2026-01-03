@@ -4,7 +4,7 @@
 /// Player에 스크립트 붙였음
 /// </summary>
 
-public class PlayerHp : MonoBehaviour
+public class PlayerHp : MonoBehaviour, IDamageable
 {
     [SerializeField] private PlayerHpUI _playerHpUI;
     [SerializeField] private PlayerHpBarUIShadow _hpBarShadow;
