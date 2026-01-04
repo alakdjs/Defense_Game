@@ -169,17 +169,6 @@ public abstract class MonsterBase : MonoBehaviour
         }
     }
 
-    protected void LooAtTarget()
-    {
-        Vector3 dir = _target.position - transform.position;
-        dir.y = 0.0f;
-
-        if (dir.sqrMagnitude < 0.0001f)
-            return;
-
-        transform.rotation = Quaternion.LookRotation(dir);
-    }
-
     /// <summary>
     /// 거리 계산
     /// </summary>
@@ -218,8 +207,6 @@ public abstract class MonsterBase : MonoBehaviour
     /// </summary>
     public virtual void PerformAttack()
     {
-        LooAtTarget();
-
         if (_animator != null)
         {
             _animator.SetTrigger("Attack");

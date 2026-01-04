@@ -11,7 +11,6 @@ public class PlayerHpBarUIShadow : MonoBehaviour
     [SerializeField] private Outline _outline;
 
     [SerializeField] private float _blinkSpeed = 6.0f;
-    [SerializeField] private float _dangerHpRatio = 0.2f; // 체력이 20% 남았을 때
 
     [SerializeField] private Color _hitFlashColor = Color.yellow;
     [SerializeField] private float _hitFlashDuration = 0.2f;

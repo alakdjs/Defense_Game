@@ -9,7 +9,7 @@ public class WallTransparencyController : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private LayerMask _wallLayer; // 벽 레이어
-    [SerializeField] private float _raycastDistance = 100f;
+    //[SerializeField] private float _raycastDistance = 100f;
 
     private List<Material> _transparentMaterials = new List<Material>();
     private Dictionary<Renderer, Material[]> _originalMaterials = new Dictionary<Renderer, Material[]>();
