@@ -2043,7 +2043,6 @@ MonoBehaviour:
   _wallLayer:
     serializedVersion: 2
     m_Bits: 128
-  _raycastDistance: 100
 --- !u!1001 &333756188
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6891,9 +6890,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7905864920071891551, guid: bdfcb529799320b45aa29f35ea838ab8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1954288981}
-    - targetCorrespondingSourceObject: {fileID: 7905864920071891551, guid: bdfcb529799320b45aa29f35ea838ab8, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1954288983}
     - targetCorrespondingSourceObject: {fileID: 7905864920071891551, guid: bdfcb529799320b45aa29f35ea838ab8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1954288980}
@@ -12245,7 +12241,6 @@ MonoBehaviour:
   - {fileID: 1808572113}
   _outline: {fileID: 1808572112}
   _blinkSpeed: 6
-  _dangerHpRatio: 0.2
   _hitFlashColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _hitFlashDuration: 0.2
 --- !u!1 &1824629876 stripped
@@ -12981,21 +12976,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c64ad1857aaa38f4d9a160977ee168a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _petRadius: 5
---- !u!114 &1954288983
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1954288978}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 803ebccaa4d41b04b9d18165d3cc3494, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   _maxHp: 100
   _defense: 1
+  _petRadius: 5
   _towerHpUI: {fileID: 506711886}
   _hpBarShadow: {fileID: 1808572118}
 --- !u!208 &1954288984
@@ -14093,7 +14076,6 @@ MonoBehaviour:
   - {fileID: 2126991197}
   _outline: {fileID: 2126991196}
   _blinkSpeed: 6
-  _dangerHpRatio: 0.2
   _hitFlashColor: {r: 1, g: 1, b: 0, a: 1}
   _hitFlashDuration: 0.2
 --- !u!114 &2126991196

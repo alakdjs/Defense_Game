@@ -60,7 +60,7 @@ public class Monster_Snowman_Snowball : MonoBehaviour
 
         if (other.CompareTag("Tower"))
         {
-            TowerHp towerHp = other.GetComponent<TowerHp>();
+            TowerMain towerHp = other.GetComponent<TowerMain>();
 
             if (towerHp != null)
             {
