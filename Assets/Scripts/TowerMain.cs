@@ -28,7 +28,9 @@ public class TowerMain : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
-        float finalDamage = Mathf.Max(1.0f, damage - _defense);
+        float finalDamage = damage / _defense;
+        finalDamage = Mathf.Max(1.0f, finalDamage);
+
         _currentHp -= finalDamage;
         _currentHp = Mathf.Clamp(_currentHp, 0.0f, _maxHp);
 

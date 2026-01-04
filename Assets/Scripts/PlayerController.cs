@@ -365,6 +365,24 @@ public class PlayerController : MonoBehaviour
         return _currentWeaponData._damage * _attack;
     }
 
+    /// <summary>
+    /// 스탯 증가 관련 (레벨업), 회복은 PlayerHp.cs에서 
+    /// </summary>
+    public void AddMaxHp(float value)
+    {
+        _maxHp += value;
+    }
+
+    public void AddAttack(float value)
+    {
+        _attack += value;
+    }
+
+    public void AddDefense(float value)
+    {
+        _defense += value;
+    }
+
     public void OnDeadAnimationEnd()
     {
         Destroy(gameObject);

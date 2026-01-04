@@ -12,9 +12,10 @@ public abstract class MonsterBase : MonoBehaviour
     protected bool _isDead = false;
     [SerializeField] protected float _attackDamage = 5.0f; // 공격력
     [SerializeField] protected float _defense = 0.0f; // 방어력
-    [SerializeField] protected float _detectRange = 15.0f; // 플레이어 감지 범위
     [SerializeField] protected float _attackRange = 2.5f; // 공격 범위
     [SerializeField] protected float _moveSpeed = 2.5f; // 스피드(이동속도)
+
+    [SerializeField] protected bool _canAct = true;
 
     [SerializeField] protected Animator _animator;
     [SerializeField] protected Transform _target;
@@ -40,8 +41,9 @@ public abstract class MonsterBase : MonoBehaviour
     public Transform Target => _target;
     public Animator Animator => _animator;
     public NavMeshAgent Agent => _agent;
-    public float DetectRange => _detectRange;
     public float AttackRange => _attackRange;
+
+    public bool CanAct => _canAct;
 
     public MonsterIdleState IdleState => _idleState;
     public MonsterChaseState ChaseState => _chaseState;

@@ -58,6 +58,13 @@ public class PlayerHp : MonoBehaviour, IDamageable
 
     }
 
+    public void Heal(float amount)
+    {
+        _currentHp += amount;
+        _currentHp = Mathf.Clamp(_currentHp, 0.0f, _player.MaxHp);
+        UpdateHpUI();
+    }
+
     private void UpdateHpUI()
     {
         float maxHp = _player.MaxHp;

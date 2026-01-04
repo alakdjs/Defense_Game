@@ -17,8 +17,11 @@ public class MonsterIdleState : IState
 
     public void Execute()
     {
-        // 플레이어 감지
-        if (_monster.DistanceToTarget() <= _monster.DetectRange)
+        // 행동 불가 상태라면 Idle(임시)
+        if (!_monster.CanAct)
+            return;
+
+        if (_monster.Target != null)
         {
             _monster.StateMachine.ChangeState(_monster.ChaseState);
         }
