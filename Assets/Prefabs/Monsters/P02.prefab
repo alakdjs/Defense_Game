@@ -1537,7 +1537,7 @@ MonoBehaviour:
   _canAct: 1
   _animator: {fileID: 2550631145524608064}
   _target: {fileID: 0}
-  _targetPlayer: {fileID: 7508143000519951695, guid: d085da537bbea694493000dafa056e9a, type: 3}
+  _targetPlayer: {fileID: 0}
   _targetTower: {fileID: 0}
   _hpBarWorldOffset: {x: 0, y: 1.5, z: 0}
   _expSpherePrefab: {fileID: 7503372356713384532, guid: 34fa1cae9d026bd49bb6fb49e8a4d2b8, type: 3}
