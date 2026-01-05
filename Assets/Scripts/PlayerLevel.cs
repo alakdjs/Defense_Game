@@ -25,6 +25,7 @@ public class PlayerLevel : MonoBehaviour
     private void Awake()
     {
         _player = GetComponent<PlayerController>();
+        _playerHp = GetComponent<PlayerHp>();
     }
 
     private void Start()
@@ -67,6 +68,9 @@ public class PlayerLevel : MonoBehaviour
 
     private void UpdateUI()
     {
+        if (_expUI == null)
+            return;
+
         _expUI.SetExp(_currentExp, _maxExp, _level);
     }
 }

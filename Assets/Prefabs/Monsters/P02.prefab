@@ -1410,7 +1410,7 @@ Transform:
   m_GameObject: {fileID: 4269879530015370148}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8, y: 0, z: 0}
+  m_LocalPosition: {x: 44.02, y: 0, z: 33.05}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1531,11 +1531,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHp: 100
   _attackDamage: 5
-  _detectRange: 15
+  _defense: 0
   _attackRange: 2.5
   _moveSpeed: 2.5
+  _canAct: 1
   _animator: {fileID: 2550631145524608064}
   _target: {fileID: 0}
+  _targetPlayer: {fileID: 7508143000519951695, guid: d085da537bbea694493000dafa056e9a, type: 3}
+  _targetTower: {fileID: 0}
   _hpBarWorldOffset: {x: 0, y: 1.5, z: 0}
   _expSpherePrefab: {fileID: 7503372356713384532, guid: 34fa1cae9d026bd49bb6fb49e8a4d2b8, type: 3}
 --- !u!1 &4502665611125097693

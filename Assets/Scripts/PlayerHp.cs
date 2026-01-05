@@ -67,6 +67,9 @@ public class PlayerHp : MonoBehaviour, IDamageable
 
     private void UpdateHpUI()
     {
+        if (_playerHpUI == null && _hpBarShadow == null)
+            return;
+
         float maxHp = _player.MaxHp;
         float hpRatio = _currentHp / maxHp;
 
