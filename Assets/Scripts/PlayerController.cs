@@ -263,16 +263,12 @@ public class PlayerController : MonoBehaviour
 
         foreach (var hit in hits)
         {
-            if (!hit.transform.root.CompareTag("Monster"))
+            MonsterBase monster = hit.GetComponentInParent<MonsterBase>();
+
+            if (monster == null)
                 continue;
 
-            MonsterBase monster = hit.transform.root.GetComponent<MonsterBase>();
-
-            if (monster != null)
-            {
-                monster.TakeDamage(GetFinalDamage());
-            }
-
+            monster.TakeDamage(GetFinalDamage());
         }
     }
 
