@@ -1,16 +1,14 @@
 using UnityEngine;
 
-public class Pet_Dog : MonoBehaviour
+public class Pet_Dog : PetBase
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected override void Awake()
     {
-        
-    }
+        base.Awake();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        _attackDamage = 25.0f;
+        _moveSpeed = 3.0f;
+
+        Agent.speed = _moveSpeed;
     }
 }

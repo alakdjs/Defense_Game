@@ -34,7 +34,8 @@ public class PetAttackState : IState
 
         if (_pet.Animator != null)
         {
-            _pet.Animator.SetFloat("Speed", 1.0f);
+            _pet.Animator.SetFloat("State", 1.0f);
+            _pet.Animator.SetFloat("Vert", 1.0f);
         }
     }
 

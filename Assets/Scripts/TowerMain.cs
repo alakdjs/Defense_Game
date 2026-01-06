@@ -5,7 +5,7 @@ public class TowerMain : MonoBehaviour, IDamageable
     [Header("Tower Stat")]
     [SerializeField] private float _maxHp = 1000.0f;
     [SerializeField] private float _defense = 1.0f;
-    [SerializeField] private float _petRadius = 5.0f; // 펫(서브타워) 이동 반경
+    [SerializeField] private float _petRadius = 10.0f; // 펫(서브타워) 이동 반경
 
     [Header("UI")]
     [SerializeField] private PlayerHpUI _towerHpUI;

@@ -5,10 +5,10 @@ using UnityEngine.AI;
 public abstract class PetBase : MonoBehaviour
 {
     [Header("Base Stat")]
-    [SerializeField] protected float _maxHp = 100.0f;      // 체력
-    [SerializeField] protected float _attackDamage = 5.0f; // 공격력
+    [SerializeField] protected float _maxHp = 100.0f; // 체력
+    [SerializeField] protected float _attackDamage; // 공격력
     [SerializeField] protected float _attackRange = 3.0f;  // 공격 범위
-    [SerializeField] protected float _moveSpeed = 2.5f;    // 이동 속도
+    [SerializeField] protected float _moveSpeed; // 이동 속도
 
     protected float _currentHp;
     protected bool _isDead = false;
@@ -22,6 +22,7 @@ public abstract class PetBase : MonoBehaviour
     // FSM
     protected StateMachine _stateMachine;
     protected PetIdleState _idleState;
+    protected PetPatrolState _patrolState;
     protected PetChaseState _chaseState;
     protected PetAttackState _attackState;
     protected PetDeadState _deadState;
@@ -36,6 +37,7 @@ public abstract class PetBase : MonoBehaviour
 
     public StateMachine StateMachine => _stateMachine;
     public PetIdleState IdleState => _idleState;
+    public PetPatrolState PatrolState => _patrolState;
     public PetChaseState ChaseState => _chaseState;
     public PetAttackState AttackState => _attackState;
     public PetDeadState DeadState => _deadState;
@@ -44,7 +46,6 @@ public abstract class PetBase : MonoBehaviour
     protected virtual void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
-        _agent.speed = _moveSpeed;
         _agent.stoppingDistance = _attackRange;
 
         if (_animator == null)
@@ -52,6 +53,7 @@ public abstract class PetBase : MonoBehaviour
 
         _stateMachine = new StateMachine();
         _idleState = new PetIdleState(this);
+        _patrolState = new PetPatrolState(this);
         _chaseState = new PetChaseState(this);
         _attackState = new PetAttackState(this);
         _deadState = new PetDeadState(this);
@@ -79,6 +81,39 @@ public abstract class PetBase : MonoBehaviour
             return;
 
         _stateMachine.Update();
+    }
+
+    // 몬스터 탐지
+    public Transform FindNearestMonster()
+    {
+        TowerMain tower = _tower.GetComponent<TowerMain>();
+        if (tower == null)
+            return null;
+
+        Collider[] hits = Physics.OverlapSphere(
+            _tower.position,
+            tower.PetRadius,
+            LayerMask.GetMask("Monster")
+        );
+
+        float minDist = float.MaxValue;
+        Transform nearest = null;
+
+        foreach (Collider hit in hits)
+        {
+            float dist = Vector3.Distance(
+                transform.position,
+                hit.transform.position
+            );
+
+            if (dist < minDist)
+            {
+                minDist = dist;
+                nearest = hit.transform;
+            }
+        }
+
+        return nearest;
     }
 
     // 현재 공격 대상 몬스터 설정
@@ -127,27 +162,10 @@ public abstract class PetBase : MonoBehaviour
         }
     }
 
-    // 이동 애니메이션 처리
-    public virtual void SetMoveAnimation(bool isMoving)
-    {
-        if (_animator == null)
-            return;
-
-        _animator.SetBool("IsMoving", isMoving);
-    }
-
     // 공격 처리
     public virtual void PerformAttack()
     {
-        if (_animator != null)
-        {
-            _animator.SetTrigger("Attack");
-        }
-        else
-        {
-            ApplyAttackDamage();
-            _stateMachine.ChangeState(_chaseState);
-        }
+        ApplyAttackDamage();
     }
 
     // 실제 공격 판정
@@ -165,14 +183,7 @@ public abstract class PetBase : MonoBehaviour
 
     public virtual void Die()
     {
-        if (_animator != null)
-        {
-            _animator.SetTrigger("Die");
-        }
-        else
-        {
-            OnDieAnimationEnd();
-        }
+        Destroy(gameObject);
     }
 
     public virtual void OnDieAnimationEnd()

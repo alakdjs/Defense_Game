@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2579845844602244158}
   - component: {fileID: 8802330354167884163}
   - component: {fileID: 3416243534330190788}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Snow Man_01
   m_TagString: Monster
   m_Icon: {fileID: 0}
@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 8570427218897172935}
   - component: {fileID: 2587356706016084203}
   - component: {fileID: 5577119395882191520}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Hat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 2632047589113969014}
   - component: {fileID: 3816020169048554231}
   - component: {fileID: 3747816238126342396}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Body_Stomach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -322,7 +322,7 @@ GameObject:
   - component: {fileID: 3479288859916943859}
   - component: {fileID: 6396650019324439073}
   - component: {fileID: 5565772980266505220}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Body_Lower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -408,7 +408,7 @@ GameObject:
   - component: {fileID: 1640282369103136429}
   - component: {fileID: 8021317842022427096}
   - component: {fileID: 1283813744661460661}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -495,7 +495,7 @@ GameObject:
   - component: {fileID: 9182965254681909620}
   - component: {fileID: 8881482083450260783}
   - component: {fileID: 7715207613241315869}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: L_Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -579,7 +579,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2170360432221461752}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: MousePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -612,7 +612,7 @@ GameObject:
   - component: {fileID: 7346523649733467468}
   - component: {fileID: 3043203768683060154}
   - component: {fileID: 9117636611947105360}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: R_Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
