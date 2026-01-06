@@ -7,8 +7,8 @@ public abstract class PetBase : MonoBehaviour
     [Header("Base Stat")]
     [SerializeField] protected float _maxHp = 100.0f;      // 체력
     [SerializeField] protected float _attackDamage = 5.0f; // 공격력
-    [SerializeField] protected float _attackRange = 2.0f;  // 공격 범위
-    [SerializeField] protected float _moveSpeed = 3.5f;    // 이동 속도
+    [SerializeField] protected float _attackRange = 3.0f;  // 공격 범위
+    [SerializeField] protected float _moveSpeed = 2.5f;    // 이동 속도
 
     protected float _currentHp;
     protected bool _isDead = false;
