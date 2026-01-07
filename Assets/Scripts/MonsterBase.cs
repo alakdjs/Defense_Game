@@ -4,7 +4,7 @@ using UnityEngine.AI;
 /// <summary>
 /// 모든 몬스터의 공통 베이스
 /// </summary>
-public abstract class MonsterBase : MonoBehaviour
+public abstract class MonsterBase : MonoBehaviour, IDamageable
 {
     [Header("Base Stat")]
     [SerializeField] protected float _maxHp = 100.0f; // 체력

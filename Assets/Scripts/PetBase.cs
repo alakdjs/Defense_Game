@@ -13,6 +13,10 @@ public abstract class PetBase : MonoBehaviour
     protected float _currentHp;
     protected bool _isDead = false;
 
+    [Header("HpBar")]
+    [SerializeField] protected Vector3 _hpBarWorldOffset = new Vector3(0.0f, 2.0f, 0.0f);
+    protected HpBar _hpBar;
+
     [SerializeField] protected Animator _animator;
     [SerializeField] protected Transform _tower;
     protected Transform _targetMonster;
@@ -70,6 +74,13 @@ public abstract class PetBase : MonoBehaviour
             {
                 _tower = towerObj.transform;
             }
+        }
+
+        // HpBar 풀에서 하나 가져오기(체력바 생성)
+        if (HpBarManager.Instance != null)
+        {
+            _hpBar = HpBarManager.Instance.GetHpBar(transform, _maxHp, _hpBarWorldOffset);
+            _hpBar.SetHp(_currentHp);
         }
 
         _stateMachine.ChangeState(_idleState);
@@ -155,6 +166,11 @@ public abstract class PetBase : MonoBehaviour
 
         _currentHp -= damage;
 
+        if (_hpBar != null)
+        {
+            _hpBar.SetHp(_currentHp);
+        }
+
         if (_currentHp <= 0.0f)
         {
             _isDead = true;
@@ -183,6 +199,12 @@ public abstract class PetBase : MonoBehaviour
 
     public virtual void Die()
     {
+        if (_hpBar != null && HpBarManager.Instance != null)
+        {
+            HpBarManager.Instance.ReturnHpbar(_hpBar);
+            _hpBar = null;
+        }
+
         Destroy(gameObject);
     }
 
