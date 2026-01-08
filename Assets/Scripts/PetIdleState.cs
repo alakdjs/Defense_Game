@@ -5,9 +5,6 @@ public class PetIdleState : IState
 {
     private PetBase _pet;
 
-    private float _setInterval = 0.3f;   // 상태 판단 주기
-    private float _setTimer = 0.0f;
-
     public PetIdleState(PetBase pet)
     {
         _pet = pet;
@@ -26,30 +23,16 @@ public class PetIdleState : IState
             _pet.Animator.SetFloat("State", 0.0f);
             _pet.Animator.SetFloat("Vert", 0.0f);
         }
-
-        _setTimer = 0.0f;
     }
 
     public void Execute()
     {
-        if (_pet.Tower == null)
-            return;
+        _pet.UpdateTarget();
 
-        _setTimer += Time.deltaTime;
-        if (_setTimer < _setInterval)
-            return;
-
-        _setTimer = 0.0f;
-
-        Transform target = _pet.FindNearestMonster();
-
-        if (target != null)
+        if (_pet.TargetMonster != null)
         {
-            _pet.SetTargetMonster(target);
             _pet.StateMachine.ChangeState(_pet.ChaseState);
-            return;
         }
-
     }
 
     public void Exit()

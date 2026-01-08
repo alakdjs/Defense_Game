@@ -169,6 +169,53 @@ public abstract class PetBase : MonoBehaviour, IDamageable
         return dist > tower.PetRadius;
     }
 
+    public virtual void UpdateTarget()
+    {
+        if (_tower == null)
+        {
+            _targetMonster = null;
+            return;
+        }
+
+        // 타워 반경 벗어나면 타겟 해제
+        if (IsOutOfTowerRadius())
+        {
+            _targetMonster = null;
+            return;
+        }
+
+        _targetMonster = FindNearestMonster();
+    }
+
+    public bool IsTargetInAttackRange()
+    {
+        if (_targetMonster == null)
+            return false;
+
+        float dist = Vector3.Distance(
+            transform.position,
+            _targetMonster.position
+        );
+
+        return dist <= _attackRange;
+    }
+
+    public bool CanAttack()
+    {
+        if (_targetMonster == null)
+            return false;
+
+        if (Time.time < _lastAttackTime + _attackCooltime)
+            return false;
+
+        float dist = Vector3.Distance(
+            transform.position,
+            _targetMonster.position
+        );
+
+        return dist <= _attackRange;
+    }
+
     // 데미지 처리
     public virtual void TakeDamage(float damage)
     {
