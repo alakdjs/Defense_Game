@@ -58,10 +58,11 @@ public class PetAttackState : IState
             _pet.TargetMonster.position
         );
 
-        if (!_hasAttacked && distance <= _pet.AttackRange)
+        if (!_hasAttacked && distance <= _pet.AttackRange && Time.time >= _pet.LastAttackTime + _pet.AttackCooltime)
         {
             _hasAttacked = true;
             _pet.PerformAttack(); // 실제 데미지 처리
+            _pet.LastAttackTime = Time.time;
         }
 
         // 돌진 종료

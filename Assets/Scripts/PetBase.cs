@@ -9,6 +9,8 @@ public abstract class PetBase : MonoBehaviour, IDamageable
     [SerializeField] protected float _attackDamage; // 공격력
     [SerializeField] protected float _attackRange = 3.0f;  // 공격 범위
     [SerializeField] protected float _moveSpeed; // 이동 속도
+    [SerializeField] protected float _attackCooltime = 3.0f;
+    protected float _lastAttackTime = -999f;
 
     protected float _currentHp;
     protected bool _isDead = false;
@@ -37,6 +39,12 @@ public abstract class PetBase : MonoBehaviour, IDamageable
     public Animator Animator => _animator;
 
     public float AttackRange => _attackRange;
+    public float AttackCooltime => _attackCooltime;
+    public float LastAttackTime
+    {
+        get => _lastAttackTime;
+        set => _lastAttackTime = value;
+    }
 
     public StateMachine StateMachine => _stateMachine;
     public PetIdleState IdleState => _idleState;
