@@ -2,7 +2,7 @@
 using UnityEngine.AI;
 
 
-public abstract class PetBase : MonoBehaviour
+public abstract class PetBase : MonoBehaviour, IDamageable
 {
     [Header("Base Stat")]
     [SerializeField] protected float _maxHp = 100.0f; // 체력
@@ -128,18 +128,6 @@ public abstract class PetBase : MonoBehaviour
     public void SetTargetMonster(Transform monster)
     {
         _targetMonster = monster;
-    }
-
-    // 타워 기준 펫 순찰 반경 반환
-    public float GetPatrolRadius()
-    {
-        TowerMain tower = _tower.GetComponent<TowerMain>();
-        if (tower != null)
-        {
-            return tower.PetRadius;
-        }
-
-        return 3.0f;
     }
 
     public bool IsOutOfTowerRadius()

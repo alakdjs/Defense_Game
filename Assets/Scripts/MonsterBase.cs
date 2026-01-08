@@ -140,35 +140,49 @@ public abstract class MonsterBase : MonoBehaviour, IDamageable
     /// </summary>
     public virtual void UpdateTarget()
     {
-        if (_targetPlayer == null || _targetTower == null)
+        Transform bestTarget = null;
+        float bestDist = float.MaxValue;
+
+        // 1. Tower
+        if (_targetTower != null)
         {
-            _target = null;
-            return;
+            float dist = Vector3.Distance(transform.position, _targetTower.position);
+            if (dist < bestDist)
+            {
+                bestTarget = _targetTower;
+                bestDist = dist;
+            }
         }
 
-        if (_targetPlayer == null)
+        // 2. Player
+        if (_targetPlayer != null)
         {
-            _target = _targetTower;
-            return;
+            float dist = Vector3.Distance(transform.position, _targetPlayer.position);
+            if (dist < bestDist)
+            {
+                bestTarget = _targetPlayer;
+                bestDist = dist;
+            }
         }
 
-        if (_targetTower == null)
+        // 3. Pet (서브타워)
+        Collider[] pets = Physics.OverlapSphere(
+            transform.position,
+            _attackRange + 10.0f,
+            LayerMask.GetMask("Pet")
+        );
+
+        foreach (Collider pet in pets)
         {
-            _target = _targetPlayer;
-            return;
+            float dist = Vector3.Distance(transform.position, pet.transform.position);
+            if (dist < bestDist)
+            {
+                bestTarget = pet.transform;
+                bestDist = dist;
+            }
         }
 
-        float playerDist = Vector3.Distance(transform.position, _targetPlayer.position);
-        float towerDist = Vector3.Distance(transform.position, _targetTower.position);
-
-        if (playerDist < towerDist)
-        {
-            _target = _targetPlayer;
-        }
-        else
-        {
-            _target = _targetTower;
-        }
+        _target = bestTarget;
     }
 
     /// <summary>
