@@ -50,9 +50,6 @@ public class PetIdleState : IState
             return;
         }
 
-        // 몬스터 없으면 순찰
-        _pet.StateMachine.ChangeState(_pet.PatrolState);
-
     }
 
     public void Exit()

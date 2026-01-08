@@ -26,7 +26,6 @@ public abstract class PetBase : MonoBehaviour
     // FSM
     protected StateMachine _stateMachine;
     protected PetIdleState _idleState;
-    protected PetPatrolState _patrolState;
     protected PetChaseState _chaseState;
     protected PetAttackState _attackState;
     protected PetDeadState _deadState;
@@ -41,7 +40,6 @@ public abstract class PetBase : MonoBehaviour
 
     public StateMachine StateMachine => _stateMachine;
     public PetIdleState IdleState => _idleState;
-    public PetPatrolState PatrolState => _patrolState;
     public PetChaseState ChaseState => _chaseState;
     public PetAttackState AttackState => _attackState;
     public PetDeadState DeadState => _deadState;
@@ -57,7 +55,6 @@ public abstract class PetBase : MonoBehaviour
 
         _stateMachine = new StateMachine();
         _idleState = new PetIdleState(this);
-        _patrolState = new PetPatrolState(this);
         _chaseState = new PetChaseState(this);
         _attackState = new PetAttackState(this);
         _deadState = new PetDeadState(this);
