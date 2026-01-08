@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5644175071511161321}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: fin.001.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9216270949291724576}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: spine.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3217701136160777944}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: foot.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2061984893645530254}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: spine.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8549473535698530760}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: thigh.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,7 +170,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 195514436007058808}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: shin.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -202,7 +202,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9192884289036012543}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: fin.001.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,7 +236,9 @@ GameObject:
   - component: {fileID: 1987070246187811404}
   - component: {fileID: 2186503813823197794}
   - component: {fileID: 5911564388637374418}
-  m_Layer: 0
+  - component: {fileID: 4385005706368325892}
+  - component: {fileID: 8002663318754080526}
+  m_Layer: 11
   m_Name: Pinguin_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,8 +254,8 @@ Transform:
   m_GameObject: {fileID: 3628045019952179084}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.14, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 5.77, y: 0, z: -5.39}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3061786577508204241}
@@ -304,6 +306,47 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &4385005706368325892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3628045019952179084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb590313a8f06a4ebb349fe9ac09e58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHp: 100
+  _attackDamage: 0
+  _attackRange: 3
+  _moveSpeed: 0
+  _attackCooltime: 3
+  _hpBarWorldOffset: {x: 0, y: 2, z: 0}
+  _animator: {fileID: 2186503813823197794}
+  _tower: {fileID: 0}
+--- !u!65 &8002663318754080526
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3628045019952179084}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.005863, y: 1.6051917, z: 0.83654153}
+  m_Center: {x: 0.0026460092, y: 0.80422443, z: -0.081729256}
 --- !u!1 &3899186703437475641
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,7 +356,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 133985398637084149}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: fin.002.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -344,7 +387,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3300430997009291138}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: thigh.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -376,7 +419,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8124732217518375077}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: spine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -408,7 +451,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3061786577508204241}
   - component: {fileID: 3444496388517668724}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Pinguin_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -515,7 +558,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4791604693983927098}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: fin.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -547,7 +590,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2336149921383940315}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: fin.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -579,7 +622,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5714150670856950630}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: spine.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -611,7 +654,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6896951301473862081}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: spine.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -646,7 +689,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1762669330091460513}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: shin.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -678,7 +721,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4138155109404557098}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: spine.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -710,7 +753,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3292660056509259355}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -742,7 +785,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2385308707764946247}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: scull
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -773,7 +816,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4509551308387452383}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: fin.002.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -804,7 +847,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7329739554687726616}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: foot.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -835,7 +878,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6393042872256931706}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Pinguin_001_rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}

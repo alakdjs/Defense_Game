@@ -60,8 +60,10 @@ public class PlayerHp : MonoBehaviour, IDamageable
 
     public void Heal(float amount)
     {
-        _currentHp += amount;
-        _currentHp = Mathf.Clamp(_currentHp, 0.0f, _player.MaxHp);
+        if (amount <= 0.0f)
+            return;
+
+        _currentHp = Mathf.Min(_currentHp + amount, _player.MaxHp);
         UpdateHpUI();
     }
 
