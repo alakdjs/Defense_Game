@@ -91,6 +91,24 @@ public abstract class PetBase : MonoBehaviour, IDamageable
         _stateMachine.Update();
     }
 
+    // Dead 연출
+    private void LateUpdate()
+    {
+        // 죽었을 때 Melt 효과
+        if (_isDead)
+        {
+            Vector3 scale = transform.localScale;
+            scale.y -= Time.deltaTime * 0.5f;
+            scale.y = Mathf.Max(0.0f, scale.y);
+            transform.localScale = scale;
+
+            if (scale.y <= 0.01f)
+            {
+                OnDieAnimationEnd();
+            }
+        }
+    }
+
     // 몬스터 탐지
     public Transform FindNearestMonster()
     {
@@ -159,6 +177,7 @@ public abstract class PetBase : MonoBehaviour, IDamageable
         if (_currentHp <= 0.0f)
         {
             _isDead = true;
+            Die();
             _stateMachine.ChangeState(_deadState);
         }
     }
@@ -189,8 +208,6 @@ public abstract class PetBase : MonoBehaviour, IDamageable
             HpBarManager.Instance.ReturnHpbar(_hpBar);
             _hpBar = null;
         }
-
-        Destroy(gameObject);
     }
 
     public virtual void OnDieAnimationEnd()
