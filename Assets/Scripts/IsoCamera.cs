@@ -4,8 +4,8 @@ using static UnityEngine.GraphicsBuffer;
 public class IsoCamera : MonoBehaviour
 {
     public Transform _target;
-    public Vector3 _offset = new Vector3(0, 10, -10);
-    public float _followSpeed = 10.0f;
+    public Vector3 _offset = new Vector3(0, 15, -10);
+    public float _followSpeed = 15.0f;
 
     void LateUpdate()
     {
@@ -16,6 +16,6 @@ public class IsoCamera : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, desiredPosition, _followSpeed * Time.deltaTime);
 
         //transform.LookAt(_target);
-        transform.rotation = Quaternion.Euler(45, 0, 0);
+        transform.rotation = Quaternion.Euler(55, 0, 0);
     }
 }

@@ -2019,8 +2019,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 891160554}
-  _offset: {x: 0, y: 10, z: -10}
-  _followSpeed: 10
+  _offset: {x: 0, y: 15, z: -10}
+  _followSpeed: 15
 --- !u!114 &330585549
 MonoBehaviour:
   m_ObjectHideFlags: 0
