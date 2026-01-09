@@ -5,7 +5,7 @@ public class TowerMain : MonoBehaviour, IDamageable
     [Header("Tower Stat")]
     [SerializeField] private float _maxHp = 1000.0f;
     [SerializeField] private float _defense = 1.0f;
-    [SerializeField] private float _petRadius = 10.0f; // 펫(서브타워) 이동 반경
+    [SerializeField] private float _petRadius = 15.0f; // 펫(서브타워) 이동 반경
 
     [Header("UI")]
     [SerializeField] private PlayerHpUI _towerHpUI;
@@ -72,5 +72,12 @@ public class TowerMain : MonoBehaviour, IDamageable
     private void Die()
     {
         // Game Over
+    }
+
+    private void OnDrawGizmos() // 펫 이동반경 표시용도
+    {
+        Gizmos.color = Color.black;
+
+        Gizmos.DrawWireSphere(transform.position, _petRadius);
     }
 }

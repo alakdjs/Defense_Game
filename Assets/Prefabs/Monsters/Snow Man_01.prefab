@@ -77,7 +77,7 @@ MonoBehaviour:
   _maxHp: 100
   _attackDamage: 5
   _defense: 0
-  _attackRange: 10
+  _attackRange: 7.5
   _moveSpeed: 2
   _canAct: 1
   _animator: {fileID: 0}

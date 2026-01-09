@@ -14720,7 +14720,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6772648711343525277, guid: 35de4e124ea4ce04883eb21aaa533ba8, type: 3}
       propertyPath: _petRadius
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6772648711343525277, guid: 35de4e124ea4ce04883eb21aaa533ba8, type: 3}
       propertyPath: _towerHpUI
