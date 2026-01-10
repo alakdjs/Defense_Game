@@ -27,7 +27,7 @@ public class PetIdleState : IState
 
     public void Execute()
     {
-        // 타워 범위 밖으로 나갔으면 타워로 복귀
+        // 타워 범위 밖으로 나갔으면 타워중앙으로 복귀
         if (_pet.IsOutOfTowerRadius())
         {
             _pet.Agent.isStopped = false;
