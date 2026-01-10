@@ -4,8 +4,10 @@ using UnityEngine.AI;
 public class PetAttackState : IState
 {
     private PetBase _pet;
-    private float _dashSpeed = 2.5f;
-    private float _originalSpeed;
+    private float _dashSpeedMultiplier = 3.0f;
+    private float _dashDuration = 1.0f; // 돌진 시간
+    private float _dashStartTime;
+    private bool _hasDashed;
 
     public PetAttackState(PetBase pet)
     {
@@ -17,11 +19,12 @@ public class PetAttackState : IState
         if (_pet.Agent == null)
             return;
 
-        // 기존 속도 저장
-        _originalSpeed = _pet.Agent.speed;
+        // 돌진 시작
+        _dashStartTime = Time.time;
+        _hasDashed = false;
 
-        // 돌진 속도
-        _pet.Agent.speed = _originalSpeed * _dashSpeed;
+        // 돌진 속도 설정 (원래 속도에서 배수 적용)
+        _pet.Agent.speed *= _dashSpeedMultiplier;
         _pet.Agent.isStopped = false;
 
         if (_pet.Animator != null)
@@ -41,14 +44,25 @@ public class PetAttackState : IState
             return;
         }
 
-        // 돌진 연출
-        _pet.Agent.SetDestination(_pet.TargetMonster.position);
+        float elapsedTime = Time.time - _dashStartTime;
 
-        if (_pet.CanAttack())
+        // 돌진 중 (1초 동안)
+        if (elapsedTime < _dashDuration)
         {
-            _pet.PerformAttack();
-            _pet.LastAttackTime = Time.time;
-            _pet.StateMachine.ChangeState(_pet.ChaseState);
+            _pet.Agent.SetDestination(_pet.TargetMonster.position);
+        }
+        else
+        {
+            // 돌진이 끝났고, 아직 공격하지 않았다면
+            if (!_hasDashed && _pet.IsTargetInAttackRange())
+            {
+                _pet.PerformAttack();
+                _pet.LastAttackTime = Time.time;
+                _hasDashed = true;
+            }
+
+            // 돌진 완료 후 Idle로 전환
+            _pet.StateMachine.ChangeState(_pet.IdleState);
         }
     }
 
@@ -57,6 +71,7 @@ public class PetAttackState : IState
         if (_pet.Agent == null)
             return;
 
-        _pet.Agent.speed = _originalSpeed;
+        // 원래 속도로 복원
+        _pet.Agent.speed /= _dashSpeedMultiplier;
     }
 }

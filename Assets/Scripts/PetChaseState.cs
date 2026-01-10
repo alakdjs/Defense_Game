@@ -33,17 +33,23 @@ public class PetChaseState : IState
             return;
         }
 
+        // 타겟 위치로 이동
         _pet.Agent.SetDestination(_pet.TargetMonster.position);
 
-        if (_pet.IsTargetInAttackRange())
+        // 공격 범위 안에 들어왔고 쿨타임도 끝났으면 Attack
+        if (_pet.CanAttack())
         {
             _pet.StateMachine.ChangeState(_pet.AttackState);
         }
+        // 범위 안에 들어왔지만 쿨타임 중이면 Idle로 (제자리에서 대기)
+        else if (_pet.IsTargetInAttackRange())
+        {
+            _pet.StateMachine.ChangeState(_pet.IdleState);
+        }
+        // 범위 밖이면 계속 Chase
     }
 
     public void Exit()
     {
-
     }
-
 }
