@@ -38,6 +38,9 @@ public class PlayerController : MonoBehaviour
     private Vector3 _targetPosition;
     private bool _hasTarget = false;
 
+    private Vector3 _keyboardInput = Vector3.zero;
+    public Vector3 KeyboardInput => _keyboardInput;
+
     public float MaxHp => _maxHp;
     public float Attack => _attack;
     public float Defense => _defense;
@@ -95,6 +98,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         CheckMouseClick();
+        CheckKeyboardInput();
         _stateMachine.Update();
         HandleAutoFire();
         HandleRotationAim();
@@ -105,6 +109,13 @@ public class PlayerController : MonoBehaviour
             WeaponData rifle = WeaponDatabase._Instance.GetRandomWeapon(WeaponType.Rifle);
 
             EquipWeapon(rifle);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            WeaponData sword = WeaponDatabase._Instance.GetRandomWeapon(WeaponType.Sword);
+
+            EquipWeapon(sword);
         }
     }
 
@@ -144,6 +155,29 @@ public class PlayerController : MonoBehaviour
                 }
 
             }
+        }
+    }
+
+    // 키보드 wasd 이동 설정
+    private void CheckKeyboardInput()
+    {
+        float horizontal = Input.GetAxisRaw("Horizontal");  // A, D
+        float vertical = Input.GetAxisRaw("Vertical");      // W, S
+
+        if (horizontal != 0 || vertical != 0)
+        {
+            // 키보드 입력이 있으면 마우스 타겟 취소
+            _hasTarget = false;
+            _keyboardInput = new Vector3(horizontal, 0, vertical).normalized;
+
+            if (_stateMachine.CurrentState != _moveState)
+            {
+                _stateMachine.ChangeState(_moveState);
+            }
+        }
+        else
+        {
+            _keyboardInput = Vector3.zero;
         }
     }
 
@@ -328,7 +362,6 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-
         // 몬스터가 없고, 이동 중일 때만 이동 방향으로 회전
         else if (HasTarget)
         {
@@ -339,6 +372,11 @@ public class PlayerController : MonoBehaviour
             {
                 lookDirection = dir;
             }
+        }
+        // 키보드 입력 방향으로 회전
+        else if (_keyboardInput != Vector3.zero)
+        {
+            lookDirection = _keyboardInput;
         }
 
         // 회전 적용

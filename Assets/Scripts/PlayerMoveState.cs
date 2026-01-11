@@ -18,6 +18,13 @@ public class PlayerMoveState : IState
 
     public void Execute()
     {
+        // 키보드 입력 우선 처리
+        if (_player.KeyboardInput != Vector3.zero)
+        {
+            HandleKeyboardMovement();
+            return;
+        }
+
         // 만약 타겟이 없으면 Idle로 복귀
         if (!_player.HasTarget)
         {
@@ -25,12 +32,35 @@ public class PlayerMoveState : IState
             return;
         }
 
+        HandleMouseMovement();
+    }
+
+    public void Exit()
+    {
+        // 이동을 멈출 때 속도 제거
+        _player.Rigidbody.linearVelocity = Vector3.zero;
+        _player.Animator.SetBool("IsMoving", false);
+    }
+
+    // 키보드 이동 처리
+    private void HandleKeyboardMovement()
+    {
+        Vector3 moveVelocity = new Vector3(
+            _player.KeyboardInput.x * _player.Speed,
+            _player.Rigidbody.linearVelocity.y,
+            _player.KeyboardInput.z * _player.Speed
+        );
+        _player.Rigidbody.linearVelocity = moveVelocity;
+    }
+
+    // 마우스 클릭 이동 처리
+    private void HandleMouseMovement()
+    {
         Vector3 current = _player.transform.position;
         Vector3 target = _player.TargetPosition;
 
         // Y값 고정 (지면 높이 차이가 있을 수 있으므로)
         target.y = current.y;
-
         Vector3 direction = (target - current).normalized;
 
         // 도착 체크
@@ -39,38 +69,17 @@ public class PlayerMoveState : IState
         {
             _player.Rigidbody.linearVelocity =
                 new Vector3(0, _player.Rigidbody.linearVelocity.y, 0);
-
             _player.ClearTarget();
-
-            // 도착했으면 Idle 상태로 전환
-            _player.StateMachine.ChangeState(_player.IdleState);
+            _player.StateMachine.ChangeState(_player.IdleState); // 도착했으면 Idle 상태로 전환
             return;
         }
 
-        // -------- 이동 처리 --------
+        // 이동 처리
         Vector3 moveVelocity = new Vector3(
             direction.x * _player.Speed,
             _player.Rigidbody.linearVelocity.y,
             direction.z * _player.Speed
         );
-
         _player.Rigidbody.linearVelocity = moveVelocity;
-
-        /*
-        // -------- 회전 처리 --------
-        if (direction.sqrMagnitude > 0.001f)
-        {
-            Quaternion targetRot = Quaternion.LookRotation(direction, Vector3.up);
-            _player.transform.rotation =
-                Quaternion.Slerp(_player.transform.rotation, targetRot, Time.deltaTime * 10f);
-        }
-        */
-    }
-
-    public void Exit()
-    {
-        // 이동을 멈출 때 속도 제거
-        _player.Rigidbody.linearVelocity = Vector3.zero;
-        _player.Animator.SetBool("IsMoving", false);
     }
 }
