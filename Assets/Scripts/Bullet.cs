@@ -39,6 +39,12 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // 펫에 맞았을 경우 (리턴)
+        if (other.gameObject.layer == LayerMask.NameToLayer("Pet"))
+        {
+            return;
+        }
+
         // 몬스터에 맞았을 경우
         MonsterBase monster = other.GetComponentInParent<MonsterBase>();
         if (monster != null)
