@@ -17,9 +17,11 @@ public class PlayerHpUI : MonoBehaviour
 
     public void SetHp(float currentHp)
     {
+        currentHp = Mathf.Clamp(currentHp, 0f, _maxHp);
+
         float ratio = currentHp / _maxHp;
         _fillImage.fillAmount = ratio;
 
-        _hpText.text = $"{Mathf.CeilToInt(currentHp)} / {Mathf.CeilToInt(_maxHp)}";
+        _hpText.text = $"{currentHp:F2} / {_maxHp:F2}";
     }
 }
