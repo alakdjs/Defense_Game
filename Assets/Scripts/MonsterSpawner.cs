@@ -70,7 +70,7 @@ public class MonsterSpawner : MonoBehaviour
             );
 
             // NavMesh 위인지 검사
-            if (NavMesh.SamplePosition(randomPos, out NavMeshHit hit, 1.0f, NavMesh.AllAreas))
+            if (NavMesh.SamplePosition(randomPos, out NavMeshHit hit, 5.0f, NavMesh.AllAreas))
             {
                 // y == 0 인 NavMesh만 허용
                 if (Mathf.Abs(hit.position.y) > 0.01f)
