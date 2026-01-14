@@ -40,21 +40,28 @@ public class PlayerLevel : MonoBehaviour
 
         _currentExp += amount;
 
-        if (_currentExp >= _maxExp)
+        // 경험치가 많이 들어와서 여러 번 레벨업 가능한 경우
+        while (_level < _maxLevel && _currentExp >= _maxExp)
         {
-            LevelUp();
+            // 남은 경험치 유지 (초과분은 다음 레벨 경험치로 넘김)
+            _currentExp -= _maxExp;
+
+            bool openedPopup = LevelUp();
+
+            // 증강 UI가 열렸으면(=Time.timeScale 0), 추가 레벨업 처리는 다음 프레임으로 넘김
+            if (openedPopup)
+                break;
         }
 
         UpdateUI();
 
     }
 
-    private void LevelUp()
+    private bool LevelUp()
     {
         _level++;
 
         // 경험치 관련
-        _currentExp = 0.0f;
         _maxExp += _expIncrease;
 
         // 스탯 증가
@@ -64,6 +71,15 @@ public class PlayerLevel : MonoBehaviour
 
         // 체력 회복
         _playerHp.Heal(_hpIncreasePerLevel);
+
+        // 특정 레벨에서 증강 카드 UI 등장 + 게임 일시정지(Time.timeScale = 0f)는 팝업 내부에서 처리
+        if (AugmentPopupController.Instance != null && AugmentPopupController.Instance.ShouldOpenPopupAtLevel(_level))
+        {
+            AugmentPopupController.Instance.OpenPopup(_level);
+            return true;
+        }
+
+        return false;
     }
 
     private void UpdateUI()

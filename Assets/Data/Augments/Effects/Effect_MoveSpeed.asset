@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7d43896de08a2c418758142a9790b01, type: 3}
   m_Name: Effect_MoveSpeed
   m_EditorClassIdentifier: 
-  effectName: 
+  effectName: "\uC774\uB3D9\uC18D\uB3C4 \uC99D\uAC00"
   effectType: 0
-  statType: 0
+  statType: 1
   weaponTypeToEquip: 0
-  valuesPerLevel: []
+  valuesPerLevel:
+  - 1

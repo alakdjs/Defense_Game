@@ -42,24 +42,26 @@ public class PlayerController : MonoBehaviour
     public Vector3 KeyboardInput => _keyboardInput;
 
     // 증강 시스템용 배율
-    private float _maxHpMultiplier = 1.0f;
-    private float _attackMultiplier = 1.0f;
-    private float _defenseMultiplier = 1.0f;
-    private float _speedMultiplier = 1.0f;
-    private float _detectRangeMultiplier = 1.0f;
-    private float _attackRangeMultiplier = 1.0f;
-    private float _autoAttackIntervalMultiplier = 1.0f;
+    private float _maxHpBonus = 0.0f;
+    private float _attackBonus = 0.0f;
+    private float _defenseBonus = 0.0f;
+    private float _speedBonus = 0.0f;
+    private float _detectRangeBonus = 0.0f;
+    private float _attackRangeBonus = 0.0f;
+    private float _autoAttackIntervalBonus = 0.0f;
 
     // 무기 강화 배율
-    private float _weaponDamageMultiplier = 1.0f;
+    private float _weaponDamageBonus = 0.0f;
 
-    public float MaxHp => _maxHp * _maxHpMultiplier;
-    public float Attack => _attack * _attackMultiplier;
-    public float Defense => _defense * _defenseMultiplier;
-    public float Speed => _speed * _speedMultiplier;
-    public float DetectRange => _detectRange * _detectRangeMultiplier;
-    public float AttackRange => _attackRange * _attackRangeMultiplier;
-    public float AutoAttackInterval => _autoAttackInterval * _autoAttackIntervalMultiplier;
+    public float MaxHp => _maxHp + _maxHpBonus;
+    public float Attack => _attack + _attackBonus;
+    public float Defense => _defense + _defenseBonus;
+    public float Speed => _speed + _speedBonus;
+    public float DetectRange => _detectRange + _detectRangeBonus;
+    public float AttackRange => _attackRange + _attackRangeBonus;
+
+    // 쿨타임 감소 = 기본 + 보너스(보너스는 보통 음수로 들어오게 설계)
+    public float AutoAttackInterval => Mathf.Max(0.1f, _autoAttackInterval + _autoAttackIntervalBonus);
 
 
     // FSM
@@ -123,12 +125,21 @@ public class PlayerController : MonoBehaviour
 
             EquipWeapon(rifle);
         }
-        // 테스트용
+        // 테스트용: 2번 키 누르면 Sword 장착
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             WeaponData sword = WeaponDatabase._Instance.GetRandomWeapon(WeaponType.Sword);
 
             EquipWeapon(sword);
+        }
+
+        // 테스트용: P 키로 증강 팝업 강제 오픈
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (AugmentPopupController.Instance != null)
+            {
+                AugmentPopupController.Instance.OpenPopup(2);
+            }
         }
     }
 
@@ -268,13 +279,13 @@ public class PlayerController : MonoBehaviour
         if (!_hasAutoAttackTarget)
         {
             _hasAutoAttackTarget = true;
-            _autoAttackTimer = _autoAttackInterval; // 즉시 공격
+            _autoAttackTimer = AutoAttackInterval; // 즉시 공격
         }
 
         // 몬스터가 있을 때에만 타이머 진행
         _autoAttackTimer += Time.deltaTime;
 
-        if (_autoAttackTimer < _autoAttackInterval)
+        if (_autoAttackTimer < AutoAttackInterval)
             return;
 
         _autoAttackTimer = 0f;
@@ -402,55 +413,60 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// 데미지 계산 (무기 데미지 x 공격력 x 무기강화배율)
+    /// 데미지 계산 (무기 데미지 + 공격력 + 무기강화보너스)
     /// </summary>
     public float GetFinalDamage()
     {
         if (_currentWeaponData == null)
             return 0;
 
-        return _currentWeaponData._damage * Attack * _weaponDamageMultiplier;
+        return _currentWeaponData._damage + Attack + _weaponDamageBonus;
     }
 
-
+    // 증강 시스템 관련 ==============================================================================
     /// <summary>
-    /// 스탯 배율 증가 (퍼센트)
+    /// 스탯 가산 증가
     /// </summary>
-    public void AddStatMultiplier(StatType statType, float percentIncrease)
+    public void AddStatAdditive(StatType statType, float addValue)
     {
-        float multiplier = 1.0f + (percentIncrease / 100f);
-
         switch (statType)
         {
             case StatType.MaxHealth:
-                _maxHpMultiplier *= multiplier;
-                Debug.Log($"[증강] 최대 체력 {percentIncrease}% 증가 -> 배율: {_maxHpMultiplier:F2}");
+                _maxHpBonus += addValue;
+                Debug.Log($"[증강] 최대 체력 +{addValue} -> 보너스: {_maxHpBonus:F2}");
+                // PlayerHp UI 갱신
+                PlayerHp playerHp = GetComponent<PlayerHp>();
+                if (playerHp != null)
+                {
+                    playerHp.RefreshUI();
+                }
                 break;
 
             case StatType.AttackDamage:
-                _attackMultiplier *= multiplier;
-                Debug.Log($"[증강] 공격력 {percentIncrease}% 증가 -> 배율: {_attackMultiplier:F2}");
+                _attackBonus += addValue;
+                Debug.Log($"[증강] 공격력 +{addValue} -> 보너스: {_attackBonus:F2}");
                 break;
 
             case StatType.MoveSpeed:
-                _speedMultiplier *= multiplier;
-                Debug.Log($"[증강] 이동 속도 {percentIncrease}% 증가 -> 배율: {_speedMultiplier:F2}");
+                _speedBonus += addValue;
+                Debug.Log($"[증강] 이동 속도 +{addValue} -> 보너스: {_speedBonus:F2}");
                 break;
 
-            case StatType.Armor:
-                _defenseMultiplier *= multiplier;
-                Debug.Log($"[증강] 방어력 {percentIncrease}% 증가 -> 배율: {_defenseMultiplier:F2}");
+            case StatType.Defense:
+                _defenseBonus += addValue;
+                Debug.Log($"[증강] 방어력 +{addValue} -> 보너스: {_defenseBonus:F2}");
                 break;
 
-            case StatType.PickupRange:
-                _detectRangeMultiplier *= multiplier;
-                Debug.Log($"[증강] 인식 범위 {percentIncrease}% 증가 -> 배율: {_detectRangeMultiplier:F2}");
+            case StatType.MonsterDetectRange:
+                _detectRangeBonus += addValue;
+                Debug.Log($"[증강] 인식 범위 +{addValue} -> 보너스: {_detectRangeBonus:F2}");
                 break;
 
             case StatType.AttackSpeed:
-                // 공격 속도 = 쿨다운 감소
-                _autoAttackIntervalMultiplier /= multiplier; // 나누기로 쿨다운 감소
-                Debug.Log($"[증강] 공격 속도 {percentIncrease}% 증가 -> 쿨다운 배율: {_autoAttackIntervalMultiplier:F2}");
+                // 공격 속도 = 쿨타임 감소를 "감소량"으로 처리
+                // addValue가 0.2라면 쿨타임을 0.2초 줄이는 방식
+                _autoAttackIntervalBonus -= addValue;
+                Debug.Log($"[증강] 공격 속도(쿨다운 감소) -{addValue} -> 보너스: {_autoAttackIntervalBonus:F2}");
                 break;
 
             default:
@@ -460,22 +476,20 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// 현재 장착 무기 데미지 증가 (퍼센트)
+    /// 현재 장착 무기 데미지 증가
     /// </summary>
-    public void UpgradeCurrentWeaponDamage(float percentIncrease)
+    public void UpgradeCurrentWeaponDamage(float addValue)
     {
-        float multiplier = 1.0f + (percentIncrease / 100f);
-        _weaponDamageMultiplier *= multiplier;
-        Debug.Log($"[증강] 무기 데미지 {percentIncrease}% 증가 -> 배율: {_weaponDamageMultiplier:F2}");
+        _weaponDamageBonus += addValue;
+        Debug.Log($"[증강] 무기 데미지 +{addValue} -> 보너스: {_weaponDamageBonus:F2}");
     }
 
     /// <summary>
-    /// 현재 장착 무기 공격 범위 증가 (퍼센트)
+    /// 현재 장착 무기 공격 범위 증가
     /// </summary>
-    public void IncreaseCurrentWeaponRange(float percentIncrease)
+    public void IncreaseCurrentWeaponRange(float addValue)
     {
-        float multiplier = 1.0f + (percentIncrease / 100f);
-        _attackRangeMultiplier *= multiplier;
+        _attackRangeBonus += addValue;
 
         // UI 업데이트
         if (_attackRangeUI != null)
@@ -483,7 +497,7 @@ public class PlayerController : MonoBehaviour
             _attackRangeUI.SetRange(AttackRange);
         }
 
-        Debug.Log($"[증강] 무기 범위 {percentIncrease}% 증가 -> 배율: {_attackRangeMultiplier:F2}");
+        Debug.Log($"[증강] 무기 범위 +{addValue} -> 보너스: {_attackRangeBonus:F2}");
     }
 
     /// <summary>

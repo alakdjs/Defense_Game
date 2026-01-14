@@ -28,67 +28,62 @@ public class AugmentPopupController : MonoBehaviour
     }
 
     /// <summary>
+    /// 해당 레벨에서 증강 팝업을 열어야 하는지
+    /// - 2,4,7,10
+    /// - 15부터 5레벨 단위로 100까지
+    /// </summary>
+    public bool ShouldOpenPopupAtLevel(int playerLevel)
+    {
+        if (playerLevel == 2 || playerLevel == 4 || playerLevel == 7 || playerLevel == 10)
+            return true;
+
+        if (playerLevel >= 15 && playerLevel <= 100 && playerLevel % 5 == 0)
+            return true;
+
+        return false;
+    }
+
+    /// <summary>
     /// 레벨에 따라 증강 팝업 열기
+    /// 호출하는 쪽(레벨업 시스템)에서 ShouldOpenPopupAtLevel을 확인하고 호출
     /// </summary>
     public void OpenPopup(int playerLevel)
     {
+        // 지정 레벨이 아니면 열지 않음
+        if (!ShouldOpenPopupAtLevel(playerLevel))
+            return;
+
         ClearCards();
 
-        List<AugmentData> selectedAugments = new List<AugmentData>();
+        // 모든 증강(무기 포함)을 전부 동일하게 랜덤 3개
+        List<AugmentData> selectedAugments = GetRandomAugments(3);
 
-        // 레벨별 증강 선택 로직
-        if (playerLevel == 2)
+        // 카드 생성 (현재 스택 정보 전달)
+        for (int i = 0; i < selectedAugments.Count; i++)
         {
-            // 2렙: 무기 선택 1개 + 능력치 증강 2개
-            selectedAugments = GetLevel2Augments();
-        }
-        else
-        {
-            // 4, 7, 10, 15, 20... : 랜덤 3개
-            selectedAugments = GetRandomAugments(3);
-        }
+            AugmentData augment = selectedAugments[i];
+            if (augment == null)
+                continue;
 
-        // 카드 생성 (현재 레벨 정보 전달)
-        foreach (var augment in selectedAugments)
-        {
             AugmentCardUI card = Instantiate(_cardPrefab, _cardParent);
-            int currentLevel = AugmentManager.Instance.GetAugmentLevel(augment);
-            card.Init(augment, currentLevel);
+
+            // 레벨 개념 제거: 현재 스택 전달
+            int currentStack = AugmentManager.Instance.GetAugmentStack(augment);
+            card.Init(augment, currentStack);
+
             _spawnedCards.Add(card);
         }
 
         _popupRoot.SetActive(true);
-        Time.timeScale = 0f;
+        Time.timeScale = 0f; // 일시정지
     }
 
     /// <summary>
-    /// 2렙 전용: 무기 선택 1개 + 능력치 증강 2개
-    /// </summary>
-    private List<AugmentData> GetLevel2Augments()
-    {
-        List<AugmentData> result = new List<AugmentData>();
-
-        // 1. 무기 선택 1개
-        List<AugmentData> weaponAugments = AugmentManager.Instance.GetAvailableAugmentsByCategory(AugmentCategory.WeaponSelect);
-        if (weaponAugments.Count > 0)
-        {
-            int randomIndex = Random.Range(0, weaponAugments.Count);
-            result.Add(weaponAugments[randomIndex]);
-        }
-
-        // 2. 능력치 증강 2개
-        List<AugmentData> statAugments = AugmentManager.Instance.GetAvailableAugmentsByCategory(AugmentCategory.StatUpgrade);
-        List<AugmentData> selected = PickRandomAugments(statAugments, 2);
-        result.AddRange(selected);
-
-        return result;
-    }
-
-    /// <summary>
-    /// 일반 레벨: 랜덤 3개
+    /// 일반 레벨: 랜덤 N개
     /// </summary>
     private List<AugmentData> GetRandomAugments(int count)
     {
+        // 선행 조건 만족한 증강만 반환
         List<AugmentData> candidates = AugmentManager.Instance.GetAvailableAugments();
         return PickRandomAugments(candidates, count);
     }

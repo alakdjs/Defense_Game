@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7d43896de08a2c418758142a9790b01, type: 3}
   m_Name: Effect_WeaponRifle
   m_EditorClassIdentifier: 
-  effectName: 
-  effectType: 0
+  effectName: "\uC0B0\uD0C0\uC758 \uC740\uCD1D \uD68D\uB4DD"
+  effectType: 4
   statType: 0
-  weaponTypeToEquip: 0
+  weaponTypeToEquip: 1
   valuesPerLevel: []

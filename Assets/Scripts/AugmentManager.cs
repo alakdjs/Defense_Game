@@ -7,8 +7,8 @@ public class AugmentManager : MonoBehaviour
 
     [SerializeField] private List<AugmentData> _allAugments = new List<AugmentData>();
 
-    // 증강별 현재 레벨 (Key: AugmentData, Value: 현재 레벨)
-    private readonly Dictionary<AugmentData, int> _augmentLevels = new Dictionary<AugmentData, int>();
+    // 증강 스택(중복 선택 횟수)
+    private readonly Dictionary<AugmentData, int> _augmentStacks = new Dictionary<AugmentData, int>();
 
     private void Awake()
     {
@@ -24,108 +24,82 @@ public class AugmentManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 현재 선택 가능한 증강 목록 반환
+    /// 증강 스택 조회 (없으면 0)
+    /// </summary>
+    public int GetAugmentStack(AugmentData data)
+    {
+        if (data == null)
+            return 0;
+
+        if (_augmentStacks.TryGetValue(data, out int s))
+            return s;
+
+        return 0;
+    }
+
+    /// <summary>
+    /// 선택 가능한 증강 목록 반환 (선행 조건 반영)
     /// </summary>
     public List<AugmentData> GetAvailableAugments()
     {
         List<AugmentData> result = new List<AugmentData>();
 
-        foreach (var augment in _allAugments)
+        if (_allAugments == null)
+            return result;
+
+        for (int i = 0; i < _allAugments.Count; i++)
         {
-            // 현재 레벨 확인
-            int currentLevel = GetAugmentLevel(augment);
-
-            // 최대 레벨 도달 시 제외
-            if (currentLevel >= augment.maxLevel)
+            AugmentData a = _allAugments[i];
+            if (a == null)
                 continue;
 
-            // 조건 체크
-            if (!CheckCondition(augment))
-                continue;
-
-            result.Add(augment);
+            // 선행 조건을 만족하는 경우만 후보에 포함
+            if (a.CanSelect(this))
+                result.Add(a);
         }
 
         return result;
     }
 
     /// <summary>
-    /// 카테고리별 선택 가능한 증강 목록 반환
+    /// 증강 적용(스택 증가 + 효과 적용)
     /// </summary>
-    public List<AugmentData> GetAvailableAugmentsByCategory(AugmentCategory category)
+    public void ApplyAugment(AugmentData data)
     {
-        List<AugmentData> all = GetAvailableAugments();
-        List<AugmentData> filtered = new List<AugmentData>();
+        if (data == null)
+            return;
 
-        foreach (var augment in all)
+        if (!data.CanSelect(this))
         {
-            if (augment.category == category)
+            Debug.LogWarning($"[증강] 선행 조건 미충족: {data.augmentName}");
+            return;
+        }
+
+        if (!_augmentStacks.ContainsKey(data))
+            _augmentStacks[data] = 0;
+
+        _augmentStacks[data]++;
+
+        // 효과 적용 (Effect는 스택 개념을 모르고, 1회 적용만 담당)
+        if (data.effects != null)
+        {
+            PlayerController player = FindAnyObjectByType<PlayerController>();
+            if (player == null)
             {
-                filtered.Add(augment);
+                Debug.LogError("[증강] PlayerController를 찾을 수 없습니다!");
+                return;
+            }
+
+            for (int i = 0; i < data.effects.Count; i++)
+            {
+                AugmentEffect e = data.effects[i];
+                if (e == null) continue;
+
+                e.Apply(player);
             }
         }
 
-        return filtered;
-    }
-
-    /// <summary>
-    /// 증강 적용 (레벨업 포함)
-    /// </summary>
-    public void ApplyAugment(AugmentData augment)
-    {
-        if (augment == null)
-        {
-            Debug.LogWarning("AugmentManager : augment가 null입니다.");
-            return;
-        }
-
-        // 현재 레벨 가져오기
-        int currentLevel = GetAugmentLevel(augment);
-
-        // 최대 레벨 체크
-        if (currentLevel >= augment.maxLevel)
-        {
-            Debug.LogWarning($"최대 레벨에 도달한 증강입니다: {augment.augmentName}");
-            return;
-        }
-
-        // 레벨업
-        _augmentLevels[augment] = currentLevel + 1;
-        int newLevel = _augmentLevels[augment];
-
-        // 증강 효과 적용 (레벨 정보 전달)
-        foreach (var effect in augment.effects)
-        {
-            if (effect == null) continue;
-            effect.Apply(newLevel); // 레벨 정보 전달
-        }
-
-        Debug.Log($"증강 적용: {augment.augmentName} Lv.{newLevel}");
-    }
-
-    /// <summary>
-    /// 특정 증강의 현재 레벨 반환
-    /// </summary>
-    public int GetAugmentLevel(AugmentData augment)
-    {
-        if (augment == null) return 0;
-        return _augmentLevels.TryGetValue(augment, out int level) ? level : 0;
-    }
-
-    /// <summary>
-    /// 증강 선택 조건 체크
-    /// </summary>
-    private bool CheckCondition(AugmentData augment)
-    {
-        if (augment.requiredAugment != null)
-        {
-            // 선행 증강 체크
-            int requiredLevel = GetAugmentLevel(augment.requiredAugment);
-            if (requiredLevel < augment.requiredLevel)
-                return false;
-        }
-
-        return true;
+        Debug.Log($"[증강] {data.augmentName} 선택! (스택: {_augmentStacks[data]})");
     }
 
     /// <summary>
@@ -133,15 +107,43 @@ public class AugmentManager : MonoBehaviour
     /// </summary>
     public Dictionary<AugmentData, int> GetSelectedAugments()
     {
-        return new Dictionary<AugmentData, int>(_augmentLevels);
+        // 현재 스택 데이터를 복사해서 반환 (외부에서 수정 방지)
+        return new Dictionary<AugmentData, int>(_augmentStacks);
     }
+
+    /// <summary>
+    /// 카테고리별 선택 가능한 증강 목록 반환 (선행 조건 반영)
+    /// </summary>
+    public List<AugmentData> GetAvailableAugmentsByCategory(AugmentCategory category)
+    {
+        List<AugmentData> result = new List<AugmentData>();
+
+        if (_allAugments == null)
+            return result;
+
+        for (int i = 0; i < _allAugments.Count; i++)
+        {
+            AugmentData a = _allAugments[i];
+            if (a == null)
+                continue;
+
+            if (a.category != category)
+                continue;
+
+            if (a.CanSelect(this))
+                result.Add(a);
+        }
+
+        return result;
+    }
+
 
     /// <summary>
     /// 게임 재시작 시 초기화
     /// </summary>
     public void ResetAugments()
     {
-        _augmentLevels.Clear();
+        _augmentStacks.Clear();
         Debug.Log("증강 시스템 초기화 완료");
     }
 }

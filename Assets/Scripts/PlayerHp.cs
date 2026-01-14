@@ -10,8 +10,10 @@ public class PlayerHp : MonoBehaviour, IDamageable
     [SerializeField] private PlayerHpBarUIShadow _hpBarShadow;
 
     private float _currentHp;
-
     private PlayerController _player;
+
+    // MaxHp 변동 감지용 캐시
+    private float _cachedMaxHp = -1.0f;
 
     public float CurrentHp => _currentHp;
 
@@ -25,6 +27,8 @@ public class PlayerHp : MonoBehaviour, IDamageable
     private void Start()
     {
         _currentHp = _player.MaxHp;
+
+        _cachedMaxHp = _player.MaxHp;
 
         if (_playerHpUI != null)
         {
@@ -69,21 +73,40 @@ public class PlayerHp : MonoBehaviour, IDamageable
 
     private void UpdateHpUI()
     {
+        // MaxHp가 바뀌었으면 UI 기준값 갱신
+        float maxHp = _player.MaxHp;
+        if (!Mathf.Approximately(_cachedMaxHp, maxHp))
+        {
+            _cachedMaxHp = maxHp;
+
+            if (_playerHpUI != null)
+            {
+                _playerHpUI.Init(maxHp);
+            }
+
+            // MaxHp가 늘어났는데 현재 체력이 최대를 넘지 않게 Clamp
+            _currentHp = Mathf.Clamp(_currentHp, 0.0f, maxHp);
+        }
+
         if (_playerHpUI == null && _hpBarShadow == null)
             return;
 
-        float maxHp = _player.MaxHp;
-        float hpRatio = _currentHp / maxHp;
+        float hpRatio = (maxHp > 0.0f) ? (_currentHp / maxHp) : 0.0f;
 
         if (_playerHpUI != null)
         {
             _playerHpUI.SetHp(_currentHp);
         }
 
-        if (_hpBarShadow  != null)
+        if (_hpBarShadow != null)
         {
             _hpBarShadow.SetDanger(hpRatio <= 0.2f);
         }
+    }
+
+    public void RefreshUI()
+    {
+        UpdateHpUI();
     }
 
     private void Die()

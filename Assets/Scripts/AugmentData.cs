@@ -11,65 +11,46 @@ public class AugmentData : ScriptableObject
     [Header("Basic Info")]
     public string augmentName;
     public Sprite icon;
-
-    [Header("Category")]
-    [Tooltip("증강 카테고리 (무기선택 / 능력치강화)")]
-    public AugmentCategory category = AugmentCategory.StatUpgrade;
-
-    [Header("Max Level")]
-    [Tooltip("최대 레벨 (뱀서 스타일: 보통 3~5)")]
-    public int maxLevel = 5;
-
-    [Header("Description")]
-    [Tooltip("레벨별 설명 (배열 크기 = maxLevel)")]
-    [TextArea(2, 4)]
-    public string[] descriptions;
+    public AugmentCategory category;
 
     [Header("Effects")]
     [Tooltip("적용할 효과 목록")]
     public List<AugmentEffect> effects;
 
     [Header("Conditions")]
-    [Tooltip("선행 증강 (필요 시)")]
-    public AugmentData requiredAugment;
+    [Tooltip("이 증강이 등장/선택되기 위한 선행 증강 목록")]
+    public List<AugmentData> requiredAugment;
 
-    [Tooltip("선행 증강 필요 레벨")]
-    public int requiredLevel = 1;
-
-    /// <summary>
-    /// 레벨에 맞는 설명 반환
-    /// </summary>
-    public string GetDescription(int level)
-    {
-        if (descriptions == null || descriptions.Length == 0)
-            return "설명 없음";
-
-        // 레벨 범위 체크
-        int index = Mathf.Clamp(level, 0, descriptions.Length - 1);
-        return descriptions[index];
-    }
+    [Header("Description")]
+    [TextArea]
+    public string description;
 
     /// <summary>
-    /// 유효성 검사 (에디터용)
+    /// 스택형 증강, 선행 조건을 만족하면 선택 가능
     /// </summary>
-    private void OnValidate()
+    public bool CanSelect(AugmentManager manager)
     {
-        // 최대 레벨은 최소 1 이상
-        if (maxLevel < 1)
-            maxLevel = 1;
+        if (manager == null)
+            return false;
 
-        // 설명 배열 크기를 maxLevel에 맞춤
-        if (descriptions == null || descriptions.Length != maxLevel)
+        // 선행 조건이 없으면 항상 가능
+        if (requiredAugment == null || requiredAugment.Count == 0)
+            return true;
+
+        // 선행 증강을 최소 1스택 이상 보유해야 함
+        for (int i = 0; i < requiredAugment.Count; i++)
         {
-            System.Array.Resize(ref descriptions, maxLevel);
+            AugmentData pre = requiredAugment[i];
+            if (pre == null)
+                continue;
+
+            if (manager.GetAugmentStack(pre) <= 0)
+                return false;
         }
 
-        // 선행 증강 체크
-        if (requiredAugment != null && requiredLevel < 1)
-        {
-            Debug.LogWarning($"{augmentName}: requiredAugment가 설정되었는데 requiredLevel이 0입니다.");
-        }
+        return true;
     }
+
 }
 
 /// <summary>

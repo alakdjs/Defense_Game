@@ -10,36 +10,28 @@ public class AugmentCardUI : MonoBehaviour
 
     private AugmentData _augmentData;
 
-    public void Init(AugmentData data, int currentLevel = 0)
+    public void Init(AugmentData data, int currentStack = 0)
     {
         _augmentData = data;
 
-        if (_titleText != null)
-        {
-            if (currentLevel > 0)
-                _titleText.text = $"{data.augmentName} Lv.{currentLevel + 1}";
-            else
-                _titleText.text = data.augmentName;
-        }
-
-        // 아이콘 세팅
+        // 아이콘
         if (_iconImage != null)
         {
             _iconImage.sprite = data.icon;
             _iconImage.enabled = data.icon != null;
         }
 
-        // 제목 세팅
+        // 제목
         if (_titleText != null)
         {
-            _titleText.text = data.augmentName;
+            int nextStack = currentStack + 1;
+            _titleText.text = $"{data.augmentName}\n(스택 {currentStack} → {nextStack})";
         }
 
-        // 설명 세팅
+        // 설명
         if (_exText != null)
         {
-            int nextLevel = currentLevel > 0 ? currentLevel + 1 : 1;
-            _exText.text = data.GetDescription(nextLevel - 1);
+            _exText.text = data.description;
         }
 
         // 버튼 이벤트 중복 방지
@@ -49,10 +41,9 @@ public class AugmentCardUI : MonoBehaviour
 
     private void OnClickSelect()
     {
-        // 안전 체크
         if (_augmentData == null)
         {
-            Debug.LogWarning("BuildUpCardUI : AugmentData가 없습니다.");
+            Debug.LogWarning("AugmentCardUI : AugmentData가 없습니다.");
             return;
         }
 

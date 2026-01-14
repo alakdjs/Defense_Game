@@ -20,29 +20,40 @@ public class AugmentEffect : ScriptableObject
     [Tooltip("무기 장착 효과일 때 사용")]
     public WeaponType weaponTypeToEquip;
 
-    [Header("Values per Level")]
-    [Tooltip("레벨별 효과 값 (퍼센트, %)")]
+    [Header("Values")]
+    [Tooltip("스택 1회 선택 시 적용될 효과 값")]
     public float[] valuesPerLevel;
 
     /// <summary>
     /// 효과 적용
+    /// - 스택형 운영: 선택될 때마다 동일하게 1회 적용
     /// </summary>
-    public void Apply(int level)
+    public void Apply(PlayerController player)
     {
-        if (level < 1 || level > valuesPerLevel.Length)
-        {
-            Debug.LogWarning($"AugmentEffect: 잘못된 레벨 {level} (valuesPerLevel 길이: {valuesPerLevel.Length})");
-            return;
-        }
-
-        float value = valuesPerLevel[level - 1];
-
-        // PlayerController 찾기
-        PlayerController player = FindPlayerController();
         if (player == null)
         {
-            Debug.LogError("PlayerController를 찾을 수 없습니다!");
-            return;
+            player = FindPlayerController();
+            if (player == null)
+            {
+                Debug.LogError("PlayerController를 찾을 수 없습니다!");
+                return;
+            }
+        }
+
+        // EquipWeapon은 value가 필요 없으므로 valuesPerLevel 검사 제외
+        if (effectType != EffectType.EquipWeapon)
+        {
+            if (valuesPerLevel == null || valuesPerLevel.Length == 0)
+            {
+                Debug.LogWarning($"{name}: valuesPerLevel이 비어있습니다.");
+                return;
+            }
+        }
+
+        float value = 0.0f;
+        if (valuesPerLevel != null && valuesPerLevel.Length > 0)
+        {
+            value = valuesPerLevel[0];
         }
 
         switch (effectType)
@@ -72,33 +83,33 @@ public class AugmentEffect : ScriptableObject
                 break;
         }
 
-        Debug.Log($"[증강 효과 적용] {effectName} | Type: {effectType} | Value: {value}% | Level: {level}");
+        Debug.Log($"[증강 효과 적용] {effectName} | Type: {effectType} | Value(Add): {value}");
     }
 
     #region Effect Implementations
 
     /// <summary>
-    /// 플레이어 스탯 증가
+    /// 플레이어 스탯 증가 (가산 증가)
     /// </summary>
-    private void ApplyStatBoost(PlayerController player, float percentIncrease)
+    private void ApplyStatBoost(PlayerController player, float addValue)
     {
-        player.AddStatMultiplier(statType, percentIncrease);
+        player.AddStatAdditive(statType, addValue);
     }
 
     /// <summary>
-    /// 현재 장착 무기 데미지 증가
+    /// 현재 장착 무기 데미지 증가 (가산 증가)
     /// </summary>
-    private void ApplyWeaponDamage(PlayerController player, float percentIncrease)
+    private void ApplyWeaponDamage(PlayerController player, float addValue)
     {
-        player.UpgradeCurrentWeaponDamage(percentIncrease);
+        player.UpgradeCurrentWeaponDamage(addValue);
     }
 
     /// <summary>
-    /// 현재 장착 무기 사거리 증가
+    /// 현재 장착 무기 사거리 증가 (가산 증가)
     /// </summary>
-    private void ApplyWeaponRange(PlayerController player, float percentIncrease)
+    private void ApplyWeaponRange(PlayerController player, float addValue)
     {
-        player.IncreaseCurrentWeaponRange(percentIncrease);
+        player.IncreaseCurrentWeaponRange(addValue);
     }
 
     /// <summary>
@@ -162,10 +173,14 @@ public class AugmentEffect : ScriptableObject
             effectName = effectType.ToString();
         }
 
-        // 값 배열이 비어있으면 경고
-        if (valuesPerLevel == null || valuesPerLevel.Length == 0)
+        // EquipWeapon은 value가 필요 없으므로 valuesPerLevel 검사 제외
+        if (effectType != EffectType.EquipWeapon)
         {
-            Debug.LogWarning($"{name}: valuesPerLevel이 비어있습니다.");
+            // 값 배열이 비어있으면 경고
+            if (valuesPerLevel == null || valuesPerLevel.Length == 0)
+            {
+                Debug.LogWarning($"{name}: valuesPerLevel이 비어있습니다.(OnValidate)");
+            }
         }
     }
 
@@ -192,7 +207,7 @@ public enum StatType
     MaxHealth,          // 최대 체력
     MoveSpeed,          // 이동 속도
     AttackDamage,       // 공격력
-    AttackSpeed,        // 공격 속도 (쿨다운 감소)
-    Armor,              // 방어력
-    PickupRange,        // 아이템 획득 범위 (현재는 몬스터 인식 범위로 사용)
+    AttackSpeed,        // 공격 속도 (쿨타임 감소)
+    Defense,            // 방어력
+    MonsterDetectRange, // 몬스터 인식 범위
 }
