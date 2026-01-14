@@ -41,12 +41,25 @@ public class PlayerController : MonoBehaviour
     private Vector3 _keyboardInput = Vector3.zero;
     public Vector3 KeyboardInput => _keyboardInput;
 
-    public float MaxHp => _maxHp;
-    public float Attack => _attack;
-    public float Defense => _defense;
-    public float Speed => _speed;
-    public float DetectRange => _detectRange;
-    public float AttackRange => _attackRange;
+    // 증강 시스템용 배율
+    private float _maxHpMultiplier = 1.0f;
+    private float _attackMultiplier = 1.0f;
+    private float _defenseMultiplier = 1.0f;
+    private float _speedMultiplier = 1.0f;
+    private float _detectRangeMultiplier = 1.0f;
+    private float _attackRangeMultiplier = 1.0f;
+    private float _autoAttackIntervalMultiplier = 1.0f;
+
+    // 무기 강화 배율
+    private float _weaponDamageMultiplier = 1.0f;
+
+    public float MaxHp => _maxHp * _maxHpMultiplier;
+    public float Attack => _attack * _attackMultiplier;
+    public float Defense => _defense * _defenseMultiplier;
+    public float Speed => _speed * _speedMultiplier;
+    public float DetectRange => _detectRange * _detectRangeMultiplier;
+    public float AttackRange => _attackRange * _attackRangeMultiplier;
+    public float AutoAttackInterval => _autoAttackInterval * _autoAttackIntervalMultiplier;
 
 
     // FSM
@@ -110,7 +123,7 @@ public class PlayerController : MonoBehaviour
 
             EquipWeapon(rifle);
         }
-
+        // 테스트용
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             WeaponData sword = WeaponDatabase._Instance.GetRandomWeapon(WeaponType.Sword);
@@ -389,15 +402,104 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// 데미지 계산
+    /// 데미지 계산 (무기 데미지 x 공격력 x 무기강화배율)
     /// </summary>
     public float GetFinalDamage()
     {
         if (_currentWeaponData == null)
             return 0;
 
-        return _currentWeaponData._damage * _attack;
+        return _currentWeaponData._damage * Attack * _weaponDamageMultiplier;
     }
+
+
+    /// <summary>
+    /// 스탯 배율 증가 (퍼센트)
+    /// </summary>
+    public void AddStatMultiplier(StatType statType, float percentIncrease)
+    {
+        float multiplier = 1.0f + (percentIncrease / 100f);
+
+        switch (statType)
+        {
+            case StatType.MaxHealth:
+                _maxHpMultiplier *= multiplier;
+                Debug.Log($"[증강] 최대 체력 {percentIncrease}% 증가 -> 배율: {_maxHpMultiplier:F2}");
+                break;
+
+            case StatType.AttackDamage:
+                _attackMultiplier *= multiplier;
+                Debug.Log($"[증강] 공격력 {percentIncrease}% 증가 -> 배율: {_attackMultiplier:F2}");
+                break;
+
+            case StatType.MoveSpeed:
+                _speedMultiplier *= multiplier;
+                Debug.Log($"[증강] 이동 속도 {percentIncrease}% 증가 -> 배율: {_speedMultiplier:F2}");
+                break;
+
+            case StatType.Armor:
+                _defenseMultiplier *= multiplier;
+                Debug.Log($"[증강] 방어력 {percentIncrease}% 증가 -> 배율: {_defenseMultiplier:F2}");
+                break;
+
+            case StatType.PickupRange:
+                _detectRangeMultiplier *= multiplier;
+                Debug.Log($"[증강] 인식 범위 {percentIncrease}% 증가 -> 배율: {_detectRangeMultiplier:F2}");
+                break;
+
+            case StatType.AttackSpeed:
+                // 공격 속도 = 쿨다운 감소
+                _autoAttackIntervalMultiplier /= multiplier; // 나누기로 쿨다운 감소
+                Debug.Log($"[증강] 공격 속도 {percentIncrease}% 증가 -> 쿨다운 배율: {_autoAttackIntervalMultiplier:F2}");
+                break;
+
+            default:
+                Debug.LogWarning($"구현되지 않은 StatType: {statType}");
+                break;
+        }
+    }
+
+    /// <summary>
+    /// 현재 장착 무기 데미지 증가 (퍼센트)
+    /// </summary>
+    public void UpgradeCurrentWeaponDamage(float percentIncrease)
+    {
+        float multiplier = 1.0f + (percentIncrease / 100f);
+        _weaponDamageMultiplier *= multiplier;
+        Debug.Log($"[증강] 무기 데미지 {percentIncrease}% 증가 -> 배율: {_weaponDamageMultiplier:F2}");
+    }
+
+    /// <summary>
+    /// 현재 장착 무기 공격 범위 증가 (퍼센트)
+    /// </summary>
+    public void IncreaseCurrentWeaponRange(float percentIncrease)
+    {
+        float multiplier = 1.0f + (percentIncrease / 100f);
+        _attackRangeMultiplier *= multiplier;
+
+        // UI 업데이트
+        if (_attackRangeUI != null)
+        {
+            _attackRangeUI.SetRange(AttackRange);
+        }
+
+        Debug.Log($"[증강] 무기 범위 {percentIncrease}% 증가 -> 배율: {_attackRangeMultiplier:F2}");
+    }
+
+    /// <summary>
+    /// 체력 회복 (PlayerHp 컴포넌트로 전달)
+    /// </summary>
+    public void Heal(float amount)
+    {
+        PlayerHp playerHp = GetComponent<PlayerHp>();
+        if (playerHp != null)
+        {
+            playerHp.Heal(amount);
+            Debug.Log($"[증강] 체력 {amount} 회복");
+        }
+
+    }
+
 
     /// <summary>
     /// 스탯 증가 관련 (레벨업), 회복은 PlayerHp.cs에서 
