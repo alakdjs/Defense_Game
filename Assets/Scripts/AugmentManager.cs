@@ -10,6 +10,10 @@ public class AugmentManager : MonoBehaviour
     // 증강 스택(중복 선택 횟수)
     private readonly Dictionary<AugmentData, int> _augmentStacks = new Dictionary<AugmentData, int>();
 
+    // 타겟 캐싱
+    private PlayerController _player;
+    private TowerMain _tower;
+
     private void Awake()
     {
         if (Instance == null)
@@ -21,6 +25,10 @@ public class AugmentManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        // 씬에서 한 번만 찾고 캐싱
+        _player = FindAnyObjectByType<PlayerController>();
+        _tower = FindAnyObjectByType<TowerMain>();
     }
 
     /// <summary>
@@ -80,22 +88,20 @@ public class AugmentManager : MonoBehaviour
 
         _augmentStacks[data]++;
 
+        // 타겟이 아직 캐싱 안 됐거나 씬 리로드로 사라졌다면 다시 캐싱(안전장치)
+        if (_player == null) _player = FindAnyObjectByType<PlayerController>();
+        if (_tower == null) _tower = FindAnyObjectByType<TowerMain>();
+
         // 효과 적용 (Effect는 스택 개념을 모르고, 1회 적용만 담당)
+        // (Find를 Effect에서 하지 않고, Manager가 참조를 전달)
         if (data.effects != null)
         {
-            PlayerController player = FindAnyObjectByType<PlayerController>();
-            if (player == null)
-            {
-                Debug.LogError("[증강] PlayerController를 찾을 수 없습니다!");
-                return;
-            }
-
             for (int i = 0; i < data.effects.Count; i++)
             {
                 AugmentEffect e = data.effects[i];
                 if (e == null) continue;
 
-                e.Apply(player);
+                e.Apply(_player, _tower);
             }
         }
 

@@ -28,18 +28,8 @@ public class AugmentEffect : ScriptableObject
     /// 효과 적용
     /// - 스택형 운영: 선택될 때마다 동일하게 1회 적용
     /// </summary>
-    public void Apply(PlayerController player)
+    public void Apply(PlayerController player, TowerMain tower)
     {
-        if (player == null)
-        {
-            player = FindPlayerController();
-            if (player == null)
-            {
-                Debug.LogError("PlayerController를 찾을 수 없습니다!");
-                return;
-            }
-        }
-
         // EquipWeapon은 value가 필요 없으므로 valuesPerLevel 검사 제외
         if (effectType != EffectType.EquipWeapon)
         {
@@ -80,7 +70,6 @@ public class AugmentEffect : ScriptableObject
 
             case EffectType.TowerMaxHp:
                 {
-                    TowerMain tower = FindAnyObjectByType<TowerMain>();
                     if (tower != null)
                     {
                         tower.AddMaxHp(value);
@@ -90,7 +79,6 @@ public class AugmentEffect : ScriptableObject
 
             case EffectType.TowerDefense:
                 {
-                    TowerMain tower = FindAnyObjectByType<TowerMain>();
                     if (tower != null)
                     {
                         tower.AddDefense(value);
@@ -156,26 +144,6 @@ public class AugmentEffect : ScriptableObject
         {
             Debug.LogError($"[증강] {weaponTypeToEquip} 타입의 무기를 찾을 수 없습니다!");
         }
-    }
-
-    #endregion
-
-    #region Helper Methods
-
-    /// <summary>
-    /// PlayerController 찾기
-    /// </summary>
-    private PlayerController FindPlayerController()
-    {
-        // 태그로 찾기
-        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-        if (playerObj != null)
-        {
-            return playerObj.GetComponent<PlayerController>();
-        }
-
-        // 태그가 없으면 직접 찾기
-        return FindAnyObjectByType<PlayerController>();
     }
 
     #endregion
