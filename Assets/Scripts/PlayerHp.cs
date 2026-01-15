@@ -77,15 +77,21 @@ public class PlayerHp : MonoBehaviour, IDamageable
         float maxHp = _player.MaxHp;
         if (!Mathf.Approximately(_cachedMaxHp, maxHp))
         {
+            float delta = maxHp - _cachedMaxHp;
             _cachedMaxHp = maxHp;
+
+            if (delta > 0.0f)
+            {
+                _currentHp += delta;
+            }
+
+            // MaxHp가 늘어났는데 현재 체력이 최대를 넘지 않게 Clamp
+            _currentHp = Mathf.Clamp(_currentHp, 0.0f, maxHp);
 
             if (_playerHpUI != null)
             {
                 _playerHpUI.Init(maxHp);
             }
-
-            // MaxHp가 늘어났는데 현재 체력이 최대를 넘지 않게 Clamp
-            _currentHp = Mathf.Clamp(_currentHp, 0.0f, maxHp);
         }
 
         if (_playerHpUI == null && _hpBarShadow == null)

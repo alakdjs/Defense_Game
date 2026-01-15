@@ -433,7 +433,7 @@ public class PlayerController : MonoBehaviour
         {
             case StatType.MaxHealth:
                 _maxHpBonus += addValue;
-                Debug.Log($"[증강] 최대 체력 +{addValue} -> 보너스: {_maxHpBonus:F2}");
+                Debug.Log($"[증강] 최대 체력 +{addValue} -> {_maxHpBonus:F2}");
                 // PlayerHp UI 갱신
                 PlayerHp playerHp = GetComponent<PlayerHp>();
                 if (playerHp != null)
@@ -444,29 +444,29 @@ public class PlayerController : MonoBehaviour
 
             case StatType.AttackDamage:
                 _attackBonus += addValue;
-                Debug.Log($"[증강] 공격력 +{addValue} -> 보너스: {_attackBonus:F2}");
+                Debug.Log($"[증강] 공격력 +{addValue} -> {_attackBonus:F2}");
                 break;
 
             case StatType.MoveSpeed:
                 _speedBonus += addValue;
-                Debug.Log($"[증강] 이동 속도 +{addValue} -> 보너스: {_speedBonus:F2}");
+                Debug.Log($"[증강] 이동 속도 +{addValue} -> {_speedBonus:F2}");
                 break;
 
             case StatType.Defense:
                 _defenseBonus += addValue;
-                Debug.Log($"[증강] 방어력 +{addValue} -> 보너스: {_defenseBonus:F2}");
+                Debug.Log($"[증강] 방어력 +{addValue} -> {_defenseBonus:F2}");
                 break;
 
             case StatType.MonsterDetectRange:
                 _detectRangeBonus += addValue;
-                Debug.Log($"[증강] 인식 범위 +{addValue} -> 보너스: {_detectRangeBonus:F2}");
+                Debug.Log($"[증강] 인식 범위 +{addValue} -> {_detectRangeBonus:F2}");
                 break;
 
             case StatType.AttackSpeed:
                 // 공격 속도 = 쿨타임 감소를 "감소량"으로 처리
                 // addValue가 0.2라면 쿨타임을 0.2초 줄이는 방식
                 _autoAttackIntervalBonus -= addValue;
-                Debug.Log($"[증강] 공격 속도(쿨다운 감소) -{addValue} -> 보너스: {_autoAttackIntervalBonus:F2}");
+                Debug.Log($"[증강] 공격 속도(쿨타임 감소) -{addValue} -> {_autoAttackIntervalBonus:F2}");
                 break;
 
             default:
@@ -481,7 +481,7 @@ public class PlayerController : MonoBehaviour
     public void UpgradeCurrentWeaponDamage(float addValue)
     {
         _weaponDamageBonus += addValue;
-        Debug.Log($"[증강] 무기 데미지 +{addValue} -> 보너스: {_weaponDamageBonus:F2}");
+        Debug.Log($"[증강] 무기 데미지 +{addValue} -> {_weaponDamageBonus:F2}");
     }
 
     /// <summary>
@@ -497,7 +497,7 @@ public class PlayerController : MonoBehaviour
             _attackRangeUI.SetRange(AttackRange);
         }
 
-        Debug.Log($"[증강] 무기 범위 +{addValue} -> 보너스: {_attackRangeBonus:F2}");
+        Debug.Log($"[증강] 무기 범위 +{addValue} -> {_attackRangeBonus:F2}");
     }
 
     /// <summary>
@@ -513,7 +513,6 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-
 
     /// <summary>
     /// 스탯 증가 관련 (레벨업), 회복은 PlayerHp.cs에서 
