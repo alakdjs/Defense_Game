@@ -458,11 +458,6 @@ public class PlayerController : MonoBehaviour
                 Debug.Log($"[증강] 방어력 +{addValue} -> {_defenseBonus:F2}");
                 break;
 
-            case StatType.MonsterDetectRange:
-                _detectRangeBonus += addValue;
-                Debug.Log($"[증강] 인식 범위 +{addValue} -> {_detectRangeBonus:F2}");
-                break;
-
             case StatType.AttackSpeed:
                 // 공격 속도 = 쿨타임 감소를 "감소량"으로 처리
                 // addValue가 0.2라면 쿨타임을 0.2초 줄이는 방식
@@ -491,6 +486,7 @@ public class PlayerController : MonoBehaviour
     public void IncreaseCurrentWeaponRange(float addValue)
     {
         _attackRangeBonus += addValue;
+        _detectRangeBonus += addValue;
 
         // UI 업데이트
         if (_attackRangeUI != null)

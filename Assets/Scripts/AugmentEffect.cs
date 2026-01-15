@@ -97,7 +97,7 @@ public class AugmentEffect : ScriptableObject
     #region Effect Implementations
 
     /// <summary>
-    /// 플레이어 스탯 증가 (가산 증가)
+    /// 플레이어 스탯 증가
     /// </summary>
     private void ApplyStatBoost(PlayerController player, float addValue)
     {
@@ -105,7 +105,7 @@ public class AugmentEffect : ScriptableObject
     }
 
     /// <summary>
-    /// 현재 장착 무기 데미지 증가 (가산 증가)
+    /// 현재 장착 무기 데미지 증가
     /// </summary>
     private void ApplyWeaponDamage(PlayerController player, float addValue)
     {
@@ -113,7 +113,7 @@ public class AugmentEffect : ScriptableObject
     }
 
     /// <summary>
-    /// 현재 장착 무기 사거리 증가 (가산 증가)
+    /// 현재 장착 무기 사거리 증가
     /// </summary>
     private void ApplyWeaponRange(PlayerController player, float addValue)
     {
@@ -176,7 +176,7 @@ public class AugmentEffect : ScriptableObject
 }
 
 /// <summary>
-/// 효과 타입 정의 (간소화)
+/// 효과 타입 정의
 /// </summary>
 public enum EffectType
 {
@@ -200,6 +200,5 @@ public enum StatType
     MoveSpeed,          // 이동 속도
     AttackDamage,       // 공격력
     AttackSpeed,        // 공격 속도 (쿨타임 감소)
-    Defense,            // 방어력
-    MonsterDetectRange, // 몬스터 인식 범위
+    Defense            // 방어력
 }
