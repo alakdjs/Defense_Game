@@ -10,12 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 53ede83967dad8940a36dcb04b140c5f, type: 3}
-  m_Name: Augment_MaxHealth
+  m_Name: Augment_PlayerAttackCooldown
   m_EditorClassIdentifier: 
-  augmentName: "\uD06C\uB9AC\uC2A4\uB9C8\uC2A4\uC758 \uCD95\uBCF5"
-  icon: {fileID: 21300000, guid: 40cdea4190862724ba7e708d87957e9b, type: 3}
+  augmentName: "\uAE30\uBBFC\uD55C \uC6C0\uC9C1\uC784"
+  icon: {fileID: 21300000, guid: f5759cdd37396e24894eefd4265dc14a, type: 3}
   category: 1
   effects:
-  - {fileID: 11400000, guid: e1b38959fdb4c084f94bfe866e2539ca, type: 2}
+  - {fileID: 11400000, guid: 86b06872cab9618458b4ff4d1b29efa3, type: 2}
   requiredAugment: []
-  description: "\uC0B0\uD0C0\uC758 \uCD5C\uB300 \uCCB4\uB825\uC774 +10 \uC99D\uAC00\uD569\uB2C8\uB2E4!"
+  description: "\uBAB8\uB180\uB9BC\uC774 \uAE30\uBBFC\uD574\uC838\n\uACF5\uACA9 \uC18D\uB3C4\uAC00
+    \uC99D\uAC00\uD569\uB2C8\uB2E4."
+  oneTimeOnly: 0

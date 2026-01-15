@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53ede83967dad8940a36dcb04b140c5f, type: 3}
+  m_Name: Augment_PlayerDefense
+  m_EditorClassIdentifier: 
+  augmentName: "\uD56B\uD329 \uC7A5\uCC29"
+  icon: {fileID: 21300000, guid: cd21969d5deb3fd4c8ef3762b84c45a3, type: 3}
+  category: 1
+  effects:
+  - {fileID: 11400000, guid: 491ea8237c48a704e80b67407feda05c, type: 2}
+  requiredAugment: []
+  description: "\uC0B0\uD0C0\uC758 \uBC29\uC5B4\uB825\uC774 \uC99D\uAC00\uD569\uB2C8\uB2E4!"

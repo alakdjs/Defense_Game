@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 53ede83967dad8940a36dcb04b140c5f, type: 3}
-  m_Name: Augment_AttackDamage
+  m_Name: Augment_PlayerMaxHp
   m_EditorClassIdentifier: 
-  augmentName: "\uBD84\uB178"
-  icon: {fileID: 21300000, guid: 85f169ef006168145a8a0d7e85272156, type: 3}
+  augmentName: "\uD06C\uB9AC\uC2A4\uB9C8\uC2A4\uC758 \uCD95\uBCF5"
+  icon: {fileID: 21300000, guid: 40cdea4190862724ba7e708d87957e9b, type: 3}
   category: 1
   effects:
-  - {fileID: 11400000, guid: 845c26ba606f98441a8c7e6e1bf5c8d8, type: 2}
+  - {fileID: 11400000, guid: e1b38959fdb4c084f94bfe866e2539ca, type: 2}
   requiredAugment: []
-  description: "\uC0B0\uD0C0\uC758 \uACF5\uACA9\uB825\uC774 \uC99D\uAC00\uD569\uB2C8\uB2E4!"
+  description: "\uC0B0\uD0C0\uC758 \uCD5C\uB300 \uCCB4\uB825\uC774 +10 \uC99D\uAC00\uD569\uB2C8\uB2E4!"
