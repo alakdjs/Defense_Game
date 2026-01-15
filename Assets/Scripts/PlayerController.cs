@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _attack = 1.0f; // 공격력 ( 최종 데미지 = 무기 데미지 x 공격력 )
     [SerializeField] private float _defense = 0.0f; // 방어력
     [SerializeField] private float _speed = 5.0f; // 스피드(이동속도)
-    [SerializeField] private float _detectRange = 6.0f; // 몬스터 인식 범위
+    private float _detectRange = 10.0f; // 몬스터 인식 범위
     private float _attackRange = 2.0f; // 무기 공격 범위
 
     [Header("Auto Attack")]
@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AttackRangeUI _attackRangeUI;
 
     private float _autoAttackTimer = 0.0f;
-    private bool _hasAutoAttackTarget = false;
 
     [SerializeField] private Animator _animator;
 
@@ -265,23 +264,6 @@ public class PlayerController : MonoBehaviour
     // 자동 공격
     private void HandleAutoFire()
     {
-        // 주변에 몬스터가 없으면
-        Transform target = FindNearestMonster();
-        if (target == null)
-        {
-            // 타이머 멈추거나 초기화
-            _autoAttackTimer = 0.0f;
-            _hasAutoAttackTarget = false;
-            return;
-        }
-
-        // 몬스터를 처음 발견했을 때
-        if (!_hasAutoAttackTarget)
-        {
-            _hasAutoAttackTarget = true;
-            _autoAttackTimer = AutoAttackInterval; // 즉시 공격
-        }
-
         // 몬스터가 있을 때에만 타이머 진행
         _autoAttackTimer += Time.deltaTime;
 

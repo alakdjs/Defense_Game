@@ -32,8 +32,7 @@ public class Bullet : MonoBehaviour
         // UI 원: 플레이어 중심, 플레이어 중심에서의 거리 기준으로 총알 파괴
         Vector3 delta = transform.position - _originPos;
         delta.y = 0.0f;
-
-        if(delta.sqrMagnitude >= _playerAttackRangeUIDistance * _playerAttackRangeUIDistance)
+        if (delta.sqrMagnitude >= _playerAttackRangeUIDistance * _playerAttackRangeUIDistance)
         {
             Destroy(gameObject);
         }

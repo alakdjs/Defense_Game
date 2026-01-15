@@ -17,4 +17,4 @@ MonoBehaviour:
   statType: 0
   weaponTypeToEquip: 1
   valuesPerLevel:
-  - 2
+  - 1.5

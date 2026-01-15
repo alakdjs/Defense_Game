@@ -15,4 +15,4 @@ MonoBehaviour:
   _weaponType: 0
   _weaponPrefab: {fileID: 7673459562004028394, guid: b72e339952381864abeccd20cc379088, type: 3}
   _damage: 20
-  _attackRange: 3
+  _attackRange: 2.5
