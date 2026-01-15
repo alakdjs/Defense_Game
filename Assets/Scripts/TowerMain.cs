@@ -80,4 +80,36 @@ public class TowerMain : MonoBehaviour, IDamageable
 
         Gizmos.DrawWireSphere(transform.position, _petRadius);
     }
+
+    /// <summary>
+    /// 타워 최대 체력 증가 (증강)
+    /// </summary>
+    /// <param name="addValue"></param>
+    public void AddMaxHp(float addValue)
+    {
+        _maxHp += addValue;
+
+        _currentHp += addValue;
+        _currentHp = Mathf.Clamp(_currentHp, 0.0f, _maxHp);
+
+        if (_towerHpUI != null)
+        {
+            _towerHpUI.Init(_maxHp);
+            _towerHpUI.SetHp(_currentHp);
+        }
+
+        UpdateHpUI();
+
+        Debug.Log($"[타워 증강] 최대 체력 + {addValue} -> {_maxHp}");
+    }
+
+    /// <summary>
+    /// 타워 방어력 증가 (증강)
+    /// </summary>
+    /// <param name="addValue"></param>
+    public void AddDefense(float addValue)
+    {
+        _defense += addValue;
+        Debug.Log($"[타워 증강] 방어력 + {addValue} -> {_defense}");
+    }
 }

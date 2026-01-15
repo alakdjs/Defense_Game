@@ -78,6 +78,26 @@ public class AugmentEffect : ScriptableObject
                 EquipWeapon(player);
                 break;
 
+            case EffectType.TowerMaxHp:
+                {
+                    TowerMain tower = FindAnyObjectByType<TowerMain>();
+                    if (tower != null)
+                    {
+                        tower.AddMaxHp(value);
+                    }
+                    break;
+                }
+
+            case EffectType.TowerDefense:
+                {
+                    TowerMain tower = FindAnyObjectByType<TowerMain>();
+                    if (tower != null)
+                    {
+                        tower.AddDefense(value);
+                    }
+                    break;
+                }
+
             default:
                 Debug.LogWarning($"구현되지 않은 EffectType: {effectType}");
                 break;
@@ -197,6 +217,10 @@ public enum EffectType
     WeaponRange,        // 현재 장착 무기 사거리 증가
     Heal,               // 즉시 체력 회복
     EquipWeapon,        // 무기 장착
+
+    // 타워 증강
+    TowerMaxHp,         // 타워의 최대 체력 증가
+    TowerDefense        // 타워의 방어력 증가
 }
 
 /// <summary>

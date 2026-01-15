@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 53ede83967dad8940a36dcb04b140c5f, type: 3}
-  m_Name: Augment_Defense
+  m_Name: Augment_TowerMaxHp
   m_EditorClassIdentifier: 
-  augmentName: "\uD56B\uD329 \uC7A5\uCC29"
-  icon: {fileID: 21300000, guid: cd21969d5deb3fd4c8ef3762b84c45a3, type: 3}
+  augmentName: "\uB8E8\uB3CC\uD504\uC758 \uCD95\uBCF5"
+  icon: {fileID: 21300000, guid: 618787bea7bdc294d91edc6f60e4257a, type: 3}
   category: 1
   effects:
-  - {fileID: 11400000, guid: 491ea8237c48a704e80b67407feda05c, type: 2}
+  - {fileID: 11400000, guid: 410f5ea6dcea3ae4a96df924b2747965, type: 2}
   requiredAugment: []
-  description: "\uC0B0\uD0C0\uC758 \uBC29\uC5B4\uB825\uC774 \uC99D\uAC00\uD569\uB2C8\uB2E4!"
+  description: "\uC370\uB9E4(\uD0C0\uC6CC)\uC758 \uCD5C\uB300 \uCCB4\uB825\uC774
+    20 \uC99D\uAC00\uD569\uB2C8\uB2E4!"
