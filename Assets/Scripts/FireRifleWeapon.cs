@@ -65,7 +65,7 @@ public class FireRifleWeapon : MonoBehaviour
         Bullet bullet = bulletObj.GetComponent<Bullet>();
         if (bullet != null)
         {
-            bullet.Init(damage, attackRange);
+            bullet.Init(damage, attackRange, playerTransform.position);
         }
     }
     

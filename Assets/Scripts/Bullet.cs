@@ -6,17 +6,17 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float _fireSpeed = 20.0f;
 
     private float _damage;
-    private float _traveledDistance;
-    private float _maxDistance;
+    private float _playerAttackRangeUIDistance;
+    private Vector3 _originPos;
     private bool _isInitialized = false;
 
 
     // 발사 시 초기화
-    public void Init(float damage, float maxDistance)
+    public void Init(float damage, float playerAttackRangeUIDistance, Vector3 originPos)
     {
         _damage = damage;
-        _traveledDistance = 0.0f;
-        _maxDistance = maxDistance;
+        _playerAttackRangeUIDistance = playerAttackRangeUIDistance;
+        _originPos = originPos;
         _isInitialized = true;
     }
 
@@ -29,9 +29,11 @@ public class Bullet : MonoBehaviour
         float move = _fireSpeed * Time.deltaTime;
         transform.position += transform.forward * move;
 
-        _traveledDistance += move;
+        // UI 원: 플레이어 중심, 플레이어 중심에서의 거리 기준으로 총알 파괴
+        Vector3 delta = transform.position - _originPos;
+        delta.y = 0.0f;
 
-        if (_traveledDistance >= _maxDistance)
+        if(delta.sqrMagnitude >= _playerAttackRangeUIDistance * _playerAttackRangeUIDistance)
         {
             Destroy(gameObject);
         }
