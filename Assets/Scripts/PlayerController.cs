@@ -314,10 +314,11 @@ public class PlayerController : MonoBehaviour
         if (_currentWeaponData == null)
             return;
 
-        Vector3 center = transform.position + transform.forward * (_currentWeaponData._attackRange * 0.5f);
+        float range = AttackRange;
+        Vector3 center = transform.position + transform.forward * (range * 0.5f);
 
         // 공격 범위 내 콜라이더 탐색
-        Collider[] hits = Physics.OverlapSphere(center, _currentWeaponData._attackRange);
+        Collider[] hits = Physics.OverlapSphere(center, range);
 
         foreach (var hit in hits)
         {
@@ -339,7 +340,7 @@ public class PlayerController : MonoBehaviour
         if (_fireRifleWeapon != null && _currentWeaponData != null)
         {
             float finalDamage = GetFinalDamage();
-            _fireRifleWeapon.Fire(transform, finalDamage, _currentWeaponData);
+            _fireRifleWeapon.Fire(transform, finalDamage, AttackRange);
         }
     }
 

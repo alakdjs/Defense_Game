@@ -10,7 +10,7 @@ public class FireRifleWeapon : MonoBehaviour
 
     private float _lastFireTime;
 
-    public void Fire(Transform playerTransform, float damage, WeaponData weaponData)
+    public void Fire(Transform playerTransform, float damage, float attackRange)
     {
         if (Time.time < _lastFireTime + _fireDelay)
             return;
@@ -22,7 +22,7 @@ public class FireRifleWeapon : MonoBehaviour
         // 가장 가까운 몬스터 찾기
         Collider[] hits = Physics.OverlapSphere(
             playerTransform.position,
-            weaponData._attackRange
+            attackRange
         );
 
         Transform target = null;
@@ -65,7 +65,7 @@ public class FireRifleWeapon : MonoBehaviour
         Bullet bullet = bulletObj.GetComponent<Bullet>();
         if (bullet != null)
         {
-            bullet.Init(damage, weaponData._attackRange);
+            bullet.Init(damage, attackRange);
         }
     }
     
