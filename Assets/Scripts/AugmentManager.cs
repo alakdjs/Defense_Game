@@ -10,6 +10,8 @@ public class AugmentManager : MonoBehaviour
     // 증강 스택(중복 선택 횟수)
     private readonly Dictionary<AugmentData, int> _augmentStacks = new Dictionary<AugmentData, int>();
 
+    private readonly HashSet<AugmentCategory> _lockedCategories = new HashSet<AugmentCategory>();
+
     // 타겟 캐싱
     private PlayerController _player;
     private TowerMain _tower;
@@ -69,6 +71,17 @@ public class AugmentManager : MonoBehaviour
         return result;
     }
 
+    // 증강 카테고리 잠금(총, 칼 무기 선택 시 더 이상 안뜨게 하기 위함)
+    public bool IsCategoryLocked(AugmentCategory category)
+    {
+        return _lockedCategories.Contains(category);
+    }
+
+    public void LockCategory(AugmentCategory category)
+    {
+        _lockedCategories.Add(category);
+    }
+
     /// <summary>
     /// 증강 적용(스택 증가 + 효과 적용)
     /// </summary>
@@ -81,6 +94,12 @@ public class AugmentManager : MonoBehaviour
         {
             Debug.LogWarning($"[증강] 선행 조건 미충족: {data.augmentName}");
             return;
+        }
+
+        // WeaponSelect 계열은 하나라도 선택하면 카테고리 자체를 잠금 (Rifle/Sword 모두 후보에서 제거)
+        if (data.category == AugmentCategory.WeaponSelect)
+        {
+            LockCategory(AugmentCategory.WeaponSelect);
         }
 
         if (!_augmentStacks.ContainsKey(data))
@@ -150,6 +169,7 @@ public class AugmentManager : MonoBehaviour
     public void ResetAugments()
     {
         _augmentStacks.Clear();
+        _lockedCategories.Clear();
         Debug.Log("증강 시스템 초기화 완료");
     }
 }

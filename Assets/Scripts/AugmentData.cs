@@ -25,12 +25,24 @@ public class AugmentData : ScriptableObject
     [TextArea]
     public string description;
 
+    [Header("Rules")]
+    [Tooltip("true면 1회만 선택 가능 (선택 후 다시 등장하지 않음)")]
+    public bool oneTimeOnly = false;
+
     /// <summary>
     /// 스택형 증강, 선행 조건을 만족하면 선택 가능
     /// </summary>
     public bool CanSelect(AugmentManager manager)
     {
         if (manager == null)
+            return false;
+
+        // WeaponSelect 같은 카테고리가 잠겨있으면 등장/선택 불가
+        if (manager.IsCategoryLocked(category))
+            return false;
+
+        // 1회성 증강: 이미 1스택 이상이면 더 이상 선택 불가
+        if (oneTimeOnly && manager.GetAugmentStack(this) > 0)
             return false;
 
         // 선행 조건이 없으면 항상 가능
