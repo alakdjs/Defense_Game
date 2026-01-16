@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class TowerMain : MonoBehaviour, IDamageable
 {
@@ -11,6 +12,10 @@ public class TowerMain : MonoBehaviour, IDamageable
     [SerializeField] private PlayerHpUI _towerHpUI;
     [SerializeField] private PlayerHpBarUIShadow _hpBarShadow;
     private float _currentHp;
+
+    [Header("Pet Spwan")]
+    [SerializeField] private List<Transform> _petSpawnPoints = new List<Transform>();
+    private readonly List<PetBase> _spawnedPets = new List<PetBase>();
 
     public float PetRadius => _petRadius;
 
@@ -111,5 +116,23 @@ public class TowerMain : MonoBehaviour, IDamageable
     {
         _defense += addValue;
         Debug.Log($"[타워 증강] 방어력 + {addValue} -> {_defense}");
+    }
+
+    /// <summary>
+    /// 펫 소환 (증강)
+    /// </summary>
+    public PetBase SpawnPet(GameObject petPrefab)
+    {
+        Vector3 spawnPos = _petSpawnPoints[0].position;
+
+        GameObject go = Instantiate(petPrefab, spawnPos, Quaternion.identity);
+
+        PetBase pet = go.GetComponent<PetBase>();
+        pet.SetTower(transform);
+
+        _spawnedPets.Add(pet);
+
+        Debug.Log($"[TowerMain] 펫 소환: {petPrefab.name} (현재 {_spawnedPets.Count}마리)");
+        return pet;
     }
 }

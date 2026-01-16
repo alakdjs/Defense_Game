@@ -1,9 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.AI;
 
 
 public abstract class PetBase : MonoBehaviour, IDamageable
 {
+    // 펫이 파괴될 때 외부에 알림(증강 동시 소환 카운트 감소용)
+    public event Action<PetBase> OnDisposed;
+    private bool _disposeNotified = false;
+
     [Header("Base Stat")]
     [SerializeField] protected float _maxHp = 100.0f; // 체력
     [SerializeField] protected float _attackDamage; // 공격력
@@ -52,6 +57,10 @@ public abstract class PetBase : MonoBehaviour, IDamageable
     public PetAttackState AttackState => _attackState;
     public PetDeadState DeadState => _deadState;
 
+    public void SetTower(Transform tower)
+    {
+        _tower = tower;
+    }
 
     protected virtual void Awake()
     {
@@ -72,6 +81,7 @@ public abstract class PetBase : MonoBehaviour, IDamageable
     {
         _currentHp = _maxHp;
 
+        // 소환 시 이미 타워가 세팅되어 있으면 Find 생략
         if (_tower == null)
         {
             GameObject towerObj = GameObject.FindGameObjectWithTag("Tower");
@@ -106,7 +116,7 @@ public abstract class PetBase : MonoBehaviour, IDamageable
         if (_isDead)
         {
             Vector3 scale = transform.localScale;
-            scale.y -= Time.deltaTime * 0.5f;
+            scale.y -= Time.deltaTime * 0.8f;
             scale.y = Mathf.Max(0.0f, scale.y);
             transform.localScale = scale;
 
@@ -267,6 +277,23 @@ public abstract class PetBase : MonoBehaviour, IDamageable
 
     public virtual void OnDieAnimationEnd()
     {
+        NotifyDisposed();
         Destroy(gameObject);
     }
+
+    private void OnDestroy()
+    {
+        // 예외 케이스(씬 전환/강제 파괴 등)에서도 알림 보장
+        NotifyDisposed();
+    }
+
+    private void NotifyDisposed()
+    {
+        if (_disposeNotified)
+            return;
+
+        _disposeNotified = true;
+        OnDisposed?.Invoke(this);
+    }
+
 }
