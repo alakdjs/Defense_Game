@@ -11218,7 +11218,7 @@ MonoBehaviour:
   _spawnCooltime: 5
   _maxSpawnCount: 500
   _monsterRoot: {fileID: 1316576214}
-  _player: {fileID: 0}
+  _player: {fileID: 360678916}
   _tower: {fileID: 7420972232231704091}
   _minSpawnDistance: 20
   _spawnRadius: 40
