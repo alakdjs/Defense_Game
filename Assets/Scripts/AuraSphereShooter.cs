@@ -7,9 +7,9 @@ public class AuraSphereShooter : MonoBehaviour
     [SerializeField] private GameObject _bulletPrefab;
 
     [SerializeField] private bool _autoFireEnabled = true;
-    [SerializeField] private float _autoFireDelay = 2.0f;
+    [SerializeField] private float _autoFireDelay = 3.0f;
     [SerializeField] private float _yOffset = 0.5f; // 플레이어 몸에서 발사 높이
-    [SerializeField] private float _auraAttackRange = 20.0f; // 파동탄 고정 사거리
+    [SerializeField] private float _auraAttackRange = 10.0f; // 파동탄 사거리
 
     [SerializeField] private float _damageMultiplier = 0.8f; // 파동탄 데미지 배율(밸런스용)
 

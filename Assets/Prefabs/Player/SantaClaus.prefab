@@ -1003,9 +1003,9 @@ MonoBehaviour:
   _player: {fileID: 1764649962388820863}
   _bulletPrefab: {fileID: 8102456856539146656, guid: dc7e2d2110bc8ac4ba7bcae6c8d379d9, type: 3}
   _autoFireEnabled: 1
-  _autoFireDelay: 2
+  _autoFireDelay: 3
   _yOffset: 0.5
-  _auraAttackRange: 20
+  _auraAttackRange: 10
   _damageMultiplier: 0.8
   _angleOffset: 0
   _rotateOverTime: 0
