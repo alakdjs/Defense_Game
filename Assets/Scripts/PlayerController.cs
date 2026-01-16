@@ -52,6 +52,11 @@ public class PlayerController : MonoBehaviour
     // 무기 강화 배율
     private float _weaponDamageBonus = 0.0f;
 
+    // 파동탄 증강 관련
+    [SerializeField] private AuraSphereShooter _auraSphereShooter;
+    private int _addAuraSphereCount = 0;
+    public int AuraSphereCount => _addAuraSphereCount;
+
     public float MaxHp => _maxHp + _maxHpBonus;
     public float Attack => _attack + _attackBonus;
     public float Defense => _defense + _defenseBonus;
@@ -477,6 +482,18 @@ public class PlayerController : MonoBehaviour
         }
 
         Debug.Log($"[증강] 무기 범위 +{addValue} -> {_attackRangeBonus:F2}");
+    }
+
+
+    /// <summary>
+    /// 파동탄 증강
+    /// </summary>
+    /// <param name="add"></param>
+    public void AddAuraSphere(int add)
+    {
+        _addAuraSphereCount += add;
+        _addAuraSphereCount = Mathf.Max(0, _addAuraSphereCount);
+        Debug.Log($"[증강] 추가 파동탄 +{add} -> {_auraSphereShooter}");
     }
 
     /// <summary>

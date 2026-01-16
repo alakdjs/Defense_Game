@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b7d43896de08a2c418758142a9790b01, type: 3}
-  m_Name: Effect_TowerMaxHp
+  m_Name: Effect_PlayerAuraSphere
   m_EditorClassIdentifier: 
-  effectName: "\uD0C0\uC6CC \uCD5C\uB300 \uCCB4\uB825 \uC99D\uAC00"
-  effectType: 6
+  effectName: StatBoost
+  effectType: 5
   statType: 0
   weaponTypeToEquip: 0
   valuesPerLevel:
-  - 20
+  - 2

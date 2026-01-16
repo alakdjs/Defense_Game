@@ -29,6 +29,10 @@ public class AugmentData : ScriptableObject
     [Tooltip("true면 1회만 선택 가능 (선택 후 다시 등장하지 않음)")]
     public bool oneTimeOnly = false;
 
+    [Header("Stack Limit")]
+    [Tooltip("이 증강의 최대 선택(스택) 개수 (0이면 무제한)")]
+    public int maxStack = 0;
+
     /// <summary>
     /// 스택형 증강, 선행 조건을 만족하면 선택 가능
     /// </summary>
@@ -43,6 +47,10 @@ public class AugmentData : ScriptableObject
 
         // 1회성 증강: 이미 1스택 이상이면 더 이상 선택 불가
         if (oneTimeOnly && manager.GetAugmentStack(this) > 0)
+            return false;
+
+        // 최대 증강 스택 제한 (0이면 무제한)
+        if (maxStack > 0 && manager.GetAugmentStack(this) >= maxStack)
             return false;
 
         // 선행 조건이 없으면 항상 가능

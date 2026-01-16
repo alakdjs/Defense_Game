@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Effect_TowerDefense
   m_EditorClassIdentifier: 
   effectName: "\uD0C0\uC6CC \uBC29\uC5B4\uB825 \uC99D\uAC00"
-  effectType: 6
+  effectType: 7
   statType: 0
   weaponTypeToEquip: 0
   valuesPerLevel:

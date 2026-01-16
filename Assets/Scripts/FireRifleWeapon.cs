@@ -6,7 +6,7 @@ public class FireRifleWeapon : MonoBehaviour
     [SerializeField] private Transform _firePoint;
     [SerializeField] private float _fireDelay = 0.3f;
 
-    private float _aimHeightOffset = 0.6f; // 몬스터 키 보정
+    private float _aimHeightOffset = 0.5f; // 몬스터 키 보정
     private float _lastFireTime;
 
     public void Fire(Transform playerTransform, float damage, float attackRange)

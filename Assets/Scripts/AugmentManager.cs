@@ -12,9 +12,9 @@ public class AugmentManager : MonoBehaviour
 
     private readonly HashSet<AugmentCategory> _lockedCategories = new HashSet<AugmentCategory>();
 
-    // 타겟 캐싱
-    private PlayerController _player;
-    private TowerMain _tower;
+    // 타겟 목록
+    [SerializeField] private PlayerController _player;
+    [SerializeField] private TowerMain _tower;
 
     private void Awake()
     {
@@ -28,9 +28,15 @@ public class AugmentManager : MonoBehaviour
             return;
         }
 
-        // 씬에서 한 번만 찾고 캐싱
-        _player = FindAnyObjectByType<PlayerController>();
-        _tower = FindAnyObjectByType<TowerMain>();
+        if (_player == null)
+        {
+            Debug.LogWarning("[AugmentManager] PlayerController가 할당되지 않았습니다. Inspector에서 연결해주세요.");
+        }
+
+        if (_tower == null)
+        {
+            Debug.LogWarning("[AugmentManager] TowerMain이 할당되지 않았습니다. Inspector에서 연결해주세요.");
+        }
     }
 
     /// <summary>
@@ -107,9 +113,15 @@ public class AugmentManager : MonoBehaviour
 
         _augmentStacks[data]++;
 
-        // 타겟이 아직 캐싱 안 됐거나 씬 리로드로 사라졌다면 다시 캐싱(안전장치)
-        if (_player == null) _player = FindAnyObjectByType<PlayerController>();
-        if (_tower == null) _tower = FindAnyObjectByType<TowerMain>();
+        if (_player == null)
+        {
+            Debug.LogWarning("[AugmentManager] PlayerController 참조가 없습니다. 증강이 정상 적용되지 않을 수 있습니다.");
+        }
+
+        if (_tower == null)
+        {
+            Debug.LogWarning("[AugmentManager] TowerMain 참조가 없습니다. 타워 증강이 적용되지 않습니다.");
+        }
 
         // 효과 적용 (Effect는 스택 개념을 모르고, 1회 적용만 담당)
         // (Find를 Effect에서 하지 않고, Manager가 참조를 전달)

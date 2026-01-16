@@ -68,6 +68,10 @@ public class AugmentEffect : ScriptableObject
                 EquipWeapon(player);
                 break;
 
+            case EffectType.AuraSphere:
+                ApplyAddAuraSphere(player, value);
+                break;
+
             case EffectType.TowerMaxHp:
                 {
                     if (tower != null)
@@ -146,6 +150,23 @@ public class AugmentEffect : ScriptableObject
         }
     }
 
+    /// <summary>
+    /// 플레이어 몸에서 360도 대칭 추가탄 개수 증가
+    /// </summary>
+    private void ApplyAddAuraSphere(PlayerController player, float addValue)
+    {
+        // valuesPerLevel이 float이라서 int로 변환
+        int addCount = Mathf.RoundToInt(addValue);
+
+        if (addCount <= 0)
+        {
+            Debug.LogWarning($"[증강] ExtraRadialBullets addValue가 0 이하입니다. ({addValue})");
+            return;
+        }
+
+        player.AddAuraSphere(addCount);
+    }
+
     #endregion
 
     #region Validation
@@ -185,6 +206,8 @@ public enum EffectType
     WeaponRange,        // 현재 장착 무기 사거리 증가
     Heal,               // 즉시 체력 회복
     EquipWeapon,        // 무기 장착
+
+    AuraSphere,         // 파동탄(플레이어 몸에서 360도 대칭 추가탄 발사)
 
     // 타워 증강
     TowerMaxHp,         // 타워의 최대 체력 증가
