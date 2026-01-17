@@ -128,11 +128,6 @@ public class AugmentManager : MonoBehaviour
             LockCategory(AugmentCategory.WeaponSelect);
         }
 
-        if (!_augmentStacks.ContainsKey(data))
-            _augmentStacks[data] = 0;
-
-        _augmentStacks[data]++;
-
         if (_player == null)
         {
             Debug.LogWarning("[AugmentManager] PlayerController 참조가 없습니다. 증강이 정상 적용되지 않을 수 있습니다.");
