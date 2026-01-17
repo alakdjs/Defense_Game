@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
 /// 모든 증강 효과를 하나의 클래스에서 처리
@@ -24,14 +26,34 @@ public class AugmentEffect : ScriptableObject
     [Tooltip("스택 1회 선택 시 적용될 효과 값")]
     public float[] valuesPerLevel;
 
+    [Serializable]
+    public class WeightedPetPrefab
+    {
+        [Tooltip("소환할 펫 프리팹")]
+        public GameObject prefab;
+
+        [Tooltip("가중치(비율)")]
+        public int weight = 1;
+    }
+
+    [Header("Pet")]
+    [Tooltip("소환할 펫 프리팹 + 가중치 목록")]
+    public List<WeightedPetPrefab> weightedPetPrefabs = new List<WeightedPetPrefab>();
+
+    [Tooltip("펫 랜덤 소환 여부(true면 weightedPetPrefabs에서 가중 랜덤 1마리)")]
+    public bool spawnRandomPet = true;
+
+    [Tooltip("랜덤이 아니라면, 이 프리팹을 소환")]
+    public GameObject specificPetPrefab;
+
     /// <summary>
     /// 효과 적용
     /// - 스택형 운영: 선택될 때마다 동일하게 1회 적용
     /// </summary>
     public void Apply(PlayerController player, TowerMain tower)
     {
-        // EquipWeapon은 value가 필요 없으므로 valuesPerLevel 검사 제외
-        if (effectType != EffectType.EquipWeapon)
+        // EquipWeapon, SpawnPet은 value가 필요 없으므로 valuesPerLevel 검사 제외
+        if (effectType != EffectType.EquipWeapon && effectType != EffectType.SpawnPet)
         {
             if (valuesPerLevel == null || valuesPerLevel.Length == 0)
             {
@@ -90,12 +112,70 @@ public class AugmentEffect : ScriptableObject
                     break;
                 }
 
+            case EffectType.SpawnPet:
+                {
+                    // 펫 소환은 AugmentManager에서 처리(소환된 Pet 참조/카운트 관리 필요)
+                    break;
+                }
+
             default:
                 Debug.LogWarning($"구현되지 않은 EffectType: {effectType}");
                 break;
         }
 
         Debug.Log($"[증강 효과 적용] {effectName} | Type: {effectType} | Value(Add): {value}");
+    }
+
+    public GameObject PickSpawnPetPrefab()
+    {
+        if (effectType != EffectType.SpawnPet)
+            return null;
+
+        if (!spawnRandomPet)
+        {
+            return specificPetPrefab;
+        }
+
+        if (weightedPetPrefabs == null || weightedPetPrefabs.Count == 0)
+        {
+            Debug.LogWarning($"[AugmentEffect.SpawnPet] weightedPetPrefabs가 비어있습니다: {name}");
+            return null;
+        }
+
+        int totalWeight = 0;
+
+        for (int i = 0; i < weightedPetPrefabs.Count; i++)
+        {
+            WeightedPetPrefab e = weightedPetPrefabs[i];
+            if (e == null || e.prefab == null || e.weight <= 0)
+                continue;
+
+            totalWeight += e.weight;
+        }
+
+        if (totalWeight <= 0)
+        {
+            Debug.LogWarning($"[AugmentEffect.SpawnPet] totalWeight가 0 입니다: {name}");
+            return null;
+        }
+
+        int roll = UnityEngine.Random.Range(0, totalWeight); // [0, totalWeight)
+        int acc = 0;
+
+        for (int i = 0; i < weightedPetPrefabs.Count; i++)
+        {
+            WeightedPetPrefab e = weightedPetPrefabs[i];
+            if (e == null || e.prefab == null || e.weight <= 0)
+                continue;
+
+            acc += e.weight;
+            if (roll < acc)
+            {
+                return e.prefab;
+            }
+        }
+
+        return null;
     }
 
     #region Effect Implementations
@@ -182,8 +262,8 @@ public class AugmentEffect : ScriptableObject
             effectName = effectType.ToString();
         }
 
-        // EquipWeapon은 value가 필요 없으므로 valuesPerLevel 검사 제외
-        if (effectType != EffectType.EquipWeapon)
+        // EquipWeapon, SpawnPet은 value가 필요 없으므로 valuesPerLevel 검사 제외
+        if (effectType != EffectType.EquipWeapon && effectType != EffectType.SpawnPet)
         {
             // 값 배열이 비어있으면 경고
             if (valuesPerLevel == null || valuesPerLevel.Length == 0)
@@ -211,7 +291,9 @@ public enum EffectType
 
     // 타워 증강
     TowerMaxHp,         // 타워의 최대 체력 증가
-    TowerDefense        // 타워의 방어력 증가
+    TowerDefense,       // 타워의 방어력 증가
+
+    SpawnPet            // 펫 소환
 }
 
 /// <summary>

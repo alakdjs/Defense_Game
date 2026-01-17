@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7d43896de08a2c418758142a9790b01, type: 3}
+  m_Name: Effect_PetSpawn
+  m_EditorClassIdentifier: 
+  effectName: "\uD3AB \uC2A4\uD3F0"
+  effectType: 8
+  statType: 0
+  weaponTypeToEquip: 0
+  valuesPerLevel:
+  - 0
+  weightedPetPrefabs:
+  - prefab: {fileID: 7219116025777090863, guid: ba1c3c164df79de43989ed522de4d918, type: 3}
+    weight: 5
+  - prefab: {fileID: 3733115592825617092, guid: 2b73c3e62aa2f2f48beeea4c2783784a, type: 3}
+    weight: 10
+  - prefab: {fileID: 7051759076746594129, guid: d7fd95cc179ff554c867bab62b024fb0, type: 3}
+    weight: 10
+  - prefab: {fileID: 3628045019952179084, guid: d30046f27a0e34647b52ae64edaa653f, type: 3}
+    weight: 15
+  - prefab: {fileID: 8459528927322762320, guid: 9526238069a4bad4b88a29bdf6dedce7, type: 3}
+    weight: 20
+  - prefab: {fileID: 9015058393367402761, guid: d05a25a20dce9f64083dc6895754e0a4, type: 3}
+    weight: 20
+  - prefab: {fileID: 2956972100117497800, guid: b584e3ee15b11f64a90cb9eb90dd0601, type: 3}
+    weight: 20
+  spawnRandomPet: 1
+  specificPetPrefab: {fileID: 7219116025777090863, guid: ba1c3c164df79de43989ed522de4d918, type: 3}

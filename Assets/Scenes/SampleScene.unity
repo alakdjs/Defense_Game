@@ -10626,6 +10626,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7420972232231704091}
+  - {fileID: 1952554147}
   m_Father: {fileID: 29500887}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1453947603
@@ -14243,6 +14244,37 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300004, guid: dbc39f66988d81d45929537e762ad795, type: 3}
+--- !u!1 &1952554146
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1952554147}
+  m_Layer: 6
+  m_Name: PetSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1952554147
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1952554146}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1446555267}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1967553755 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1487683352328500, guid: c288b9e9dd9d8164cbd0b8c3aecb02e9, type: 3}
@@ -15691,6 +15723,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d1164c33a69142c43b1d71d8d6e3a1c0, type: 2}
   - {fileID: 11400000, guid: 7404148a253f77244a6c95f477af5832, type: 2}
   - {fileID: 11400000, guid: 34c6d8f21552186498fdd8c4712087e8, type: 2}
+  - {fileID: 11400000, guid: 58de7550dfdcb4d45a6a92e4e084ad9f, type: 2}
   _player: {fileID: 1093551358}
   _tower: {fileID: 7420972232231704094}
 --- !u!1 &2141060068 stripped
@@ -15815,6 +15848,14 @@ PrefabInstance:
       propertyPath: _hpBarShadow
       value: 
       objectReference: {fileID: 1808572118}
+    - target: {fileID: 6772648711343525277, guid: 35de4e124ea4ce04883eb21aaa533ba8, type: 3}
+      propertyPath: _petSpawnPoints.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6772648711343525277, guid: 35de4e124ea4ce04883eb21aaa533ba8, type: 3}
+      propertyPath: '_petSpawnPoints.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1952554147}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
