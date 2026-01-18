@@ -31,6 +31,7 @@ public class HpBar : MonoBehaviour
     {
         _target = target;
         _monsterHp = monsterHp;
+        _useAutoHide = useAutoHide;
 
         _maxHp = Mathf.Max(1.0f, maxHp);
         _currentHp = maxHp;
