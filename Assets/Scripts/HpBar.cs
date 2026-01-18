@@ -4,6 +4,12 @@ using UnityEngine.UI;
 
 public class HpBar : MonoBehaviour
 {
+    // HpBar 자동 숨김 타이머
+    [SerializeField] private bool _useAutoHide = false;
+    [SerializeField] private float _autoHideDelay = 1.5f;
+    private float _hideTimer = 0.0f;
+    private bool _autoHide = false;
+
     [SerializeField] private Image _fillImage;
     [SerializeField] private Color _fullHpColor = Color.green;
     [SerializeField] private Color _middleHpColor = Color.yellow;
@@ -21,7 +27,7 @@ public class HpBar : MonoBehaviour
     private float _currentHp;
 
     // 초기화
-    public void Init(Transform target, float maxHp, bool monsterHp)
+    public void Init(Transform target, float maxHp, bool monsterHp, bool useAutoHide)
     {
         _target = target;
         _monsterHp = monsterHp;
@@ -31,7 +37,20 @@ public class HpBar : MonoBehaviour
 
         _mainCamera = Camera.main;
 
+        if (!_useAutoHide)
+            gameObject.SetActive(true);
+
         UpdateHpBar();
+    }
+
+    public void ShowHpBar()
+    {
+        if (!_useAutoHide)
+            return;
+
+        _autoHide = true;
+        _hideTimer = _autoHideDelay;
+        gameObject.SetActive(true);
     }
 
     // World Offset 설정 (머리 위)
@@ -105,13 +124,20 @@ public class HpBar : MonoBehaviour
             return;
         }
 
-        gameObject.SetActive(true);
+        if (_autoHide)
+        {
+            _hideTimer -= Time.deltaTime;
+            if (_hideTimer <= 0.0f)
+            {
+                gameObject.SetActive(false);
+                _autoHide = false;
+                return;
+            }
+        }
 
         // 월드 좌표 -> 화면 좌표 변환
         Vector3 worldPos = _target.position + _worldOffset;
         Vector3 screenPos = _mainCamera.WorldToScreenPoint(worldPos);
-
-        gameObject.SetActive(true);
         transform.position = screenPos;
     }
 }

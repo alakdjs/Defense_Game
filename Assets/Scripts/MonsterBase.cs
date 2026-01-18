@@ -95,7 +95,7 @@ public abstract class MonsterBase : MonoBehaviour, IDamageable
         // HpBar 풀에서 하나 가져오기
         if (HpBarManager.Instance != null)
         {
-            _hpBar = HpBarManager.Instance.GetHpBar(transform, _maxHp, _hpBarWorldOffset, true);
+            _hpBar = HpBarManager.Instance.GetHpBar(transform, _maxHp, _hpBarWorldOffset, true, true);
             _hpBar.SetHp(_currentHp);
         }
 
@@ -125,6 +125,7 @@ public abstract class MonsterBase : MonoBehaviour, IDamageable
         // 체력바 갱신
         if (_hpBar != null)
         {
+            _hpBar.ShowHpBar();
             _hpBar.SetHp(_currentHp);
         }
 

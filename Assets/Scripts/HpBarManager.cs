@@ -49,7 +49,7 @@ public class HpBarManager : MonoBehaviour
     }
 
     // HpBar 하나 가져오기
-    public HpBar GetHpBar(Transform target, float maxHp, Vector3 offset, bool monsterHp)
+    public HpBar GetHpBar(Transform target, float maxHp, Vector3 offset, bool monsterHp, bool useAutoHide)
     {
         if (_pool.Count == 0)
         {
@@ -57,9 +57,9 @@ public class HpBarManager : MonoBehaviour
         }
 
         HpBar bar = _pool.Dequeue();
-        bar.gameObject.SetActive(true);
+        bar.gameObject.SetActive(false);
 
-        bar.Init(target, maxHp, monsterHp);
+        bar.Init(target, maxHp, monsterHp, useAutoHide);
         bar.SetWorldOffset(offset);
 
         return bar;
