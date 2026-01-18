@@ -6,9 +6,10 @@ public class Pet_Tiger : PetBase
     {
         base.Awake();
 
-        _attackDamage = 50.0f;
+        _attackDamage = 100.0f;
+        _maxHp = 200.0f;
+        _defense = 1.5f;
         _moveSpeed = 3.0f;
-
         Agent.speed = _moveSpeed;
     }
 }

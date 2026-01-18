@@ -6,9 +6,10 @@ public class Pet_Pinguin : PetBase
     {
         base.Awake();
 
-        _attackDamage = 30.0f;
+        _attackDamage = 60.0f;
+        _maxHp = 200.0f;
+        _defense = 1.2f;
         _moveSpeed = 3.0f;
-
         Agent.speed = _moveSpeed;
     }
 }

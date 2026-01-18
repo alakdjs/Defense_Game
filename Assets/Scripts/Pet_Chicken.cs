@@ -6,9 +6,10 @@ public class Pet_Chicken : PetBase
     {
         base.Awake();
 
-        _attackDamage = 20.0f;
+        _attackDamage = 35.0f;
+        _maxHp = 200.0f;
+        _defense = 1.0f;
         _moveSpeed = 3.0f;
-
         Agent.speed = _moveSpeed;
     }
 }

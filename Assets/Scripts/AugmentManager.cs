@@ -16,11 +16,10 @@ public class AugmentManager : MonoBehaviour
     [SerializeField] private PlayerController _player;
     [SerializeField] private TowerMain _tower;
 
-    // 펫 소환 증강: 현재 살아있는 활성 펫 수 카운트
-    private readonly Dictionary<AugmentData, int> _activePetCount = new Dictionary<AugmentData, int>();
-
-    // 소환된 펫이 어떤 증강에서 나왔는지 매핑(죽으면 증강 카운트 감소)
-    private readonly Dictionary<PetBase, AugmentData> _petOwnerAugment = new Dictionary<PetBase, AugmentData>();
+    // 펫 강화 누적치(앞으로 소환될 펫에도 적용)
+    private float _petBonusAttack = 0.0f;
+    private float _petBonusDefense = 0.0f;
+    private float _petBonusMaxHp = 0.0f;
 
     private void Awake()
     {
@@ -55,20 +54,6 @@ public class AugmentManager : MonoBehaviour
 
         if (_augmentStacks.TryGetValue(data, out int s))
             return s;
-
-        return 0;
-    }
-
-    /// <summary>
-    /// 펫 소환 증강의 현재 활성 펫 수 조회 (없으면 0)
-    /// </summary>
-    public int GetActivePetCount(AugmentData data)
-    {
-        if (data == null)
-            return 0;
-
-        if (_activePetCount.TryGetValue(data, out int c))
-            return c;
 
         return 0;
     }
@@ -122,7 +107,7 @@ public class AugmentManager : MonoBehaviour
             return;
         }
 
-        // WeaponSelect 계열은 하나라도 선택하면 카테고리 자체를 잠금 (Rifle/Sword 모두 후보에서 제거)
+        // WeaponSelect 계열은 하나라도 선택하면 카테고리 자체를 잠금
         if (data.category == AugmentCategory.WeaponSelect)
         {
             LockCategory(AugmentCategory.WeaponSelect);
@@ -138,7 +123,10 @@ public class AugmentManager : MonoBehaviour
             Debug.LogWarning("[AugmentManager] TowerMain 참조가 없습니다. 타워 증강이 적용되지 않습니다.");
         }
 
-        bool usedSpawnPet = false;
+        if (!_augmentStacks.ContainsKey(data))
+            _augmentStacks[data] = 0;
+
+        _augmentStacks[data]++;
 
         // 효과 적용 (Effect는 스택 개념을 모르고, 1회 적용만 담당)
         if (data.effects != null)
@@ -148,10 +136,13 @@ public class AugmentManager : MonoBehaviour
                 AugmentEffect e = data.effects[i];
                 if (e == null) continue;
 
-                // SummonPet은 Manager에서 직접 처리(소환된 Pet 참조/카운트 관리 필요)
-                if (e.effectType == EffectType.SpawnPet)
+                if (e.effectType == EffectType.PetUpgradeAll)
                 {
-                    usedSpawnPet = true;
+                    ApplyPetUpgradeAll(e);
+                }
+                // SpawnPet은 Manager에서 직접 처리(소환된 Pet 참조/카운트 관리 필요)
+                else if (e.effectType == EffectType.SpawnPet)
+                {
 
                     if (_tower == null)
                     {
@@ -166,8 +157,11 @@ public class AugmentManager : MonoBehaviour
                         continue;
                     }
 
-                    // TowerMain 스폰포인트 1개에서 계속 소환
+                    // TowerMain 스폰포인트 1개에서 SpwanPet 펫 계속 소환
                     PetBase pet = _tower.SpawnPet(prefab);
+
+                    // 지금까지 누적된 펫 강화치를 새 펫에게 적용
+                    pet.ApplyUpgradeAll(_petBonusAttack, _petBonusDefense, _petBonusMaxHp);
 
                     if (pet == null)
                     {
@@ -175,17 +169,7 @@ public class AugmentManager : MonoBehaviour
                         continue;
                     }
 
-                    // 활성 카운트 증가
-                    if (!_activePetCount.ContainsKey(data))
-                        _activePetCount[data] = 0;
-
-                    _activePetCount[data]++;
-
-                    // 매핑 등록 + 죽음 이벤트 구독
-                    _petOwnerAugment[pet] = data;
-                    pet.OnDisposed += HandleSpawndPetDisposed;
-
-                    Debug.Log($"[AugmentManager] SpawnPet 적용: {data.augmentName} (활성: {_activePetCount[data]}/{data.maxStack})");
+                    Debug.Log($"[AugmentManager] SpawnPet 적용: {data.augmentName} (스택: {_augmentStacks[data]}/{data.maxStack})");
                 }
                 else
                 {
@@ -194,46 +178,36 @@ public class AugmentManager : MonoBehaviour
             }
         }
 
-        // 일반 증강만 누적 스택 증가
-        if (!usedSpawnPet)
-        {
-            if (!_augmentStacks.ContainsKey(data))
-                _augmentStacks[data] = 0;
-
-            _augmentStacks[data]++;
-
-            Debug.Log($"[증강] {data.augmentName} 선택! (스택: {_augmentStacks[data]})");
-        }
-        else
-        {
-            Debug.Log($"[증강] {data.augmentName} 선택! (펫 소환 증강)");
-        }
+        Debug.Log($"[증강] {data.augmentName} 선택! (스택: {_augmentStacks[data]})");
     }
 
     /// <summary>
-    /// 펫이 죽거나 파괴되면 호출되어, 해당 증강의 활성 펫 수를 감소
+    /// 펫 강화(증강): 누적치 갱신, 현재 펫들에 증가된 능력치 즉시 적용
     /// </summary>
-    private void HandleSpawndPetDisposed(PetBase pet)
+    private void ApplyPetUpgradeAll(AugmentEffect e)
     {
-        if (pet == null)
-            return;
+        _petBonusAttack += e.petAttackAdd;
+        _petBonusDefense += e.petDefenseAdd;
+        _petBonusMaxHp += e.petMaxHpAdd;
 
-        pet.OnDisposed -= HandleSpawndPetDisposed;
-
-        if (_petOwnerAugment.TryGetValue(pet, out AugmentData owner))
+        if (_tower == null)
         {
-            _petOwnerAugment.Remove(pet);
-
-            if (_activePetCount.ContainsKey(owner))
-            {
-                _activePetCount[owner]--;
-
-                if (_activePetCount[owner] < 0)
-                    _activePetCount[owner] = 0;
-
-                Debug.Log($"[AugmentManager.HandleSpawndPetDisposed] 펫 사망/파괴로 활성 카운트 감소: {owner.augmentName} (활성: {_activePetCount[owner]}/{owner.maxStack})");
-            }
+            Debug.LogWarning("[AugmentManager] TowerMain이 없어 펫 강화 적용 불가");
+            return;
         }
+
+        // 현재 소환된 펫들에게 "이번 증가분만" 적용
+        IReadOnlyList<PetBase> pets = _tower.SpawnedPets;
+        for (int i = 0; i < pets.Count; i++)
+        {
+            PetBase pet = pets[i];
+            if (pet == null)
+                continue;
+
+            pet.ApplyUpgradeAll(e.petAttackAdd, e.petDefenseAdd, e.petMaxHpAdd);
+        }
+
+        Debug.Log($"[AugmentManager] 펫 강화 적용(누적) -> ATK:{_petBonusAttack}, DEF:{_petBonusDefense}, MaxHP:{_petBonusMaxHp}");
     }
 
     /// <summary>
@@ -279,9 +253,6 @@ public class AugmentManager : MonoBehaviour
     {
         _augmentStacks.Clear();
         _lockedCategories.Clear();
-
-        _activePetCount.Clear();
-        _petOwnerAugment.Clear();
 
         Debug.Log("증강 시스템 초기화 완료");
     }

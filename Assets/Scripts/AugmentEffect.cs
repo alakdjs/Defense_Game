@@ -46,6 +46,16 @@ public class AugmentEffect : ScriptableObject
     [Tooltip("랜덤이 아니라면, 이 프리팹을 소환")]
     public GameObject specificPetPrefab;
 
+    [Header("Pet Upgrade")]
+    [Tooltip("펫 공격력 증가량")]
+    public float petAttackAdd = 0.0f;
+
+    [Tooltip("펫 방어력 증가량")]
+    public float petDefenseAdd = 0.0f;
+
+    [Tooltip("펫 최대 체력 증가량")]
+    public float petMaxHpAdd = 0.0f;
+
     /// <summary>
     /// 효과 적용
     /// - 스택형 운영: 선택될 때마다 동일하게 1회 적용
@@ -115,6 +125,12 @@ public class AugmentEffect : ScriptableObject
             case EffectType.SpawnPet:
                 {
                     // 펫 소환은 AugmentManager에서 처리(소환된 Pet 참조/카운트 관리 필요)
+                    break;
+                }
+
+            case EffectType.PetUpgradeAll:
+                {
+                    // 펫 강화는 AugmentManager에서 누적치 관리 + 현재/미래 펫에 적용
                     break;
                 }
 
@@ -293,7 +309,8 @@ public enum EffectType
     TowerMaxHp,         // 타워의 최대 체력 증가
     TowerDefense,       // 타워의 방어력 증가
 
-    SpawnPet            // 펫 소환
+    SpawnPet,           // 펫 소환
+    PetUpgradeAll       // 펫 강화(공격/방어/최대체력)    
 }
 
 /// <summary>

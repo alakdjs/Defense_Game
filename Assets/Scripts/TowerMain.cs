@@ -16,8 +16,10 @@ public class TowerMain : MonoBehaviour, IDamageable
     [Header("Pet Spwan")]
     [SerializeField] private List<Transform> _petSpawnPoints = new List<Transform>();
     private readonly List<PetBase> _spawnedPets = new List<PetBase>();
-
+    
+    public IReadOnlyList<PetBase> SpawnedPets => _spawnedPets;
     public float PetRadius => _petRadius;
+
 
     private void Awake()
     {
@@ -89,7 +91,6 @@ public class TowerMain : MonoBehaviour, IDamageable
     /// <summary>
     /// 타워 최대 체력 증가 (증강)
     /// </summary>
-    /// <param name="addValue"></param>
     public void AddMaxHp(float addValue)
     {
         _maxHp += addValue;
@@ -111,7 +112,6 @@ public class TowerMain : MonoBehaviour, IDamageable
     /// <summary>
     /// 타워 방어력 증가 (증강)
     /// </summary>
-    /// <param name="addValue"></param>
     public void AddDefense(float addValue)
     {
         _defense += addValue;

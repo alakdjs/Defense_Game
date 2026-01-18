@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public abstract class PetBase : MonoBehaviour, IDamageable
 {
-    // 펫이 파괴될 때 외부에 알림(증강 동시 소환 카운트 감소용)
+    // 펫이 파괴될 때 외부에 알림
     public event Action<PetBase> OnDisposed;
     private bool _disposeNotified = false;
 
@@ -15,6 +15,7 @@ public abstract class PetBase : MonoBehaviour, IDamageable
     [SerializeField] protected float _attackRange = 3.0f;  // 공격 범위
     [SerializeField] protected float _moveSpeed; // 이동 속도
     [SerializeField] protected float _attackCooltime = 3.0f;
+    [SerializeField] protected float _defense = 1.0f; // 방어력
     protected float _lastAttackTime = -999f;
 
     protected float _currentHp;
@@ -57,6 +58,7 @@ public abstract class PetBase : MonoBehaviour, IDamageable
     public PetAttackState AttackState => _attackState;
     public PetDeadState DeadState => _deadState;
 
+    // 소환 시 타워 참조 주입
     public void SetTower(Transform tower)
     {
         _tower = tower;
@@ -232,7 +234,11 @@ public abstract class PetBase : MonoBehaviour, IDamageable
         if (_isDead)
             return;
 
-        _currentHp -= damage;
+        // 방어력 적용
+        float finalDamage = damage / _defense;
+        finalDamage = Mathf.Max(1.0f, finalDamage);
+
+        _currentHp -= finalDamage;
 
         if (_hpBar != null)
         {
@@ -294,6 +300,27 @@ public abstract class PetBase : MonoBehaviour, IDamageable
 
         _disposeNotified = true;
         OnDisposed?.Invoke(this);
+    }
+
+
+    /// <summary>
+    /// 펫 강화 증강
+    /// </summary>
+    public void ApplyUpgradeAll(float addAttack, float addDefense, float addMaxHp)
+    {
+        _attackDamage += addAttack;
+        _defense += addDefense;
+        _maxHp += addMaxHp;
+
+        _currentHp += addMaxHp;
+        _currentHp = Mathf.Clamp(_currentHp, 0.0f, _maxHp);
+
+        if (_hpBar != null)
+        {
+            _hpBar.SetHp(_currentHp);
+        }
+
+        Debug.Log($"[펫 증강] {name} | ATK +{addAttack}, DEF +{addDefense}, MaxHP +{addMaxHp} -> ATK:{_attackDamage}, DEF:{_defense}, HP:{_currentHp}/{_maxHp}");
     }
 
 }
