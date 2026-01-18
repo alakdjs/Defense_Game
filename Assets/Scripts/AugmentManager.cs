@@ -171,6 +171,10 @@ public class AugmentManager : MonoBehaviour
 
                     Debug.Log($"[AugmentManager] SpawnPet 적용: {data.augmentName} (스택: {_augmentStacks[data]}/{data.maxStack})");
                 }
+                else if(e.effectType == EffectType.StunMonsters)
+                {
+                    ApplyStunMonsters(e.stunDuration);
+                }
                 else
                 {
                     e.Apply(_player, _tower);
@@ -208,6 +212,26 @@ public class AugmentManager : MonoBehaviour
         }
 
         Debug.Log($"[AugmentManager] 펫 강화 적용(누적) -> ATK:{_petBonusAttack}, DEF:{_petBonusDefense}, MaxHP:{_petBonusMaxHp}");
+    }
+
+    /// <summary>
+    /// 몬스터 기절 증강
+    /// </summary>
+    private void ApplyStunMonsters(float duration)
+    {
+        if (duration <= 0.0f)
+            return;
+
+        MonsterBase[] monsters =
+            FindObjectsByType<MonsterBase>(FindObjectsSortMode.None);
+
+        for (int i = 0; i < monsters.Length; i++)
+        {
+            if (monsters[i] == null)
+                continue;
+
+            monsters[i].Stun(duration);
+        }
     }
 
     /// <summary>

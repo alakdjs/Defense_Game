@@ -56,6 +56,9 @@ public class AugmentEffect : ScriptableObject
     [Tooltip("펫 최대 체력 증가량")]
     public float petMaxHpAdd = 0.0f;
 
+    [Header("Monster Stun Settings")]
+    public float stunDuration = 5.0f;
+
     /// <summary>
     /// 효과 적용
     /// - 스택형 운영: 선택될 때마다 동일하게 1회 적용
@@ -361,7 +364,9 @@ public enum EffectType
     SpawnPet,           // 펫 소환
     PetUpgradeAll,      // 펫 강화(공격/방어/최대체력)    
 
-    AbsorbRange         // 자석 범위 증가
+    AbsorbRange,        // 자석 범위 증가
+
+    StunMonsters     // 몬스터 기절
 }
 
 /// <summary>

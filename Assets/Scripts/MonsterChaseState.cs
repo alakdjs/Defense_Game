@@ -17,6 +17,9 @@ public class MonsterChaseState : IState
 
     public void Execute()
     {
+        if (!_monster.CanAct)
+            return;
+
         _monster.UpdateTarget();
 
         if (_monster.Target == null)

@@ -12,6 +12,13 @@ public class MonsterAttackState : IState
     public void Enter()
     {
         _monster.Agent.isStopped = true;
+
+        if (!_monster.CanAct)
+        {
+            _monster.StateMachine.ChangeState(_monster.IdleState);
+            return;
+        }
+            
         _monster.PerformAttack();
     }
 

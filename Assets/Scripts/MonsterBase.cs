@@ -31,11 +31,17 @@ public abstract class MonsterBase : MonoBehaviour, IDamageable
 
     protected NavMeshAgent _agent;
 
+    // Stun
+    protected bool _isStunned = false;
+    protected float _stunEndTime = 0.0f;
+    protected Coroutine _stunCoroutine;
+
     // FSM
     protected StateMachine _stateMachine;
     protected MonsterIdleState _idleState;
     protected MonsterChaseState _chaseState;
     protected MonsterAttackState _attackState;
+    protected MonsterStunState _stunState;
     protected MonsterDeadState _deadState;
 
     public Transform Target => _target;
@@ -48,10 +54,15 @@ public abstract class MonsterBase : MonoBehaviour, IDamageable
     public MonsterIdleState IdleState => _idleState;
     public MonsterChaseState ChaseState => _chaseState;
     public MonsterAttackState AttackState => _attackState;
+    public MonsterStunState StunState => _stunState;
     public MonsterDeadState DeadState => _deadState;
 
     public StateMachine StateMachine => _stateMachine;
 
+    public void SetCanAct(bool canAct)
+    {
+        _canAct = canAct;
+    }
 
     protected virtual void Awake()
     {
@@ -65,6 +76,7 @@ public abstract class MonsterBase : MonoBehaviour, IDamageable
         _idleState = new MonsterIdleState(this);
         _chaseState = new MonsterChaseState(this);
         _attackState = new MonsterAttackState(this);
+        _stunState = new MonsterStunState(this);
         _deadState = new MonsterDeadState(this);
     }
 
@@ -132,6 +144,13 @@ public abstract class MonsterBase : MonoBehaviour, IDamageable
         if (_currentHp <= 0.0f)
         {
             _isDead = true;
+
+            // 기절 코루틴이 돌고 있다면 중단
+            if (_stunCoroutine != null)
+            {
+                StopCoroutine(_stunCoroutine);
+                _stunCoroutine = null;
+            }
             _stateMachine.ChangeState(_deadState);
         }    
     }
@@ -224,6 +243,12 @@ public abstract class MonsterBase : MonoBehaviour, IDamageable
     /// </summary>
     public virtual void PerformAttack()
     {
+        if (_isDead)
+            return;
+
+        if (_canAct == false)
+            return;
+
         if (_animator != null)
         {
             _animator.SetTrigger("Attack");
@@ -249,6 +274,94 @@ public abstract class MonsterBase : MonoBehaviour, IDamageable
         {
             damageable.TakeDamage(_attackDamage);
         }
+    }
+
+    /// <summary>
+    /// 몬스터 기절 상태 (증강)
+    /// </summary>
+    public void PlayStunAnimation(bool isStun)
+    {
+        if (_animator == null)
+            return;
+
+        if (isStun)
+        {
+            if (HasAnimatorParameter(_animator, "Stun", AnimatorControllerParameterType.Trigger))
+            {
+                _animator.SetTrigger("Stun");
+            }
+        }
+    }
+
+    // Animator 파라미터 존재 체크 (없는 파라미터 Set 하면 로그가 지저분해질 수 있어서 방지)
+    protected bool HasAnimatorParameter(Animator animator, string paramName, AnimatorControllerParameterType type)
+    {
+        if (animator == null)
+            return false;
+
+        foreach (var p in animator.parameters)
+        {
+            if (p.name == paramName && p.type == type)
+                return true;
+        }
+        return false;
+    }
+
+    public void Stun(float duration)
+    {
+        if (_isDead)
+            return;
+
+        if (duration <= 0.0f)
+            return;
+
+        float newEndTime = Time.time + duration;
+
+        // 이미 기절 중이면 더 길게 연장
+        if (_isStunned)
+        {
+            _stunEndTime = Mathf.Max(_stunEndTime, newEndTime);
+            return;
+        }
+
+        _isStunned = true;
+        _stunEndTime = newEndTime;
+
+        SetCanAct(false);
+
+        // 공격/추적 중이든 뭐든 기절 상태로 전환
+        _stateMachine.ChangeState(_stunState);
+
+        if (_stunCoroutine != null)
+            StopCoroutine(_stunCoroutine);
+
+        _stunCoroutine = StartCoroutine(Co_StunRoutine());
+    }
+
+    protected System.Collections.IEnumerator Co_StunRoutine()
+    {
+        // 기절 유지
+        while (Time.time < _stunEndTime)
+        {
+            yield return null;
+        }
+
+        // 기절 해제
+        _isStunned = false;
+        SetCanAct(true);
+
+        // 타겟 갱신 후 상황에 맞게 복귀
+        UpdateTarget();
+
+        if (_isDead)
+            yield break;
+
+        if (_target != null)
+            _stateMachine.ChangeState(_chaseState);
+        else
+            _stateMachine.ChangeState(_idleState);
+
+        _stunCoroutine = null;
     }
 
     /// <summary>

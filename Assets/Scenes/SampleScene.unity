@@ -15727,6 +15727,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2ad393d2fc7d226428fdf6a26204115a, type: 2}
   - {fileID: 11400000, guid: ae56d66e5cefc4347a53191afa4a0fcc, type: 2}
   - {fileID: 11400000, guid: 14a7538031b8de4469e7443ac17d68dc, type: 2}
+  - {fileID: 11400000, guid: bd30de547ac9ca244b5ffc9b1db64b8c, type: 2}
   _player: {fileID: 1093551358}
   _tower: {fileID: 7420972232231704094}
 --- !u!1 &2141060068 stripped
