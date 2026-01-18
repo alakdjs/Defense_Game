@@ -233,16 +233,16 @@ public class AugmentEffect : ScriptableObject
     /// </summary>
     private void EquipWeapon(PlayerController player)
     {
-        WeaponData weaponToEquip = WeaponDatabase._Instance.GetRandomWeapon(weaponTypeToEquip);
+        WeaponData weaponToEquip = WeaponDatabase.Instance.GetWeapon(weaponTypeToEquip, WeaponElementType.Normal);
 
         if (weaponToEquip != null)
         {
             player.EquipWeapon(weaponToEquip);
-            Debug.Log($"[증강] {weaponTypeToEquip} 타입 무기 장착: {weaponToEquip.name}");
+            Debug.Log($"[증강] {weaponTypeToEquip} 기본 무기 장착: {weaponToEquip.name}");
         }
         else
         {
-            Debug.LogError($"[증강] {weaponTypeToEquip} 타입의 무기를 찾을 수 없습니다!");
+            Debug.LogError($"[증강] {weaponTypeToEquip} 기본 무기를 찾을 수 없습니다!");
         }
     }
 

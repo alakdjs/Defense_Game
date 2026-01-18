@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         // 시작 무기 : Sword (Stick)
-        WeaponData startWeapon = WeaponDatabase._Instance.GetDefaultWeapon(WeaponType.Sword);
+        WeaponData startWeapon = WeaponDatabase.Instance.GetWeapon(WeaponType.Sword, WeaponElementType.WoodStick);
         EquipWeapon(startWeapon);
 
         // 시작 시 무기 상태 Animator 동기화
@@ -125,14 +125,14 @@ public class PlayerController : MonoBehaviour
         // 테스트용: 1번 키 누르면 Rifle 장착
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            WeaponData rifle = WeaponDatabase._Instance.GetRandomWeapon(WeaponType.Rifle);
+            WeaponData rifle = WeaponDatabase.Instance.GetWeapon(WeaponType.Rifle, WeaponElementType.Normal);
 
             EquipWeapon(rifle);
         }
         // 테스트용: 2번 키 누르면 Sword 장착
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            WeaponData sword = WeaponDatabase._Instance.GetRandomWeapon(WeaponType.Sword);
+            WeaponData sword = WeaponDatabase.Instance.GetWeapon(WeaponType.Sword, WeaponElementType.Normal);
 
             EquipWeapon(sword);
         }
@@ -219,15 +219,11 @@ public class PlayerController : MonoBehaviour
     // 무기 장착
     public void EquipWeapon(WeaponData data)
     {
-        if (data == null || data._weaponPrefab == null)
+        if (data == null || data.WeaponPrefab == null)
         {
             Debug.LogError("[EquipWeapon] WeaponData 또는 Prefab null");
             return;
         }
-
-        // 같은 무기 데이터면 교체하지 않음
-        if (_currentWeaponData == data)
-            return;
 
         // 기존 무기 제거
         if (_currentWeapon != null)
@@ -237,14 +233,14 @@ public class PlayerController : MonoBehaviour
         }
 
         // 무기 생성
-        _currentWeapon = Instantiate(data._weaponPrefab, _weaponTarget);
+        _currentWeapon = Instantiate(data.WeaponPrefab, _weaponTarget);
         _currentWeapon.transform.localPosition = Vector3.zero;
 
         // 무기 데이터 및 타입 갱신
         _currentWeaponData = data;
-        _weaponType = data._weaponType;
+        _weaponType = data.WeaponType;
 
-        _attackRange = data._attackRange; // 공격 범위 동기화
+        _attackRange = data.AttackRange; // 공격 범위 동기화
 
         // UI 반영
         if (_attackRangeUI != null)
@@ -408,7 +404,7 @@ public class PlayerController : MonoBehaviour
         if (_currentWeaponData == null)
             return 0;
 
-        return _currentWeaponData._damage + Attack + _weaponDamageBonus;
+        return _currentWeaponData.Damage + Attack + _weaponDamageBonus;
     }
 
     // 증강 시스템 관련 ==============================================================================

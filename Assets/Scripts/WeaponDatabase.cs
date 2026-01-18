@@ -4,17 +4,17 @@ using System.Collections.Generic;
 
 public class WeaponDatabase : MonoBehaviour
 {
-    public static WeaponDatabase _Instance;
+    public static WeaponDatabase Instance;
 
     [SerializeField] private List<WeaponData> _weaponDataList;
 
-    private Dictionary<WeaponType, List<WeaponData>> _weaponDict;
+    private Dictionary<(WeaponType, WeaponElementType), WeaponData> _weaponDict;
 
     private void Awake()
     {
-        if (_Instance == null)
+        if (Instance == null)
         {
-            _Instance = this;
+            Instance = this;
         }
         else
         {
@@ -22,37 +22,37 @@ public class WeaponDatabase : MonoBehaviour
             return;
         }
 
-        _weaponDict = new Dictionary<WeaponType, List<WeaponData>>();
+        BuildDatabase();
+    }
+
+    private void BuildDatabase()
+    {
+        _weaponDict = new Dictionary<(WeaponType, WeaponElementType), WeaponData>();
 
         foreach (var data in _weaponDataList)
         {
-            if (!_weaponDict.ContainsKey(data._weaponType))
+            if (data == null)
+                continue;
+
+            var key = (data.WeaponType, data.ElementType);
+
+            if (_weaponDict.ContainsKey(key))
             {
-                _weaponDict[data._weaponType] = new List<WeaponData>();
+                Debug.LogError($"[WeaponDatabase] 중복 무기: {data.WeaponType} + {data.ElementType}");
+                continue;
             }
 
-            _weaponDict[data._weaponType].Add(data);
+            _weaponDict.Add(key, data);
         }
-
     }
 
-    // 타입에 해당하는 무기 목록 반환
-    public List<WeaponData> GetWeaponList(WeaponType type)
+    // 무기 조회
+    public WeaponData GetWeapon(WeaponType type, WeaponElementType element)
     {
-        return _weaponDict[type];
-    }
+        if (_weaponDict.TryGetValue((type, element), out var weapon))
+            return weapon;
 
-    // 기본 무기 (첫 번째)
-    public WeaponData GetDefaultWeapon(WeaponType type)
-    {
-        return _weaponDict[type][0];
+        Debug.LogError($"[WeaponDatabase] 무기 없음: {type} + {element}");
+        return null;
     }
-
-    // 랜덤 무기
-    public WeaponData GetRandomWeapon(WeaponType type)
-    {
-        List<WeaponData> list = _weaponDict[type];
-        return list[Random.Range(0, list.Count)];
-    }
-
 }

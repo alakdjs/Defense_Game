@@ -935,7 +935,7 @@ MonoBehaviour:
   _attackRangeUI: {fileID: 3163982397162585240}
   _animator: {fileID: 4526791162038460213}
   _weaponTarget: {fileID: 8875656307576171951}
-  _weaponType: 1
+  _weaponType: 0
   _auraSphereShooter: {fileID: 749791383398464610}
 --- !u!114 &1358831494660521577
 MonoBehaviour:
