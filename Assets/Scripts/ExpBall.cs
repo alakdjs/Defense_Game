@@ -48,5 +48,4 @@ public class ExpBall : MonoBehaviour
 
         Destroy(gameObject);
     }
-
 }

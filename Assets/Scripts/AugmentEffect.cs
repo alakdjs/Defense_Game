@@ -134,6 +134,10 @@ public class AugmentEffect : ScriptableObject
                     break;
                 }
 
+            case EffectType.AbsorbRange:
+                ApplyAbsorbRange(player, value);
+                break;
+
             default:
                 Debug.LogWarning($"구현되지 않은 EffectType: {effectType}");
                 break;
@@ -263,6 +267,18 @@ public class AugmentEffect : ScriptableObject
         player.AddAuraSphere(addCount);
     }
 
+    private void ApplyAbsorbRange(PlayerController player, float addValue)
+    {
+        PlayerPickupCollector collector = player.GetComponent<PlayerPickupCollector>();
+        if(collector == null)
+        {
+            Debug.LogWarning("[증강] PlayerPickupCollector가 없습니다.");
+            return;
+        }
+
+        collector.AddAbsorbRange(addValue);
+    }
+
     #endregion
 
     #region Validation
@@ -310,7 +326,9 @@ public enum EffectType
     TowerDefense,       // 타워의 방어력 증가
 
     SpawnPet,           // 펫 소환
-    PetUpgradeAll       // 펫 강화(공격/방어/최대체력)    
+    PetUpgradeAll,      // 펫 강화(공격/방어/최대체력)    
+
+    AbsorbRange         // 자석 범위 증가
 }
 
 /// <summary>

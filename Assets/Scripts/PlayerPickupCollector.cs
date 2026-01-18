@@ -31,4 +31,10 @@ public class PlayerPickupCollector : MonoBehaviour
         }
     }
 
+    // 흡수 범위 증강
+    public void AddAbsorbRange(float addValue)
+    {
+        _collectRange += addValue;
+        Debug.Log($"[증강] 경험치 흡수 범위 증가 +{addValue} -> {_collectRange:F2}");
+    }
 }
