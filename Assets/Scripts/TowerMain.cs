@@ -20,6 +20,8 @@ public class TowerMain : MonoBehaviour, IDamageable
     public IReadOnlyList<PetBase> SpawnedPets => _spawnedPets;
     public float PetRadius => _petRadius;
 
+    public float MaxHp => _maxHp;
+    public float CurrentHp => _currentHp;
 
     private void Awake()
     {
@@ -86,6 +88,24 @@ public class TowerMain : MonoBehaviour, IDamageable
         Gizmos.color = Color.black;
 
         Gizmos.DrawWireSphere(transform.position, _petRadius);
+    }
+
+    public void Heal(float amount)
+    {
+        if (amount <= 0.0f)
+            return;
+
+        if (_currentHp <= 0.0f)
+            return;
+
+        _currentHp = Mathf.Min(_currentHp + amount, _maxHp);
+
+        if (_towerHpUI != null)
+        {
+            _towerHpUI.SetHp(_currentHp);
+        }
+
+        UpdateHpUI();
     }
 
     /// <summary>

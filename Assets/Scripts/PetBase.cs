@@ -38,6 +38,8 @@ public abstract class PetBase : MonoBehaviour, IDamageable
     protected PetAttackState _attackState;
     protected PetDeadState _deadState;
 
+    public float MaxHp => _maxHp;
+    public float CurrentHp => _currentHp;
 
     public Transform Tower => _tower;
     public Transform TargetMonster => _targetMonster;
@@ -302,6 +304,23 @@ public abstract class PetBase : MonoBehaviour, IDamageable
         OnDisposed?.Invoke(this);
     }
 
+    public void Heal(float amount)
+    {
+        if (amount <= 0.0f)
+            return;
+
+        if (_isDead)
+            return;
+
+        _currentHp = Mathf.Min(_currentHp + amount, _maxHp);
+
+        if (_hpBar != null)
+        {
+            _hpBar.SetHp(_currentHp);
+        }
+
+        Debug.Log($"[펫] 체력 {amount} 회복 -> {_currentHp}/{_maxHp}");
+    }
 
     /// <summary>
     /// 펫 강화 증강

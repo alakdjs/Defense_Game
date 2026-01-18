@@ -92,8 +92,8 @@ public class AugmentEffect : ScriptableObject
                 ApplyWeaponRange(player, value);
                 break;
 
-            case EffectType.Heal:
-                ApplyHeal(player, value);
+            case EffectType.HealAll:
+                ApplyHealAll(player, tower, value);
                 break;
 
             case EffectType.EquipWeapon:
@@ -227,9 +227,42 @@ public class AugmentEffect : ScriptableObject
     /// <summary>
     /// 즉시 체력 회복
     /// </summary>
-    private void ApplyHeal(PlayerController player, float amount)
+    private void ApplyHealAll(PlayerController player, TowerMain tower, float value)
     {
-        player.Heal(amount);
+        float ratio = value;
+        if (ratio > 1.0f)
+        {
+            ratio *= 0.01f;
+        }
+
+        ratio = Mathf.Clamp01(ratio);
+        if (ratio <= 0.0f)
+            return;
+
+        if (player != null)
+        {
+            float amount = player.MaxHp * ratio;
+            player.Heal(amount);
+        }
+
+        if (tower != null)
+        {
+            float amount = tower.MaxHp * ratio;
+            tower.Heal(amount);
+
+            IReadOnlyList<PetBase> pets = tower.SpawnedPets;
+            for (int i = 0; i < pets.Count; i++)
+            {
+                PetBase pet = pets[i];
+                if (pet == null)
+                    continue;
+
+                float petAmount = pet.MaxHp * ratio;
+                pet.Heal(petAmount);
+            }
+        }
+
+        Debug.Log($"[증강] 공통 비율 회복 적용: +{ratio * 100.0f}");
     }
 
     /// <summary>
@@ -316,7 +349,7 @@ public enum EffectType
     StatBoost,          // 플레이어 스탯 증가
     WeaponDamage,       // 현재 장착 무기 데미지 증가
     WeaponRange,        // 현재 장착 무기 사거리 증가
-    Heal,               // 즉시 체력 회복
+    HealAll,               // 즉시 체력 회복(플레이어, 타워, 펫)
     EquipWeapon,        // 무기 장착
 
     AuraSphere,         // 파동탄(플레이어 몸에서 360도 대칭 추가탄 발사)
