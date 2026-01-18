@@ -12,6 +12,8 @@ public class HpBar : MonoBehaviour
     [SerializeField] private bool _followTarget = true;
     [SerializeField] private Vector3 _worldOffset = Vector3.up;
 
+    [SerializeField] private bool _monsterHp = false;
+
     private Transform _target;
     private Camera _mainCamera;
 
@@ -19,9 +21,11 @@ public class HpBar : MonoBehaviour
     private float _currentHp;
 
     // 초기화
-    public void Init(Transform target, float maxHp)
+    public void Init(Transform target, float maxHp, bool monsterHp)
     {
         _target = target;
+        _monsterHp = monsterHp;
+
         _maxHp = Mathf.Max(1.0f, maxHp);
         _currentHp = maxHp;
 
@@ -34,6 +38,22 @@ public class HpBar : MonoBehaviour
     public void SetWorldOffset(Vector3 offset)
     {
         _worldOffset = offset;
+    }
+
+    // 최대 체력 갱신(펫 강화)
+    public void SetMaxHp(float maxHp)
+    {
+        float oldMax = _maxHp;
+        _maxHp = Mathf.Max(1.0f, maxHp);
+
+        if (oldMax > 0.0f)
+        {
+            float ratio = _currentHp / oldMax;
+            _currentHp = _maxHp * ratio;
+        }
+
+        _currentHp = Mathf.Clamp(_currentHp, 0.0f, _maxHp);
+        UpdateHpBar();
     }
 
     // 체력 갱신
@@ -50,8 +70,13 @@ public class HpBar : MonoBehaviour
             return;
 
         float ratio = _currentHp / _maxHp;
-
         _fillImage.fillAmount = ratio; // 체력 비율에 따른 FillAmount
+
+        if (_monsterHp)
+        {
+            _fillImage.color = Color.red;
+            return;
+        }
 
         if (ratio >= 0.66f)
         {

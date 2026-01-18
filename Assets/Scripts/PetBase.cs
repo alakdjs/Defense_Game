@@ -96,7 +96,7 @@ public abstract class PetBase : MonoBehaviour, IDamageable
         // HpBar 풀에서 하나 가져오기(체력바 생성)
         if (HpBarManager.Instance != null)
         {
-            _hpBar = HpBarManager.Instance.GetHpBar(transform, _maxHp, _hpBarWorldOffset);
+            _hpBar = HpBarManager.Instance.GetHpBar(transform, _maxHp, _hpBarWorldOffset, false);
             _hpBar.SetHp(_currentHp);
         }
 
@@ -317,6 +317,7 @@ public abstract class PetBase : MonoBehaviour, IDamageable
 
         if (_hpBar != null)
         {
+            _hpBar.SetMaxHp(_maxHp);
             _hpBar.SetHp(_currentHp);
         }
 

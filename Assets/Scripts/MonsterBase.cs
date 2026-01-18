@@ -95,7 +95,7 @@ public abstract class MonsterBase : MonoBehaviour, IDamageable
         // HpBar 풀에서 하나 가져오기
         if (HpBarManager.Instance != null)
         {
-            _hpBar = HpBarManager.Instance.GetHpBar(transform, _maxHp, _hpBarWorldOffset);
+            _hpBar = HpBarManager.Instance.GetHpBar(transform, _maxHp, _hpBarWorldOffset, true);
             _hpBar.SetHp(_currentHp);
         }
 
