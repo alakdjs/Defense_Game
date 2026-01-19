@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.AI;
 
 /// <summary>
@@ -35,6 +36,9 @@ public abstract class MonsterBase : MonoBehaviour, IDamageable
     protected bool _isStunned = false;
     protected float _stunEndTime = 0.0f;
     protected Coroutine _stunCoroutine;
+
+    // 몬스터 사망 이벤트
+    public static event Action<MonsterBase> OnAnyMonsterDied;
 
     // FSM
     protected StateMachine _stateMachine;
@@ -389,6 +393,8 @@ public abstract class MonsterBase : MonoBehaviour, IDamageable
     {
         DropExp();
         CleanUpHpBar();
+
+        OnAnyMonsterDied?.Invoke(this);
         Destroy(gameObject);
     }
 

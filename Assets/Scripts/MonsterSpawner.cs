@@ -4,6 +4,8 @@ using UnityEngine.AI;
 public class MonsterSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] _monsterPrefabs;
+
+    [SerializeField] private bool _useAutoSpawn = false;
     [SerializeField] private float _spawnCooltime = 5.0f; // 스폰 쿨타임
     [SerializeField] private int _maxSpawnCount = 500; // 최대 스폰 개수
     
@@ -19,6 +21,9 @@ public class MonsterSpawner : MonoBehaviour
 
     private void Update()
     {
+        if (_useAutoSpawn == false)
+            return;
+
         if (_currentSpawnCount >= _maxSpawnCount)
             return;
 
@@ -27,32 +32,34 @@ public class MonsterSpawner : MonoBehaviour
         if (_spawnTimer >= _spawnCooltime)
         {
             _spawnTimer = 0.0f;
-            SpawnMonster();
+
+            if (_monsterPrefabs == null || _monsterPrefabs.Length == 0)
+                return;
+
+            int index = Random.Range(0, _monsterPrefabs.Length);
+            SpawnMonster(_monsterPrefabs[index]);
         }
     }
 
-    private void SpawnMonster()
+    // WaveDirector가 호출하는 단일 스폰 API
+    public MonsterBase SpawnMonster(GameObject prefab)
     {
-        if (_monsterPrefabs == null || _monsterPrefabs.Length == 0) 
-            return;
+        if (prefab == null) 
+            return null;
 
-        if (_player == null)
-            return;
+        if (_player == null || _tower == null)
+            return null;
 
         Vector3 spawnPos;
         bool found = TryGetValidSpawnPosition(out spawnPos);
 
         if (!found)
-            return;
-
-        int index = Random.Range(0, _monsterPrefabs.Length);
-        GameObject prefab = _monsterPrefabs[index];
-
-        if (prefab == null)
-            return;
+            return null;
 
         GameObject monsterObj = Instantiate(prefab, spawnPos, Quaternion.identity, _monsterRoot);
         _currentSpawnCount++;
+
+        return monsterObj.GetComponentInParent<MonsterBase>();
     }
 
     private bool TryGetValidSpawnPosition(out Vector3 result)

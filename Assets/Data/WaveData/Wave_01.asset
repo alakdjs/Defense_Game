@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 444a4cfcd59c5934db4f635749d68aa1, type: 3}
+  m_Name: Wave_01
+  m_EditorClassIdentifier: 
+  waveName: Wave01
+  waveDuration: 120
+  baseSpawnInterval: 5
+  baseMaxAlive: 10
+  segments:
+  - startTime: 0
+    endTime: 60
+    pool:
+    - prefab: {fileID: 8526445191827257934, guid: db8a340232348ad45931818c8dc69018, type: 3}
+      weight: 100
+  - startTime: 60
+    endTime: 120
+    pool:
+    - prefab: {fileID: 8526445191827257934, guid: db8a340232348ad45931818c8dc69018, type: 3}
+      weight: 50
+    - prefab: {fileID: 4269879530015370148, guid: 7ff87b9058e75d640a15da275fc5667f, type: 3}
+      weight: 50
+  isBossWave: 0
+  bossPrefab: {fileID: 0}
+  includeAddsInBossClear: 1
