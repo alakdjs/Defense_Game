@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef8fcbf31b7d49b48ba8ea72d89ee44c, type: 3}
-  m_Name: WoodStick
+  m_Name: Sword_Fire
   m_EditorClassIdentifier: 
   WeaponType: 0
-  ElementType: 0
-  WeaponPrefab: {fileID: 7673459562004028394, guid: b72e339952381864abeccd20cc379088, type: 3}
-  Damage: 25
-  AttackRange: 2.5
+  ElementType: 2
+  WeaponPrefab: {fileID: 1886500060825846587, guid: dd16811e053322a408cf67afcbd6d1a4, type: 3}
+  Damage: 30
+  AttackRange: 3

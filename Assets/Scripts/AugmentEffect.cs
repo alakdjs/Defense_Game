@@ -352,7 +352,7 @@ public enum EffectType
     StatBoost,          // 플레이어 스탯 증가
     WeaponDamage,       // 현재 장착 무기 데미지 증가
     WeaponRange,        // 현재 장착 무기 사거리 증가
-    HealAll,               // 즉시 체력 회복(플레이어, 타워, 펫)
+    HealAll,            // 즉시 체력 회복(플레이어, 타워, 펫)
     EquipWeapon,        // 무기 장착
 
     AuraSphere,         // 파동탄(플레이어 몸에서 360도 대칭 추가탄 발사)
@@ -366,7 +366,7 @@ public enum EffectType
 
     AbsorbRange,        // 자석 범위 증가
 
-    StunMonsters     // 몬스터 기절
+    StunMonsters        // 몬스터 기절
 }
 
 /// <summary>
@@ -378,5 +378,5 @@ public enum StatType
     MoveSpeed,          // 이동 속도
     AttackDamage,       // 공격력
     AttackSpeed,        // 공격 속도 (쿨타임 감소)
-    Defense            // 방어력
+    Defense             // 방어력
 }
