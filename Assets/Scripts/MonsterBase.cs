@@ -40,6 +40,9 @@ public abstract class MonsterBase : MonoBehaviour, IDamageable
     // 몬스터 사망 이벤트
     public static event Action<MonsterBase> OnAnyMonsterDied;
 
+    public float MaxHp => _maxHp;
+    public float CurrentHp => _currentHp;
+
     public float HpRatio01
     {
         get

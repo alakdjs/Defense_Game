@@ -8,6 +8,7 @@ public class WaveTimerBarUI : MonoBehaviour
     [SerializeField] private Image _fillImage;
     [SerializeField] private Text _timeText;
     [SerializeField] private Text _waveNameText;
+    [SerializeField] private Text _bossHpText;
 
     private void Awake()
     {
@@ -53,16 +54,7 @@ public class WaveTimerBarUI : MonoBehaviour
         if (_waveManager == null)
             return;
 
-        // 보스 웨이브: 보스 HP 표시
-        if (_waveManager.IsBossWave && _waveManager.HasBossSpawned &&_waveManager.BossInstance != null)
-        {
-            _fillImage.fillAmount = _waveManager.BossInstance.HpRatio01;
-
-            if (_waveNameText != null)
-                _waveNameText.text = $"{_waveManager.CurrentWaveName} BOSS !";
-
-            return;
-        }
+        _bossHpText.gameObject.SetActive(false);
 
         // 일반 웨이브: 남은 시간 표시, 진행률(0~1)
         float p = _waveManager.CurrentWaveProgress01;
@@ -79,6 +71,26 @@ public class WaveTimerBarUI : MonoBehaviour
             int s = totalSec % 60;
             _timeText.text = $"{m:00}:{s:00}";
         }
+
+        // 보스 웨이브: 보스 HP 표시
+        if (_waveManager.IsBossWave && _waveManager.HasBossSpawned &&_waveManager.BossInstance != null)
+        {
+            _fillImage.fillAmount = _waveManager.BossInstance.HpRatio01;
+            _fillImage.color = Color.red;
+
+            if (_waveNameText != null)
+                _waveNameText.text = $"{_waveManager.CurrentWaveName} BOSS !";
+
+            if (_timeText != null)
+            {
+                _bossHpText.text = $"{_waveManager.BossInstance.CurrentHp} / {_waveManager.BossInstance.MaxHp}";
+                _bossHpText.gameObject.SetActive(true);
+                _timeText.text = "";
+            }
+
+            return;
+        }
+
     }
 
 }
