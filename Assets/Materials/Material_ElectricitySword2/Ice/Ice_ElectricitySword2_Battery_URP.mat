@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Fire_ElectricitySword2_Battery_URP
+  m_Name: Ice_ElectricitySword2_Battery_URP
   m_Shader: {fileID: -6465566751694194690, guid: cb395a32ffcb44f4c9f0cad1ad418a26, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -182,14 +182,14 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Base_Color_1: {r: 1, g: 0.29411766, b: 0.29245266, a: 0}
+    - _Base_Color_1: {r: 0.4156863, g: 0.54901963, b: 0.7058824, a: 1}
     - _Base_Color_2: {r: 0, g: 0, b: 0, a: 0}
-    - _Base_Color_3: {r: 1, g: 0, b: 0, a: 0}
+    - _Base_Color_3: {r: 1, g: 1, b: 1, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Default_Emission_Color: {r: 0.85882354, g: 0.1764706, b: 0, a: 0}
     - _EmissionColor: {r: 2.722513, g: 0.41884813, b: 0, a: 1}
-    - _Emission_Color: {r: 1, g: 0, b: 0, a: 1}
-    - _Fill_Level_Emission_Color: {r: 1, g: 0, b: 0, a: 0}
+    - _Emission_Color: {r: 0, g: 0, b: 1, a: 1}
+    - _Fill_Level_Emission_Color: {r: 0.20943397, g: 1, b: 0.9712388, a: 0}
     - _GradientNoise_Color: {r: 0, g: 766.9961, b: 682.6667, a: 0}
     - _GradientNoise_Speed: {r: 0, g: 0.2, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}

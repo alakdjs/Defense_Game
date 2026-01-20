@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Fire_ElectricitySword2_ElectricityWeaponsEffects_URP
+  m_Name: Water_ElectricitySword2_ElectricityWeaponsEffects_URP
   m_Shader: {fileID: -6465566751694194690, guid: 6d7dcd2bb1ce8a14081162df82e36985, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -114,7 +114,7 @@ Material:
     - _Orb_Pulsing_Minimum: 0.024
     - _Orb_Pulsing_Speed: 10
     - _Orb_Scale: 60.4
-    - _Orb_Speed_X: 0.138
+    - _Orb_Speed_X: 0.17
     - _Orb_Speed_Y: 0
     - _Orb_Width: 1
     - _Pulsing_Enabled: 0
@@ -128,14 +128,14 @@ Material:
     - _Tilling_1: 7.4
     - _Use_Only_Emission_Opacity_Minimum: 0
     m_Colors:
-    - _Base_Color_1: {r: 0.5882353, g: 0, b: 0, a: 0}
-    - _Base_Color_2: {r: 0.39215687, g: 0, b: 0, a: 0}
-    - _Base_Color_3: {r: 0.29411766, g: 0, b: 0, a: 0}
-    - _Circuit_Color: {r: 38.524326, g: 0.07932204, b: 0, a: 1}
-    - _Electricity_Color: {r: 2.8933103, g: 0.18993448, b: 0.13633391, a: 1}
+    - _Base_Color_1: {r: 0, g: 0.43018886, b: 0.645283, a: 0}
+    - _Base_Color_2: {r: 0.2619793, g: 0.2619793, b: 0.6226415, a: 0}
+    - _Base_Color_3: {r: 0, g: 0, b: 0.29411766, a: 0}
+    - _Circuit_Color: {r: 0, g: 51.432995, b: 51.432995, a: 1}
+    - _Electricity_Color: {r: 0.13633393, g: 3.8627968, b: 3.8627968, a: 1}
     - _Electricity_Speed: {r: 0.1, g: 0.2, b: 0, a: 0}
-    - _Emission_Color: {r: 1.8664235, g: 0.032346662, b: 0, a: 1}
-    - _Orb_Color: {r: 0.96981126, g: 0.20765746, b: 0.076163165, a: 1}
+    - _Emission_Color: {r: 0, g: 0, b: 2.4918218, a: 1}
+    - _Orb_Color: {r: 0.1415093, g: 1, b: 1, a: 1}
     - _Orb_Color_1: {r: 0, g: 3.4415908, b: 3.4415908, a: 1}
     - _Orb_Color_2: {r: 0, g: 12.843142, b: 25.992073, a: 0}
     - _Orb_Speed: {r: 0.1, g: 0.2, b: 0, a: 0}
