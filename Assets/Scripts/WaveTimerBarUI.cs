@@ -53,7 +53,18 @@ public class WaveTimerBarUI : MonoBehaviour
         if (_waveManager == null)
             return;
 
-        // 진행률(0~1)
+        // 보스 웨이브: 보스 HP 표시
+        if (_waveManager.IsBossWave && _waveManager.HasBossSpawned &&_waveManager.BossInstance != null)
+        {
+            _fillImage.fillAmount = _waveManager.BossInstance.HpRatio01;
+
+            if (_waveNameText != null)
+                _waveNameText.text = $"{_waveManager.CurrentWaveName} BOSS !";
+
+            return;
+        }
+
+        // 일반 웨이브: 남은 시간 표시, 진행률(0~1)
         float p = _waveManager.CurrentWaveProgress01;
 
         if (_fillImage != null)

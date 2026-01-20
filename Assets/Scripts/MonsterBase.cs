@@ -40,6 +40,17 @@ public abstract class MonsterBase : MonoBehaviour, IDamageable
     // 몬스터 사망 이벤트
     public static event Action<MonsterBase> OnAnyMonsterDied;
 
+    public float HpRatio01
+    {
+        get
+        {
+            if (_maxHp <= 0.0f)
+                return 0.0f;
+
+            return Mathf.Clamp01(_currentHp / _maxHp);
+        }
+    }
+
     // FSM
     protected StateMachine _stateMachine;
     protected MonsterIdleState _idleState;

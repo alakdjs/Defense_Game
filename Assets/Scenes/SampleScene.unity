@@ -9160,8 +9160,7 @@ MonoBehaviour:
   _playerLevel: {fileID: 360678917}
   _bossInstance: {fileID: 2579845844602244158, guid: 4a21c635ce6416f4a9ca4dba50a2c8ff, type: 3}
   _waves:
-  - {fileID: 11400000, guid: d04bd8981639b2441b55f6a4ddd66151, type: 2}
-  - {fileID: 11400000, guid: c572cab47cd1771489bf00b3bc90e8f7, type: 2}
+  - {fileID: 11400000, guid: 7651a7343b7196f41bb9fbef829479f0, type: 2}
   _spawnIntervalDecreasePerLevel: 0.01
   _maxAliveIncreasePerLevel: 2
   _minSpawnInterval: 0.15

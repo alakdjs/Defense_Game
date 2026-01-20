@@ -29,6 +29,20 @@ public class WaveManager : MonoBehaviour
     private float _spawnTimer = 0.0f;
     private bool _isRunning = false;
 
+    public bool HasBossSpawned => _bossSpawned;
+    public MonsterBase BossInstance => _bossInstance;
+    public bool IsBossWave
+    {
+        get
+        {
+            if (_waves == null || _waves.Length == 0)
+                return false;
+
+            WaveData wave = _waves[_currentWaveIndex];
+            return wave != null && wave.isBossWave;
+        }
+    }
+
     // ================================== UI ==================================
     public string CurrentWaveName
     {
