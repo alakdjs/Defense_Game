@@ -13,22 +13,15 @@ MonoBehaviour:
   m_Name: Wave_01
   m_EditorClassIdentifier: 
   waveName: Wave01
-  waveDuration: 60
+  waveDuration: 30
   baseSpawnInterval: 5
-  baseMaxAlive: 5
+  baseMaxAlive: 2
   segments:
   - startTime: 0
     endTime: 30
     pool:
     - prefab: {fileID: 8526445191827257934, guid: db8a340232348ad45931818c8dc69018, type: 3}
       weight: 100
-  - startTime: 30
-    endTime: 60
-    pool:
-    - prefab: {fileID: 8526445191827257934, guid: db8a340232348ad45931818c8dc69018, type: 3}
-      weight: 50
-    - prefab: {fileID: 4269879530015370148, guid: 7ff87b9058e75d640a15da275fc5667f, type: 3}
-      weight: 50
   isBossWave: 0
   bossPrefab: {fileID: 0}
   includeAddsInBossClear: 1

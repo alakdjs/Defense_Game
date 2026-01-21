@@ -28,19 +28,11 @@ public class AugmentPopupController : MonoBehaviour
     }
 
     /// <summary>
-    /// 해당 레벨에서 증강 팝업을 열어야 하는지
-    /// - 2,4,7,10
-    /// - 15부터 5레벨 단위로 100까지
+    /// 해당 레벨에서 증강 팝업을 열어야 하는지(레벨업 시)
     /// </summary>
     public bool ShouldOpenPopupAtLevel(int playerLevel)
     {
-        if (playerLevel == 2 || playerLevel == 4 || playerLevel == 7 || playerLevel == 10)
-            return true;
-
-        if (playerLevel >= 15 && playerLevel <= 100 && playerLevel % 5 == 0)
-            return true;
-
-        return false;
+        return true;
     }
 
     /// <summary>
