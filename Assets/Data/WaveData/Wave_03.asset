@@ -23,5 +23,5 @@ MonoBehaviour:
     - prefab: {fileID: 9134753539657703364, guid: 7e21656da0c8fa649a316e7df134d4c9, type: 3}
       weight: 100
   isBossWave: 1
-  bossPrefab: {fileID: 5091145028789322039, guid: 761ffc3ee7d5bc141a7370b70775c011, type: 3}
+  bossPrefab: {fileID: 5655989853241019075, guid: c3aa93bb88db992498dfef043c717bd1, type: 3}
   includeAddsInBossClear: 1

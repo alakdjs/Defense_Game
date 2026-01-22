@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3416243534330190788}
   - component: {fileID: 2579845844602244158}
   m_Layer: 9
-  m_Name: Snow Man_01
+  m_Name: Electric_Snow Man_01
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -203,7 +203,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c204c026ffa3da248b839a42f93256fb, type: 2}
+  - {fileID: 2100000, guid: 10faeb4c99610f64bb069cc68f1d5296, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -289,7 +289,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c204c026ffa3da248b839a42f93256fb, type: 2}
+  - {fileID: 2100000, guid: 10faeb4c99610f64bb069cc68f1d5296, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -375,7 +375,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c204c026ffa3da248b839a42f93256fb, type: 2}
+  - {fileID: 2100000, guid: 10faeb4c99610f64bb069cc68f1d5296, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -462,7 +462,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c204c026ffa3da248b839a42f93256fb, type: 2}
+  - {fileID: 2100000, guid: 10faeb4c99610f64bb069cc68f1d5296, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -548,7 +548,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c204c026ffa3da248b839a42f93256fb, type: 2}
+  - {fileID: 2100000, guid: 10faeb4c99610f64bb069cc68f1d5296, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -665,7 +665,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c204c026ffa3da248b839a42f93256fb, type: 2}
+  - {fileID: 2100000, guid: 10faeb4c99610f64bb069cc68f1d5296, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

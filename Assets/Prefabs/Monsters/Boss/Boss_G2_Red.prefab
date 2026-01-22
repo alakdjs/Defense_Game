@@ -331,7 +331,7 @@ GameObject:
   - component: {fileID: 964285983935879171}
   - component: {fileID: 5417398828033202240}
   m_Layer: 9
-  m_Name: G2_Red
+  m_Name: Boss_G2_Red
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -347,7 +347,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7826261131551472003}
