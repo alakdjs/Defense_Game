@@ -3,6 +3,9 @@
 
 public class Monster_PartyMonster : MonsterBase
 {
+    [SerializeField] private float _attackCoolTime = 2.0f;
+    private float _lastAttackTime;
+
     protected override void Awake()
     {
         base.Awake();
@@ -11,7 +14,26 @@ public class Monster_PartyMonster : MonsterBase
         {
             _animator = GetComponent<Animator>();
         }
+    }
 
+    public override void PerformAttack()
+    {
+        if (_isDead)
+            return;
+
+        if (_canAct == false)
+            return;
+
+        // 공격 쿨타임 체크
+        if (Time.time < _lastAttackTime + _attackCoolTime)
+        {
+            StateMachine.ChangeState(IdleState);
+            return;
+        }
+
+        _lastAttackTime = Time.time;
+
+        base.PerformAttack();
     }
 
     public void OnAttackHit()
