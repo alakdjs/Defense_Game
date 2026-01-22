@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef8fcbf31b7d49b48ba8ea72d89ee44c, type: 3}
-  m_Name: Assult_Rifle_1
+  m_Name: Rifle_Electric
   m_EditorClassIdentifier: 
   WeaponType: 1
-  ElementType: 1
-  WeaponPrefab: {fileID: 5806699757733382792, guid: 4306539b5b4dbb747a8855adcc2e4845, type: 3}
+  ElementType: 3
+  WeaponPrefab: {fileID: 1504308363925235494, guid: c73ec84769050364f9b0794050057ddd, type: 3}
   Damage: 30
   AttackRange: 8

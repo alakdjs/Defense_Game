@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3191086116233276439}
   - component: {fileID: 3708384443095665308}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: Ice_Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9d348d508a72a8e4998406f3f706f6be, type: 2}
+  - {fileID: 2100000, guid: 7dda8c7cc84c7d1409838ebd9fb63d88, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
