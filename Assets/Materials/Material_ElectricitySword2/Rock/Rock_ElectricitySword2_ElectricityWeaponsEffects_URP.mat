@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Ice_ElectricitySword2_ElectricityWeaponsEffects_URP
+  m_Name: Rock_ElectricitySword2_ElectricityWeaponsEffects_URP
   m_Shader: {fileID: -6465566751694194690, guid: 6d7dcd2bb1ce8a14081162df82e36985, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -128,14 +128,14 @@ Material:
     - _Tilling_1: 7.4
     - _Use_Only_Emission_Opacity_Minimum: 0
     m_Colors:
-    - _Base_Color_1: {r: 0.56796724, g: 0.80882317, b: 0.90943396, a: 0}
-    - _Base_Color_2: {r: 0.6622641, g: 0.7973585, b: 1, a: 0}
-    - _Base_Color_3: {r: 0.6666667, g: 1, b: 1, a: 0}
-    - _Circuit_Color: {r: 0.72811884, g: 21.661533, b: 16.382673, a: 1}
-    - _Electricity_Color: {r: 6.2745194, g: 10.512573, b: 10.512573, a: 1}
+    - _Base_Color_1: {r: 0.6603774, g: 0.529282, b: 0.40744036, a: 0}
+    - _Base_Color_2: {r: 0.3886792, g: 0.2654854, b: 0.17233889, a: 0}
+    - _Base_Color_3: {r: 0.2830189, g: 0.20578337, b: 0.14471342, a: 0}
+    - _Circuit_Color: {r: 0.25094336, g: 0.17927907, b: 0.17376643, a: 1}
+    - _Electricity_Color: {r: 0.2679245, g: 0.19590366, b: 0.17743677, a: 1}
     - _Electricity_Speed: {r: 0.1, g: 0.2, b: 0, a: 0}
-    - _Emission_Color: {r: 0.058242075, g: 0.9957524, b: 0.9957524, a: 1}
-    - _Orb_Color: {r: 0.75686276, g: 1, b: 1, a: 1}
+    - _Emission_Color: {r: 0.17358482, g: 0.09667528, b: 0.074346706, a: 1}
+    - _Orb_Color: {r: 2.7924528, g: 1.0754317, b: 0.77451044, a: 1}
     - _Orb_Color_1: {r: 0, g: 3.4415908, b: 3.4415908, a: 1}
     - _Orb_Color_2: {r: 0, g: 12.843142, b: 25.992073, a: 0}
     - _Orb_Speed: {r: 0.1, g: 0.2, b: 0, a: 0}
