@@ -88,7 +88,14 @@ public abstract class MonsterBase : MonoBehaviour, IDamageable
         _agent.speed = _moveSpeed;
 
         if (_animator == null)
+        {
             _animator = GetComponent<Animator>();
+            if (_animator == null)
+            {
+                // 비활성 오브젝트 포함해서 자식 Animator까지 찾기
+                _animator = GetComponentInChildren<Animator>(true);
+            }
+        }
 
         _stateMachine = new StateMachine();
         _idleState = new MonsterIdleState(this);
@@ -311,7 +318,7 @@ public abstract class MonsterBase : MonoBehaviour, IDamageable
         }
     }
 
-    // Animator 파라미터 존재 체크 (없는 파라미터 Set 하면 로그가 지저분해질 수 있어서 방지)
+    // Animator 파라미터 존재 체크
     protected bool HasAnimatorParameter(Animator animator, string paramName, AnimatorControllerParameterType type)
     {
         if (animator == null)
@@ -431,4 +438,24 @@ public abstract class MonsterBase : MonoBehaviour, IDamageable
     {
         Instantiate(_expSpherePrefab, transform.position + Vector3.up * 0.5f, Quaternion.identity);
     }
+
+    /// <summary>
+    /// AnimationEvent용: 공격 타격 프레임에서 호출
+    /// </summary>
+    public void AnimEvent_AttackHit()
+    {
+        ApplyAttackDamage();
+    }
+
+    /// <summary>
+    /// AnimationEvent용: 공격 애니 종료 프레임에서 호출
+    /// </summary>
+    public void AnimEvent_AttackEnd()
+    {
+        if (_isDead)
+            return;
+
+        _stateMachine.ChangeState(_chaseState);
+    }
+
 }

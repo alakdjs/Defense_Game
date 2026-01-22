@@ -253,15 +253,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3628045019952179084}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.77, y: 0, z: -5.39}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3061786577508204241}
   - {fileID: 6393042872256931706}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!95 &2186503813823197794
 Animator:
   serializedVersion: 7
@@ -323,6 +323,7 @@ MonoBehaviour:
   _attackRange: 3
   _moveSpeed: 0
   _attackCooltime: 3
+  _defense: 1
   _hpBarWorldOffset: {x: 0, y: 2, z: 0}
   _animator: {fileID: 2186503813823197794}
   _tower: {fileID: 0}

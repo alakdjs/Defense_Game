@@ -2933,8 +2933,8 @@ GameObject:
   - component: {fileID: 3674118700341542541}
   - component: {fileID: 746894314670455395}
   - component: {fileID: 6677786252347936889}
-  - component: {fileID: 3969682075391730611}
   - component: {fileID: 612203271062232719}
+  - component: {fileID: 3969682075391730611}
   - component: {fileID: 3116666057364031908}
   m_Layer: 9
   m_Name: P01
@@ -2952,7 +2952,7 @@ Transform:
   m_GameObject: {fileID: 8526445191827257934}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -8.8, y: 0, z: -9.45}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2977,9 +2977,9 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: eeebdeb8be91e0e43ae9170c2d8e4279, type: 3}
   m_Controller: {fileID: 9100000, guid: f5e71d2eda3d6cc40857811c187df502, type: 2}
-  m_CullingMode: 1
+  m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
@@ -3010,29 +3010,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!136 &3969682075391730611
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8526445191827257934}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.8
-  m_Height: 2.25
-  m_Direction: 1
-  m_Center: {x: -0, y: 1.12, z: -0}
 --- !u!54 &612203271062232719
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3060,6 +3037,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
+--- !u!136 &3969682075391730611
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8526445191827257934}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.8
+  m_Height: 2.25
+  m_Direction: 1
+  m_Center: {x: -0, y: 1.12, z: -0}
 --- !u!114 &3116666057364031908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3084,6 +3084,7 @@ MonoBehaviour:
   _targetTower: {fileID: 0}
   _hpBarWorldOffset: {x: 0, y: 1.5, z: 0}
   _expSpherePrefab: {fileID: 7503372356713384532, guid: 34fa1cae9d026bd49bb6fb49e8a4d2b8, type: 3}
+  _attackCoolTime: 2
 --- !u!1 &8776642320991409445
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,8 +20,8 @@ MonoBehaviour:
   - startTime: 0
     endTime: 10
     pool:
-    - prefab: {fileID: 8526445191827257934, guid: db8a340232348ad45931818c8dc69018, type: 3}
+    - prefab: {fileID: 9134753539657703364, guid: 7e21656da0c8fa649a316e7df134d4c9, type: 3}
       weight: 100
   isBossWave: 1
-  bossPrefab: {fileID: 722587135448257199, guid: 4a21c635ce6416f4a9ca4dba50a2c8ff, type: 3}
+  bossPrefab: {fileID: 5091145028789322039, guid: 761ffc3ee7d5bc141a7370b70775c011, type: 3}
   includeAddsInBossClear: 1
