@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8832351485796923753}
   - component: {fileID: 6473944954627059900}
   m_Layer: 0
-  m_Name: Snowball
+  m_Name: Snowball_Electirc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a4ebc4391c295a940bc89e96f3a7a90f, type: 2}
+  - {fileID: 2100000, guid: 28c4b6e11a88bc545bd007acb6b3cac0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
