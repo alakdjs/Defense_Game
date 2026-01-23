@@ -62,6 +62,11 @@ public class TowerMain : MonoBehaviour, IDamageable
         }
     }
 
+    public virtual void TakeDamage(DamageInfo damageInfo)
+    {
+        TakeDamage(damageInfo.damage);
+    }
+
     private void UpdateHpUI()
     {
         float maxHp = _maxHp;

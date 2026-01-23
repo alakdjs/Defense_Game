@@ -864,6 +864,7 @@ GameObject:
   - component: {fileID: 1358831494660521577}
   - component: {fileID: 2952976231310677641}
   - component: {fileID: 8013200603411548615}
+  - component: {fileID: -2426007572544134056}
   - component: {fileID: 749791383398464610}
   - component: {fileID: 8477843245008824782}
   - component: {fileID: 8818892606315624513}
@@ -936,6 +937,7 @@ MonoBehaviour:
   _animator: {fileID: 4526791162038460213}
   _weaponTarget: {fileID: 8875656307576171951}
   _weaponType: 0
+  _elementalStatus: {fileID: 0}
   _auraSphereShooter: {fileID: 749791383398464610}
 --- !u!114 &1358831494660521577
 MonoBehaviour:
@@ -988,6 +990,19 @@ MonoBehaviour:
   _expLayer:
     serializedVersion: 2
     m_Bits: 256
+--- !u!114 &-2426007572544134056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7167928421021097973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cabf038027d2808459cbe4af89381f69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _element: 1
 --- !u!114 &749791383398464610
 MonoBehaviour:
   m_ObjectHideFlags: 0

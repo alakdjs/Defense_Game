@@ -19,11 +19,18 @@ public class AuraSphereShooter : MonoBehaviour
 
     private float _lastAutoFireTime;
 
+    private ElementalStatus _playerElementalStatus;
+
     private void Awake()
     {
         if (_player == null)
         {
             _player = GetComponentInParent<PlayerController>();
+        }
+
+        if (_player != null)
+        {
+            _playerElementalStatus = _player.GetComponent<ElementalStatus>();
         }
     }
 
@@ -48,16 +55,23 @@ public class AuraSphereShooter : MonoBehaviour
         // 발사 시점에 최신 값 Pull
         float damage = _player.GetFinalDamage() * _damageMultiplier;
 
+        ElementType attackerElement = ElementType.Normal;
+        if (_playerElementalStatus != null)
+        {
+            attackerElement = _playerElementalStatus.Element;
+        }
+        DamageInfo damageInfo = new DamageInfo(damage, attackerElement, _player.gameObject);
+
         Vector3 originPos = _player.transform.position;
 
-        FireAuraSphereInternal(damage, _auraAttackRange, count, originPos);
+        FireAuraSphereInternal(damageInfo, _auraAttackRange, count, originPos);
     }
 
     /// <summary>
     /// 플레이어 몸에서 360도 대칭으로 파동탄 발사
     /// 쿨타임 체크는 Update에서
     /// </summary>
-    private void FireAuraSphereInternal(float damage, float attackRange, int count, Vector3 originPos)
+    private void FireAuraSphereInternal(DamageInfo damageInfo, float attackRange, int count, Vector3 originPos)
     {
         // 발사 기준점: 플레이어 위치
         Vector3 pos = transform.position;
@@ -82,19 +96,19 @@ public class AuraSphereShooter : MonoBehaviour
             dir.y = 0f;
             dir.Normalize();
 
-            SpawnBullet(spawnPos, dir, damage, attackRange, originPos);
+            SpawnBullet(spawnPos, dir, damageInfo, attackRange, originPos);
         }
     }
 
     // 총알 생성
-    private void SpawnBullet(Vector3 spawnPos, Vector3 dir, float damage, float attackRange, Vector3 originPos)
+    private void SpawnBullet(Vector3 spawnPos, Vector3 dir, DamageInfo damageInfo, float attackRange, Vector3 originPos)
     {
         GameObject bulletObj = Instantiate(_bulletPrefab, spawnPos, Quaternion.LookRotation(dir));
 
         Bullet bullet = bulletObj.GetComponent<Bullet>();
         if (bullet != null)
         {
-            bullet.Init(damage, attackRange, originPos);
+            bullet.Init(damageInfo, attackRange, originPos);
         }
     }
 }

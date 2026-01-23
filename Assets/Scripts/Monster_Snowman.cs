@@ -49,7 +49,15 @@ public class Monster_Snowman : MonsterBase
 
         if (projectile != null)
         {
-            projectile.Init(_attackDamage, AttackRange);
+            ElementType attackerElement = ElementType.Normal;
+            if (_elementalStatus != null)
+            {
+                attackerElement = _elementalStatus.Element;
+            }
+
+            DamageInfo dmg = new DamageInfo(_attackDamage, attackerElement, gameObject);
+
+            projectile.Init(dmg, AttackRange);
         }
         else
         {

@@ -5,21 +5,20 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private float _fireSpeed = 20.0f;
 
-    private float _damage;
+    private DamageInfo _damageInfo;
     private float _playerAttackRangeUIDistance;
     private Vector3 _originPos;
     private bool _isInitialized = false;
 
 
     // 발사 시 초기화
-    public void Init(float damage, float playerAttackRangeUIDistance, Vector3 originPos)
+    public void Init(DamageInfo damageInfo, float playerAttackRangeUIDistance, Vector3 originPos)
     {
-        _damage = damage;
+        _damageInfo = damageInfo;
         _playerAttackRangeUIDistance = playerAttackRangeUIDistance;
         _originPos = originPos;
         _isInitialized = true;
     }
-
 
     void Update()
     {
@@ -47,10 +46,10 @@ public class Bullet : MonoBehaviour
         }
 
         // 몬스터에 맞았을 경우
-        MonsterBase monster = other.GetComponentInParent<MonsterBase>();
-        if (monster != null)
+        IDamageable damageable = other.GetComponentInParent<IDamageable>();
+        if (damageable != null && other.GetComponentInParent<MonsterBase>() != null)
         {
-            monster.TakeDamage(_damage);
+            damageable.TakeDamage(_damageInfo);
             Destroy(gameObject);
             return;
         }

@@ -32,6 +32,8 @@ public abstract class MonsterBase : MonoBehaviour, IDamageable
 
     protected NavMeshAgent _agent;
 
+    protected ElementalStatus _elementalStatus;
+
     // Stun
     protected bool _isStunned = false;
     protected float _stunEndTime = 0.0f;
@@ -103,6 +105,8 @@ public abstract class MonsterBase : MonoBehaviour, IDamageable
         _attackState = new MonsterAttackState(this);
         _stunState = new MonsterStunState(this);
         _deadState = new MonsterDeadState(this);
+
+        _elementalStatus = GetComponent<ElementalStatus>();
     }
 
     protected virtual void Start()
@@ -150,13 +154,30 @@ public abstract class MonsterBase : MonoBehaviour, IDamageable
     /// <summary>
     /// 공통 데미지 처리
     /// </summary>
-    /// <param name="damage"></param>
     public virtual void TakeDamage(float damage)
+    {
+        // 기존 코드 호환: 속성 정보 없이 들어오면 Normal 공격으로 처리
+        TakeDamage(new DamageInfo(damage, ElementType.Normal, null));
+    }
+
+    public virtual void TakeDamage(DamageInfo damageInfo)
     {
         if (_isDead)
             return;
 
-        float finalDamage = Mathf.Max(1.0f, damage - _defense);
+        // 방어 속성 (없으면 Normal)
+        ElementType defenderElement = ElementType.Normal;
+        if (_elementalStatus != null)
+        {
+            defenderElement = _elementalStatus.Element;
+        }
+
+        // 상성 배율
+        float multiplier = ElementalCombat.GetMultiplier(damageInfo.attackerElement, defenderElement);
+
+        // 최종 데미지 = (원 데미지 * 상성배율) - 방어력 (최소 1)
+        float scaledDamage = damageInfo.damage * multiplier;
+        float finalDamage = Mathf.Max(1.0f, scaledDamage - _defense);
         _currentHp -= finalDamage;
 
         // 체력바 갱신
@@ -297,7 +318,15 @@ public abstract class MonsterBase : MonoBehaviour, IDamageable
         IDamageable damageable = _target.GetComponent<IDamageable>();
         if (damageable != null)
         {
-            damageable.TakeDamage(_attackDamage);
+            // 공격 속성 (없으면 Normal)
+            ElementType attackerElement = ElementType.Normal;
+            if (_elementalStatus != null)
+            {
+                attackerElement = _elementalStatus.Element;
+            }
+
+            DamageInfo dmg = new DamageInfo(_attackDamage, attackerElement, gameObject);
+            damageable.TakeDamage(dmg);
         }
     }
 

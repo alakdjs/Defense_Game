@@ -9,7 +9,7 @@ public class FireRifleWeapon : MonoBehaviour
     private float _aimHeightOffset = 0.5f; // 몬스터 키 보정
     private float _lastFireTime;
 
-    public void Fire(Transform playerTransform, float damage, float attackRange)
+    public void Fire(Transform playerTransform, DamageInfo damageInfo, float attackRange)
     {
         if (Time.time < _lastFireTime + _fireDelay)
             return;
@@ -64,7 +64,7 @@ public class FireRifleWeapon : MonoBehaviour
         Bullet bullet = bulletObj.GetComponent<Bullet>();
         if (bullet != null)
         {
-            bullet.Init(damage, attackRange, playerTransform.position);
+            bullet.Init(damageInfo, attackRange, playerTransform.position);
         }
     }
     

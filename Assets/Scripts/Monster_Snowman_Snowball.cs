@@ -4,7 +4,7 @@ public class Monster_Snowman_Snowball : MonoBehaviour
 {
     [SerializeField] private float _snowballSpeed = 25.0f;
 
-    private float _damage;
+    private DamageInfo _damageInfo;
     private float _traveledDistance;
     private float _maxDistance;
     private bool _isInitialized = false;
@@ -16,9 +16,9 @@ public class Monster_Snowman_Snowball : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
     }
 
-    public void Init(float damage, float maxDistance)
+    public void Init(DamageInfo damageInfo, float maxDistance)
     {
-        _damage = damage;
+        _damageInfo = damageInfo;
         _traveledDistance = 0.0f;
         _maxDistance = maxDistance;
         _isInitialized = true;
@@ -47,37 +47,10 @@ public class Monster_Snowman_Snowball : MonoBehaviour
         IDamageable damageable = other.GetComponent<IDamageable>();
         if (damageable != null)
         {
-            damageable.TakeDamage(_damage);
+            damageable.TakeDamage(_damageInfo);
             Destroy(gameObject);
             return;
         }
-        /*
-        if (other.CompareTag("Player"))
-        {
-            PlayerHp playerHp = other.GetComponent<PlayerHp>();
-
-            if (playerHp != null)
-            {
-                playerHp.TakeDamage(_damage);
-            }
-
-            Destroy(gameObject);
-            return;
-        }
-
-        if (other.CompareTag("Tower"))
-        {
-            TowerMain towerHp = other.GetComponent<TowerMain>();
-
-            if (towerHp != null)
-            {
-                towerHp.TakeDamage(_damage);
-            }
-
-            Destroy(gameObject);
-            return;
-        }
-        */
 
         // 맵 오브젝트에 맞았을 경우
         if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))

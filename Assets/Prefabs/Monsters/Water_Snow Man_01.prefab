@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 621074935933945739}
   - component: {fileID: 3416243534330190788}
   - component: {fileID: 2579845844602244158}
+  - component: {fileID: 4378563573383136491}
   m_Layer: 9
   m_Name: Water_Snow Man_01
   m_TagString: Monster
@@ -139,6 +140,19 @@ MonoBehaviour:
   _snowballPrefab: {fileID: 3580650660468538349, guid: 558aecf9186797f41b92dda7bfe9c602, type: 3}
   _attackCoolTime: 2
   _aimHeightOffset: 1.3
+--- !u!114 &4378563573383136491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722587135448257199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cabf038027d2808459cbe4af89381f69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _element: 3
 --- !u!1 &1823745060660438372
 GameObject:
   m_ObjectHideFlags: 0

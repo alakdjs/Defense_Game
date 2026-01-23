@@ -255,6 +255,11 @@ public abstract class PetBase : MonoBehaviour, IDamageable
         }
     }
 
+    public virtual void TakeDamage(DamageInfo damageInfo)
+    {
+        TakeDamage(damageInfo.damage);
+    }
+
     // 공격 처리
     public virtual void PerformAttack()
     {

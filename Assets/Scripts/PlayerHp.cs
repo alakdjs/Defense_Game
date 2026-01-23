@@ -12,6 +12,8 @@ public class PlayerHp : MonoBehaviour, IDamageable
     private float _currentHp;
     private PlayerController _player;
 
+    private ElementalStatus _elementalStatus; // 플레이어에 붙임
+
     // MaxHp 변동 감지용 캐시
     private float _cachedMaxHp = -1.0f;
 
@@ -21,6 +23,8 @@ public class PlayerHp : MonoBehaviour, IDamageable
     private void Awake()
     {
         _player = GetComponent<PlayerController>();
+
+        _elementalStatus = GetComponent<ElementalStatus>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -40,10 +44,27 @@ public class PlayerHp : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
+        // 기존 호출은 공격자 속성 정보가 없으니 Normal 공격으로 처리
+        TakeDamage(new DamageInfo(damage, ElementType.Normal, null));
+    }
+
+    public void TakeDamage(DamageInfo damageInfo)
+    {
         if (_currentHp <= 0.0f)
             return;
 
-        float finalDamage = Mathf.Max(1.0f, damage - _player.Defense);
+        ElementType defenderElement = ElementType.Normal;
+        if (_elementalStatus != null)
+        {
+            defenderElement = _elementalStatus.Element;
+        }
+
+        float multiplier = ElementalCombat.GetMultiplier(damageInfo.attackerElement, defenderElement);
+
+        // 최종 데미지 = (원 데미지 * 상성배율) - 방어력 (최소 1)
+        float scaledDamage = damageInfo.damage * multiplier;
+        float finalDamage = Mathf.Max(1.0f, scaledDamage - _player.Defense);
+
         _currentHp -= finalDamage;
         _currentHp = Mathf.Clamp(_currentHp, 0.0f, _player.MaxHp);
 

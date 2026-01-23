@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
     private WeaponData _currentWeaponData; // 현재 장착된 무기 데이터
     private FireRifleWeapon _fireRifleWeapon; // Rifle 전용 발사 스크립트
 
+    [SerializeField] private ElementalStatus _elementalStatus;
+
     private Rigidbody _rb;
     private Camera _mainCam;
 
@@ -100,6 +102,11 @@ public class PlayerController : MonoBehaviour
         _idleState = new PlayerIdleState(this);
         _moveState = new PlayerMoveState(this);
         _deadState = new PlayerDeadState(this);
+
+        if (_elementalStatus == null)
+        {
+            _elementalStatus = GetComponent<ElementalStatus>();
+        }
     }
 
     void Start()
@@ -242,6 +249,13 @@ public class PlayerController : MonoBehaviour
 
         _attackRange = data.AttackRange; // 공격 범위 동기화
 
+        // 무기 속성 = 플레이어 속성 (공격/방어 동일 적용)
+        if (_elementalStatus != null && _currentWeaponData != null)
+        {
+            ElementType elem = ElementalCombat.ToElementType(_currentWeaponData.ElementType);
+            _elementalStatus.SetElement(elem);
+        }
+
         // UI 반영
         if (_attackRangeUI != null)
         {
@@ -310,7 +324,16 @@ public class PlayerController : MonoBehaviour
             if (monster == null)
                 continue;
 
-            monster.TakeDamage(GetFinalDamage());
+            float finalDamage = GetFinalDamage();
+
+            ElementType attackerElement = ElementType.Normal;
+            if (_elementalStatus != null)
+            {
+                attackerElement = _elementalStatus.Element;
+            }
+
+            DamageInfo dmg = new DamageInfo(finalDamage, attackerElement, gameObject);
+            monster.TakeDamage(dmg);
         }
     }
 
@@ -323,7 +346,15 @@ public class PlayerController : MonoBehaviour
         if (_fireRifleWeapon != null && _currentWeaponData != null)
         {
             float finalDamage = GetFinalDamage();
-            _fireRifleWeapon.Fire(transform, finalDamage, AttackRange);
+
+            ElementType attackerElement = ElementType.Normal;
+            if (_elementalStatus != null)
+            {
+                attackerElement = _elementalStatus.Element;
+            }
+
+            DamageInfo dmg = new DamageInfo(finalDamage, attackerElement, gameObject);
+            _fireRifleWeapon.Fire(transform, dmg, AttackRange);
         }
     }
 
