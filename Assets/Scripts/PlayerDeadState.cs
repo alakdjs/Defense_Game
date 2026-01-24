@@ -11,14 +11,14 @@ public class PlayerDeadState : IState
 
     public void Enter()
     {
-        _player.Animator.SetBool("IsMoving", false);
-        _player.Animator.SetBool("IsDead", true);
+        _player.Animator.SetBool("IsMovingPlayer", false);
+        _player.Animator.SetTrigger("Die");
 
         // 이동 중이었다면 즉시 멈춤
         _player.Rigidbody.linearVelocity = Vector3.zero;
         _player.Rigidbody.angularVelocity = Vector3.zero;
 
-        _player.Invoke(nameof(PlayerController.OnDeadAnimationEnd), 3.5f);
+        _player.Invoke(nameof(PlayerController.OnDieAnimationEnd), 3.5f);
     }
 
     public void Execute()

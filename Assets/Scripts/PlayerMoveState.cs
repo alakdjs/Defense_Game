@@ -13,7 +13,7 @@ public class PlayerMoveState : IState
     public void Enter()
     {
         // 이동 애니메이션 실행
-        _player.Animator.SetBool("IsMoving", true);
+        _player.Animator.SetBool("IsMovingPlayer", true);
     }
 
     public void Execute()
@@ -39,7 +39,7 @@ public class PlayerMoveState : IState
     {
         // 이동을 멈출 때 속도 제거
         _player.Rigidbody.linearVelocity = Vector3.zero;
-        _player.Animator.SetBool("IsMoving", false);
+        _player.Animator.SetBool("IsMovingPlayer", false);
     }
 
     // 키보드 이동 처리

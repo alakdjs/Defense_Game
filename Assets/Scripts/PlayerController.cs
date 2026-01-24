@@ -555,7 +555,7 @@ public class PlayerController : MonoBehaviour
         _defense += value;
     }
 
-    public void OnDeadAnimationEnd()
+    public void OnDieAnimationEnd()
     {
         Destroy(gameObject);
     }

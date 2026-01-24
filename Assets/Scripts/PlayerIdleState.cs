@@ -12,7 +12,7 @@ public class PlayerIdleState : IState
 
     public void Enter()
     {
-        _player.Animator.SetBool("IsMoving", false);
+        _player.Animator.SetBool("IsMovingPlayer", false);
         _player.Rigidbody.linearVelocity = Vector3.zero;
     }
 
@@ -21,7 +21,7 @@ public class PlayerIdleState : IState
         // 움직이기 시작하면 즉시 MoveState로 전환
         if (_player.HasTarget)
         {
-            _player.Animator.SetBool("IsMoving", true);
+            _player.Animator.SetBool("IsMovingPlayer", true);
             _player.StateMachine.ChangeState(_player.MoveState);
             return;
         }

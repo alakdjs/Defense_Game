@@ -1,8 +1,8 @@
-ï»¿using UnityEngine;
+using UnityEngine;
 
-public class Monster_PartyMonster : MonsterBase
+public class Monster_Santa : MonsterBase
 {
-    [SerializeField] private float _attackCoolTime = 2.0f;
+    [SerializeField] private float _attackCoolTime = 1.0f;
     private float _lastAttackTime;
 
     protected override void Awake()
@@ -23,7 +23,7 @@ public class Monster_PartyMonster : MonsterBase
         if (_canAct == false)
             return;
 
-        // ê³µê²© ì¿¨íƒ€ì„ ì²´í¬
+        // °ø°İ ÄğÅ¸ÀÓ Ã¼Å©
         if (Time.time < _lastAttackTime + _attackCoolTime)
         {
             StateMachine.ChangeState(ChaseState);
@@ -37,11 +37,11 @@ public class Monster_PartyMonster : MonsterBase
 
     public void OnAttackHit()
     {
-        // ì‹¤ì œ ê³µê²© íŒì •
+        // ½ÇÁ¦ °ø°İ ÆÇÁ¤
         ApplyAttackDamage();
     }
 
-    // ëª¬ìŠ¤í„° ê³µê²© ì• ë‹ˆë©”ì´ì…˜
+    // ¸ó½ºÅÍ °ø°İ ¾Ö´Ï¸ŞÀÌ¼Ç
     public void OnAttackAnimationEnd()
     {
         if (_isDead)
@@ -50,10 +50,9 @@ public class Monster_PartyMonster : MonsterBase
         StateMachine.ChangeState(ChaseState);
     }
 
-    // ëª¬ìŠ¤í„° Die ì• ë‹ˆë©”ì´ì…˜ ì´ë²¤íŠ¸ ì¢…ë£Œìš© ë©”ì†Œë“œ
+    // ¸ó½ºÅÍ Die ¾Ö´Ï¸ŞÀÌ¼Ç ÀÌº¥Æ® Á¾·á¿ë ¸Ş¼Òµå
     public override void OnDieAnimationEnd()
     {
         base.OnDieAnimationEnd();
     }
-
 }
