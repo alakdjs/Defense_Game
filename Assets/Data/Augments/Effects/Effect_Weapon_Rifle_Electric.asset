@@ -10,10 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b7d43896de08a2c418758142a9790b01, type: 3}
-  m_Name: Effect_WeaponSword
+  m_Name: Effect_Weapon_Rifle_Electric
   m_EditorClassIdentifier: 
-  effectName: "\uC0B0\uD0C0\uC758 \uC131\uAC80 \uD68D\uB4DD"
+  effectName: "\uD0C0\uC785 \uBCC0\uACBD"
   effectType: 4
   statType: 0
-  weaponTypeToEquip: 0
+  weaponTypeToEquip: 1
+  weaponElementTypeToEquip: 3
   valuesPerLevel: []
+  weightedPetPrefabs: []
+  spawnRandomPet: 1
+  specificPetPrefab: {fileID: 0}
+  petAttackAdd: 0
+  petDefenseAdd: 0
+  petMaxHpAdd: 0
+  stunDuration: 5

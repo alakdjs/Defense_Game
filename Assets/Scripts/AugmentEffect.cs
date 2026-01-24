@@ -22,6 +22,9 @@ public class AugmentEffect : ScriptableObject
     [Tooltip("무기 장착 효과일 때 사용")]
     public WeaponType weaponTypeToEquip;
 
+    [Tooltip("무기 장착 효과일 때 사용(무기 속성). 비워두면 Normal로 처리")]
+    public WeaponElementType weaponElementTypeToEquip = WeaponElementType.Normal;
+
     [Header("Values")]
     [Tooltip("스택 1회 선택 시 적용될 효과 값")]
     public float[] valuesPerLevel;
@@ -273,16 +276,19 @@ public class AugmentEffect : ScriptableObject
     /// </summary>
     private void EquipWeapon(PlayerController player)
     {
-        WeaponData weaponToEquip = WeaponDatabase.Instance.GetWeapon(weaponTypeToEquip, WeaponElementType.Normal);
+        // 인스펙터에서 안 건드렸으면 Normal
+        WeaponElementType element = weaponElementTypeToEquip;
+
+        WeaponData weaponToEquip = WeaponDatabase.Instance.GetWeapon(weaponTypeToEquip, element);
 
         if (weaponToEquip != null)
         {
             player.EquipWeapon(weaponToEquip);
-            Debug.Log($"[증강] {weaponTypeToEquip} 기본 무기 장착: {weaponToEquip.name}");
+            Debug.Log($"[증강] {weaponTypeToEquip} 무기 장착: {weaponToEquip.name} (Element: {element})");
         }
         else
         {
-            Debug.LogError($"[증강] {weaponTypeToEquip} 기본 무기를 찾을 수 없습니다!");
+            Debug.LogError($"[증강] {weaponTypeToEquip} 무기를 찾을 수 없습니다! (Element: {element})");
         }
     }
 

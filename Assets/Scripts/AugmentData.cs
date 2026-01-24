@@ -80,4 +80,5 @@ public enum AugmentCategory
 {
     WeaponSelect,   // 무기 선택
     StatUpgrade,    // 능력치 강화
+    ElementUpgrade  // 플레이어 타입 부여
 }
