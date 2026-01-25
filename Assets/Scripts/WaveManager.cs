@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
+    [SerializeField] private StageManager _stageManager;
+
     [SerializeField] private MonsterSpawner _spawner;
     [SerializeField] private PlayerLevel _playerLevel;
     [SerializeField] private MonsterBase _bossInstance = null;
@@ -183,6 +185,9 @@ public class WaveManager : MonoBehaviour
         _spawnTimer = 0.0f;
         _bossSpawned = false;
         _isRunning = true;
+
+        if (_stageManager != null)
+            _stageManager.UpdateStageByWaveIndex(_currentWaveIndex);
 
         WaveData wave = _waves[_currentWaveIndex];
         Debug.Log($"[WaveManager] Wave Start: {wave.waveName} (Index: {_currentWaveIndex})");

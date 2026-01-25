@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 444a4cfcd59c5934db4f635749d68aa1, type: 3}
-  m_Name: Wave_03
+  m_Name: Wave_Test_Boss
   m_EditorClassIdentifier: 
   waveName: Wave_03
   waveDuration: 10

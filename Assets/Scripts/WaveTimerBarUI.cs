@@ -10,10 +10,14 @@ public class WaveTimerBarUI : MonoBehaviour
     [SerializeField] private Text _waveNameText;
     [SerializeField] private Text _bossHpText;
 
+    private Color _defaultFillColor = Color.white;
+
     private void Awake()
     {
         if (_fillImage == null)
             Debug.LogWarning("[WaveTimerBarUI] Fill Image가 연결되지 않았습니다.");
+        else
+            _defaultFillColor = _fillImage.color;
     }
 
     private void OnEnable()
@@ -60,7 +64,10 @@ public class WaveTimerBarUI : MonoBehaviour
         float p = _waveManager.CurrentWaveProgress01;
 
         if (_fillImage != null)
+        {
             _fillImage.fillAmount = 1.0f - p;
+            _fillImage.color = _defaultFillColor;
+        }
 
         if (_timeText != null)
         {

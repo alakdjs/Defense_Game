@@ -9245,6 +9245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b09950a11eca1a341adebd07cde0a4e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _stageManager: {fileID: 1551926516}
   _spawner: {fileID: 1507024347}
   _playerLevel: {fileID: 360678917}
   _bossInstance: {fileID: 2579845844602244158, guid: 4a21c635ce6416f4a9ca4dba50a2c8ff, type: 3}
@@ -11123,6 +11124,7 @@ Transform:
   - {fileID: 1507024346}
   - {fileID: 2136273288}
   - {fileID: 1266234165}
+  - {fileID: 1551926515}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1502209588 stripped
@@ -11650,6 +11652,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4541638795107168, guid: ed10cc7d5d496334591a5086a621998b, type: 3}
   m_PrefabInstance: {fileID: 1547525776}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1551926514
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1551926515}
+  - component: {fileID: 1551926516}
+  m_Layer: 0
+  m_Name: StageManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1551926515
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1551926514}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1486278750}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1551926516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1551926514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84617914c6254894d847c1fbdc37f720, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _wavesPerStage: 10
 --- !u!1001 &1559316664
 PrefabInstance:
   m_ObjectHideFlags: 0
