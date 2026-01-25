@@ -3,7 +3,7 @@
 
 public class ExpBall : MonoBehaviour
 {
-    [SerializeField] private int _expAmount = 2;
+    [SerializeField] private int _expAmount = 5;
     [SerializeField] private float _followSpeed = 12.0f;
 
     private bool _isAttracting = false;

@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class PlayerLevel : MonoBehaviour
 {
@@ -7,7 +7,7 @@ public class PlayerLevel : MonoBehaviour
 
     [SerializeField] private float _currentExp = 0.0f;
     [SerializeField] private float _maxExp = 10.0f;
-    [SerializeField] private float _expIncrease = 2.0f;
+    [SerializeField] private float _expIncrease = 5.0f;
 
     [SerializeField] private float _hpIncreasePerLevel = 10.0f;
     [SerializeField] private float _attackIncreasePerLevel = 0.1f;
@@ -27,7 +27,7 @@ public class PlayerLevel : MonoBehaviour
         _player = GetComponent<PlayerController>();
         _playerHp = GetComponent<PlayerHp>();
     }
-
+    
     private void Start()
     {
         UpdateUI();
@@ -40,15 +40,15 @@ public class PlayerLevel : MonoBehaviour
 
         _currentExp += amount;
 
-        // °æÇèÄ¡°¡ ¸¹ÀÌ µé¾î¿Í¼­ ¿©·¯ ¹ø ·¹º§¾÷ °¡´ÉÇÑ °æ¿ì
+        // ê²½í—˜ì¹˜ê°€ ë§ì´ ë“¤ì–´ì™€ì„œ ì—¬ëŸ¬ ë²ˆ ë ˆë²¨ì—… ê°€ëŠ¥í•œ ê²½ìš°
         while (_level < _maxLevel && _currentExp >= _maxExp)
         {
-            // ³²Àº °æÇèÄ¡ À¯Áö (ÃÊ°úºĞÀº ´ÙÀ½ ·¹º§ °æÇèÄ¡·Î ³Ñ±è)
+            // ë‚¨ì€ ê²½í—˜ì¹˜ ìœ ì§€ (ì´ˆê³¼ë¶„ì€ ë‹¤ìŒ ë ˆë²¨ ê²½í—˜ì¹˜ë¡œ ë„˜ê¹€)
             _currentExp -= _maxExp;
 
             bool openedPopup = LevelUp();
 
-            // Áõ°­ UI°¡ ¿­·ÈÀ¸¸é(=Time.timeScale 0), Ãß°¡ ·¹º§¾÷ Ã³¸®´Â ´ÙÀ½ ÇÁ·¹ÀÓÀ¸·Î ³Ñ±è
+            // ì¦ê°• UIê°€ ì—´ë ¸ìœ¼ë©´(=Time.timeScale 0), ì¶”ê°€ ë ˆë²¨ì—… ì²˜ë¦¬ëŠ” ë‹¤ìŒ í”„ë ˆì„ìœ¼ë¡œ ë„˜ê¹€
             if (openedPopup)
                 break;
         }
@@ -61,18 +61,18 @@ public class PlayerLevel : MonoBehaviour
     {
         _level++;
 
-        // °æÇèÄ¡ °ü·Ã
+        // ê²½í—˜ì¹˜ ê´€ë ¨
         _maxExp += _expIncrease;
 
-        // ½ºÅÈ Áõ°¡
+        // ìŠ¤íƒ¯ ì¦ê°€
         _player.AddMaxHp(_hpIncreasePerLevel);
         _player.AddAttack(_attackIncreasePerLevel);
         _player.AddDefense(_defenseIncreasePerLevel);
 
-        // Ã¼·Â È¸º¹
+        // ì²´ë ¥ íšŒë³µ
         _playerHp.Heal(_hpIncreasePerLevel);
 
-        // ·¹º§ ¾÷ ½Ã Áõ°­ Ä«µå UI µîÀå + °ÔÀÓ ÀÏ½ÃÁ¤Áö(Time.timeScale = 0f)´Â ÆË¾÷ ³»ºÎ¿¡¼­ Ã³¸®
+        // ë ˆë²¨ ì—… ì‹œ ì¦ê°• ì¹´ë“œ UI ë“±ì¥ + ê²Œì„ ì¼ì‹œì •ì§€(Time.timeScale = 0f)ëŠ” íŒì—… ë‚´ë¶€ì—ì„œ ì²˜ë¦¬
         if (AugmentPopupController.Instance != null && AugmentPopupController.Instance.ShouldOpenPopupAtLevel(_level))
         {
             AugmentPopupController.Instance.OpenPopup(_level);

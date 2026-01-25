@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -15,12 +15,12 @@ public class StageManager : MonoBehaviour
 {
     public event Action<StageType> OnStageChanged;
 
-    [SerializeField] private int _wavesPerStage = 10; // ½ºÅ×ÀÌÁö´ç ¿şÀÌºê ¼ö
+    [SerializeField] private int _wavesPerStage = 10; // ìŠ¤í…Œì´ì§€ë‹¹ ì›¨ì´ë¸Œ ìˆ˜
     private StageType _currentStage = StageType.Day1;
 
     public StageType GetStageByWaveIndex(int waveIndex)
     {
-        // waveIndex 0ºÎÅÍ
+        // waveIndex 0ë¶€í„°
         int stageIndex = (waveIndex / _wavesPerStage) + 1;
         stageIndex = Mathf.Clamp(stageIndex, 1, 5);
 

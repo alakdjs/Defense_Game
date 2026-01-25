@@ -1,8 +1,8 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// Animator(=Little_Ghost2_v1)¿¡ ºÙ¿©¼­ AnimationEvent¸¦ ¹Ş´Â ¿ëµµ.
-/// ½ÇÁ¦ ·ÎÁ÷Àº ºÎ¸ğÀÇ MonsterBase·Î Àü´Ş.
+/// Animator(=Little_Ghost2_v1)ì— ë¶™ì—¬ì„œ AnimationEventë¥¼ ë°›ëŠ” ìš©ë„.
+/// ì‹¤ì œ ë¡œì§ì€ ë¶€ëª¨ì˜ MonsterBaseë¡œ ì „ë‹¬.
 /// </summary>
 public class Monster_Ghost_AnimationEventProxy : MonoBehaviour
 {
@@ -21,7 +21,7 @@ public class Monster_Ghost_AnimationEventProxy : MonoBehaviour
         }
     }
 
-    // attack Å¬¸³ÀÇ AnimationEvent¿¡¼­ È£Ãâ
+    // attack í´ë¦½ì˜ AnimationEventì—ì„œ í˜¸ì¶œ
     public void OnAttackHit()
     {
         if (_monster == null)
@@ -30,7 +30,7 @@ public class Monster_Ghost_AnimationEventProxy : MonoBehaviour
         _monster.AnimEvent_AttackHit();
     }
 
-    // attack Å¬¸³ÀÇ AnimationEvent¿¡¼­ È£Ãâ
+    // attack í´ë¦½ì˜ AnimationEventì—ì„œ í˜¸ì¶œ
     public void OnAttackAnimationEnd()
     {
         if (_monster == null)
