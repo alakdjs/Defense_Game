@@ -186,11 +186,12 @@ public class WaveManager : MonoBehaviour
         _bossSpawned = false;
         _isRunning = true;
 
-        if (_stageManager != null)
-            _stageManager.UpdateStageByWaveIndex(_currentWaveIndex);
-
         WaveData wave = _waves[_currentWaveIndex];
         Debug.Log($"[WaveManager] Wave Start: {wave.waveName} (Index: {_currentWaveIndex})");
+
+        // 웨이브 시작 시 스테이지 갱신
+        if (_stageManager != null)
+            _stageManager.UpdateStageByWaveIndex(_currentWaveIndex);
 
         // UI 갱신
         OnWaveStarted?.Invoke();

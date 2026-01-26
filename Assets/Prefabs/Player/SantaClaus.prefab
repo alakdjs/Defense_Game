@@ -969,7 +969,7 @@ MonoBehaviour:
   _maxLevel: 100
   _currentExp: 0
   _maxExp: 10
-  _expIncrease: 2
+  _expIncrease: 2.5
   _hpIncreasePerLevel: 10
   _attackIncreasePerLevel: 0.1
   _defenseIncreasePerLevel: 0.1

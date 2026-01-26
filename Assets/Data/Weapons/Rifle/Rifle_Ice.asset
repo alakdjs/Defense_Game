@@ -15,5 +15,5 @@ MonoBehaviour:
   WeaponType: 1
   ElementType: 6
   WeaponPrefab: {fileID: 665775668505184368, guid: f90ca7e20d58b234db8c4aead34125b8, type: 3}
-  Damage: 30
+  Damage: 50
   AttackRange: 8

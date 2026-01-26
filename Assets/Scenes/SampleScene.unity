@@ -731,6 +731,74 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1301619487167056, guid: bba7fb7fa4870b649bc67d73608ea962, type: 3}
   m_PrefabInstance: {fileID: 1176093103}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &131506949
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 131506950}
+  - component: {fileID: 131506951}
+  m_Layer: 0
+  m_Name: StageLightingController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &131506950
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131506949}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1486278750}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &131506951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131506949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7f3716d76ceeda4681b5f1900a355a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stageManager: {fileID: 1551926516}
+  _sunLight: {fileID: 410087040}
+  _sunsetSkybox: {fileID: 2100000, guid: 306954a84f732a547a2cbabdd37456e3, type: 2}
+  _nightSkybox: {fileID: 2100000, guid: 837469ee0498c8341ac211afbc8d729c, type: 2}
+  _dawnSkybox: {fileID: 2100000, guid: 347f85290087cd4448953d04ffb71ff1, type: 2}
+  _snowDaySkybox: {fileID: 2100000, guid: 638a3b40763e41e42a97adbd49bac793, type: 2}
+  _sunsetSunColor: {r: 1, g: 0.55, b: 0.25, a: 1}
+  _nightSunColor: {r: 0.55, g: 0.65, b: 1, a: 1}
+  _dawnSunColor: {r: 0.95, g: 0.75, b: 0.55, a: 1}
+  _snowDaySunColor: {r: 0.9, g: 0.95, b: 1, a: 1}
+  _sunsetSunIntensity: 1.1
+  _nightSunIntensity: 0.25
+  _dawnSunIntensity: 0.6
+  _snowDaySunIntensity: 1
+  _sunsetAmbient: {r: 0.35, g: 0.25, b: 0.2, a: 1}
+  _nightAmbient: {r: 0.06, g: 0.07, b: 0.1, a: 1}
+  _dawnAmbient: {r: 0.18, g: 0.18, b: 0.22, a: 1}
+  _snowDayAmbient: {r: 0.35, g: 0.38, b: 0.42, a: 1}
+  _useFog: 1
+  _sunsetFogColor: {r: 0.45, g: 0.28, b: 0.2, a: 1}
+  _nightFogColor: {r: 0.03, g: 0.04, b: 0.06, a: 1}
+  _dawnFogColor: {r: 0.2, g: 0.2, b: 0.25, a: 1}
+  _snowDayFogColor: {r: 0.45, g: 0.5, b: 0.55, a: 1}
+  _fogDensity: 0.01
 --- !u!1001 &158300794
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2503,7 +2571,7 @@ PrefabInstance:
       objectReference: {fileID: 974844959}
     - target: {fileID: 2952976231310677641, guid: d085da537bbea694493000dafa056e9a, type: 3}
       propertyPath: _expIncrease
-      value: 5
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 7167928421021097973, guid: d085da537bbea694493000dafa056e9a, type: 3}
       propertyPath: m_Name
@@ -9273,6 +9341,27 @@ MonoBehaviour:
   _playerLevel: {fileID: 360678917}
   _bossInstance: {fileID: 2579845844602244158, guid: 4a21c635ce6416f4a9ca4dba50a2c8ff, type: 3}
   _waves:
+  - {fileID: 11400000, guid: d04bd8981639b2441b55f6a4ddd66151, type: 2}
+  - {fileID: 11400000, guid: c572cab47cd1771489bf00b3bc90e8f7, type: 2}
+  - {fileID: 11400000, guid: abada281f38e4154eb61f57fe7b3fbc6, type: 2}
+  - {fileID: 11400000, guid: 592f40a6e1ea55f4a9b5e49474e18042, type: 2}
+  - {fileID: 11400000, guid: 9dcb9aee118d58743b30aa8f06e158c1, type: 2}
+  - {fileID: 11400000, guid: c9379e5462d16744db605137a8f1dfb5, type: 2}
+  - {fileID: 11400000, guid: 1c4efbc216ee7914ab897036a2cd3c90, type: 2}
+  - {fileID: 11400000, guid: fda2244380a8fa34cb4906da43b79846, type: 2}
+  - {fileID: 11400000, guid: 6df93dd7d8bc82b4fb3fc7854502939f, type: 2}
+  - {fileID: 11400000, guid: 210e8ff4917573644818c77e2d11e512, type: 2}
+  - {fileID: 11400000, guid: 883b84baa012c1b48b4cdc1faa620760, type: 2}
+  - {fileID: 11400000, guid: bc0fb9c089558974f8cc1968a8c383ed, type: 2}
+  - {fileID: 11400000, guid: 80f920857028d314696d5d92c888711f, type: 2}
+  - {fileID: 11400000, guid: 18668e9aad485d548833bc5be7a2aaf3, type: 2}
+  - {fileID: 11400000, guid: 5c8cc5b4ef6cbd942942c8fc8bb93e2e, type: 2}
+  - {fileID: 11400000, guid: f57a88df40bb2604784867b5aafde768, type: 2}
+  - {fileID: 11400000, guid: 76bbc18d942d55e418f07680c252dbf7, type: 2}
+  - {fileID: 11400000, guid: d8d3238257c7505439b9dfb69a71fd3e, type: 2}
+  - {fileID: 11400000, guid: 6e3b72a04a425a3448b8257a8177212d, type: 2}
+  - {fileID: 11400000, guid: e8ad7c683d9f5884d8219b964d69f692, type: 2}
+  - {fileID: 11400000, guid: c21517e61ca0f1a45bc8fe390662a8e5, type: 2}
   - {fileID: 11400000, guid: 7651a7343b7196f41bb9fbef829479f0, type: 2}
   _spawnIntervalDecreasePerLevel: 0.01
   _maxAliveIncreasePerLevel: 2
@@ -11148,6 +11237,7 @@ Transform:
   - {fileID: 2136273288}
   - {fileID: 1266234165}
   - {fileID: 1551926515}
+  - {fileID: 131506950}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1502209588 stripped
@@ -13664,7 +13754,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 100, y: -25}
+  m_AnchoredPosition: {x: 131, y: -25}
   m_SizeDelta: {x: 200, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1802634781
@@ -14216,7 +14306,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 100, y: -2}
+  m_AnchoredPosition: {x: 131, y: -2}
   m_SizeDelta: {x: 200, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1862547772

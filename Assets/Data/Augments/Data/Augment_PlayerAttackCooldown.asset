@@ -21,3 +21,4 @@ MonoBehaviour:
   description: "\uBAB8\uB180\uB9BC\uC774 \uAE30\uBBFC\uD574\uC838\n\uACF5\uACA9 \uC18D\uB3C4\uAC00
     \uC99D\uAC00\uD569\uB2C8\uB2E4."
   oneTimeOnly: 0
+  maxStack: 4

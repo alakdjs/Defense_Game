@@ -40,6 +40,10 @@ public abstract class MonsterBase : MonoBehaviour, IDamageable
     protected float _stunEndTime = 0.0f;
     protected Coroutine _stunCoroutine;
 
+    // Animator 파라미터 캐시
+    private bool _hasIsStunBool = false;
+    private bool _animatorParamCached = false;
+
     // 몬스터 사망 이벤트
     public static event Action<MonsterBase> OnAnyMonsterDied;
 
@@ -339,27 +343,31 @@ public abstract class MonsterBase : MonoBehaviour, IDamageable
         if (_animator == null)
             return;
 
-        if (isStun)
+        // 최초 1회 파라미터 캐싱
+        CacheAnimatorParameters();
+
+        if (_hasIsStunBool)
         {
-            if (HasAnimatorParameter(_animator, "IsStun", AnimatorControllerParameterType.Bool))
-            {
-                _animator.SetBool("IsStun", isStun);
-            }
+            _animator.SetBool("IsStun", isStun);
         }
     }
 
-    // Animator 파라미터 존재 체크
-    protected bool HasAnimatorParameter(Animator animator, string paramName, AnimatorControllerParameterType type)
+    // Animator 파라미터 존재 체크 + 캐싱 (최초 1회)
+    protected void CacheAnimatorParameters()
     {
-        if (animator == null)
-            return false;
+        if (_animator == null || _animatorParamCached)
+            return;
 
-        foreach (var p in animator.parameters)
+        foreach (var p in _animator.parameters)
         {
-            if (p.name == paramName && p.type == type)
-                return true;
+            if (p.name == "IsStun" && p.type == AnimatorControllerParameterType.Bool)
+            {
+                _hasIsStunBool = true;
+                break;
+            }
         }
-        return false;
+
+        _animatorParamCached = true;
     }
 
     public void Stun(float duration)
@@ -407,13 +415,16 @@ public abstract class MonsterBase : MonoBehaviour, IDamageable
 
         // 애니메이터 강제 해제
         PlayStunAnimation(false);
-        _animator.ResetTrigger("IsStun"); // 혹시 남아있으면 제거
 
         // 타겟 갱신 후 상황에 맞게 복귀
         UpdateTarget();
 
+        // 기절 해제 전에 죽었으면 종료
         if (_isDead)
+        {
+            _stunCoroutine = null;
             yield break;
+        }
 
         if (_target != null)
             _stateMachine.ChangeState(_chaseState);
