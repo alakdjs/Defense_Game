@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class Monster_Santa : MonsterBase
 {
@@ -23,7 +23,7 @@ public class Monster_Santa : MonsterBase
         if (_canAct == false)
             return;
 
-        // °ø°İ ÄğÅ¸ÀÓ Ã¼Å©
+        // ê³µê²© ì¿¨íƒ€ì„ ì²´í¬
         if (Time.time < _lastAttackTime + _attackCoolTime)
         {
             StateMachine.ChangeState(ChaseState);
@@ -37,11 +37,17 @@ public class Monster_Santa : MonsterBase
 
     public void OnAttackHit()
     {
-        // ½ÇÁ¦ °ø°İ ÆÇÁ¤
+        if (_isDead)
+            return;
+
+        if (_canAct == false)
+            return;
+
+        // ì‹¤ì œ ê³µê²© íŒì •
         ApplyAttackDamage();
     }
 
-    // ¸ó½ºÅÍ °ø°İ ¾Ö´Ï¸ŞÀÌ¼Ç
+    // ëª¬ìŠ¤í„° ê³µê²© ì• ë‹ˆë©”ì´ì…˜
     public void OnAttackAnimationEnd()
     {
         if (_isDead)
@@ -50,7 +56,7 @@ public class Monster_Santa : MonsterBase
         StateMachine.ChangeState(ChaseState);
     }
 
-    // ¸ó½ºÅÍ Die ¾Ö´Ï¸ŞÀÌ¼Ç ÀÌº¥Æ® Á¾·á¿ë ¸Ş¼Òµå
+    // ëª¬ìŠ¤í„° Die ì• ë‹ˆë©”ì´ì…˜ ì´ë²¤íŠ¸ ì¢…ë£Œìš© ë©”ì†Œë“œ
     public override void OnDieAnimationEnd()
     {
         base.OnDieAnimationEnd();

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 
 public class Monster_Ghost : MonsterBase
@@ -24,7 +24,7 @@ public class Monster_Ghost : MonsterBase
         if (_canAct == false)
             return;
 
-        // °ø°İ ÄğÅ¸ÀÓ Ã¼Å©
+        // ê³µê²© ì¿¨íƒ€ì„ ì²´í¬
         if (Time.time < _lastAttackTime + _attackCoolTime)
         {
             StateMachine.ChangeState(IdleState);
@@ -38,11 +38,17 @@ public class Monster_Ghost : MonsterBase
 
     public void OnAttackHit()
     {
-        // ½ÇÁ¦ °ø°İ ÆÇÁ¤
+        if (_isDead)
+            return;
+
+        if (_canAct == false)
+            return;
+
+        // ì‹¤ì œ ê³µê²© íŒì •
         ApplyAttackDamage();
     }
 
-    // ¸ó½ºÅÍ °ø°İ ¾Ö´Ï¸ŞÀÌ¼Ç
+    // ëª¬ìŠ¤í„° ê³µê²© ì• ë‹ˆë©”ì´ì…˜
     public void OnAttackAnimationEnd()
     {
         if (_isDead)
@@ -53,7 +59,7 @@ public class Monster_Ghost : MonsterBase
 
     public override void Die()
     {
-        // Melt Ã³¸®, FSMÀº Die()Ã³¸®·Î ÀÎ½Ä
+        // Melt ì²˜ë¦¬, FSMì€ Die()ì²˜ë¦¬ë¡œ ì¸ì‹
     }
 
     public override void OnDieAnimationEnd()
@@ -63,7 +69,7 @@ public class Monster_Ghost : MonsterBase
 
     private void LateUpdate()
     {
-        // Á×¾úÀ» ¶§¸¸ Melt È¿°ú
+        // ì£½ì—ˆì„ ë•Œë§Œ Melt íš¨ê³¼
         if (_isDead)
         {
             _meltTime += Time.deltaTime;

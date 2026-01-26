@@ -442,8 +442,22 @@ public abstract class MonsterBase : MonoBehaviour, IDamageable
         if (_isDead == false)
             return;
 
+        _canAct = false;
+
+        if (_agent != null)
+        {
+            _agent.isStopped = true;
+            _agent.ResetPath();
+        }
+
         if (_animator != null)
         {
+            // Die 도중 다른 애니메이션 튀는 현상 방지
+            _animator.ResetTrigger("Attack");
+            _animator.SetBool("IsMoving", false);
+            PlayStunAnimation(false);
+
+            // Die 트리거
             _animator.SetTrigger("Die");
         }
         else
@@ -489,6 +503,12 @@ public abstract class MonsterBase : MonoBehaviour, IDamageable
     /// </summary>
     public void AnimEvent_AttackHit()
     {
+        if (_isDead)
+            return;
+
+        if (_canAct == false)
+            return;
+
         ApplyAttackDamage();
     }
 

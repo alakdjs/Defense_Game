@@ -37,6 +37,12 @@ public class Monster_PartyMonster : MonsterBase
 
     public void OnAttackHit()
     {
+        if (_isDead)
+            return;
+
+        if (_canAct == false)
+            return;
+
         // 실제 공격 판정
         ApplyAttackDamage();
     }
