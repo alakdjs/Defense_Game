@@ -777,6 +777,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stageManager: {fileID: 1551926516}
   _sunLight: {fileID: 410087040}
+  _transitionDuration: 1
   _sunsetSkybox: {fileID: 2100000, guid: 306954a84f732a547a2cbabdd37456e3, type: 2}
   _nightSkybox: {fileID: 2100000, guid: 837469ee0498c8341ac211afbc8d729c, type: 2}
   _dawnSkybox: {fileID: 2100000, guid: 347f85290087cd4448953d04ffb71ff1, type: 2}
@@ -793,12 +794,6 @@ MonoBehaviour:
   _nightAmbient: {r: 0.06, g: 0.07, b: 0.1, a: 1}
   _dawnAmbient: {r: 0.18, g: 0.18, b: 0.22, a: 1}
   _snowDayAmbient: {r: 0.35, g: 0.38, b: 0.42, a: 1}
-  _useFog: 1
-  _sunsetFogColor: {r: 0.45, g: 0.28, b: 0.2, a: 1}
-  _nightFogColor: {r: 0.03, g: 0.04, b: 0.06, a: 1}
-  _dawnFogColor: {r: 0.2, g: 0.2, b: 0.25, a: 1}
-  _snowDayFogColor: {r: 0.45, g: 0.5, b: 0.55, a: 1}
-  _fogDensity: 0.01
 --- !u!1001 &158300794
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9341,6 +9336,7 @@ MonoBehaviour:
   _playerLevel: {fileID: 360678917}
   _bossInstance: {fileID: 2579845844602244158, guid: 4a21c635ce6416f4a9ca4dba50a2c8ff, type: 3}
   _waves:
+  - {fileID: 11400000, guid: 7651a7343b7196f41bb9fbef829479f0, type: 2}
   - {fileID: 11400000, guid: d04bd8981639b2441b55f6a4ddd66151, type: 2}
   - {fileID: 11400000, guid: c572cab47cd1771489bf00b3bc90e8f7, type: 2}
   - {fileID: 11400000, guid: abada281f38e4154eb61f57fe7b3fbc6, type: 2}
@@ -9362,7 +9358,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6e3b72a04a425a3448b8257a8177212d, type: 2}
   - {fileID: 11400000, guid: e8ad7c683d9f5884d8219b964d69f692, type: 2}
   - {fileID: 11400000, guid: c21517e61ca0f1a45bc8fe390662a8e5, type: 2}
-  - {fileID: 11400000, guid: 7651a7343b7196f41bb9fbef829479f0, type: 2}
   _spawnIntervalDecreasePerLevel: 0.01
   _maxAliveIncreasePerLevel: 2
   _minSpawnInterval: 0.15

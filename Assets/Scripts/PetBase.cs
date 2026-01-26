@@ -9,6 +9,11 @@ public abstract class PetBase : MonoBehaviour, IDamageable
     public event Action<PetBase> OnDisposed;
     private bool _disposeNotified = false;
 
+    // Die 연출(Melt 효과)
+    private float _meltDuration = 0.55f;
+    private float _meltTime = 0.0f;
+    private Vector3 _initialScale;
+
     [Header("Base Stat")]
     [SerializeField] protected float _maxHp = 100.0f; // 체력
     [SerializeField] protected float _attackDamage; // 공격력
@@ -116,15 +121,20 @@ public abstract class PetBase : MonoBehaviour, IDamageable
     // Dead 연출
     private void LateUpdate()
     {
-        // 죽었을 때 Melt 효과
+        // 죽었을 때만 Melt 효과
         if (_isDead)
         {
-            Vector3 scale = transform.localScale;
-            scale.y -= Time.deltaTime * 0.8f;
-            scale.y = Mathf.Max(0.0f, scale.y);
+            _meltTime += Time.deltaTime;
+
+            float t = Mathf.Clamp01(_meltTime / _meltDuration);
+
+            float eased = Mathf.Pow(t, 3.0f);
+
+            Vector3 scale = _initialScale;
+            scale.y = Mathf.Lerp(_initialScale.y, 0.0f, eased);
             transform.localScale = scale;
 
-            if (scale.y <= 0.01f)
+            if (t >= 1.0f)
             {
                 OnDieAnimationEnd();
             }
