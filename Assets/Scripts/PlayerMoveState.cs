@@ -4,7 +4,6 @@ public class PlayerMoveState : IState
 {
     private PlayerController _player;
 
-
     public PlayerMoveState(PlayerController player)
     {
         _player = player;

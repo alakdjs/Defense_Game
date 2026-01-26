@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections;
 
 /// <summary>
 /// 모든 몬스터의 공통 베이스
@@ -340,9 +341,9 @@ public abstract class MonsterBase : MonoBehaviour, IDamageable
 
         if (isStun)
         {
-            if (HasAnimatorParameter(_animator, "Stun", AnimatorControllerParameterType.Trigger))
+            if (HasAnimatorParameter(_animator, "IsStun", AnimatorControllerParameterType.Bool))
             {
-                _animator.SetTrigger("Stun");
+                _animator.SetBool("IsStun", isStun);
             }
         }
     }
@@ -392,7 +393,7 @@ public abstract class MonsterBase : MonoBehaviour, IDamageable
         _stunCoroutine = StartCoroutine(Co_StunRoutine());
     }
 
-    protected System.Collections.IEnumerator Co_StunRoutine()
+    protected IEnumerator Co_StunRoutine()
     {
         // 기절 유지
         while (Time.time < _stunEndTime)
@@ -403,6 +404,10 @@ public abstract class MonsterBase : MonoBehaviour, IDamageable
         // 기절 해제
         _isStunned = false;
         SetCanAct(true);
+
+        // 애니메이터 강제 해제
+        PlayStunAnimation(false);
+        _animator.ResetTrigger("IsStun"); // 혹시 남아있으면 제거
 
         // 타겟 갱신 후 상황에 맞게 복귀
         UpdateTarget();

@@ -9273,16 +9273,6 @@ MonoBehaviour:
   _playerLevel: {fileID: 360678917}
   _bossInstance: {fileID: 2579845844602244158, guid: 4a21c635ce6416f4a9ca4dba50a2c8ff, type: 3}
   _waves:
-  - {fileID: 11400000, guid: d04bd8981639b2441b55f6a4ddd66151, type: 2}
-  - {fileID: 11400000, guid: c572cab47cd1771489bf00b3bc90e8f7, type: 2}
-  - {fileID: 11400000, guid: abada281f38e4154eb61f57fe7b3fbc6, type: 2}
-  - {fileID: 11400000, guid: 592f40a6e1ea55f4a9b5e49474e18042, type: 2}
-  - {fileID: 11400000, guid: 9dcb9aee118d58743b30aa8f06e158c1, type: 2}
-  - {fileID: 11400000, guid: c9379e5462d16744db605137a8f1dfb5, type: 2}
-  - {fileID: 11400000, guid: 1c4efbc216ee7914ab897036a2cd3c90, type: 2}
-  - {fileID: 11400000, guid: fda2244380a8fa34cb4906da43b79846, type: 2}
-  - {fileID: 11400000, guid: 6df93dd7d8bc82b4fb3fc7854502939f, type: 2}
-  - {fileID: 11400000, guid: 210e8ff4917573644818c77e2d11e512, type: 2}
   - {fileID: 11400000, guid: 7651a7343b7196f41bb9fbef829479f0, type: 2}
   _spawnIntervalDecreasePerLevel: 0.01
   _maxAliveIncreasePerLevel: 2
