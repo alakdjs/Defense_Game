@@ -259,7 +259,7 @@ public class PlayerController : MonoBehaviour
         // UI 반영
         if (_attackRangeUI != null)
         {
-            _attackRangeUI.SetRange(_attackRange);
+            _attackRangeUI.SetRange(AttackRange);
 
         }
 
