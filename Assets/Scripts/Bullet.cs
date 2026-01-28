@@ -50,6 +50,15 @@ public class Bullet : MonoBehaviour
         if (damageable != null && other.GetComponentInParent<MonsterBase>() != null)
         {
             damageable.TakeDamage(_damageInfo);
+
+            // 총알 히트 VFX (Rifle)
+            if (HitVFXManager.Instance != null)
+            {
+                // Trigger라 RaycastHit.point가 없어서 가장 자연스러운 접점 근사치를 사용
+                Vector3 hitPos = other.ClosestPoint(transform.position);
+                HitVFXManager.Instance.SpawnHitVFX(hitPos, WeaponType.Rifle);
+            }
+
             Destroy(gameObject);
             return;
         }

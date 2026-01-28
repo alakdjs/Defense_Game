@@ -59,6 +59,18 @@ public class PlayerController : MonoBehaviour
     private int _addAuraSphereCount = 0;
     public int AuraSphereCount => _addAuraSphereCount;
 
+    [Header("Sword Slash VFX (Elemental)")]
+    [SerializeField] private Transform _slashSpawnPoint;
+    [SerializeField] private GameObject _slashFirePrefab;
+    [SerializeField] private GameObject _slashElectricPrefab;
+    [SerializeField] private GameObject _slashWaterPrefab;
+    [SerializeField] private GameObject _slashRockPrefab;
+    [SerializeField] private GameObject _slashIcePrefab;
+    [SerializeField] private GameObject _slashNormalPrefab;
+    [SerializeField] private float _slashLifeTime = 0.35f;
+    [SerializeField] private float _slashForwardOffset = 0.6f; // SpawnPoint 없을 때 전방 오프셋
+
+
     public float MaxHp => _maxHp + _maxHpBonus;
     public float Attack => _attack + _attackBonus;
     public float Defense => _defense + _defenseBonus;
@@ -335,6 +347,8 @@ public class PlayerController : MonoBehaviour
             DamageInfo dmg = new DamageInfo(finalDamage, attackerElement, gameObject);
             monster.TakeDamage(dmg);
         }
+
+        SpawnSwordHitVFXOnce(hits);
     }
 
     // 총알 발사 관련 Rifle 애니메이션 이벤트에서 호출
@@ -426,6 +440,96 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+
+    /// <summary>
+    /// 애니메이션 이벤트(베기 시작 프레임)에서 호출: 칼에서 Slash VFX 스폰
+    /// </summary>
+    public void AnimEvent_SpawnSlashVFX()
+    {
+        if (_currentWeaponData == null)
+            return;
+
+        GameObject prefab = GetSlashPrefab(_currentWeaponData.ElementType);
+        if (prefab == null)
+            return;
+
+        Vector3 pos;
+
+        if (_slashSpawnPoint != null)
+        {
+            pos = _slashSpawnPoint.position;
+        }
+        else
+        {
+            pos = transform.position + transform.forward * _slashForwardOffset;
+            pos.y += 1.0f; 
+        }
+
+        Quaternion rot = Quaternion.LookRotation(transform.forward);
+
+        GameObject vfx = Instantiate(prefab, pos, rot);
+
+        // Play On Awake가 꺼져있어도 무조건 보이게 강제 재생
+        ParticleSystem[] pss = vfx.GetComponentsInChildren<ParticleSystem>(true);
+        for (int i = 0; i < pss.Length; i++)
+        {
+            pss[i].Play(true);
+        }
+
+        Destroy(vfx, _slashLifeTime);
+    }
+
+
+    /// <summary>
+    /// 무기 속성에 맞는 Slash 프리팹 선택
+    /// </summary>
+    private GameObject GetSlashPrefab(WeaponElementType element)
+    {
+        switch (element)
+        {
+            case WeaponElementType.Fire: return _slashFirePrefab;
+            case WeaponElementType.Electric: return _slashElectricPrefab;
+            case WeaponElementType.Water: return _slashWaterPrefab;
+            case WeaponElementType.Rock: return _slashRockPrefab;
+            case WeaponElementType.Ice: return _slashIcePrefab;
+            default: return _slashNormalPrefab;
+        }
+    }
+
+    /// <summary>
+    /// 칼 공격 1회당 가장 가까운 몬스터 1마리에게만 Hit VFX 스폰
+    /// </summary>
+    private void SpawnSwordHitVFXOnce(Collider[] hits)
+    {
+        if (HitVFXManager.Instance == null)
+            return;
+
+        MonsterBase closest = null;
+        float minDist = float.MaxValue;
+
+        foreach (var hit in hits)
+        {
+            MonsterBase monster = hit.GetComponentInParent<MonsterBase>();
+            if (monster == null)
+                continue;
+
+            float dist = (monster.transform.position - transform.position).sqrMagnitude;
+            if (dist < minDist)
+            {
+                minDist = dist;
+                closest = monster;
+            }
+        }
+
+        if (closest == null)
+            return;
+
+        Vector3 hitPos = closest.transform.position;
+        hitPos.y += 0.6f; // 몬스터 몸통 높이 보정
+
+        HitVFXManager.Instance.SpawnHitVFX(hitPos, WeaponType.Sword);
+    }
+
 
     /// <summary>
     /// 데미지 계산 (무기 데미지 + 공격력 + 무기강화보너스)
