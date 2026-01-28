@@ -50,18 +50,17 @@ public class PetAttackState : IState
         if (elapsedTime < _dashDuration)
         {
             _pet.Agent.SetDestination(_pet.TargetMonster.position);
-        }
-        else
-        {
-            // 돌진이 끝났고, 아직 공격하지 않았다면
-            if (!_hasDashed && _pet.IsTargetInAttackRange())
+
+            if (_pet.CanAttack())
             {
                 _pet.PerformAttack();
                 _pet.LastAttackTime = Time.time;
-                _hasDashed = true;
             }
-
+        }
+        else
+        {
             // 돌진 완료 후 Idle로 전환
+            _hasDashed = true;
             _pet.StateMachine.ChangeState(_pet.IdleState);
         }
     }

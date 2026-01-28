@@ -45,6 +45,7 @@ public abstract class PetBase : MonoBehaviour, IDamageable
 
     public float MaxHp => _maxHp;
     public float CurrentHp => _currentHp;
+    public bool IsDead => _isDead;
 
     public Transform Tower => _tower;
     public Transform TargetMonster => _targetMonster;
@@ -75,6 +76,12 @@ public abstract class PetBase : MonoBehaviour, IDamageable
     {
         _agent = GetComponent<NavMeshAgent>();
         _agent.stoppingDistance = _attackRange;
+
+        // stoppingDistance는 공격범위와 동기화
+        if (_agent != null)
+        {
+            _agent.stoppingDistance = _attackRange;
+        }
 
         if (_animator == null)
             _animator = GetComponent<Animator>();
@@ -260,6 +267,8 @@ public abstract class PetBase : MonoBehaviour, IDamageable
         if (_currentHp <= 0.0f)
         {
             _isDead = true;
+            _initialScale = transform.localScale;
+            _meltTime = 0.0f;
             Die();
             _stateMachine.ChangeState(_deadState);
         }
