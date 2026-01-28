@@ -16,5 +16,13 @@ MonoBehaviour:
   effectType: 0
   statType: 4
   weaponTypeToEquip: 0
+  weaponElementTypeToEquip: 1
   valuesPerLevel:
-  - 0.2
+  - 2
+  weightedPetPrefabs: []
+  spawnRandomPet: 1
+  specificPetPrefab: {fileID: 0}
+  petAttackAdd: 0
+  petDefenseAdd: 0
+  petMaxHpAdd: 0
+  stunDuration: 5
