@@ -2544,10 +2544,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1319858336}
     m_Modifications:
-    - target: {fileID: -2426007572544134056, guid: d085da537bbea694493000dafa056e9a, type: 3}
-      propertyPath: _element
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1358831494660521577, guid: d085da537bbea694493000dafa056e9a, type: 3}
       propertyPath: _playerHpUI
       value: 
@@ -2556,46 +2552,10 @@ PrefabInstance:
       propertyPath: _hpBarShadow
       value: 
       objectReference: {fileID: 2126991195}
-    - target: {fileID: 1764649962388820863, guid: d085da537bbea694493000dafa056e9a, type: 3}
-      propertyPath: _slashIcePrefab
-      value: 
-      objectReference: {fileID: 856368647163548680, guid: 724d151229932ba47931fcc83c083470, type: 3}
-    - target: {fileID: 1764649962388820863, guid: d085da537bbea694493000dafa056e9a, type: 3}
-      propertyPath: _elementalStatus
-      value: 
-      objectReference: {fileID: 360678918}
-    - target: {fileID: 1764649962388820863, guid: d085da537bbea694493000dafa056e9a, type: 3}
-      propertyPath: _slashFirePrefab
-      value: 
-      objectReference: {fileID: 5313456068782518071, guid: 50f1354827c77ef4b99c4dca0ee3411d, type: 3}
-    - target: {fileID: 1764649962388820863, guid: d085da537bbea694493000dafa056e9a, type: 3}
-      propertyPath: _slashRockPrefab
-      value: 
-      objectReference: {fileID: 2060418090655630911, guid: 4fb7673fa1cb7e34ea16f350b1e1fba9, type: 3}
-    - target: {fileID: 1764649962388820863, guid: d085da537bbea694493000dafa056e9a, type: 3}
-      propertyPath: _slashSpawnPoint
-      value: 
-      objectReference: {fileID: 1637691296}
-    - target: {fileID: 1764649962388820863, guid: d085da537bbea694493000dafa056e9a, type: 3}
-      propertyPath: _slashWaterPrefab
-      value: 
-      objectReference: {fileID: 856368647163548680, guid: 724d151229932ba47931fcc83c083470, type: 3}
-    - target: {fileID: 1764649962388820863, guid: d085da537bbea694493000dafa056e9a, type: 3}
-      propertyPath: _slashNormalPrefab
-      value: 
-      objectReference: {fileID: 5545173171955001552, guid: 7ac879c2caac1ca41b6c438e77d8b25d, type: 3}
-    - target: {fileID: 1764649962388820863, guid: d085da537bbea694493000dafa056e9a, type: 3}
-      propertyPath: _slashElectricPrefab
-      value: 
-      objectReference: {fileID: 9177886612219991525, guid: f90fc7acf1ef2fa4c85896a9afc17028, type: 3}
     - target: {fileID: 2952976231310677641, guid: d085da537bbea694493000dafa056e9a, type: 3}
       propertyPath: _expUI
       value: 
       objectReference: {fileID: 974844959}
-    - target: {fileID: 2952976231310677641, guid: d085da537bbea694493000dafa056e9a, type: 3}
-      propertyPath: _expIncrease
-      value: 2.5
-      objectReference: {fileID: 0}
     - target: {fileID: 7167928421021097973, guid: d085da537bbea694493000dafa056e9a, type: 3}
       propertyPath: m_Name
       value: SantaClaus
@@ -2642,10 +2602,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 7508143000519951695, guid: d085da537bbea694493000dafa056e9a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1637691296}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d085da537bbea694493000dafa056e9a, type: 3}
 --- !u!4 &360678916 stripped
@@ -2662,17 +2619,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae5f5ce036688a044bf0d1eb62e447d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &360678918 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -2426007572544134056, guid: d085da537bbea694493000dafa056e9a, type: 3}
-  m_PrefabInstance: {fileID: 360678915}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cabf038027d2808459cbe4af89381f69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &367338794 stripped
@@ -12764,37 +12710,6 @@ ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 19889002, guid: 950f8b7b75b0e45949ba0a337607535c, type: 3}
   m_PrefabInstance: {fileID: 1830808376}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1637691295
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1637691296}
-  m_Layer: 11
-  m_Name: SlashSpawnPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1637691296
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1637691295}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.8, y: 0.8, z: 1.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 360678916}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1666409693
 PrefabInstance:
   m_ObjectHideFlags: 0

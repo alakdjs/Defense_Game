@@ -465,7 +465,7 @@ public class PlayerController : MonoBehaviour
             pos.y += 1.0f; 
         }
 
-        Quaternion rot = Quaternion.LookRotation(transform.forward);
+        Quaternion rot = Quaternion.LookRotation(transform.right);
 
         GameObject vfx = Instantiate(prefab, pos, rot);
 
