@@ -30,6 +30,8 @@ public abstract class PetBase : MonoBehaviour, IDamageable
     [SerializeField] protected Vector3 _hpBarWorldOffset = new Vector3(0.0f, 2.0f, 0.0f);
     protected HpBar _hpBar;
 
+    [SerializeField] private GameObject _dashShield;
+
     [SerializeField] protected Animator _animator;
     [SerializeField] protected Transform _tower;
     protected Transform _targetMonster;
@@ -146,6 +148,15 @@ public abstract class PetBase : MonoBehaviour, IDamageable
                 OnDieAnimationEnd();
             }
         }
+    }
+
+    // 쉴드 (돌진 연출)
+    public void SetDashShield(bool active)
+    {
+        if (_dashShield == null)
+            return;
+
+        _dashShield.SetActive(active);
     }
 
     // 몬스터 탐지

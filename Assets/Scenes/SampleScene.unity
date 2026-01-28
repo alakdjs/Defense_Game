@@ -11575,7 +11575,7 @@ MonoBehaviour:
   _maxSpawnCount: 500
   _monsterRoot: {fileID: 1316576214}
   _player: {fileID: 360678916}
-  _tower: {fileID: 7420972232231704091}
+  _tower: {fileID: 1560336647}
   _minSpawnDistance: 20
   _spawnRadius: 40
   _maxTryCount: 20
@@ -12008,6 +12008,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4776677457597204, guid: 30117b0930be222468df2cb044a94fd1, type: 3}
   m_PrefabInstance: {fileID: 1559316664}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1560336647 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5736221707927780110, guid: d025b2644d1498547ab7468c9912f97a, type: 3}
+  m_PrefabInstance: {fileID: 1902015356873653482}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1560336649 stripped
 MonoBehaviour:
@@ -16580,6 +16585,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3615209386236052634, guid: d025b2644d1498547ab7468c9912f97a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5
+      objectReference: {fileID: 0}
     - target: {fileID: 3868640567508339549, guid: d025b2644d1498547ab7468c9912f97a, type: 3}
       propertyPath: _towerHpUI
       value: 
@@ -16637,11 +16646,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d025b2644d1498547ab7468c9912f97a, type: 3}
---- !u!4 &7420972232231704091 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5456778346007258313, guid: d025b2644d1498547ab7468c9912f97a, type: 3}
-  m_PrefabInstance: {fileID: 1902015356873653482}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

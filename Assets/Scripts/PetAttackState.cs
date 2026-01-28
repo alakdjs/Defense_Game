@@ -21,6 +21,7 @@ public class PetAttackState : IState
 
         // 돌진 시작
         _dashStartTime = Time.time;
+        _pet.SetDashShield(true);
         _hasDashed = false;
 
         // 돌진 속도 설정 (원래 속도에서 배수 적용)
@@ -69,6 +70,8 @@ public class PetAttackState : IState
     {
         if (_pet.Agent == null)
             return;
+
+        _pet.SetDashShield(false);
 
         // 원래 속도로 복원
         _pet.Agent.speed /= _dashSpeedMultiplier;
