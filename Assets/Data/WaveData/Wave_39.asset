@@ -10,18 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 444a4cfcd59c5934db4f635749d68aa1, type: 3}
-  m_Name: Wave_Test_Boss
+  m_Name: Wave_39
   m_EditorClassIdentifier: 
-  waveName: Wave_03
-  waveDuration: 10
-  baseSpawnInterval: 1
-  baseMaxAlive: 1
+  waveName: Wave39
+  waveDuration: 30
+  baseSpawnInterval: 3
+  baseMaxAlive: 8
   segments:
   - startTime: 0
-    endTime: 5
+    endTime: 30
     pool:
     - prefab: {fileID: 9134753539657703364, guid: 7e21656da0c8fa649a316e7df134d4c9, type: 3}
-      weight: 100
-  isBossWave: 1
-  bossPrefab: {fileID: 5420701288393339506, guid: adf1679896c340b419e1e0c498630fca, type: 3}
+      weight: 30
+    - prefab: {fileID: 5655989853241019075, guid: 7bc7612a6362eb2439a809f19d8fee3d, type: 3}
+      weight: 35
+    - prefab: {fileID: 5091145028789322039, guid: 761ffc3ee7d5bc141a7370b70775c011, type: 3}
+      weight: 35
+  isBossWave: 0
+  bossPrefab: {fileID: 0}
   includeAddsInBossClear: 1

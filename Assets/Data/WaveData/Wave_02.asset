@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Wave_02
   m_EditorClassIdentifier: 
   waveName: Wave02
-  waveDuration: 30
+  waveDuration: 20
   baseSpawnInterval: 5
   baseMaxAlive: 2
   segments:
   - startTime: 0
-    endTime: 30
+    endTime: 20
     pool:
     - prefab: {fileID: 8526445191827257934, guid: db8a340232348ad45931818c8dc69018, type: 3}
       weight: 50

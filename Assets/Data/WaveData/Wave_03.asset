@@ -15,7 +15,7 @@ MonoBehaviour:
   waveName: Wave03
   waveDuration: 30
   baseSpawnInterval: 5
-  baseMaxAlive: 3
+  baseMaxAlive: 2
   segments:
   - startTime: 0
     endTime: 30

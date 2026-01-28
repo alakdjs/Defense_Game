@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveName: Wave14
   waveDuration: 30
-  baseSpawnInterval: 3
-  baseMaxAlive: 9
+  baseSpawnInterval: 4
+  baseMaxAlive: 5
   segments:
   - startTime: 0
     endTime: 30

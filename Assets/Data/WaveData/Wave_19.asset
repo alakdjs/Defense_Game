@@ -15,13 +15,13 @@ MonoBehaviour:
   waveName: Wave19
   waveDuration: 30
   baseSpawnInterval: 3
-  baseMaxAlive: 10
+  baseMaxAlive: 7
   segments:
   - startTime: 0
     endTime: 30
     pool:
     - prefab: {fileID: 722587135448257199, guid: 4a21c635ce6416f4a9ca4dba50a2c8ff, type: 3}
-      weight: 30
+      weight: 50
     - prefab: {fileID: 5655989853241019075, guid: 7bc7612a6362eb2439a809f19d8fee3d, type: 3}
       weight: 25
     - prefab: {fileID: 4269879530015370148, guid: 7ff87b9058e75d640a15da275fc5667f, type: 3}

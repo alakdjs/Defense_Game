@@ -10,22 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 444a4cfcd59c5934db4f635749d68aa1, type: 3}
-  m_Name: Wave_13
+  m_Name: Wave_38
   m_EditorClassIdentifier: 
-  waveName: Wave13
+  waveName: Wave38
   waveDuration: 30
-  baseSpawnInterval: 4
-  baseMaxAlive: 5
+  baseSpawnInterval: 3
+  baseMaxAlive: 7
   segments:
   - startTime: 0
     endTime: 30
     pool:
-    - prefab: {fileID: 9134753539657703364, guid: 7e21656da0c8fa649a316e7df134d4c9, type: 3}
+    - prefab: {fileID: 8526445191827257934, guid: db8a340232348ad45931818c8dc69018, type: 3}
       weight: 50
     - prefab: {fileID: 4269879530015370148, guid: 7ff87b9058e75d640a15da275fc5667f, type: 3}
-      weight: 25
-    - prefab: {fileID: 722587135448257199, guid: 9af5f6933d161424fa310079aa3c63bb, type: 3}
-      weight: 25
+      weight: 50
   isBossWave: 0
   bossPrefab: {fileID: 0}
   includeAddsInBossClear: 1

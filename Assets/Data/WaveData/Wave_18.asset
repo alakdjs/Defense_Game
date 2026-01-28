@@ -15,7 +15,7 @@ MonoBehaviour:
   waveName: Wave18
   waveDuration: 30
   baseSpawnInterval: 3
-  baseMaxAlive: 10
+  baseMaxAlive: 7
   segments:
   - startTime: 0
     endTime: 30

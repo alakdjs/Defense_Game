@@ -10,27 +10,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 444a4cfcd59c5934db4f635749d68aa1, type: 3}
-  m_Name: Wave_20
+  m_Name: Wave_30
   m_EditorClassIdentifier: 
-  waveName: Wave20
+  waveName: Wave30
   waveDuration: 30
   baseSpawnInterval: 3
-  baseMaxAlive: 7
+  baseMaxAlive: 8
   segments:
   - startTime: 0
-    endTime: 20
+    endTime: 15
     pool:
     - prefab: {fileID: 722587135448257199, guid: 4a21c635ce6416f4a9ca4dba50a2c8ff, type: 3}
-      weight: 30
-    - prefab: {fileID: 722587135448257199, guid: f09fc68792041f54a920180600c0f000, type: 3}
-      weight: 35
+      weight: 20
+    - prefab: {fileID: 722587135448257199, guid: 9bd7a14249f2f4744976e45783df8fde, type: 3}
+      weight: 20
     - prefab: {fileID: 722587135448257199, guid: 9af5f6933d161424fa310079aa3c63bb, type: 3}
-      weight: 35
-  - startTime: 20
+      weight: 20
+    - prefab: {fileID: 722587135448257199, guid: 0263bae0fcf22ba4299ee3a8bb447136, type: 3}
+      weight: 20
+    - prefab: {fileID: 722587135448257199, guid: f09fc68792041f54a920180600c0f000, type: 3}
+      weight: 20
+  - startTime: 15
     endTime: 30
     pool:
-    - prefab: {fileID: 8526445191827257934, guid: db8a340232348ad45931818c8dc69018, type: 3}
+    - prefab: {fileID: 5655989853241019075, guid: 7bc7612a6362eb2439a809f19d8fee3d, type: 3}
       weight: 100
   isBossWave: 1
-  bossPrefab: {fileID: 722587135448257199, guid: 5f6579578d25548418c0ae40dff20340, type: 3}
+  bossPrefab: {fileID: 5655989853241019075, guid: c3aa93bb88db992498dfef043c717bd1, type: 3}
   includeAddsInBossClear: 1
