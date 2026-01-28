@@ -43,5 +43,12 @@ public class HitVFXManager : MonoBehaviour
             return;
 
         Instantiate(prefab, position, Quaternion.identity);
+
+        // 카메라 흔들림
+        IsoCamera cam = Camera.main.GetComponent<IsoCamera>();
+        if (cam != null)
+        {
+            cam.Shake();
+        }
     }
 }
