@@ -13,11 +13,12 @@ public class MonsterSpawner : MonoBehaviour
     [SerializeField] private Transform _player;
     [SerializeField] private Transform _tower;
     [SerializeField] private float _minSpawnDistance = 20.0f; // 최소 스폰 범위
-    [SerializeField] private float _spawnRadius = 40.0f; // 스폰 범위
+    [SerializeField] private float _spawnRadius = 45.0f; // 스폰 범위
     [SerializeField] private int _maxTryCount = 20; // 무한루프 방지
 
     private float _spawnTimer = 0.0f;
     private int _currentSpawnCount = 0;
+
 
     private void Update()
     {
@@ -44,11 +45,15 @@ public class MonsterSpawner : MonoBehaviour
     // WaveDirector가 호출하는 단일 스폰 API
     public MonsterBase SpawnMonster(GameObject prefab)
     {
-        if (prefab == null) 
+        if (prefab == null)
+        {
             return null;
+        }
 
         if (_player == null || _tower == null)
+        {
             return null;
+        }
 
         Vector3 spawnPos;
         bool found = TryGetValidSpawnPosition(out spawnPos);
@@ -77,7 +82,7 @@ public class MonsterSpawner : MonoBehaviour
             );
 
             // NavMesh 위인지 검사
-            if (NavMesh.SamplePosition(randomPos, out NavMeshHit hit, 5.0f, NavMesh.AllAreas))
+            if (NavMesh.SamplePosition(randomPos, out NavMeshHit hit, 30.0f, NavMesh.AllAreas))
             {
                 // y == 0 인 NavMesh만 허용
                 if (Mathf.Abs(hit.position.y) > 0.01f)
@@ -90,5 +95,17 @@ public class MonsterSpawner : MonoBehaviour
 
         result = Vector3.zero;
         return false;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (_tower == null)
+            return;
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(_tower.position, _minSpawnDistance);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(_tower.position, _spawnRadius);
     }
 }
