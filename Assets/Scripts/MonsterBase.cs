@@ -161,7 +161,7 @@ public abstract class MonsterBase : MonoBehaviour, IDamageable
     /// </summary>
     public virtual void TakeDamage(float damage)
     {
-        // 기존 코드 호환: 속성 정보 없이 들어오면 Normal 공격으로 처리
+        // 속성 정보 없이 들어오면 Normal 공격으로 처리
         TakeDamage(new DamageInfo(damage, ElementType.Normal, null));
     }
 
