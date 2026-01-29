@@ -390,7 +390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHp: 1000
-  _attackDamage: 50
+  _attackDamage: 30
   _defense: 30
   _attackRange: 5
   _moveSpeed: 5

@@ -387,11 +387,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f33e1b3d8db25f4eb88bb129596e448, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHp: 100
-  _attackDamage: 5
-  _defense: 0
+  _maxHp: 500
+  _attackDamage: 15
+  _defense: 15
   _attackRange: 2.5
-  _moveSpeed: 2.5
+  _moveSpeed: 3
   _canAct: 1
   _animator: {fileID: 0}
   _target: {fileID: 0}
