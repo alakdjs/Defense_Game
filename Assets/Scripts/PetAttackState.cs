@@ -7,7 +7,6 @@ public class PetAttackState : IState
     private float _dashSpeedMultiplier = 3.0f;
     private float _dashDuration = 1.0f; // 돌진 시간
     private float _dashStartTime;
-    private bool _hasDashed;
 
     public PetAttackState(PetBase pet)
     {
@@ -22,7 +21,6 @@ public class PetAttackState : IState
         // 돌진 시작
         _dashStartTime = Time.time;
         _pet.SetDashShield(true);
-        _hasDashed = false;
 
         // 돌진 속도 설정 (원래 속도에서 배수 적용)
         _pet.Agent.speed *= _dashSpeedMultiplier;
@@ -60,8 +58,6 @@ public class PetAttackState : IState
         }
         else
         {
-            // 돌진 완료 후 Idle로 전환
-            _hasDashed = true;
             _pet.StateMachine.ChangeState(_pet.IdleState);
         }
     }
