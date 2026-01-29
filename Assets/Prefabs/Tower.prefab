@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8529987727244875118}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3615209386236052634}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: PetSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7364778227223438049, guid: 2378b4a0c3f1080439606a9c137e5220, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7364778227223438049, guid: 2378b4a0c3f1080439606a9c137e5220, type: 3}
       propertyPath: m_TagString

@@ -25,6 +25,6 @@ public class WeaponData : ScriptableObject
     public WeaponType WeaponType; // 무기 종류
     public WeaponElementType ElementType; // 무기 속성
     public GameObject WeaponPrefab; // 실제 무기 프리팹
-    public float Damage = 30.0f; // 데미지
+    public float Damage = 50.0f; // 데미지
     public float AttackRange = 2.0f; // 공격 인식 범위
 }
