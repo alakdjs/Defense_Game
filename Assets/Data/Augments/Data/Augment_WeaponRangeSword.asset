@@ -22,3 +22,4 @@ MonoBehaviour:
   description: "\uAC80\uC5D0 \uAE43\uB4E0 \uAE30\uC6B4\uC774 \uBED7\uC5B4\uB098\uAC00\n\uACF5\uACA9
     \uBC94\uC704\uAC00 \uC99D\uAC00\uD569\uB2C8\uB2E4."
   oneTimeOnly: 0
+  maxStack: 20
