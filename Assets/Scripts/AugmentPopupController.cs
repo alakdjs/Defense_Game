@@ -67,7 +67,9 @@ public class AugmentPopupController : MonoBehaviour
         }
 
         _popupRoot.SetActive(true);
-        Time.timeScale = 0f; // 일시정지
+
+        if (GameManager.Instance != null)
+            GameManager.Instance.SetState(GameState.AugmentSelect);
     }
 
     /// <summary>
@@ -84,7 +86,9 @@ public class AugmentPopupController : MonoBehaviour
     {
         _popupRoot.SetActive(false);
         ClearCards();
-        Time.timeScale = 1.0f;
+
+        if (GameManager.Instance != null)
+            GameManager.Instance.SetState(GameState.Playing);
     }
 
     public void ClearCards()

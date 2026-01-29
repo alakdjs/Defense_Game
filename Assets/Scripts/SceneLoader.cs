@@ -2,7 +2,7 @@
 using UnityEngine.SceneManagement;
 
 
-public class StartSceneManager : MonoBehaviour
+public class SceneLoader : MonoBehaviour
 {
     public void GoSampleScene()
     {

@@ -72,7 +72,7 @@ public class PlayerLevel : MonoBehaviour
         // 체력 회복
         _playerHp.Heal(_hpIncreasePerLevel);
 
-        // 레벨 업 시 증강 카드 UI 등장 + 게임 일시정지(Time.timeScale = 0f)는 팝업 내부에서 처리
+        // 레벨 업 시 증강 카드 UI 등장 + 게임 일시정지(Time.timeScale = 0f)는 GameManager에서 처리
         if (AugmentPopupController.Instance != null && AugmentPopupController.Instance.ShouldOpenPopupAtLevel(_level))
         {
             AugmentPopupController.Instance.OpenPopup(_level);

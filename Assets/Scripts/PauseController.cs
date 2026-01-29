@@ -7,22 +7,39 @@ public class PauseController : MonoBehaviour
     [SerializeField] private Sprite _pauseSprite;
     [SerializeField] private Sprite _playSprite;
 
-    private bool _isPaused = false;
+    private void OnEnable()
+    {
+        if (GameManager.Instance != null)
+            GameManager.Instance.OnGameStateChanged += HandleStateChanged;
+    }
+
+    private void OnDisable()
+    {
+        if (GameManager.Instance != null)
+            GameManager.Instance.OnGameStateChanged -= HandleStateChanged;
+    }
 
     public void TogglePause()
     {
-        _isPaused = !_isPaused;
+        if (GameManager.Instance == null)
+            return;
 
-        if (_isPaused)
+        GameManager.Instance.TogglePause();
+    }
+
+    private void HandleStateChanged(GameState oldState, GameState newState)
+    {
+        bool isPaused = (newState == GameState.Paused || newState == GameState.Settings);
+
+        if (isPaused)
         {
-            Time.timeScale = 0f;
             _pauseButtonImage.sprite = _playSprite;
         }
         else
         {
-            Time.timeScale = 1f;
             _pauseButtonImage.sprite = _pauseSprite;
         }
+
     }
 
 }
