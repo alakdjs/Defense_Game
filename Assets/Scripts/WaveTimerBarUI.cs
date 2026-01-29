@@ -10,6 +10,9 @@ public class WaveTimerBarUI : MonoBehaviour
     [SerializeField] private Text _waveNameText;
     [SerializeField] private Text _bossHpText;
 
+    [SerializeField] private Image _totalWaveFillImage;
+    [SerializeField] private Text _totalWaveText;
+
     private Color _defaultFillColor = Color.white;
 
     private void Awake()
@@ -18,6 +21,12 @@ public class WaveTimerBarUI : MonoBehaviour
             Debug.LogWarning("[WaveTimerBarUI] Fill Image가 연결되지 않았습니다.");
         else
             _defaultFillColor = _fillImage.color;
+
+        if (_totalWaveFillImage == null)
+            Debug.LogWarning("[WaveTimerBarUI] TotalWave Fill Image가 연결되지 않았습니다.");
+
+        if (_totalWaveText == null)
+            Debug.LogWarning("[WaveTimerBarUI] TotalWave Text가 연결되지 않았습니다.");
     }
 
     private void OnEnable()
@@ -57,6 +66,19 @@ public class WaveTimerBarUI : MonoBehaviour
     {
         if (_waveManager == null)
             return;
+
+        // 전체 웨이브 진행도
+        if (_totalWaveFillImage != null)
+        {
+            _totalWaveFillImage.fillAmount = _waveManager.TotalWaveProgress01;
+        }
+
+        if (_totalWaveText != null)
+        {
+            int cur = _waveManager.CurrentWaveNumber1Based;
+            int total = _waveManager.TotalWaveCount;
+            _totalWaveText.text = $"{cur} / {total}";
+        }
 
         _bossHpText.gameObject.SetActive(false);
 

@@ -93,6 +93,45 @@ public class WaveManager : MonoBehaviour
         }
     }
 
+    public int TotalWaveCount
+    {
+        get
+        {
+            return (_waves != null) ? _waves.Length : 0;
+        }
+    }
+
+    public int CurrentWaveIndex => _currentWaveIndex;
+
+    // 전체 웨이브 진행도
+    public float TotalWaveProgress01
+    {
+        get
+        {
+            int total = TotalWaveCount;
+            if (total <= 0)
+                return 0.0f;
+
+            // (현재 웨이브 인덱스 + 현재 웨이브 내부 진행도)
+            float progressed = _currentWaveIndex + CurrentWaveProgress01;
+
+            float remaining = 1.0f - (progressed / total);
+            return Mathf.Clamp01(remaining);
+        }
+    }
+
+    public int CurrentWaveNumber1Based
+    {
+        get
+        {
+            int total = TotalWaveCount;
+            if (total <= 0)
+                return 0;
+
+            return Mathf.Clamp(_currentWaveIndex + 1, 1, total);
+        }
+    }
+
     public event Action OnWaveStarted;
 
     // ====================================================================
