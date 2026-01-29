@@ -10,8 +10,8 @@ public class PlayerLevel : MonoBehaviour
     [SerializeField] private float _expIncrease = 2.5f;
 
     [SerializeField] private float _hpIncreasePerLevel = 10.0f;
-    [SerializeField] private float _attackIncreasePerLevel = 0.1f;
-    [SerializeField] private float _defenseIncreasePerLevel = 0.1f;
+    [SerializeField] private float _attackIncreasePerLevel = 2.0f;
+    [SerializeField] private float _defenseIncreasePerLevel = 2.0f;
 
     [SerializeField] private PlayerExpUI _expUI;
 

@@ -18,7 +18,7 @@ MonoBehaviour:
   weaponTypeToEquip: 0
   weaponElementTypeToEquip: 1
   valuesPerLevel:
-  - 10
+  - 5
   weightedPetPrefabs: []
   spawnRandomPet: 1
   specificPetPrefab: {fileID: 0}
