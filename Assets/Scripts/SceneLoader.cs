@@ -4,14 +4,19 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-    public void GoSampleScene()
-    {
-        SceneManager.LoadScene("SampleScene");
-    }
-
     public void GoStartScene()
     {
         SceneManager.LoadScene("StartScene");
+    }
+
+    public void GoCutsceneScene()
+    {
+        SceneManager.LoadScene("CutsceneScene");
+    }
+
+    public void GoSampleScene()
+    {
+        SceneManager.LoadScene("SampleScene");
     }
 
     // 게임 종료 버튼용

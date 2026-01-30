@@ -403,8 +403,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2095367935}
-        m_TargetAssemblyTypeName: StartSceneManager, Assembly-CSharp
-        m_MethodName: GoSampleScene
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: GoCutsceneScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
