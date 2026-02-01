@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.SceneManagement;
 
 public class CutsceneManager : MonoBehaviour
 {
@@ -66,7 +65,7 @@ public class CutsceneManager : MonoBehaviour
     {
         if (_cutsceneData == null || _cutsceneData.frames == null || _cutsceneData.frames.Length == 0)
         {
-            SceneManager.LoadScene(_nextSceneName);
+            LoadingManager.Instance.LoadSceneAsync("CutsceneScene");
             return;
         }
 
@@ -103,7 +102,7 @@ public class CutsceneManager : MonoBehaviour
 
         if (_frameIndex >= _cutsceneData.frames.Length)
         {
-            SceneManager.LoadScene(_nextSceneName);
+            LoadingManager.Instance.LoadSceneAsync(_nextSceneName);
             return;
         }
 

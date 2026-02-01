@@ -1,22 +1,21 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 
 public class SceneLoader : MonoBehaviour
 {
     public void GoStartScene()
     {
-        SceneManager.LoadScene("StartScene");
+        LoadingManager.Instance.LoadSceneAsync("StartScene");
     }
 
     public void GoCutsceneScene()
     {
-        SceneManager.LoadScene("CutsceneScene");
+        LoadingManager.Instance.LoadSceneAsync("CutsceneScene");
     }
 
     public void GoSampleScene()
     {
-        SceneManager.LoadScene("SampleScene");
+        LoadingManager.Instance.LoadSceneAsync("SampleScene");
     }
 
     // 게임 종료 버튼용
