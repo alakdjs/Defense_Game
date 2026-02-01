@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,9 +12,12 @@ public class LoadingManager : MonoBehaviour
     private GameObject _overlayInstance;
     private LoadingOverlayView _view;
 
+    // ì¤‘ë³µ ë¡œë“œ ë°©ì§€
+    private bool _isLoading = false;
+
     private void Awake()
     {
-        // ½Ì±ÛÅæ + ¾À À¯Áö
+        // ì‹±ê¸€í†¤ + ì”¬ ìœ ì§€
         if (Instance != null)
         {
             Destroy(gameObject);
@@ -26,30 +29,36 @@ public class LoadingManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ·Îµù ¿À¹ö·¹ÀÌ¸¦ ¶ç¿ì°í, ºñµ¿±â·Î ¾À ·Îµå
+    /// ë¡œë”© ì˜¤ë²„ë ˆì´ë¥¼ ë„ìš°ê³ , ë¹„ë™ê¸°ë¡œ ì”¬ ë¡œë“œ
     /// </summary>
     public void LoadSceneAsync(string sceneName)
     {
+        // ë¡œë”© ì¤‘ì´ë©´ ì¤‘ë³µ í˜¸ì¶œ ë°©ì§€
+        if (_isLoading)
+            return;
+
         StartCoroutine(CoLoadSceneAsync(sceneName));
     }
 
     private IEnumerator CoLoadSceneAsync(string sceneName)
     {
+        _isLoading = true;
+
         ShowOverlay();
 
         if (_view != null)
             _view.SetProgress(0f);
 
-        // UI°¡ ÇÑ ÇÁ·¹ÀÓ ±×·ÁÁú ½Ã°£À» È®º¸
+        // UIê°€ í•œ í”„ë ˆì„ ê·¸ë ¤ì§ˆ ì‹œê°„ì„ í™•ë³´
         yield return null;
 
         AsyncOperation op = SceneManager.LoadSceneAsync(sceneName);
         op.allowSceneActivation = false;
 
-        // progress´Â 0.9±îÁö ¿Ã¶ó°¡°í, allowSceneActivation¿¡¼­ ÁøÂ¥ ³Ñ¾î°¨
+        // progressëŠ” 0.9ê¹Œì§€ ì˜¬ë¼ê°€ê³ , allowSceneActivationì—ì„œ ì§„ì§œ ë„˜ì–´ê°
         while (op.progress < 0.9f)
         {
-            // 0~0.9 ¡æ 0~1·Î Á¤±ÔÈ­
+            // 0~0.9 â†’ 0~1ë¡œ ì •ê·œí™”
             float normalizedProgress = Mathf.Clamp01(op.progress / 0.9f);
 
             if (_view != null)
@@ -58,19 +67,21 @@ public class LoadingManager : MonoBehaviour
             yield return null;
         }
 
-        // 100% Ã¤¿ì±â
+        // 100% ì±„ìš°ê¸°
         if (_view != null)
             _view.SetProgress(1f);
 
-        // ´ÙÀ½ ÇÁ·¹ÀÓ¿¡ ¾À È°¼ºÈ­
+        // ë‹¤ìŒ í”„ë ˆì„ì— ì”¬ í™œì„±í™”
         yield return null;
 
         op.allowSceneActivation = true;
 
-        // ¾À ÀüÈ¯ ÈÄ ÇÑ ÇÁ·¹ÀÓ ±â´Ù·È´Ù°¡ ¿À¹ö·¹ÀÌ ¼û±è
+        // ì”¬ ì „í™˜ í›„ í•œ í”„ë ˆì„ ê¸°ë‹¤ë ¸ë‹¤ê°€ ì˜¤ë²„ë ˆì´ ìˆ¨ê¹€
         yield return null;
 
         HideOverlay();
+
+        _isLoading = false;
     }
 
     private void ShowOverlay()
