@@ -2987,7 +2987,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2952976231310677641, guid: d085da537bbea694493000dafa056e9a, type: 3}
       propertyPath: _defenseIncreasePerLevel
-      value: 0.1
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7167928421021097973, guid: d085da537bbea694493000dafa056e9a, type: 3}
       propertyPath: m_Name

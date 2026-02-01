@@ -19,3 +19,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7d9594111cf1e0e4ba909c74fb5df58e, type: 2}
   requiredAugment: []
   description: "\uC774\uB3D9\uC18D\uB3C4\uAC00 \uC99D\uAC00\uD569\uB2C8\uB2E4!"
+  oneTimeOnly: 0
+  maxStack: 10
