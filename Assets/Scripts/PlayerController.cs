@@ -577,7 +577,7 @@ public class PlayerController : MonoBehaviour
                 break;
 
             case StatType.AttackSpeed:
-                // 공격 속도 = 쿨타임 감소를 "감소량"으로 처리
+                // 공격 속도 = 쿨타임 감소를 감소량으로 처리
                 // addValue가 0.2라면 쿨타임을 0.2초 줄이는 방식
                 _autoAttackIntervalBonus -= addValue;
                 Debug.Log($"[증강] 공격 속도(쿨타임 감소) -{addValue} -> {_autoAttackIntervalBonus:F2}");

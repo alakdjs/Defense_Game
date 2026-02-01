@@ -86,6 +86,10 @@ public class TowerMain : MonoBehaviour, IDamageable
     private void Die()
     {
         // Game Over
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.GameOver();
+        }
     }
 
     private void OnDrawGizmos() // 펫 이동반경 표시용도

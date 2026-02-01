@@ -10,6 +10,8 @@ public class PauseController : MonoBehaviour
     [SerializeField] private GameObject _pausePopupRoot;
     [SerializeField] private Image _dimBackgroundImage;
 
+    [SerializeField] private SceneLoader _sceneLoader;
+
     private void Awake()
     {
         // 초기 상태에서 팝업이 켜져있지 않도록
@@ -70,6 +72,28 @@ public class PauseController : MonoBehaviour
         // 팝업 동기화
         if (_pausePopupRoot != null)
             _pausePopupRoot.SetActive(isPaused);
+    }
+
+    public void OnClickGoToTitle()
+    {
+        if (_sceneLoader == null)
+        {
+            Debug.LogError("[PauseController] SceneLoader가 연결되지 않았습니다.");
+            return;
+        }
+
+        _sceneLoader.GoStartScene();
+    }
+
+    public void OnClickQuit()
+    {
+        if (_sceneLoader == null)
+        {
+            Debug.LogError("[PauseController] SceneLoader가 연결되지 않았습니다.");
+            return;
+        }
+
+        _sceneLoader.QuitGame();
     }
 
 }

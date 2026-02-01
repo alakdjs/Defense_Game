@@ -143,6 +143,12 @@ public class PlayerHp : MonoBehaviour, IDamageable
             _hpBarShadow.SetDanger(false);
         }
 
+        // Game Over
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.GameOver();
+        }
+
         if (_player != null)
         {
             _player.StateMachine.ChangeState(_player.DeadState);
