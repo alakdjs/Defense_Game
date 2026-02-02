@@ -45,6 +45,9 @@ public class WaveManager : MonoBehaviour
     private float _spawnTimer = 0.0f;
     private bool _isRunning = false;
 
+
+    public event Action<int> OnWaveCompleted; // 0-based wave index
+
     public bool HasBossSpawned => _bossSpawned;
     public MonsterBase BossInstance => _bossInstance;
     public bool IsBossWave
@@ -260,6 +263,10 @@ public class WaveManager : MonoBehaviour
     private void GoNextWave()
     {
         _isRunning = false;
+
+        // 현재 웨이브가 끝났다는 이벤트
+        // (이 시점의 _currentWaveIndex가 방금 끝난 웨이브)
+        OnWaveCompleted?.Invoke(_currentWaveIndex);
 
         int next = _currentWaveIndex + 1;
         if (next >= _waves.Length)
