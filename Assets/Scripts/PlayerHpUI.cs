@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 
 public class PlayerHpUI : MonoBehaviour
 {
     [SerializeField] private Image _fillImage;
-    [SerializeField] private Text _hpText;
+    [SerializeField] private TMP_Text _hpText;
 
     private float _maxHp;
 

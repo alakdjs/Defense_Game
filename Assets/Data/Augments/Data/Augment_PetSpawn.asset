@@ -18,6 +18,6 @@ MonoBehaviour:
   effects:
   - {fileID: 11400000, guid: 01762a20ce1db0247a6aa5a30558a869, type: 2}
   requiredAugment: []
-  description: "\uBB34\uC791\uC704 \uD3AB 1\uB9C8\uB9AC\uB97C \uC18C\uD658\uD569\uB2C8\uB2E4!"
+  description: "\uBB34\uC791\uC704 \uD3AB 1\uB9C8\uB9AC\uB97C\\n\uC18C\uD658\uD569\uB2C8\uB2E4!"
   oneTimeOnly: 0
   maxStack: 5

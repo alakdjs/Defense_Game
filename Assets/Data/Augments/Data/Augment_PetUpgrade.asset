@@ -19,8 +19,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6420678836d348440a1c1948b9e8acd7, type: 2}
   requiredAugment:
   - {fileID: 11400000, guid: 58de7550dfdcb4d45a6a92e4e084ad9f, type: 2}
-  description: "\uD3AB\uC758 \uBAA8\uB4E0 \uB2A5\uB825\uCE58(\uACF5\uACA9\uB825,
-    \uBC29\uC5B4\uB825, \uCD5C\uB300\uCCB4\uB825)\uAC00 \uC601\uAD6C\uC801\uC73C\uB85C
+  description: "\uD3AB\uC758 \uBAA8\uB4E0 \uB2A5\uB825\uCE58\\n(\uACF5\uACA9\uB825,
+    \uBC29\uC5B4\uB825, \uCD5C\uB300\uCCB4\uB825)\uAC00\\n\uC601\uAD6C\uC801\uC73C\uB85C
     \uC99D\uAC00\uD569\uB2C8\uB2E4!"
   oneTimeOnly: 0
   maxStack: 10

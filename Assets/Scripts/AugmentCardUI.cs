@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class AugmentCardUI : MonoBehaviour
 {
     [SerializeField] private Image _iconImage;
-    [SerializeField] private Text _titleText;
-    [SerializeField] private Text _exText;
+    [SerializeField] private TMP_Text _titleText;
+    [SerializeField] private TMP_Text _exText;
     [SerializeField] private Button _selectButton;
 
     private AugmentData _augmentData;

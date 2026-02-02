@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 
 public class PlayerExpUI : MonoBehaviour
 {
     [SerializeField] private Image _fillImage;
-    [SerializeField] private Text _levelText;
+    [SerializeField] private TMP_Text _levelText;
 
     public void SetExp(float currentExp, float maxExp, int level)
     {

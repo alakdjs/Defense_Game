@@ -19,7 +19,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dd78b876dfccab448997df6dc0bd4d45, type: 2}
   requiredAugment:
   - {fileID: 11400000, guid: d1164c33a69142c43b1d71d8d6e3a1c0, type: 2}
-  description: "\uBE59\uACB0\uC758 \uAE30\uC6B4\uC73C\uB85C \uC5BC\uC74C \uD0C0\uC785
+  description: "\uBE59\uACB0\uC758 \uAE30\uC6B4\uC73C\uB85C\\n\uC5BC\uC74C \uD0C0\uC785
     \uC18D\uC131\uC744 \uAC16\uC2B5\uB2C8\uB2E4!"
   oneTimeOnly: 0
   maxStack: 0

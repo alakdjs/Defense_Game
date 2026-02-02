@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 
 public class WaveTimerBarUI : MonoBehaviour
 {
     [SerializeField] private WaveManager _waveManager;
     [SerializeField] private Image _fillImage;
-    [SerializeField] private Text _timeText;
-    [SerializeField] private Text _waveNameText;
-    [SerializeField] private Text _bossHpText;
+    [SerializeField] private TMP_Text _timeText;
+    [SerializeField] private TMP_Text _waveNameText;
+    [SerializeField] private TMP_Text _bossHpText;
 
     [SerializeField] private Image _totalWaveFillImage;
-    [SerializeField] private Text _totalWaveText;
+    [SerializeField] private TMP_Text _totalWaveText;
 
     private Color _defaultFillColor = Color.white;
 

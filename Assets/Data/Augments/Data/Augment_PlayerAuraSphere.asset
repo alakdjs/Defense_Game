@@ -18,7 +18,7 @@ MonoBehaviour:
   effects:
   - {fileID: 11400000, guid: e0f85db1a0a012347b180c61f1619707, type: 2}
   requiredAugment: []
-  description: "\uB0B4\uBA74\uC758 \uC5D0\uB108\uC9C0\uAC00 \uD30C\uB3D9\uD0C4\uC774
-    \uB418\uC5B4 \uC8FC\uAE30\uC801\uC73C\uB85C \uBAB8 \uBC16\uC73C\uB85C \uBC29\uCD9C\uB429\uB2C8\uB2E4."
+  description: "\uB0B4\uBA74\uC758 \uC5D0\uB108\uC9C0\uAC00\\n\uD30C\uB3D9\uD0C4\uC774
+    \uB418\uC5B4\\n\uC8FC\uAE30\uC801\uC73C\uB85C\\n\uBAB8 \uBC16\uC73C\uB85C \uBC29\uCD9C\uB429\uB2C8\uB2E4."
   oneTimeOnly: 0
   maxStack: 7
