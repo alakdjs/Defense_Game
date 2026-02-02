@@ -12,6 +12,20 @@ public class WaveManager : MonoBehaviour
     [Header("Wave List")]
     [SerializeField] private WaveData[] _waves;
 
+    // 게임 클리어 직전(마지막 웨이브일 때)
+    [Header("Last Wave Visual")]
+    [Tooltip("마지막 웨이브에 켤 오브젝트")]
+    [SerializeField] private GameObject _lastWaveEnableTarget;
+
+    // ================== 게임 클리어 컷씬 ==================
+    [Header("Game Clear Cutscene")]
+    [Tooltip("모든 웨이브 클리어 시 재생할 컷씬 데이터")]
+    [SerializeField] private CutsceneData _gameClearCutsceneData;
+
+    [Tooltip("클리어 컷씬 종료 후 이동할 씬 이름")]
+    [SerializeField] private string _afterClearSceneName = "StartScene";
+    // ===============================================================
+
     [Header("Difficulty Tuning")]
     [Tooltip("레벨이 오르면 감소/MaxAlive 증가")]
     [SerializeField] private float _spawnIntervalDecreasePerLevel = 0.01f;
@@ -225,6 +239,13 @@ public class WaveManager : MonoBehaviour
         _bossSpawned = false;
         _isRunning = true;
 
+        // ===== 마지막 웨이브 특정 오브젝트 활성화 =====
+        bool isLastWave = (_waves != null && _waves.Length > 0 && _currentWaveIndex == _waves.Length - 1);
+        
+        if (_lastWaveEnableTarget != null)
+            _lastWaveEnableTarget.SetActive(isLastWave);
+        // ==============================================
+
         WaveData wave = _waves[_currentWaveIndex];
         Debug.Log($"[WaveManager] Wave Start: {wave.waveName} (Index: {_currentWaveIndex})");
 
@@ -244,10 +265,29 @@ public class WaveManager : MonoBehaviour
         if (next >= _waves.Length)
         {
             Debug.Log("[WaveManager] All waves cleared!");
+            HandleGameClear(); // 게임 클리어 처리
             return;
         }
 
         StartWave(next);
+    }
+
+    // 게임 클리어 시 컷씬 재생
+    private void HandleGameClear()
+    {
+        if (GameManager.Instance != null)
+            GameManager.Instance.StartCutscene();
+
+        if (_gameClearCutsceneData == null)
+        {
+            Debug.LogWarning("[WaveManager] 게임 클리어 컷씬 데이터가 null -> 바로 다음 씬으로 이동");
+            LoadingManager.Instance.LoadSceneAsync(_afterClearSceneName);
+            return;
+        }
+
+        // CutsceneScene에서 이 데이터로 재생하도록 예약하고, CutsceneScene로 이동
+        CutsceneManager.SetPendingCutscene(_gameClearCutsceneData, _afterClearSceneName);
+        LoadingManager.Instance.LoadSceneAsync("CutsceneScene");
     }
 
     private void TickSpawn(WaveData wave)

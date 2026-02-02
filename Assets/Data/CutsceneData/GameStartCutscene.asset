@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 230b73f2864478544b422f94a1c1d73d, type: 3}
+  m_Name: GameStartCutscene
+  m_EditorClassIdentifier: 
+  frames:
+  - image: {fileID: 21300000, guid: 88e5a0819b586084e8f7a90320661491, type: 3}
+    dialogues:
+    - "\uBA70\uCE60 \uB4A4\uBA74 \uBA54\uB9AC \uD06C\uB9AC\uC2A4\uB9C8\uC2A4!"
+    - "\uC544\uC8FC \uBA3C \uACF3\uBD80\uD130 \uBC30\uB2EC\uC744 \uD558\uB824\uBA74
+      \uBBF8\uB9AC\uBBF8\uB9AC \uCD9C\uBC1C\uD574\uC57C \uD55C\uB2E4.."
+    - "\uC790 \uADF8\uB7FC \uCD9C\uBC1C\uD574\uBCFC\uAE4C?"
+    - "\uB8E8\uB3CC\uD504\uC640 \uC5EC\uD589\uD558\uAE30 \uC88B\uC740 \uBC24\uC774\uAD6C\uB098.."
+  - image: {fileID: 21300000, guid: 9ec9e9f610988684d81eae583b8d2188, type: 3}
+    dialogues:
+    - "\uBB50\uC9C0..!?"
+    - "\uC54C \uC218 \uC5C6\uB294 \uD798\uC5D0 \uC758\uD574 \uACF5\uAC04\uC774 \uB4A4\uD2C0\uB838\uB2E4..!"
+    - "\uC124\uC0C1\uAC00\uC0C1\uC73C\uB85C \uB8E8\uB3CC\uD504\uB4E4\uB3C4 \uB193\uCCD0\uBC84\uB838\uC5B4..!"
+    - "\uD070\uC77C\uC774\uB2E4..! \uC5B4\uB9B0\uC774\uB4E4\uC5D0\uAC8C \uC904 \uC120\uBB3C\uB3C4
+      \uC774\uACF3 \uC800\uACF3\uC73C\uB85C..!"
+  - image: {fileID: 21300000, guid: 5ca3ce8403587d94dbe9dea08eccf000, type: 3}
+    dialogues:
+    - "\uB9DD\uD588\uB2E4.. \uC5EC\uAE34 \uC5B4\uB514\uC9C0? \uB09C\uC0DD \uCC98\uC74C
+      \uBCF4\uB294 \uC774\uC0C1\uD55C \uC7A5\uC18C\uB85C \uB5A8\uC5B4\uC84C\uB2E4..!"
+    - "\uAD1C\uCC2E\uC544..! \uB2E4\uD589\uC778\uAC74 \uC544\uC9C1 \uD06C\uB9AC\uC2A4\uB9C8\uC2A4\uAE4C\uC9C0
+      \uBA40\uC5C8\uB2E4\uB294 \uC810\uC774\uB2E4.."
+    - "\uC5BC\uB978 \uC8FC\uBCC0\uC5D0 \uD769\uC5B4\uC9C4 \uC120\uBB3C\uC744 \uB418\uCC3E\uACE0.."
+    - "\uB8E8\uB3CC\uD504\uB4E4\uB3C4 \uC774\uACF3\uC73C\uB85C \uB418\uB3CC\uC544\uC640\uC900\uB2E4\uBA74..!"
+    - "\uD06C\uB9AC\uC2A4\uB9C8\uC2A4 \uC804\uAE4C\uC9C0 \uC120\uBB3C\uC744 \uC904
+      \uC218 \uC788\uC5B4..!"
+    - "\uC8FC\uBCC0\uC5D0 \uBAAC\uC2A4\uD130\uB4E4\uC774 \uC788\uB294 \uB290\uB08C\uC774\uB2E4.."
+    - "\uB8E8\uB3CC\uD504\uAC00 \uC62C \uB54C\uAE4C\uC9C0 \uC798 \uBC84\uD168\uBCF4\uC790..!"

@@ -4,10 +4,32 @@ using TMPro;
 
 public class CutsceneManager : MonoBehaviour
 {
+    // 컷씬 씬 재사용
+    private struct CutsceneRequest
+    {
+        public CutsceneData data;
+        public string nextSceneName;
+    }
+
+    private static bool _hasPendingRequest = false;
+    private static CutsceneRequest _pendingRequest;
+
+    /// <summary>
+    /// 외부(WaveManager)에서 다음에 CutsceneScene 들어가면 이 컷씬을 재생하도록 예약
+    /// </summary>
+    public static void SetPendingCutscene(CutsceneData data, string nextSceneName)
+    {
+        _pendingRequest = new CutsceneRequest
+        {
+            data = data,
+            nextSceneName = nextSceneName
+        };
+        _hasPendingRequest = true;
+    }
+
     [Header("UI")]
     [SerializeField] private Image _background;
     [SerializeField] private TMP_Text _dialogueText;
-
     [SerializeField] private Button _prevButton;
     [SerializeField] private Button _nextButton;
 
@@ -20,6 +42,14 @@ public class CutsceneManager : MonoBehaviour
 
     private void Start()
     {
+        // 들어오자마자 Pending 요청이 있으면 덮어쓰기
+        if (_hasPendingRequest)
+        {
+            _cutsceneData = _pendingRequest.data;
+            _nextSceneName = _pendingRequest.nextSceneName;
+            _hasPendingRequest = false; // 1회성
+        }
+
         // 컷씬 진입 상태로 전환
         if (GameManager.Instance != null)
         {
@@ -65,7 +95,9 @@ public class CutsceneManager : MonoBehaviour
     {
         if (_cutsceneData == null || _cutsceneData.frames == null || _cutsceneData.frames.Length == 0)
         {
-            LoadingManager.Instance.LoadSceneAsync("CutsceneScene");
+            // 데이터가 없으면 무한 루프 방지: 다음 씬이 있으면 그쪽으로, 없으면 StartScene으로
+            string fallback = string.IsNullOrEmpty(_nextSceneName) ? "StartScene" : _nextSceneName;
+            LoadingManager.Instance.LoadSceneAsync(fallback);
             return;
         }
 
