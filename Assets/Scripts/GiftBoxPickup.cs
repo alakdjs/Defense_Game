@@ -26,6 +26,10 @@ public class GiftBoxPickup : MonoBehaviour
         // 체력 회복
         player.Heal(_healAmount);
 
+        // 상자 획득 카운트 증가
+        if (GameManager.Instance != null)
+            GameManager.Instance.AddGiftBox();
+
         // 이펙트
         if (_pickupVfxPrefab != null)
         {

@@ -8,9 +8,17 @@ public class SceneLoader : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+    private void SetTitleStateIfPossible()
+    {
+        // Title로 이동할 때 런 플래그/카운트 리셋
+        if (GameManager.Instance != null)
+            GameManager.Instance.SetState(GameState.Title);
+    }
+
     public void GoStartScene()
     {
         ResetTimeScale();
+        SetTitleStateIfPossible();
         LoadingManager.Instance.LoadSceneAsync("StartScene");
     }
 
@@ -30,6 +38,10 @@ public class SceneLoader : MonoBehaviour
     public void RestartCurrentScene()
     {
         ResetTimeScale();
+
+        if (GameManager.Instance != null)
+            GameManager.Instance.SetState(GameState.Playing);
+
         string currentSceneName = SceneManager.GetActiveScene().name;
         LoadingManager.Instance.LoadSceneAsync(currentSceneName);
     }

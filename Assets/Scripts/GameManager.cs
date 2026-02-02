@@ -21,6 +21,19 @@ public class GameManager : MonoBehaviour
     public GameState CurrentState => _currentState;
     private GameState _prevState = GameState.Title;
 
+    // GiftBox 관련
+    private bool _runInitialized = false; // 현재 인게임 런 초기화 여부
+
+    public event Action<int> OnGiftBoxCountChanged;
+    private int _giftBoxCount = 0;
+    public int GiftBoxCount => _giftBoxCount;
+
+    public void AddGiftBox()
+    {
+        _giftBoxCount++;
+        OnGiftBoxCountChanged?.Invoke(_giftBoxCount);
+    }
+
     private void Awake()
     {
         // 싱글톤
@@ -63,6 +76,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void InitNewRun()
+    {
+        // 인게임 시작 시 초기화
+        _giftBoxCount = 0;
+        OnGiftBoxCountChanged?.Invoke(_giftBoxCount);
+
+        Debug.Log("[GameManager] InitNewRun()");
+    }
+
     public void SetState(GameState nextState)
     {
         if (_currentState == nextState)
@@ -71,6 +93,21 @@ public class GameManager : MonoBehaviour
         GameState old = _currentState;
         _prevState = old;
         _currentState = nextState;
+
+        if (_currentState == GameState.Title)
+        {
+            _runInitialized = false;
+
+            _giftBoxCount = 0;
+            OnGiftBoxCountChanged?.Invoke(_giftBoxCount);
+        }
+
+        // Playing 첫 진입 초기화
+        if (_currentState == GameState.Playing && _runInitialized == false)
+        {
+            InitNewRun();
+            _runInitialized = true;
+        }
 
         ApplyGlobalPolicy(_currentState);
 
@@ -82,6 +119,10 @@ public class GameManager : MonoBehaviour
     {
         switch (state)
         {
+            case GameState.Title:
+                Time.timeScale = 1f;
+                break;
+
             case GameState.Playing:
                 Time.timeScale = 1f;
                 break;
@@ -96,6 +137,12 @@ public class GameManager : MonoBehaviour
             case GameState.Cutscene:
                 Time.timeScale = 1f;
                 break;
+        }
+
+        // 런 종료: 결과 상태 들어가면 다음 런 준비
+        if (state == GameState.Result)
+        {
+            _runInitialized = false;
         }
     }
 
