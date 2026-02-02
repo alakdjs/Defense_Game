@@ -22,7 +22,7 @@ MonoBehaviour:
   weightedPetPrefabs: []
   spawnRandomPet: 1
   specificPetPrefab: {fileID: 0}
-  petAttackAdd: 10
-  petDefenseAdd: 10
-  petMaxHpAdd: 10
+  petAttackAdd: 5
+  petDefenseAdd: 0.5
+  petMaxHpAdd: 5
   stunDuration: 5
