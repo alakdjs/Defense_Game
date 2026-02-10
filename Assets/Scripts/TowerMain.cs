@@ -92,11 +92,17 @@ public class TowerMain : MonoBehaviour, IDamageable
         }
     }
 
-    private void OnDrawGizmos() // 펫 이동반경 표시용도
+    private void OnDrawGizmos() // 펫 반경 표시용도
     {
         Gizmos.color = Color.black;
 
         Gizmos.DrawWireSphere(transform.position, _petRadius);
+    }
+
+    public Vector3 GetPetReturnPosition()
+    {
+        // 펫이 복귀할 기본 위치(스폰 포인트)
+        return _petSpawnPoints[0].position;
     }
 
     public void Heal(float amount)
@@ -157,7 +163,7 @@ public class TowerMain : MonoBehaviour, IDamageable
         GameObject go = Instantiate(petPrefab, spawnPos, Quaternion.identity);
 
         PetBase pet = go.GetComponent<PetBase>();
-        pet.SetTower(transform);
+        pet.SetTower(this);
 
         _spawnedPets.Add(pet);
 

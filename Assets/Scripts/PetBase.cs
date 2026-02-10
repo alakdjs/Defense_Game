@@ -23,6 +23,11 @@ public abstract class PetBase : MonoBehaviour, IDamageable
     [SerializeField] protected float _defense = 1.0f; // 방어력
     protected float _lastAttackTime = -999f;
 
+    [Tooltip("펫을 중심으로 몬스터를 탐지하는 범위")]
+    [SerializeField] protected float _detectRadius = 15.0f;
+
+    [SerializeField] protected TowerMain _tower;
+
     protected float _currentHp;
     protected bool _isDead = false;
 
@@ -33,7 +38,7 @@ public abstract class PetBase : MonoBehaviour, IDamageable
     [SerializeField] private GameObject _dashShield;
 
     [SerializeField] protected Animator _animator;
-    [SerializeField] protected Transform _tower;
+
     protected Transform _targetMonster;
 
     protected NavMeshAgent _agent;
@@ -49,7 +54,7 @@ public abstract class PetBase : MonoBehaviour, IDamageable
     public float CurrentHp => _currentHp;
     public bool IsDead => _isDead;
 
-    public Transform Tower => _tower;
+    public TowerMain Tower => _tower;
     public Transform TargetMonster => _targetMonster;
     public NavMeshAgent Agent => _agent;
     public Animator Animator => _animator;
@@ -69,7 +74,7 @@ public abstract class PetBase : MonoBehaviour, IDamageable
     public PetDeadState DeadState => _deadState;
 
     // 소환 시 타워 참조 주입
-    public void SetTower(Transform tower)
+    public void SetTower(TowerMain tower)
     {
         _tower = tower;
     }
@@ -105,7 +110,7 @@ public abstract class PetBase : MonoBehaviour, IDamageable
             GameObject towerObj = GameObject.FindGameObjectWithTag("Tower");
             if (towerObj != null)
             {
-                _tower = towerObj.transform;
+                _tower = towerObj.GetComponent<TowerMain>();
             }
         }
 
@@ -162,13 +167,12 @@ public abstract class PetBase : MonoBehaviour, IDamageable
     // 몬스터 탐지
     public Transform FindNearestMonster()
     {
-        TowerMain tower = _tower.GetComponent<TowerMain>();
-        if (tower == null)
+        if (_tower == null)
             return null;
 
         Collider[] hits = Physics.OverlapSphere(
-            _tower.position,
-            tower.PetRadius,
+            transform.position,
+            _detectRadius,
             LayerMask.GetMask("Monster")
         );
 
@@ -198,34 +202,38 @@ public abstract class PetBase : MonoBehaviour, IDamageable
         _targetMonster = monster;
     }
 
+    // 타겟 몬스터의 콜라이더 표면까지의 실제 거리
+    protected float GetDistanceToTargetSurface()
+    {
+        Vector3 petPos = transform.position;
+
+        Collider col = _targetMonster.GetComponent<Collider>();
+
+        Vector3 closest = col.ClosestPoint(petPos);
+        return Vector3.Distance(petPos, closest);
+    }
+
+
+    // 타워 스폰(펫 스폰 포인트)으로 복귀할 목적지 계산
+    public Vector3 GetReturnPositionToTowerSpawn()
+    {
+        if (_tower == null)
+            return transform.position;
+
+        return _tower.GetPetReturnPosition();
+    }
+
     public bool IsOutOfTowerRadius()
     {
         if (_tower == null)
             return false;
 
-        TowerMain tower = _tower.GetComponent<TowerMain>();
-        if (tower == null)
-            return false;
-
-        float dist = Vector3.Distance(transform.position, _tower.position);
-        return dist > tower.PetRadius;
+        float dist = Vector3.Distance(transform.position, _tower.transform.position);
+        return dist > _tower.PetRadius;
     }
 
     public virtual void UpdateTarget()
     {
-        if (_tower == null)
-        {
-            _targetMonster = null;
-            return;
-        }
-
-        // 타워 반경 벗어나면 타겟 해제
-        if (IsOutOfTowerRadius())
-        {
-            _targetMonster = null;
-            return;
-        }
-
         _targetMonster = FindNearestMonster();
     }
 
@@ -234,12 +242,7 @@ public abstract class PetBase : MonoBehaviour, IDamageable
         if (_targetMonster == null)
             return false;
 
-        float dist = Vector3.Distance(
-            transform.position,
-            _targetMonster.position
-        );
-
-        return dist <= _attackRange;
+        return GetDistanceToTargetSurface() <= _attackRange;
     }
 
     public bool CanAttack()
@@ -250,12 +253,7 @@ public abstract class PetBase : MonoBehaviour, IDamageable
         if (Time.time < _lastAttackTime + _attackCooltime)
             return false;
 
-        float dist = Vector3.Distance(
-            transform.position,
-            _targetMonster.position
-        );
-
-        return dist <= _attackRange;
+        return GetDistanceToTargetSurface() <= _attackRange;
     }
 
     // 데미지 처리

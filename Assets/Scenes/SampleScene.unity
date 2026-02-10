@@ -3658,7 +3658,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7508143000519951695, guid: d085da537bbea694493000dafa056e9a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7508143000519951695, guid: d085da537bbea694493000dafa056e9a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3666,7 +3666,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7508143000519951695, guid: d085da537bbea694493000dafa056e9a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.17
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 7508143000519951695, guid: d085da537bbea694493000dafa056e9a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -22574,7 +22574,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3615209386236052634, guid: d025b2644d1498547ab7468c9912f97a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5
+      value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 3868640567508339549, guid: d025b2644d1498547ab7468c9912f97a, type: 3}
       propertyPath: _towerHpUI
