@@ -1,10 +1,10 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class CutsceneManager : MonoBehaviour
 {
-    // ÄÆ¾À ¾À Àç»ç¿ë
+    // ì»·ì”¬ ì”¬ ì¬ì‚¬ìš©
     private struct CutsceneRequest
     {
         public CutsceneData data;
@@ -15,7 +15,7 @@ public class CutsceneManager : MonoBehaviour
     private static CutsceneRequest _pendingRequest;
 
     /// <summary>
-    /// ¿ÜºÎ(WaveManager)¿¡¼­ ´ÙÀ½¿¡ CutsceneScene µé¾î°¡¸é ÀÌ ÄÆ¾ÀÀ» Àç»ıÇÏµµ·Ï ¿¹¾à
+    /// ì™¸ë¶€(WaveManager)ì—ì„œ ë‹¤ìŒì— CutsceneScene ë“¤ì–´ê°€ë©´ ì´ ì»·ì”¬ì„ ì¬ìƒí•˜ë„ë¡ ì˜ˆì•½
     /// </summary>
     public static void SetPendingCutscene(CutsceneData data, string nextSceneName)
     {
@@ -42,15 +42,15 @@ public class CutsceneManager : MonoBehaviour
 
     private void Start()
     {
-        // µé¾î¿ÀÀÚ¸¶ÀÚ Pending ¿äÃ»ÀÌ ÀÖÀ¸¸é µ¤¾î¾²±â
+        // ë“¤ì–´ì˜¤ìë§ˆì Pending ìš”ì²­ì´ ìˆìœ¼ë©´ ë®ì–´ì“°ê¸°
         if (_hasPendingRequest)
         {
             _cutsceneData = _pendingRequest.data;
             _nextSceneName = _pendingRequest.nextSceneName;
-            _hasPendingRequest = false; // 1È¸¼º
+            _hasPendingRequest = false; // 1íšŒì„±
         }
 
-        // ÄÆ¾À ÁøÀÔ »óÅÂ·Î ÀüÈ¯
+        // ì»·ì”¬ ì§„ì… ìƒíƒœë¡œ ì „í™˜
         if (GameManager.Instance != null)
         {
             GameManager.Instance.StartCutscene();
@@ -68,13 +68,13 @@ public class CutsceneManager : MonoBehaviour
 
     private void Update()
     {
-        // ´ÙÀ½
+        // ë‹¤ìŒ
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Next();
         }
 
-        // ÀÌÀü
+        // ì´ì „
         if (Input.GetKeyDown(KeyCode.Backspace))
         {
             Prev();
@@ -95,7 +95,7 @@ public class CutsceneManager : MonoBehaviour
     {
         if (_cutsceneData == null || _cutsceneData.frames == null || _cutsceneData.frames.Length == 0)
         {
-            // µ¥ÀÌÅÍ°¡ ¾øÀ¸¸é ¹«ÇÑ ·çÇÁ ¹æÁö: ´ÙÀ½ ¾ÀÀÌ ÀÖÀ¸¸é ±×ÂÊÀ¸·Î, ¾øÀ¸¸é StartSceneÀ¸·Î
+            // ë°ì´í„°ê°€ ì—†ìœ¼ë©´ ë¬´í•œ ë£¨í”„ ë°©ì§€: ë‹¤ìŒ ì”¬ì´ ìˆìœ¼ë©´ ê·¸ìª½ìœ¼ë¡œ, ì—†ìœ¼ë©´ StartSceneìœ¼ë¡œ
             string fallback = string.IsNullOrEmpty(_nextSceneName) ? "StartScene" : _nextSceneName;
             LoadingManager.Instance.LoadSceneAsync(fallback);
             return;
@@ -119,7 +119,7 @@ public class CutsceneManager : MonoBehaviour
         CutsceneFrame frame = _cutsceneData.frames[_frameIndex];
         int dialogueCount = frame.dialogues != null ? frame.dialogues.Length : 0;
 
-        // ´ë»ç°¡ ´õ ³²¾Æ ÀÖÀ¸¸é ´ë»ç¸¸ ³Ñ±è
+        // ëŒ€ì‚¬ê°€ ë” ë‚¨ì•„ ìˆìœ¼ë©´ ëŒ€ì‚¬ë§Œ ë„˜ê¹€
         if (dialogueCount > 0 && _dialogueIndex < dialogueCount - 1)
         {
             _dialogueIndex++;
@@ -128,7 +128,7 @@ public class CutsceneManager : MonoBehaviour
             return;
         }
 
-        // ÀÌ ÄÆ ³¡ ¡æ ´ÙÀ½ ÄÆ
+        // ì´ ì»· ë â†’ ë‹¤ìŒ ì»·
         _frameIndex++;
         _dialogueIndex = 0;
 
@@ -144,7 +144,7 @@ public class CutsceneManager : MonoBehaviour
 
     private void Prev()
     {
-        // °°Àº ÄÆ¿¡¼­ ÀÌÀü ´ë»ç°¡ ÀÖÀ¸¸é
+        // ê°™ì€ ì»·ì—ì„œ ì´ì „ ëŒ€ì‚¬ê°€ ìˆìœ¼ë©´
         if (_dialogueIndex > 0)
         {
             _dialogueIndex--;
@@ -153,20 +153,20 @@ public class CutsceneManager : MonoBehaviour
             return;
         }
 
-        // Ã¹ ÄÆ + Ã¹ ´ë»ç¸é ´õ ÀÌ»ó ¸ø °¨
+        // ì²« ì»· + ì²« ëŒ€ì‚¬ë©´ ë” ì´ìƒ ëª» ê°
         if (_frameIndex == 0)
         {
             RefreshButtonState();
             return;
         }
 
-        // ÀÌÀü ÄÆÀ¸·Î ÀÌµ¿
+        // ì´ì „ ì»·ìœ¼ë¡œ ì´ë™
         _frameIndex--;
 
         CutsceneFrame prevFrame = _cutsceneData.frames[_frameIndex];
         int dialogueCount = prevFrame.dialogues != null ? prevFrame.dialogues.Length : 0;
 
-        // ÀÌÀü ÄÆÀÇ ¸¶Áö¸· ´ë»ç·Î
+        // ì´ì „ ì»·ì˜ ë§ˆì§€ë§‰ ëŒ€ì‚¬ë¡œ
         _dialogueIndex = Mathf.Max(0, dialogueCount - 1);
 
         ShowCurrent();
@@ -175,7 +175,7 @@ public class CutsceneManager : MonoBehaviour
 
     private void RefreshButtonState()
     {
-        // Prev: Ã¹ ÄÆ + Ã¹ ´ë»ç¸é ºñÈ°¼º
+        // Prev: ì²« ì»· + ì²« ëŒ€ì‚¬ë©´ ë¹„í™œì„±
         if (_prevButton != null)
         {
             bool canPrev = !(_frameIndex == 0 && _dialogueIndex == 0);

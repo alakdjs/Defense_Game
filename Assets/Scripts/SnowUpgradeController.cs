@@ -1,23 +1,23 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 
 public class SnowUpgradeController : MonoBehaviour
 {
     [SerializeField] private StageManager _stageManager;
 
-    [Tooltip("±âº» ´«(Soft). Ç×»ó ÆÄÆ¼Å¬ On")]
+    [Tooltip("ê¸°ë³¸ ëˆˆ(Soft). í•­ìƒ íŒŒí‹°í´ On")]
     [SerializeField] private ParticleSystem _softSnow;
 
-    [Tooltip("Æø¼³ ´«(Heavy). SnowDay¿¡¼­¸¸ ÆÄÆ¼Å¬ On")]
+    [Tooltip("í­ì„¤ ëˆˆ(Heavy). SnowDayì—ì„œë§Œ íŒŒí‹°í´ On")]
     [SerializeField] private ParticleSystem _heavySnow;
 
     private void Awake()
     {
-        // Soft´Â Ç×»ó ÄÑµÒ
+        // SoftëŠ” í•­ìƒ ì¼œë‘ 
         if (_softSnow != null && _softSnow.isPlaying == false)
             _softSnow.Play();
 
-        // Heavy´Â ±âº»ÀûÀ¸·Î ²¨µÒ
+        // HeavyëŠ” ê¸°ë³¸ì ìœ¼ë¡œ êº¼ë‘ 
         if (_heavySnow != null && _heavySnow.isPlaying)
             _heavySnow.Stop();
     }
@@ -36,7 +36,7 @@ public class SnowUpgradeController : MonoBehaviour
 
     private void Start()
     {
-        // ½ÃÀÛ ½Ã ÇöÀç ½ºÅ×ÀÌÁö »óÅÂ¸¦ 1È¸ ¹İ¿µ
+        // ì‹œì‘ ì‹œ í˜„ì¬ ìŠ¤í…Œì´ì§€ ìƒíƒœë¥¼ 1íšŒ ë°˜ì˜
         if (_stageManager != null)
             _stageManager.ForceBroadcastCurrentStage();
         else
@@ -45,7 +45,7 @@ public class SnowUpgradeController : MonoBehaviour
 
     private void HandleStageChanged(StageType stage)
     {
-        // SnowDay¿¡¼­¸¸ Heavy¸¦ ÄÑ¼­ Æø¼³ ¾÷±×·¹ÀÌµå
+        // SnowDayì—ì„œë§Œ Heavyë¥¼ ì¼œì„œ í­ì„¤ ì—…ê·¸ë ˆì´ë“œ
         bool isSnowDay = (stage == StageType.SnowDay);
 
         if (_heavySnow == null)

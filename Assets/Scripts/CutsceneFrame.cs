@@ -1,12 +1,12 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [System.Serializable]
 public class CutsceneFrame
 {
     [Header("Image")]
     public Sprite image;
-
+    
     [Header("Dialogues")]
-    [Tooltip("ÀÌ ÀÌ¹ÌÁö¿¡¼­ ¼ø¼­´ë·Î Ãâ·ÂµÉ ´ë»çµé")]
+    [Tooltip("ì´ ì´ë¯¸ì§€ì—ì„œ ìˆœì„œëŒ€ë¡œ ì¶œë ¥ë  ëŒ€ì‚¬ë“¤")]
     public string[] dialogues;
 }
