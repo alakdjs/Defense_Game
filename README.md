@@ -1,7 +1,7 @@
 # Unity_3D_Project (ReadMe 수정중)
 # Santa Survival (Santa-Survivor-Defense_Game)
 
-Santa Survival은 Unity로 개발한 3D Wave Defense Survival Game입니다.
+Santa Survival은 Unity로 개발한 3D Wave Defense Survival Game입니다.  
 플레이어는 산타 캐릭터를 조작하여 몰려오는 몬스터 웨이브를 막아내고, 다양한 증강 시스템과 무기 속성 시스템을 활용해 생존해야 합니다.
 
 게임은 자동 공격 기반 전투 시스템과 로그라이크 형태의 웨이브 디펜스 구조를 결합하여 진행되며,
