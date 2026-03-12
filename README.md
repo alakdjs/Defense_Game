@@ -10,3 +10,5 @@ Santa Survival은 Unity로 개발한 3D Wave Defense Survival Game입니다.
 
 또한 몬스터, 펫, 플레이어 모두 FSM 기반 AI 구조로 설계되어 있으며
 무기 및 증강 시스템은 ScriptableObject 기반 데이터 구조로 구현되었습니다.
+
+사진 추가 예정, 링크 연결 예정, 설명 더 추가 예정
