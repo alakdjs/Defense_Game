@@ -240,8 +240,8 @@ Cutscene System
 
 ## 게임 다운로드
 
-PC:
-모바일:
+PC:  
+모바일:  
 
 <br>
 
