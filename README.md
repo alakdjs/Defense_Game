@@ -247,4 +247,6 @@ PC:
 
 ## 사용 에셋, 애니메이션, 이미지 등 출처
 
-유니티 에셋스토어(무료), Mixamo, https://www.flaticon.com/kr/
+유니티 에셋스토어(무료),  
+https://www.mixamo.com/,  
+https://www.flaticon.com/kr/  
