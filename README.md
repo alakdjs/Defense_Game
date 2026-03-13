@@ -17,7 +17,6 @@ Santa Survival은 Unity로 개발한 "3D Wave Defense + 로그라이크" 장르�
 <img width="400" height="225" alt="6_보스몬스터조우" src="https://github.com/user-attachments/assets/a31c04de-0d79-415e-a9e8-8db5da75d130" />
 <img width="400" height="225" alt="7_최종보스" src="https://github.com/user-attachments/assets/7349bc39-1135-4681-8871-e6b933a993a0" />
 
-
 <br>
 
 ## 🔧 Development Environment
@@ -37,6 +36,33 @@ Santa Survival은 Unity로 개발한 "3D Wave Defense + 로그라이크" 장르�
 
 <br>
 
+## 🧱 Project Architecture
+
+이 프로젝트는 다음과 같은 구조를 기반으로 설계되었습니다.
+
+**Architecture**
+- FSM (Finite State Machine)
+- ScriptableObject Data Architecture
+- Component-based Design
+
+**Core Gameplay Systems**
+- Player FSM System
+- Monster AI System
+- Pet AI System
+- Wave System
+- Augment System
+- Weapon System
+- Elemental Combat System
+- Tower Defense System
+
+**Supporting Systems**
+- Camera Occlusion System
+- Async Scene Loading
+- Game State Manager
+- Cutscene System
+
+<br>
+
 ## 🧭 Game Flow
 
 (이미지)  
@@ -45,38 +71,8 @@ Santa Survival은 Unity로 개발한 "3D Wave Defense + 로그라이크" 장르�
 플레이어 / 펫 / 타워가 협력하여 몬스터를 처치합니다.  
 
 몬스터 처치 시 경험치를 획득하며   
-레벨업 시 **증강(Augment)**을 선택하여 캐릭터를 강화합니다.  
+레벨업 시 **증강(Augment)**을 선택하여 캐릭터를 강화합니다.
 
-.....................................  
-Architecture
-- FSM (Finite State Machine)
-- ScriptableObject Data Architecture
-- Component-based Design
-
-Core Systems
-- Player FSM System
-- Monster AI System
-- Pet AI System
-- Wave System
-- Augment System
-- Weapon System
-- Elemental Damage System
-- Tower Defense System
-
-UI Systems
-- Player HP UI
-- Monster, Pet HP Bar
-- EXP / Level UI
-- Wave Progress UI
-- Attack Range UI
-
-Additional Systems
-- Camera Occlusion System
-- Async Scene Loading
-- Game State Manager
-- Cutscene System (ScriptableObject 기반)  
-....................................
-  
 <br>
 
 ## 🧠 Core Systems
