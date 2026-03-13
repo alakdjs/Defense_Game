@@ -307,16 +307,16 @@ Santa Survival은 Unity로 개발한 "3D Wave Defense + 로그라이크" 장르�
 ## 📂 Project Structure
 
 Scripts
-├ Player
-├ Monster
-├ Pet
-├ Tower
-├ Wave
-├ Augment
-├ Weapon
-├ UI
-├ Managers
-└ Systems
+- Player
+- Monster
+- Pet
+- Tower
+- Wave
+- Augment
+- Weapon
+-  UI
+- Managers
+- Systems
 
 <br>
 
