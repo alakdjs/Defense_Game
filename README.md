@@ -224,7 +224,7 @@ Santa Survival은 Unity로 개발한 "3D Wave Defense + 로그라이크" 장르�
 증강 시스템은 ScriptableObject 기반 데이터 구조로 설계했습니다.   
 
 증강 적용 흐름   
-(이미지)
+<img width="820" height="1113" alt="augment_system_diagram" src="https://github.com/user-attachments/assets/e74f138a-da62-4ca9-9b89-52493817e6a5" />
 
 * AugmentData
   * augmentName
