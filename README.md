@@ -93,7 +93,7 @@ Santa Survival은 Unity로 개발한 "3D Wave Defense + 로그라이크" 장르�
 
 <br>
 
-#### Player FSM
+### Player FSM
 
 플레이어는 Idle / Move / Dead 상태로 구성됩니다.  
 
@@ -113,7 +113,7 @@ Santa Survival은 Unity로 개발한 "3D Wave Defense + 로그라이크" 장르�
 
 <br>
 
-#### Monster FSM
+### Monster FSM
 
 몬스터는 Idle / Chase / Attack / Stun / Dead 상태로 구성된 AI 구조를 사용합니다.  
 
@@ -143,7 +143,7 @@ Santa Survival은 Unity로 개발한 "3D Wave Defense + 로그라이크" 장르�
 
 <br>
 
-#### Pet FSM
+### Pet FSM
 
 펫은 플레이어를 보조하는 서브 타워형 AI 유닛입니다.  
 
