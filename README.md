@@ -1,8 +1,9 @@
-# 🎮 3D Wave Defense Game
+# 🎮 Santa Survival
 
-Santa Survival은 Unity로 개발한 "3D Wave Defense + 로그라이크" 장르의 개인 프로젝트입니다.   
+Unity로 개발한 **3D Wave Defense + 로그라이크** 장르의 개인 프로젝트입니다.  
+
 플레이어는 자동 공격을 기반으로 몰려오는 몬스터를 처치하며 경험치를 획득하고,   
-레벨업 시 선택하는 "증강 시스템(Augment System)"을 통해 캐릭터를 강화하면서 타워를 방어해야 합니다.  
+레벨업 시 선택하는 **증강 시스템(Augment System)**을 통해 캐릭터를 강화하면서 타워를 방어해야 합니다.  
 
 이 프로젝트는 FSM 기반 AI 구조, ScriptableObject 데이터 설계, 증강 시스템,   
 웨이브 기반 게임 루프 구현 등   
@@ -31,9 +32,8 @@ Santa Survival은 Unity로 개발한 "3D Wave Defense + 로그라이크" 장르�
 
 ## 📅 Development Period
 
-**2025.12 ~ 2026.02 (약 2개월)**  
-
-**Solo Development**
+- **2025.12 ~ 2026.02 (약 2개월)**  
+- **Solo Development**
 
 <br>
 
@@ -137,7 +137,7 @@ Santa Survival은 Unity로 개발한 "3D Wave Defense + 로그라이크" 장르�
   * 사망 처리
   * 애니메이션이 없는 몬스터는 y스케일을 줄이는 연출로 구현
 
-특징
+**특징**
 - NavMesh 기반 추적 AI
 - 애니메이션 이벤트 기반 공격 처리
 - 증강 시스템과 연동되는 Stun 상태
@@ -165,7 +165,7 @@ Santa Survival은 Unity로 개발한 "3D Wave Defense + 로그라이크" 장르�
 * Dead
   * 사망 연출
 
-특징
+**특징**
 - 타워 반경 기반 활동 범위
 - 공격 후 Idle 상태에서 반경을 벗어나면 스폰 위치로 복귀
 - 일정 반경 내 몬스터 자동 탐지
@@ -261,7 +261,7 @@ Santa Survival은 Unity로 개발한 "3D Wave Defense + 로그라이크" 장르�
   * Boss Wave
   * Game Progress UI  
 
-특징
+**특징**
 - ScriptableObject 기반 WaveData
 - 플레이어 레벨 기반 난이도 증가
 - 보스 웨이브 시스템
