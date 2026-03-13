@@ -31,7 +31,8 @@ Santa Survival은 Unity로 개발한 "3D Wave Defense + 로그라이크" 장르�
 
 ## 📅 Development Period
 
-**2025.12 ~ 2026.02 (약 2개월)**   
+**2025.12 ~ 2026.02 (약 2개월)**  
+
 **Solo Development**
 
 <br>
