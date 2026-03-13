@@ -66,7 +66,7 @@ Santa Survival은 Unity로 개발한 "3D Wave Defense + 로그라이크" 장르�
 
 ## 🧭 Game Flow
 
-(이미지)  
+<img width="450" height="650" alt="game_flow_diagram" src="https://github.com/user-attachments/assets/12289c79-cb71-4310-b0bd-a9a9ad91729d" />
 
 몬스터 웨이브가 시작되면 몬스터가 스폰되고   
 플레이어 / 펫 / 타워가 협력하여 몬스터를 처치합니다.  
