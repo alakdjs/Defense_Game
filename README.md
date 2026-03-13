@@ -65,7 +65,7 @@ Santa Survival은 Unity로 개발한 "3D Wave Defense + 로그라이크" 장르�
 
 ## 🧭 Game Flow
 
-(이미지)  
+
 
 몬스터 웨이브가 시작되면 몬스터가 스폰되고   
 플레이어 / 펫 / 타워가 협력하여 몬스터를 처치합니다.  
@@ -231,7 +231,8 @@ Santa Survival은 Unity로 개발한 "3D Wave Defense + 로그라이크" 장르�
   * effects
   * requiredAugment
   * oneTimeOnly
-  * maxStack
+  * maxStack  
+
 
 지원하는 증강 효과
 - 플레이어 능력치 증가
@@ -257,7 +258,7 @@ Santa Survival은 Unity로 개발한 "3D Wave Defense + 로그라이크" 장르�
 * WaveManager
   * Monster Spawn
   * Boss Wave
-  * Game Progress UI
+  * Game Progress UI  
 
 특징
 - ScriptableObject 기반 WaveData
