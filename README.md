@@ -6,7 +6,7 @@ Unity로 개발한 **3D Wave Defense + 로그라이크** 장르의 개인 프로
 레벨업 시 선택하는 **증강 시스템(Augment System)**을 통해 캐릭터를 성장시키며 타워를 방어해야 합니다.  
 
 이 프로젝트는 FSM 기반 AI 구조, ScriptableObject 데이터 설계, 증강 시스템,   
-웨이브 기반 게임 루프 구현 등   
+성장 기반 전투 루프 + 웨이브 난이도 구조 등   
 전반적인 게임 플레이 시스템 설계와 구조 구현에 초점을 맞춰 개발되었습니다.  
 
 <img width="400" height="225" alt="1_게임시작화면" src="https://github.com/user-attachments/assets/7d3abc07-a2b7-4796-a777-79a874dbe45d" />
@@ -58,10 +58,11 @@ PC (Windows) / Android
 - Player FSM System
 - Monster AI System
 - Pet AI System
-- Wave System
-- Augment System
 - Weapon System
 - Elemental Combat System
+- Level & EXP System
+- Augment System
+- Wave System
 - Tower Defense System
 
 **Supporting Systems**
@@ -249,6 +250,7 @@ PC (Windows) / Android
 
 
 지원하는 증강 효과
+- 무기 선택(Sword, Rifle)
 - 플레이어 능력치 증가
 - 무기 강화
 - 무기 속성 변경
@@ -258,7 +260,7 @@ PC (Windows) / Android
 - 몬스터 기절
 - 파동탄 공격(패시브 추가)
 - 경험치 흡수 범위 증가
-- 전체 회복
+- 아군 전체 회복
 
 <br>
 
@@ -275,7 +277,9 @@ PC (Windows) / Android
 
 ## 🌊 Wave System
 
-게임은 웨이브 기반 진행 시스템으로 구성됩니다.  
+몬스터 처치 → 경험치 획득 → 레벨업 → 증강 선택 → 캐릭터 성장으로 이어지는   
+성장 기반 전투 루프를 중심으로 게임이 진행되며,   
+몬스터 웨이브를 통해 점진적인 난이도 상승 구조를 설계했습니다.  
 
 각 웨이브마다 몬스터가 등장하며   
 게임 진행 상황은 Wave Timer UI로 표시됩니다.
@@ -402,7 +406,7 @@ Scripts
 - ScriptableObject 기반 데이터 설계
 - NavMesh 기반 몬스터 AI
 - 자동 공격 전투 시스템
-- 웨이브 기반 디펜스 게임 루프
+- 성장 기반 전투 루프 + 웨이브 난이도 구조
 - 속성 상성 전투 시스템
 - 레벨 및 경험치 시스템
 - 증강 카드 기반 성장 시스템
