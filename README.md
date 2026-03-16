@@ -2,8 +2,8 @@
 
 Unity로 개발한 **3D Wave Defense + 로그라이크** 장르의 개인 프로젝트입니다.  
 
-플레이어는 자동 공격을 기반으로 몰려오는 몬스터를 처치하며 경험치를 획득하고,   
-레벨업 시 선택하는 **증강 시스템(Augment System)**을 통해 캐릭터를 강화하면서 타워를 방어해야 합니다.  
+플레이어(산타)는 자동 공격을 기반으로 몬스터를 처치하며 경험치를 획득하고,   
+레벨업 시 선택하는 **증강 시스템(Augment System)**을 통해 캐릭터를 성장시키며 타워를 방어해야 합니다.  
 
 이 프로젝트는 FSM 기반 AI 구조, ScriptableObject 데이터 설계, 증강 시스템,   
 웨이브 기반 게임 루프 구현 등   
@@ -17,6 +17,16 @@ Unity로 개발한 **3D Wave Defense + 로그라이크** 장르의 개인 프로
 
 <img width="400" height="225" alt="6_보스몬스터조우" src="https://github.com/user-attachments/assets/a31c04de-0d79-415e-a9e8-8db5da75d130" />
 <img width="400" height="225" alt="7_최종보스" src="https://github.com/user-attachments/assets/7349bc39-1135-4681-8871-e6b933a993a0" />
+
+<br>
+
+## 🎮 Genre
+3D Wave Defense / Roguelike
+
+<br>
+
+## 🎮 Platform
+PC (Windows) / Android
 
 <br>
 
@@ -42,9 +52,9 @@ Unity로 개발한 **3D Wave Defense + 로그라이크** 장르의 개인 프로
 이 프로젝트는 다음과 같은 구조를 기반으로 설계되었습니다.
 
 **Architecture**
-- FSM (Finite State Machine)
-- ScriptableObject Data Architecture
-- Component-based Design
+- FSM (Finite State Machine) 기반 AI 구조
+- ScriptableObject 기반 데이터 아키텍처
+- Component 기반 게임 시스템 설계
 
 **Core Gameplay Systems**
 - Player FSM System
@@ -66,6 +76,8 @@ Unity로 개발한 **3D Wave Defense + 로그라이크** 장르의 개인 프로
 
 ## 🧭 Game Flow
 
+게임은 웨이브 기반으로 진행되며   
+몬스터 처치 → 경험치 획득 → 레벨업 → 증강 선택의 루프 구조로 설계되었습니다.
 <img width="450" height="650" alt="game_flow_diagram" src="https://github.com/user-attachments/assets/12289c79-cb71-4310-b0bd-a9a9ad91729d" />
 
 몬스터 웨이브가 시작되면 몬스터가 스폰되고   
@@ -81,7 +93,8 @@ Unity로 개발한 **3D Wave Defense + 로그라이크** 장르의 개인 프로
 ### FSM 기반 AI 시스템
 
 플레이어, 몬스터, 펫의 상태 처리를 위해 FSM(Finite State Machine) 구조를 사용했습니다.     
-공통 StateMachine과 IState 인터페이스를 기반으로 상태를 분리하여 관리합니다.  
+공통 StateMachine과 IState 인터페이스를 기반으로 상태를 분리하여 관리합니다.   
+상태별 로직을 분리하여 유지보수성과 확장성을 높였습니다.  
 
 * StateMachine
   * ChangeState()
@@ -213,7 +226,8 @@ Unity로 개발한 **3D Wave Defense + 로그라이크** 장르의 개인 프로
 | Weak | 0.5x                |
 | Normal | 1.0x                |
 
-속성 배율 계산은 ElementalCombat에서 처리됩니다.
+속성 배율 계산은 ElementalCombat에서 처리되며   
+각 오브젝트에 ElementalStatus 컴포넌트를 통해 적용됩니다.
 
 <br>
 
@@ -221,7 +235,8 @@ Unity로 개발한 **3D Wave Defense + 로그라이크** 장르의 개인 프로
 
 레벨업 시 증강 카드 3개 중 하나를 선택할 수 있습니다.  
 
-증강 시스템은 ScriptableObject 기반 데이터 구조로 설계했습니다.   
+플레이어가 레벨업할 때마다 증강 선택 UI가 표시되며   
+선택된 증강은 ScriptableObject 기반 시스템을 통해 Player, Pet, Tower 등에 적용됩니다.  
 
 증강 적용 흐름   
 <img width="400" height="500" alt="augment_system_diagram" src="https://github.com/user-attachments/assets/e74f138a-da62-4ca9-9b89-52493817e6a5" />
@@ -253,8 +268,10 @@ Unity로 개발한 **3D Wave Defense + 로그라이크** 장르의 개인 프로
 
 게임은 웨이브 기반 진행 시스템으로 구성됩니다.  
 
-각 웨이브마다 몬스터가 등장하며
-게임 진행 상황은 Wave Timer UI로 표시됩니다.  
+각 웨이브마다 몬스터가 등장하며   
+게임 진행 상황은 Wave Timer UI로 표시됩니다.
+- 현재 웨이브 진행 시간(보스 웨이브일 경우 보스의 체력바로 변경)
+- 전체 게임 진행률
 
 * WaveManager
   * Monster Spawn
@@ -278,6 +295,21 @@ Unity로 개발한 **3D Wave Defense + 로그라이크** 장르의 개인 프로
 
 <br>
 
+## 🎁 Gift Box System
+
+맵 전역에 산타가 잃어버린 선물 상자가 스폰됩니다.  
+
+플레이어는 맵을 탐색하여 선물 상자를 획득할 수 있으며    
+획득 시 체력이 회복됩니다.
+
+선물 상자는 웨이브 완료 시 랜덤 위치에 생성되며   
+NavMesh 기반 위치 샘플링을 통해 유효한 위치에 스폰됩니다.  
+
+이 시스템은 맵 탐색 요소를 추가하여   
+플레이어가 타워 주변에만 머무르지 않도록 설계되었습니다.
+
+<br>
+
 ## 🎬 Cutscene System
 
 게임 시작과 클리어 연출을 위해 ScriptableObject 기반 컷씬 시스템을 구현했습니다.  
@@ -295,13 +327,26 @@ Unity로 개발한 **3D Wave Defense + 로그라이크** 장르의 개인 프로
 
 ## 🌄 Stage System
 
-웨이브 진행에 따라 스테이지 환경이 변경됩니다.
+웨이브 진행에 따라 스테이지 환경이 변경됩니다.   
+10웨이브마다 Skybox가 변경되며   
+시간대가 낮 → 해질녘 → 밤 → 새벽 → 낮으로 변화합니다.   
+마지막 스테이지에서는 눈 효과가 강화되어   
+게임 분위기를 연출합니다.
 - Skybox
 - Lighting
 - Ambient
 
 스테이지 변경 이벤트는 StageManager에서 관리되며   
 환경 변화는 StageLightingController에서 처리됩니다.
+
+<br>
+
+## ⏳ Async Scene Loading
+
+씬 전환 시 로딩 시간을 개선하기 위해 비동기 씬 로딩을 사용했습니다.  
+
+씬 로딩 중에는 로딩 오버레이 UI를 표시하여   
+플레이어가 자연스럽게 게임 시작을 기다릴 수 있도록 구현했습니다.
 
 <br>
 
@@ -315,7 +360,7 @@ Scripts
 - Wave
 - Augment
 - Weapon
--  UI
+- UI
 - Managers
 - Systems
 
@@ -327,7 +372,7 @@ Scripts
 - ScriptableObject 기반 데이터 설계
 - NavMesh 기반 몬스터 AI
 - 자동 공격 전투 시스템
-- 웨이브 디펜스 구조(웨이브 기반 게임 루프)
+- 웨이브 기반 디펜스 게임 루프
 - 속성 상성 전투 시스템
 - 증강 카드 기반 성장 시스템
 - 펫 AI 시스템
