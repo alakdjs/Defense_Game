@@ -236,7 +236,7 @@ PC (Windows) / Android
 플레이어가 레벨업할 때마다 증강 선택 UI가 표시되며   
 선택된 증강은 ScriptableObject 기반 시스템을 통해 Player, Pet, Tower 등에 적용됩니다.  
 
-증강 적용 흐름   
+(증강 적용 흐름)   
 <img width="400" height="500" alt="augment_system_diagram" src="https://github.com/user-attachments/assets/e74f138a-da62-4ca9-9b89-52493817e6a5" />
 
 * AugmentData
