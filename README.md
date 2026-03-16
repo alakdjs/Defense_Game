@@ -262,6 +262,17 @@ PC (Windows) / Android
 
 <br>
 
+## 📈 Level & EXP System
+
+몬스터 처치 시 경험치 Sphere가 드롭됩니다.  
+
+플레이어는 일정 범위 내에서 경험치를 자동으로 흡수합니다.  
+
+경험치가 일정량에 도달하면 플레이어 레벨이 상승하며     
+레벨업 시 증강(Augment) 선택 UI가 표시됩니다.
+
+<br>
+
 ## 🌊 Wave System
 
 게임은 웨이브 기반 진행 시스템으로 구성됩니다.  
@@ -304,7 +315,9 @@ PC (Windows) / Android
 NavMesh 기반 위치 샘플링을 통해 유효한 위치에 스폰됩니다.  
 
 이 시스템은 맵 탐색 요소를 추가하여   
-플레이어가 타워 주변에만 머무르지 않도록 설계되었습니다.
+플레이어가 타워 주변에만 머무르지 않도록 설계되었습니다.  
+
+획득한 선물 상자의 개수는 UI를 통해 표시됩니다.
 
 <br>
 
@@ -320,6 +333,25 @@ NavMesh 기반 위치 샘플링을 통해 유효한 위치에 스폰됩니다.
     * Dialogues
       
 컷씬 진행과 씬 전환은 CutsceneManager가 담당합니다.
+
+<br>
+
+## 🎮 Game State System
+
+GameManager는 게임 전체 상태를 관리합니다.  
+
+게임 상태는 다음과 같이 구성됩니다.  
+
+- Title
+- Settings
+- Cutscene
+- Playing
+- Paused
+- AugmentSelect
+- Result
+
+상태 전환 시 Time.timeScale을 제어하여   
+게임 진행과 UI 상태를 관리하도록 구현했습니다.
 
 <br>
 
@@ -372,6 +404,7 @@ Scripts
 - 자동 공격 전투 시스템
 - 웨이브 기반 디펜스 게임 루프
 - 속성 상성 전투 시스템
+- 레벨 및 경험치 시스템
 - 증강 카드 기반 성장 시스템
 - 펫 AI 시스템
  
