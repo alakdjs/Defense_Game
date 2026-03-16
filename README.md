@@ -75,7 +75,7 @@ PC (Windows) / Android
 ## 🧭 Game Flow
 
 게임은 웨이브 기반으로 진행되며   
-몬스터 처치 → 경험치 획득 → 레벨업 → 증강 선택의 루프 구조로 설계되었습니다.
+몬스터 처치 → 경험치 획득 → 레벨업 → 증강 선택의 루프 구조로 설계되었습니다.  
 <img width="450" height="650" alt="game_flow_diagram" src="https://github.com/user-attachments/assets/12289c79-cb71-4310-b0bd-a9a9ad91729d" />
 
 몬스터 웨이브가 시작되면 몬스터가 스폰되고   
