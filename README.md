@@ -23,8 +23,6 @@ Unity로 개발한 **3D Wave Defense + 로그라이크** 장르의 개인 프로
 ## 🎮 Genre
 3D Wave Defense / Roguelike
 
-<br>
-
 ## 🎮 Platform
 PC (Windows) / Android
 
