@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AugmentPopupController : MonoBehaviour
 {
@@ -8,6 +10,11 @@ public class AugmentPopupController : MonoBehaviour
     [SerializeField] private GameObject _popupRoot; // 팝업 전체 Root 오브젝트
     [SerializeField] private Transform _cardParent; // 카드가 생성될 부모 Transform
     [SerializeField] private AugmentCardUI _cardPrefab; // 증강 카드 프리팹
+
+    [Header("Reroll")]
+    [SerializeField] private Button _rerollButton;
+    [SerializeField] private TMP_Text _rerollCostText;
+    [SerializeField] private int _rerollCost = 1;
 
     // 현재 생성된 카드 목록
     private readonly List<AugmentCardUI> _spawnedCards = new List<AugmentCardUI>();
@@ -25,6 +32,12 @@ public class AugmentPopupController : MonoBehaviour
         }
 
         _popupRoot.SetActive(false);
+
+        if (_rerollButton != null)
+        {
+            _rerollButton.onClick.RemoveAllListeners();
+            _rerollButton.onClick.AddListener(OnClickReroll);
+        }
     }
 
     /// <summary>
@@ -45,6 +58,41 @@ public class AugmentPopupController : MonoBehaviour
         if (!ShouldOpenPopupAtLevel(playerLevel))
             return;
 
+        _popupRoot.SetActive(true);
+
+        RefreshCards();
+        RefreshRerollUI();
+
+        if (GameManager.Instance != null)
+            GameManager.Instance.SetState(GameState.AugmentSelect);
+    }
+
+    /// <summary>
+    /// 리롤 버튼 클릭
+    /// </summary>
+    public void OnClickReroll()
+    {
+        if (GameManager.Instance == null)
+        {
+            Debug.LogWarning("[AugmentPopupController] GameManager가 없습니다.");
+            return;
+        }
+
+        if (GameManager.Instance.TryUseGiftBox(_rerollCost) == false)
+        {
+            Debug.Log("[AugmentPopupController] 선물상자가 부족합니다.");
+            return;
+        }
+
+        RefreshCards();
+        RefreshRerollUI();
+    }
+
+    /// <summary>
+    /// 현재 팝업 카드 새로 생성
+    /// </summary>
+    private void RefreshCards()
+    {
         ClearCards();
 
         // 모든 증강(무기 포함)을 전부 동일하게 랜덤 3개
@@ -65,11 +113,24 @@ public class AugmentPopupController : MonoBehaviour
 
             _spawnedCards.Add(card);
         }
+    }
 
-        _popupRoot.SetActive(true);
+    private void RefreshRerollUI()
+    {
+        if (_rerollCostText != null)
+        {
+            int currentCount = 0;
 
-        if (GameManager.Instance != null)
-            GameManager.Instance.SetState(GameState.AugmentSelect);
+            if (GameManager.Instance != null)
+                currentCount = GameManager.Instance.GiftBoxCount;
+
+            _rerollCostText.text = $"선물상자 {_rerollCost}개 사용하여 리롤\n({currentCount}개 보유)";
+        }
+
+        if (_rerollButton != null && GameManager.Instance != null)
+        {
+            _rerollButton.interactable = GameManager.Instance.GiftBoxCount >= _rerollCost;
+        }
     }
 
     /// <summary>

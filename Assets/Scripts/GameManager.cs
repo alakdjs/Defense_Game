@@ -34,6 +34,20 @@ public class GameManager : MonoBehaviour
         OnGiftBoxCountChanged?.Invoke(_giftBoxCount);
     }
 
+    // 선물상자를 사용하여 증강 새로고침
+    public bool TryUseGiftBox(int giftboxCount)
+    {
+        if (giftboxCount <= 0)
+            return true;
+
+        if (_giftBoxCount < giftboxCount)
+            return false;
+
+        _giftBoxCount -= giftboxCount;
+        OnGiftBoxCountChanged?.Invoke(_giftBoxCount);
+        return true;
+    }
+
     private void Awake()
     {
         // 싱글톤
