@@ -82,7 +82,8 @@ PC (Windows) / Android
 
 게임은 웨이브 기반으로 진행되며   
 몬스터 처치 → 경험치 획득 → 레벨업 → 증강 선택의 루프 구조로 설계되었습니다.  
-<img width="400" height="400" alt="GameFlow" src="https://github.com/user-attachments/assets/cc89af39-9017-4815-8a90-1b20a4a0eadb" />
+<img width="807" height="1542" alt="mermaid-diagram" src="https://github.com/user-attachments/assets/081c3833-7720-4b1b-84e3-b0c1464574f9" />
+
 
 몬스터 웨이브가 시작되면 몬스터가 스폰되고   
 플레이어 / 펫 / 타워가 협력하여 몬스터를 처치합니다.  
