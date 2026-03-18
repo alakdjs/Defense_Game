@@ -372,7 +372,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // 자동 에임 회전 관련 근처 가까운 몬스터 인식
+    // 근처 가까운 몬스터를 인식하여 플레이어 자동 에임 회전
     private Transform FindNearestMonster()
     {
         Collider[] hits = Physics.OverlapSphere(transform.position, DetectRange);
