@@ -45,19 +45,27 @@ PC (Windows) / Android
 
 ## 📅 Development Period
 
-- **2025.12 ~ 2026.02 (약 2개월)**  
+- **2025.12.08 ~ 2026.02.02 (약 2개월)**  
 - **Solo Development**
 
 <br>
 
 ## 🧱 Project Architecture
 
-이 프로젝트는 다음과 같은 구조를 기반으로 설계되었습니다.
+이 프로젝트는 **데이터 중심 구조 + 상태 기반 로직 분리**를 목표로 설계되었습니다.
 
-**Architecture**
-- FSM (Finite State Machine) 기반 AI 구조
-- ScriptableObject 기반 데이터 아키텍처
-- Component 기반 게임 시스템 설계
+### Architecture
+
+- FSM 기반 상태 관리 (Player / Monster / Pet)
+- ScriptableObject 기반 데이터 설계
+- Component 기반 기능 분리 구조
+
+### Core Gameplay Loop
+
+몬스터 처치 → 경험치 획득 → 레벨업 → 증강 선택 → 전투 강화
+
+이 루프를 중심으로   
+웨이브 진행에 따라 난이도가 점진적으로 상승하도록 설계했습니다.
 
 **Core Gameplay Systems**
 - Player FSM System
@@ -75,6 +83,7 @@ PC (Windows) / Android
 - Async Scene Loading
 - Game State Manager
 - Cutscene System
+- etc.
 
 <br>
 
@@ -240,22 +249,22 @@ PC (Windows) / Android
 
 ## 🧬 Augment System
 
-레벨업 시 증강 카드 3개 중 하나를 선택할 수 있습니다.  
+증강 시스템은 **ScriptableObject 기반 데이터 구조**로 설계되었습니다.  
 
-플레이어가 레벨업할 때마다 증강 선택 UI가 표시되며   
-선택된 증강은 ScriptableObject 기반 시스템을 통해 Player, Pet, Tower 등에 적용됩니다.  
+- 레벨업 시 3개의 선택지 제공
+- 선택 결과는 Player / Pet / Tower에 즉시 반영
+- 선행 조건 및 스택 구조 지원
+
+핵심 특징:
+
+- 데이터 기반 확장 구조 (코드 수정 없이 증강 추가 가능)
+- 카테고리 잠금 시스템 (무기 선택 중복 방지)
+- 스택 기반 강화 시스템
+
+증강 적용은 AugmentManager에서 통합 관리됩니다.  
 
 (증강 적용 흐름)   
 <img width="400" height="500" alt="augment_system_diagram" src="https://github.com/user-attachments/assets/e74f138a-da62-4ca9-9b89-52493817e6a5" />
-
-* AugmentData
-  * augmentName
-  * category
-  * effects
-  * requiredAugment
-  * oneTimeOnly
-  * maxStack  
-
 
 지원하는 증강 효과
 - 무기 선택(Sword, Rifle)
