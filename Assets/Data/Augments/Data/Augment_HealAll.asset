@@ -20,7 +20,7 @@ MonoBehaviour:
   requiredAugment:
   - {fileID: 11400000, guid: 58de7550dfdcb4d45a6a92e4e084ad9f, type: 2}
   description: "\uD06C\uB9AC\uC2A4\uB9C8\uC2A4\uC758 \uCD95\uBCF5\uC73C\uB85C\\n\uC804\uBD80
-    \uCCB4\uB825\uC744 20%\\n\uD68C\uBCF5\uD569\uB2C8\uB2E4! (\uC0B0\uD0C0, \uC370\uB9E4,
+    \uCCB4\uB825\uC744 20%\\n\uD68C\uBCF5\uD569\uB2C8\uB2E4!\\n(\uC0B0\uD0C0, \uC370\uB9E4,
     \uD3AB)"
   oneTimeOnly: 0
   maxStack: 10

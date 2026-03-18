@@ -20,6 +20,6 @@ MonoBehaviour:
   requiredAugment:
   - {fileID: 11400000, guid: ff65c7bab51c64a4d8d8599be2128edd, type: 2}
   description: "\uC870\uC900 \uC815\uD655\uB3C4\uAC00 \uD5A5\uC0C1\uB418\uC5B4\\n\uCD1D\uC54C\uC774
-    \uB354 \uBA3C \uAC70\uB9AC\uAE4C\uC9C0 \uB3C4\uB2EC\uD569\uB2C8\uB2E4."
+    \uB354 \uBA3C \uAC70\uB9AC\uAE4C\uC9C0\\n\uB3C4\uB2EC\uD569\uB2C8\uB2E4."
   oneTimeOnly: 0
   maxStack: 20
