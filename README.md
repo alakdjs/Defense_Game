@@ -59,6 +59,7 @@ PC (Windows) / Android
 - FSM 기반 상태 관리 (Player / Monster / Pet)
 - ScriptableObject 기반 데이터 설계
 - Component 기반 기능 분리 구조
+<img width="948" height="532" alt="Title" src="https://github.com/user-attachments/assets/c973f85e-2c64-40d4-b8eb-fca0e5047eaa" />
 
 ### Core Gameplay Loop
 
