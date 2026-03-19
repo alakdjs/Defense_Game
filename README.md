@@ -343,22 +343,6 @@ GameManager는 게임 전체 상태를 관리합니다.
 
 <br>
 
-## 📂 Project Structure
-
-Scripts
-- Player
-- Monster
-- Pet
-- Tower
-- Wave
-- Augment
-- Weapon
-- UI
-- Managers
-- Systems
-
-<br>
-
 ## ⭐ Key Features
 
 - FSM 기반 AI 시스템
