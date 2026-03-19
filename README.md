@@ -112,59 +112,20 @@ PC (Windows) / Android
 공통 StateMachine과 IState 인터페이스를 기반으로 상태를 분리하여 관리합니다.   
 상태별 로직을 분리하여 유지보수성과 확장성을 높였습니다.  
 
-* StateMachine
-  * ChangeState()
-  * Update()
-
-* IState
-  * Enter()
-  * Execute()
-  * Exit()
-
 <br>
 
 ### Player FSM
 
 플레이어는 Idle / Move / Dead 상태로 구성됩니다.  
 
-공격 상태를 별도의 FSM으로 두지 않고 자동 공격 시스템을 PlayerController에서 처리하여   
-이동 FSM과 전투 로직을 분리했습니다.  
-
-* Idle
-  * 이동 입력 발생 → Move
-
-* Move
-  * 키보드 이동
-  * 마우스 목적지 이동
-  * 목적지 도착 → Idle
-
-* Dead
-  * 사망 애니메이션 후 제거
+공격은 별도의 상태로 분리하지 않고 자동 공격 시스템으로 처리하여   
+이동과 전투 로직을 분리했습니다.
 
 <br>
 
 ### Monster FSM
 
 몬스터는 Idle / Chase / Attack / Stun / Dead 상태로 구성된 AI 구조를 사용합니다.  
-
-* Idle
-  * 타겟 감지 → Chase
-
-* Chase
-  * NavMeshAgent 추적
-  * 공격 범위 진입 → Attack
-
-* Attack
-  * 공격 실행
-  * 애니메이션 이벤트 → Chase
-  * 일부 몬스터는 투사체 기반 공격을 사용
-
-* Stun
-  * 일정 시간 행동 불가
-
-* Dead
-  * 사망 처리
-  * 애니메이션이 없는 몬스터는 y스케일을 줄이는 연출로 구현
 
 **특징**
 - NavMesh 기반 추적 AI
@@ -176,23 +137,7 @@ PC (Windows) / Android
 ### Pet FSM
 
 펫은 플레이어를 보조하는 서브 타워형 AI 유닛입니다.  
-
-* Idle
-  * 타겟 없음 → 대기
-  * 타워 반경 이탈 → 복귀
-  * 공격 가능 → Attack
-  * 타겟 존재 → Chase
-
-* Chase
-  * 몬스터 추적
-  * 공격 범위 진입 → Attack
-
-* Attack
-  * 돌진 공격
-  * 공격 후 Idle
-
-* Dead
-  * 사망 연출
+증강으로 펫을 소환할 수 있습니다.  
 
 **특징**
 - 타워 반경 기반 활동 범위
@@ -205,13 +150,6 @@ PC (Windows) / Android
 ## ⚔️ Weapon System
 
 무기 시스템은 ScriptableObject 기반 데이터 구조로 구현되었습니다.  
-
-* WeaponData (ScriptableObject)
-  * WeaponType
-  * ElementType
-  * Damage
-  * AttackRange
-  * Prefab
  
 무기 데이터는 WeaponDatabase를 통해 관리됩니다.  
 
@@ -241,9 +179,6 @@ PC (Windows) / Android
 | Strong | 1.5x               |
 | Weak | 0.5x                |
 | Normal | 1.0x                |
-
-속성 배율 계산은 ElementalCombat에서 처리되며   
-각 오브젝트에 ElementalStatus 컴포넌트를 통해 적용됩니다.
 
 <br>
 
@@ -303,11 +238,6 @@ PC (Windows) / Android
 - 현재 웨이브 진행 시간(보스 웨이브일 경우 보스의 체력바로 변경)
 - 전체 게임 진행률
 
-* WaveManager
-  * Monster Spawn
-  * Boss Wave
-  * Game Progress UI  
-
 **특징**
 - ScriptableObject 기반 WaveData
 - 플레이어 레벨 기반 난이도 증가
@@ -328,9 +258,6 @@ PC (Windows) / Android
 ## 🎁 Gift Box System
 
 맵 전역에 산타가 잃어버린 선물 상자가 스폰됩니다.  
-
-플레이어는 맵을 탐색하여 선물 상자를 획득할 수 있으며    
-획득 시 체력이 회복됩니다.
 
 선물 상자는 웨이브 완료 시 랜덤 위치에 생성되며   
 NavMesh 기반 위치 샘플링을 통해 유효한 위치에 스폰됩니다.  
@@ -359,11 +286,6 @@ NavMesh 기반 위치 샘플링을 통해 유효한 위치에 스폰됩니다.
 게임 시작과 클리어 연출을 위해 ScriptableObject 기반 컷씬 시스템을 구현했습니다.  
 
 컷씬 데이터는 이미지와 대사 프레임 구조로 관리됩니다.  
-
-* CutsceneData
-  * CutsceneFrame[]
-    * Image
-    * Dialogues
       
 컷씬 진행과 씬 전환은 CutsceneManager가 담당합니다.
 
@@ -375,13 +297,13 @@ GameManager는 게임 전체 상태를 관리합니다.
 
 게임 상태는 다음과 같이 구성됩니다.  
 
-- Title
-- Settings
-- Cutscene
-- Playing
-- Paused
-- AugmentSelect
-- Result
+- Title (타이틀 화면)
+- Settings (설정 화면)
+- Cutscene (컷씬)
+- Playing (게임 중)
+- Paused (게임 일시정지)
+- AugmentSelect (증강 팝업 창)
+- Result (게임 결과, 게임 오버)
 
 상태 전환 시 Time.timeScale을 제어하여   
 게임 진행과 UI 상태를 관리하도록 구현했습니다.
@@ -395,14 +317,19 @@ GameManager는 게임 전체 상태를 관리합니다.
 시간대가 낮 → 해질녘 → 밤 → 새벽 → 낮으로 변화합니다.   
 마지막 스테이지에서는 눈 효과가 강화되어   
 게임 분위기를 연출합니다.
-- Skybox
-- Lighting
-- Ambient
-
-스테이지 변경 이벤트는 StageManager에서 관리되며   
-환경 변화는 StageLightingController에서 처리됩니다.
 
 <br>
+
+## 🎥 Camera System
+
+탑다운 기반 아이소메트릭 뷰로 카메라를 구성하여  
+플레이어와 전장을 한눈에 파악할 수 있도록 설계했습니다.  
+
+카메라와 플레이어 사이의 장애물을 Raycast로 감지하여   
+해당 오브젝트를 투명화하는 Camera Occlusion 시스템을 구현했습니다.  
+
+몬스터 타격 시 카메라 흔들림(Camera Shake)을 적용하여   
+전투 타격감을 강화했습니다.
 
 ## ⏳ Async Scene Loading
 
