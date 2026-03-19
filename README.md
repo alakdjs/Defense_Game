@@ -14,14 +14,14 @@ Unity로 개발한 **3D Wave Defense + 로그라이크** 장르의 개인 프로
 
 을 통해 **확장성과 유지보수를 고려한 게임 시스템 설계**에 초점을 맞춰 개발되었습니다.  
 
-<img width="400" height="225" alt="1_게임시작화면" src="https://github.com/user-attachments/assets/7d3abc07-a2b7-4796-a777-79a874dbe45d" />
-<img width="400" height="225" alt="2_컷씬장면" src="https://github.com/user-attachments/assets/e7a309ba-4499-46fe-ae4e-ee12a8775088" />
+<img width="400" height="225" alt="Title" src="https://github.com/user-attachments/assets/c973f85e-2c64-40d4-b8eb-fca0e5047eaa" />
+<img width="400" height="225" alt="cutScene" src="https://github.com/user-attachments/assets/d1256038-16ec-4114-a11c-d558e23121c7" />
 
-<img width="400" height="225" alt="4_증강선택" src="https://github.com/user-attachments/assets/bd532072-232e-4590-bd77-9bc89acdf50e" />
-<img width="400" height="225" alt="5_게임진행중" src="https://github.com/user-attachments/assets/4671a0fd-607e-402a-864c-c57d7eea1fa1" />
+<img width="400" height="225" alt="game1" src="https://github.com/user-attachments/assets/ccf76f28-6a96-4084-b021-6e8102cb2be7" />
+<img width="400" height="225" alt="game2" src="https://github.com/user-attachments/assets/806a2188-0813-42c4-a7a7-d189b7ade223" />
 
-<img width="400" height="225" alt="6_보스몬스터조우" src="https://github.com/user-attachments/assets/a31c04de-0d79-415e-a9e8-8db5da75d130" />
-<img width="400" height="225" alt="7_최종보스" src="https://github.com/user-attachments/assets/7349bc39-1135-4681-8871-e6b933a993a0" />
+<img width="400" height="225" alt="game3" src="https://github.com/user-attachments/assets/e0db32ce-ba35-4f12-925d-70b2a95a65dd" />
+<img width="400" height="225" alt="game4" src="https://github.com/user-attachments/assets/e344aee5-446d-43d2-8eaf-3348cf53e07d" />
 
 <br>
 
@@ -59,7 +59,6 @@ PC (Windows) / Android
 - FSM 기반 상태 관리 (Player / Monster / Pet)
 - ScriptableObject 기반 데이터 설계
 - Component 기반 기능 분리 구조
-<img width="948" height="532" alt="Title" src="https://github.com/user-attachments/assets/c973f85e-2c64-40d4-b8eb-fca0e5047eaa" />
 
 ### Core Gameplay Loop
 
