@@ -141,6 +141,7 @@ public class PlayerController : MonoBehaviour
         HandleAutoFire();
         HandleRotationAim();
 
+        /*
         // 테스트용: 1번 키 누르면 Rifle 장착
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -164,6 +165,7 @@ public class PlayerController : MonoBehaviour
                 AugmentPopupController.Instance.OpenPopup(2);
             }
         }
+        */
     }
 
     private void FixedUpdate()
