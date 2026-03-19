@@ -409,5 +409,6 @@ PC:
 ## 📌 사용 에셋, 애니메이션, 이미지 출처
 
 - Unity Asset Store (무료 에셋)
-- Mixamo[https://www.mixamo.com/]
-- Flaticon[https://www.flaticon.com/kr/]
+- Mixamo: [https://www.mixamo.com/]
+- Flaticon: [https://www.flaticon.com/kr/]
+- ChatGPT, Gemini AI를 사용하여 컷씬 이미지 생성
