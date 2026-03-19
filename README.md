@@ -79,6 +79,7 @@ PC (Windows) / Android
 - Tower Defense System
 
 **Supporting Systems**
+- Object pooling
 - Camera Occlusion System
 - Async Scene Loading
 - Game State Manager
@@ -333,6 +334,8 @@ GameManager는 게임 전체 상태를 관리합니다.
 
 몬스터 타격 시 카메라 흔들림(Camera Shake)을 적용하여   
 전투 타격감을 강화했습니다.
+
+<br>
 
 ## ⏳ Async Scene Loading
 
