@@ -17,7 +17,6 @@ public class LoadingManager : MonoBehaviour
 
     private void Awake()
     {
-        // 싱글톤 + 씬 유지
         if (Instance != null)
         {
             Destroy(gameObject);
@@ -28,12 +27,8 @@ public class LoadingManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    /// <summary>
-    /// 로딩 오버레이를 띄우고, 비동기로 씬 로드
-    /// </summary>
     public void LoadSceneAsync(string sceneName)
     {
-        // 로딩 중이면 중복 호출 방지
         if (_isLoading)
             return;
 
@@ -49,38 +44,60 @@ public class LoadingManager : MonoBehaviour
         if (_view != null)
             _view.SetProgress(0f);
 
-        // UI가 한 프레임 그려질 시간을 확보
+        // UI 먼저 표시
         yield return null;
 
         AsyncOperation op = SceneManager.LoadSceneAsync(sceneName);
         op.allowSceneActivation = false;
 
-        // progress는 0.9까지 올라가고, allowSceneActivation에서 진짜 넘어감
+        float displayedProgress = 0f;
+        float minDisplayTime = 0.5f;   // 너무 빨리 끝나도 최소한 잠깐은 보이게
+        float elapsed = 0f;
+
         while (op.progress < 0.9f)
         {
-            // 0~0.9 → 0~1로 정규화
-            float normalizedProgress = Mathf.Clamp01(op.progress / 0.9f);
+            elapsed += Time.unscaledDeltaTime;
+
+            // Unity progress(0~0.9)를 0~0.99로 정규화
+            float realProgress = Mathf.Clamp01(op.progress / 0.9f) * 0.99f;
+
+            // 실제 진행률을 너무 늦지 않게 따라가되 약간만 부드럽게
+            displayedProgress = Mathf.Lerp(displayedProgress, realProgress, Time.unscaledDeltaTime * 8f);
+
+            // 너무 느리게 끌려가지 않도록 하한 보정
+            if (realProgress - displayedProgress < 0.01f)
+                displayedProgress = realProgress;
 
             if (_view != null)
-                _view.SetProgress(normalizedProgress);
+                _view.SetProgress(displayedProgress);
 
             yield return null;
         }
 
-        // 100% 채우기
+        // 실제 로딩은 끝났지만, 너무 빨리 끝났다면 최소 표시 시간만 맞춤
+        while (elapsed < minDisplayTime)
+        {
+            elapsed += Time.unscaledDeltaTime;
+
+            displayedProgress = Mathf.Lerp(displayedProgress, 0.99f, Time.unscaledDeltaTime * 10f);
+
+            if (_view != null)
+                _view.SetProgress(displayedProgress);
+
+            yield return null;
+        }
+
+        // 마지막 100%
         if (_view != null)
             _view.SetProgress(1f);
 
-        // 다음 프레임에 씬 활성화
-        yield return null;
+        yield return new WaitForSecondsRealtime(0.1f);
 
         op.allowSceneActivation = true;
 
-        // 씬 전환 후 한 프레임 기다렸다가 오버레이 숨김
         yield return null;
 
         HideOverlay();
-
         _isLoading = false;
     }
 
@@ -103,8 +120,6 @@ public class LoadingManager : MonoBehaviour
     private void HideOverlay()
     {
         if (_overlayInstance != null)
-        {
             _overlayInstance.SetActive(false);
-        }
     }
 }
