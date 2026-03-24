@@ -15,7 +15,7 @@ MonoBehaviour:
   waveName: Wave35
   waveDuration: 30
   baseSpawnInterval: 1
-  baseMaxAlive: 15
+  baseMaxAlive: 10
   segments:
   - startTime: 0
     endTime: 15

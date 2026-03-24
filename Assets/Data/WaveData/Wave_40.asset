@@ -15,7 +15,7 @@ MonoBehaviour:
   waveName: Wave40
   waveDuration: 30
   baseSpawnInterval: 2
-  baseMaxAlive: 12
+  baseMaxAlive: 10
   segments:
   - startTime: 0
     endTime: 20

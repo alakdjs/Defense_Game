@@ -5,14 +5,15 @@ using System.Collections.Generic;
 /// HpBar 풀링 매니저
 /// - Screen Space Overlay Canvas 기준
 /// - 몬스터 수가 많을 때 성능 최적화
+/// Managers에 없고, Canvas의 HpBarBanager에 스크립트 붙임
 /// </summary>
 public class HpBarManager : MonoBehaviour
 {
     [SerializeField] private HpBar _hpBarPrefab;
-    [SerializeField] private int _initialPoolSize = 50;
+    [SerializeField] private int _initialPoolSize = 60;
+    [SerializeField] private Transform _hpBarRoot;
 
     private Queue<HpBar> _pool = new Queue<HpBar>();
-    private Canvas _canvas;
 
     public static HpBarManager Instance { get; private set; }
 
@@ -26,10 +27,9 @@ public class HpBarManager : MonoBehaviour
 
         Instance = this;
 
-        _canvas = GetComponentInParent<Canvas>();
-        if (_canvas == null)
+        if (_hpBarRoot == null)
         {
-            Debug.LogError("캔버스를 찾을 수 없음 HpBarManager_Log");
+            Debug.LogError("HpBarRoot가 연결되지 않았습니다. HpBarManager_Log");
             return;
         }
 
@@ -40,9 +40,38 @@ public class HpBarManager : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.OnGameStateChanged += HandleGameStateChanged;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.OnGameStateChanged -= HandleGameStateChanged;
+        }
+    }
+
+    private void HandleGameStateChanged(GameState oldState, GameState newState)
+    {
+        if (_hpBarRoot == null)
+            return;
+
+        bool hideHpBar =
+            newState == GameState.Paused ||
+            newState == GameState.AugmentSelect ||
+            newState == GameState.Result;
+
+        _hpBarRoot.gameObject.SetActive(!hideHpBar);
+    }
+
     private HpBar CreateNewHpBar()
     {
-        HpBar bar = Instantiate(_hpBarPrefab, _canvas.transform);
+        HpBar bar = Instantiate(_hpBarPrefab, _hpBarRoot);
         bar.gameObject.SetActive(false);
         _pool.Enqueue(bar);
         return bar;

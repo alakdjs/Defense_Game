@@ -3877,10 +3877,18 @@ PrefabInstance:
       propertyPath: _hpBarShadow
       value: 
       objectReference: {fileID: 2126991195}
+    - target: {fileID: 1764649962388820863, guid: d085da537bbea694493000dafa056e9a, type: 3}
+      propertyPath: _speed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2952976231310677641, guid: d085da537bbea694493000dafa056e9a, type: 3}
       propertyPath: _expUI
       value: 
       objectReference: {fileID: 974844959}
+    - target: {fileID: 2952976231310677641, guid: d085da537bbea694493000dafa056e9a, type: 3}
+      propertyPath: _expIncrease
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2952976231310677641, guid: d085da537bbea694493000dafa056e9a, type: 3}
       propertyPath: _hpIncreasePerLevel
       value: 5
@@ -4291,7 +4299,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hpBarPrefab: {fileID: 3698420867166227, guid: 76fdd80d662966d48a2c104b4b4a6270, type: 3}
-  _initialPoolSize: 50
+  _initialPoolSize: 60
+  _hpBarRoot: {fileID: 1211634270}
 --- !u!1 &432498672
 GameObject:
   m_ObjectHideFlags: 0
@@ -13079,6 +13088,41 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1257872027978266, guid: 30117b0930be222468df2cb044a94fd1, type: 3}
   m_PrefabInstance: {fileID: 1756745565}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1211634269
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1211634270}
+  m_Layer: 5
+  m_Name: HpBarRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1211634270
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211634269}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1757559670}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1212261797
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18781,6 +18825,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1211634270}
   - {fileID: 422936148}
   - {fileID: 739984104}
   - {fileID: 1620564871}
