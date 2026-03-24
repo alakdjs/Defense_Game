@@ -25,12 +25,15 @@ public class MonsterChaseState : IState
         if (_monster.Target == null)
             return;
 
-        _monster.Agent.SetDestination(_monster.Target.position);
+        float dist = _monster.DistanceToTarget();
 
-        if (_monster.DistanceToTarget() <= _monster.AttackRange)
+        if (dist <= _monster.AttackRange)
         {
             _monster.StateMachine.ChangeState(_monster.AttackState);
+            return;
         }
+
+        _monster.Agent.SetDestination(_monster.Target.position);
     }
 
     public void Exit() 

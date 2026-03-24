@@ -26,6 +26,8 @@ public class GiftBoxSpawner : MonoBehaviour
     [Tooltip("겹침 체크에 사용할 레이어")]
     [SerializeField] private LayerMask _giftBoxLayer;
 
+    private float _groundYTolerance = 0.01f;  // y=0 평면에서 허용할 오차 범위
+
     private void OnEnable()
     {
         if (_waveManager != null)
@@ -65,13 +67,17 @@ public class GiftBoxSpawner : MonoBehaviour
 
         for (int attempt = 0; attempt < _maxAttemptsPerBox; attempt++)
         {
-            // BoxCollider bounds 내부 랜덤 점 (y는 bounds 중심)
+            // x, z만 랜덤으로 뽑고 y는 0 기준으로 고정
             float x = Random.Range(b.min.x, b.max.x);
             float z = Random.Range(b.min.z, b.max.z);
-            Vector3 rawPos = new Vector3(x, b.center.y, z);
+            Vector3 rawPos = new Vector3(x, 0f, z);
 
             // NavMesh 위로 스냅
             if (NavMesh.SamplePosition(rawPos, out NavMeshHit hit, _navMeshSampleRadius, NavMesh.AllAreas) == false)
+                continue;
+
+            // y == 0 인 NavMesh만 허용
+            if (Mathf.Abs(hit.position.y) > _groundYTolerance)
                 continue;
 
             Vector3 spawnPos = hit.position;
