@@ -62,6 +62,38 @@ public class WaveManager : MonoBehaviour
         }
     }
 
+    public bool ShouldShowClearRemainingMonstersText
+    {
+        get
+        {
+            if (_waves == null || _waves.Length == 0)
+                return false;
+
+            WaveData wave = _waves[_currentWaveIndex];
+            if (wave == null)
+                return false;
+
+            // 보스 웨이브가 아니면 표시 안 함
+            if (wave.isBossWave == false)
+                return false;
+
+            // 보스가 아직 소환되지 않았으면 표시 안 함
+            if (_bossSpawned == false)
+                return false;
+
+            // 보스가 아직 살아있으면 표시 안 함
+            if (_bossInstance != null)
+                return false;
+
+            // 잡몹까지 전멸 조건을 쓰는 웨이브가 아니면 표시 안 함
+            if (wave.includeAddsInBossClear == false)
+                return false;
+
+            // 보스는 죽었고, 아직 살아있는 몬스터가 남아있을 때만 표시
+            return _aliveCount > 0;
+        }
+    }
+
     // ================================== UI ==================================
     public string CurrentWaveName
     {
@@ -411,6 +443,11 @@ public class WaveManager : MonoBehaviour
 
     private void HandleAnyMonsterDied(MonsterBase monster)
     {
+        if (monster == _bossInstance)
+        {
+            _bossInstance = null;
+        }
+
         // AliveCount 감소
         _aliveCount = Mathf.Max(0, _aliveCount - 1);
     }

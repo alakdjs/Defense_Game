@@ -24,7 +24,7 @@ public abstract class PetBase : MonoBehaviour, IDamageable
     protected float _lastAttackTime = -999f;
 
     [Tooltip("펫을 중심으로 몬스터를 탐지하는 범위")]
-    [SerializeField] protected float _detectRadius = 15.0f;
+    [SerializeField] protected float _detectRadius = 20.0f;
 
     [SerializeField] protected TowerMain _tower;
 

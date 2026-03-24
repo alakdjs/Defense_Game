@@ -13,6 +13,8 @@ public class WaveTimerBarUI : MonoBehaviour
     [SerializeField] private Image _totalWaveFillImage;
     [SerializeField] private TMP_Text _totalWaveText;
 
+    [SerializeField] private TMP_Text _clearRemainingMonstersText;
+
     private Color _defaultFillColor = Color.white;
 
     private void Awake()
@@ -64,6 +66,9 @@ public class WaveTimerBarUI : MonoBehaviour
 
     private void UpdateUI()
     {
+        if (_clearRemainingMonstersText != null)
+            _clearRemainingMonstersText.gameObject.SetActive(false);
+
         if (_waveManager == null)
             return;
 
@@ -80,7 +85,8 @@ public class WaveTimerBarUI : MonoBehaviour
             _totalWaveText.text = $"{cur} / {total}";
         }
 
-        _bossHpText.gameObject.SetActive(false);
+        if (_bossHpText != null)
+            _bossHpText.gameObject.SetActive(false);
 
         // 일반 웨이브: 남은 시간 표시, 진행률(0~1)
         float p = _waveManager.CurrentWaveProgress01;
@@ -120,6 +126,11 @@ public class WaveTimerBarUI : MonoBehaviour
             return;
         }
 
+        // 보스는 죽었고, 잡몹이 남았을 때만 텍스트 표시
+        if (_clearRemainingMonstersText != null && _waveManager.ShouldShowClearRemainingMonstersText)
+        {
+            _clearRemainingMonstersText.gameObject.SetActive(true);
+        }
     }
 
 }

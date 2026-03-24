@@ -1531,10 +1531,11 @@ MonoBehaviour:
   _moveSpeed: 0
   _attackCooltime: 3
   _defense: 1
+  _detectRadius: 20
+  _tower: {fileID: 0}
   _hpBarWorldOffset: {x: 0, y: 2, z: 0}
   _dashShield: {fileID: 1693097488519197820}
   _animator: {fileID: 6698393332691282617}
-  _tower: {fileID: 0}
 --- !u!65 &579638025044989264
 BoxCollider:
   m_ObjectHideFlags: 0
