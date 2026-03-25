@@ -401,8 +401,10 @@ GameManager는 게임 전체 상태를 관리합니다.
 
 ## 기술 문서 (기술서)
 
-프로젝트의 상세 기술 구현 내용은 아래 문서에서 확인할 수 있습니다.   
-(링크 추가 예정)
+프로젝트의 상세 기술 구현 내용은 아래 문서에서 확인할 수 있습니다.  
+
+https://drive.google.com/file/d/1gzonwyFuHRDarZ4JrvgX6uOpxAI7bfyH/view?usp=sharing
+
 
 <br>
 
