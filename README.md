@@ -374,9 +374,11 @@ GameManager는 게임 전체 상태를 관리합니다.
 
 <br>
 
-## 플레이 영상
+## 🎬 시연 영상
 
-[게임플레이 영상](https://www.youtube.com/watch?v=BDJenL7dYcA)
+[![Santa Survival Gameplay](https://img.youtube.com/vi/BDJenL7dYcA/0.jpg)](https://youtu.be/BDJenL7dYcA)
+
+자동 공격 기반 전투와 증강 시스템, 웨이브 진행을 포함한 전체 플레이 영상입니다.
 
 <br>
 
