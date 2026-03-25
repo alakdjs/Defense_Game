@@ -32,12 +32,6 @@ public class AugmentPopupController : MonoBehaviour
         }
 
         _popupRoot.SetActive(false);
-
-        if (_rerollButton != null)
-        {
-            _rerollButton.onClick.RemoveAllListeners();
-            _rerollButton.onClick.AddListener(OnClickReroll);
-        }
     }
 
     /// <summary>
