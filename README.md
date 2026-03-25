@@ -380,10 +380,21 @@ GameManager는 게임 전체 상태를 관리합니다.
 
 <br>
 
-## 게임 다운로드
+## 🎮 게임 다운로드
 
-(링크 추가 예정)
+[Santa Survival 다운로드](https://github.com/alakdjs/Defense_Game/releases/download/v1.0.0/SantaSurvival_beta.zip)
 
+### 🖥 실행 방법
+
+1. 압축 파일을 다운로드합니다.   
+2. 압축을 해제합니다.   
+3. `Santa_Survival.exe`를 실행합니다.  
+
+### ⚙️ 실행 환경
+
+- Windows 64-bit   
+- Keyboard / Mouse
+  
 <br>
 
 ## 기술 문서 (기술서)
@@ -396,6 +407,6 @@ GameManager는 게임 전체 상태를 관리합니다.
 ## 📌 사용 에셋, 애니메이션, 이미지 출처
 
 - Unity Asset Store (무료 에셋)
-- Mixamo: [https://www.mixamo.com/]
-- Flaticon: [https://www.flaticon.com/kr/]
+- [Mixamo](https://www.mixamo.com/)
+- [Flaticon](https://www.flaticon.com/kr/)
 - ChatGPT, Gemini AI를 사용하여 컷씬 이미지 생성
