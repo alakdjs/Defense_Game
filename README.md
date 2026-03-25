@@ -29,7 +29,7 @@ Unity로 개발한 **3D Wave Defense + 로그라이크** 장르의 개인 프로
 3D Wave Defense / Roguelike
 
 ## 🎮 Platform
-PC (Windows) / Android
+PC (Windows)
 
 <br>
 
@@ -382,8 +382,7 @@ GameManager는 게임 전체 상태를 관리합니다.
 
 ## 게임 다운로드
 
-PC:  
-모바일:  
+(링크 추가 예정)
 
 <br>
 
