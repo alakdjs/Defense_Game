@@ -376,7 +376,7 @@ GameManager는 게임 전체 상태를 관리합니다.
 
 ## 플레이 영상
 
-링크 추가 예정
+[게임플레이 영상](https://www.youtube.com/watch?v=BDJenL7dYcA)
 
 <br>
 
