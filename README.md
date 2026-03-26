@@ -413,4 +413,4 @@ https://drive.google.com/file/d/1gzonwyFuHRDarZ4JrvgX6uOpxAI7bfyH/view?usp=shari
 - Unity Asset Store (무료 에셋)
 - [Mixamo](https://www.mixamo.com/)
 - [Flaticon](https://www.flaticon.com/kr/)
-- ChatGPT, Gemini AI를 사용하여 컷씬 이미지 생성
+- ChatGPT, Gemini AI를 사용하여 타이틀 및 컷씬 이미지 생성
