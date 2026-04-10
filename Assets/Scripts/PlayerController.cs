@@ -1,6 +1,4 @@
-﻿using Unity.Android.Gradle.Manifest;
-using UnityEngine;
-
+﻿using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
